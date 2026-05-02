@@ -1,0 +1,40 @@
+# Secrets and local config
+.env
+.env.docker
+.env.local
+
+# Exports and dumps - local only, never commit
+*.sql
+*.xml
+exports/
+
+# Logs
+*.log
+error_log
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.cache
+*.swp
+*~
+*.sublime-project
+*.sublime-workspace
+
+# WordPress core - not tracked in site repo
+vendor/
+xmlrpc.php
+index.php
+wp-*.php
+!wp-config.php
+wp-admin/
+wp-includes/
+wp-content/themes/twenty*/
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/backups/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
