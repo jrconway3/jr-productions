@@ -1,0 +1,4 @@
+# Git submodules for image content.
+# Run the following to add them (replace with actual repo URLs):
+#   git submodule add <lpc-repo-url> submodules/lpc
+#   git submodule add <fe-repo-url> submodules/fe

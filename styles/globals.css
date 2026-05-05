@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Commodore 64';
+  src: url('/fonts/commodore-64-6.3.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --accent-lpc: #4ade80;
+  --accent-lpc-light: #86efac;
+  --accent-fe: #fbbf24;
+  --accent-fe-light: #fde68a;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply bg-site-bg text-site-text font-body;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(rgba(74,222,128,0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-pixel;
+}
+
+/* Hard pixel border — no border-radius, solid inset shadow */
+.pixel-border {
+  border: 2px solid currentColor;
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.08);
+}
+
+/* Flat sprite card with colored left + top accent bar (game menu feel) */
+.sprite-card {
+  @apply bg-site-surface;
+  border-left: 4px solid var(--accent-lpc);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, border-left-color 0.1s;
+}
+
+.sprite-card:hover {
+  transform: translateX(2px);
+  box-shadow: -4px 0 16px rgba(74,222,128,0.3), 0 4px 16px rgba(0,0,0,0.5);
+}
+
+/* Full-width page container */
+.page-wide {
+  width: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1280px) {
+  .page-wide {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Hero banner stripe */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(74,222,128,0.12) 0%, rgba(34,197,94,0.06) 50%, transparent 100%);
+  border-bottom: 1px solid rgba(74,222,128,0.15);
+}
+
+/* Section-level accent overrides */
+.section-lpc {
+  --accent: var(--accent-lpc);
+  --accent-light: var(--accent-lpc-light);
+}
+
+.section-lpc .sprite-card {
+  border-top-color: var(--accent-lpc);
+}
+
+.section-fe {
+  --accent: var(--accent-fe);
+  --accent-light: var(--accent-fe-light);
+}
+
+.section-fe .sprite-card {
+  border-left-color: var(--accent-fe);
+}
+
+.section-fe .sprite-card:hover {
+  box-shadow: -4px 0 16px rgba(251,191,36,0.3), 0 4px 16px rgba(0,0,0,0.5);
+}
+
+.section-lpc .sprite-card {
+  border-left-color: var(--accent-lpc);
+}
+
+/* Hero sprite collage grid */
+.sprite-collage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+  aspect-ratio: 4 / 3;
+  max-height: 320px;
+}
+
+/* Placeholder tile for when no images are loaded */
+.sprite-collage-placeholder {
+  background-image:
+    linear-gradient(45deg, rgba(74,222,128,0.08) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(74,222,128,0.08) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(74,222,128,0.08) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(74,222,128,0.08) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  border: 1px solid rgba(74,222,128,0.1);
+}
+
+/* Masonry grid — CSS columns base */
+.masonry-grid {
+  column-count: 2;
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid { column-count: 3; }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid { column-count: 4; }
+}
+
+@media (min-width: 1280px) {
+  .masonry-grid { column-count: 5; }
+}
+
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
