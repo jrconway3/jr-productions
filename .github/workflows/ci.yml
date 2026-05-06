@@ -24,6 +24,9 @@ jobs:
       - name: Install deps
         run: npm ci
 
+      - name: Run Tests
+        run: npm test
+
       - name: Run ESLint
         run: npm run lint
 
