@@ -1,9 +1,8 @@
 {
-  "id": "wings_feathered",
   "name": "Feathered Wings",
-  "category": "lpc",
-  "subcategory": "body/wings",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "body/wings",
+  "format": "spritesheet",
   "tags": [
     "wings"
   ],

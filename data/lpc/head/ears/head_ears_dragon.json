@@ -1,9 +1,8 @@
 {
-  "id": "head_ears_dragon",
   "name": "Dragon Ears",
-  "category": "lpc",
-  "subcategory": "head/ears",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/ears",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

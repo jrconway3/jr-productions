@@ -1,9 +1,8 @@
 {
-  "id": "torso_clothes_sleeveless2_scoop",
   "name": "Sleeveless 2 Scoop",
-  "category": "lpc",
-  "subcategory": "torso/shirts/sleeveless",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/shirts/sleeveless",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

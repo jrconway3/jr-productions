@@ -1,9 +1,8 @@
 {
-  "id": "hair_relm_short",
   "name": "Relm Short",
-  "category": "lpc",
-  "subcategory": "hair/bob",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/bob",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

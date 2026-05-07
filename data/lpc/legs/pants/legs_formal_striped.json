@@ -1,9 +1,8 @@
 {
-  "id": "legs_formal_striped",
   "name": "Striped Formal Pants",
-  "category": "lpc",
-  "subcategory": "legs/pants",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "legs/pants",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

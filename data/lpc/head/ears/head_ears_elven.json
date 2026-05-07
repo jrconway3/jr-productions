@@ -1,9 +1,8 @@
 {
-  "id": "head_ears_elven",
   "name": "Elven ears",
-  "category": "lpc",
-  "subcategory": "head/ears",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/ears",
+  "format": "spritesheet",
   "license": "GPL 3.0, CC-BY-SA 3.0",
   "credits": [
     {

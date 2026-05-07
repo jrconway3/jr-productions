@@ -1,9 +1,8 @@
 {
-  "id": "beards_french",
   "name": "French Mustache",
-  "category": "lpc",
-  "subcategory": "hair/mustaches",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/mustaches",
+  "format": "spritesheet",
   "license": "CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

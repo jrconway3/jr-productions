@@ -1,9 +1,8 @@
 {
-  "id": "legs_skirts_plain",
   "name": "Plain skirt",
-  "category": "lpc",
-  "subcategory": "legs/skirts",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "legs/skirts",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

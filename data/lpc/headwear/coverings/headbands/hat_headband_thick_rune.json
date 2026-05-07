@@ -1,9 +1,8 @@
 {
-  "id": "hat_headband_thick_rune",
   "name": "Thick Headband Rune",
-  "category": "lpc",
-  "subcategory": "headwear/coverings/headbands",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/coverings/headbands",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

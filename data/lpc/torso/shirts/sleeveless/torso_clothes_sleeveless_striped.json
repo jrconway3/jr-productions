@@ -1,9 +1,8 @@
 {
-  "id": "torso_clothes_sleeveless_striped",
   "name": "Sleeveless striped",
-  "category": "lpc",
-  "subcategory": "torso/shirts/sleeveless",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/shirts/sleeveless",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

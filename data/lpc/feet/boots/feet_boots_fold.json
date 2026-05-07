@@ -1,9 +1,8 @@
 {
-  "id": "feet_boots_fold",
   "name": "Folded Rim Boots",
-  "category": "lpc",
-  "subcategory": "feet/boots",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "feet/boots",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

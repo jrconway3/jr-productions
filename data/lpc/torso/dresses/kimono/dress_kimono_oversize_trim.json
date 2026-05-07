@@ -1,9 +1,8 @@
 {
-  "id": "dress_kimono_oversize_trim",
   "name": "Kimono Oversized Sleeves Trim",
-  "category": "lpc",
-  "subcategory": "torso/dresses/kimono",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/dresses/kimono",
+  "format": "spritesheet",
   "tags": [
     "arms",
     "sleeves_trim"

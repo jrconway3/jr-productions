@@ -1,9 +1,8 @@
 {
-  "id": "hat_bicorne_foreaft",
   "name": "Bicorne foreaft",
-  "category": "lpc",
-  "subcategory": "headwear/hats/foreaft",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/foreaft",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

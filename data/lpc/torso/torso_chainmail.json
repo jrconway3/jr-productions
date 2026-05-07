@@ -1,9 +1,8 @@
 {
-  "id": "torso_chainmail",
   "name": "Chainmail",
-  "category": "lpc",
-  "subcategory": "torso",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

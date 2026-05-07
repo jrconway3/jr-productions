@@ -1,9 +1,8 @@
 {
-  "id": "shoulders_epaulets",
   "name": "Epaulets",
-  "category": "lpc",
-  "subcategory": "arms/shoulders",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "arms/shoulders",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0",
   "credits": [
     {

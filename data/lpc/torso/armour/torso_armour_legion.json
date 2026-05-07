@@ -1,9 +1,8 @@
 {
-  "id": "torso_armour_legion",
   "name": "Legion",
-  "category": "lpc",
-  "subcategory": "torso/armour",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/armour",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 2.0, GPL 3.0",
   "credits": [
     {

@@ -1,9 +1,8 @@
 {
-  "id": "hair_pixie",
   "name": "Pixie",
-  "category": "lpc",
-  "subcategory": "hair/short",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/short",
+  "format": "spritesheet",
   "license": "CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

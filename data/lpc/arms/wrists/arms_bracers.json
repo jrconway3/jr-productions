@@ -1,9 +1,8 @@
 {
-  "id": "arms_bracers",
   "name": "Bracers",
-  "category": "lpc",
-  "subcategory": "arms/wrists",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "arms/wrists",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

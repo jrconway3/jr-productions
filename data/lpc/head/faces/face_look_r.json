@@ -1,9 +1,8 @@
 {
-  "id": "face_look_r",
   "name": "Looking Right",
-  "category": "lpc",
-  "subcategory": "head/faces",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/faces",
+  "format": "spritesheet",
   "tags": [
     "expression"
   ],

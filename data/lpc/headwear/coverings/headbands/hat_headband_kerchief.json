@@ -1,9 +1,8 @@
 {
-  "id": "hat_headband_kerchief",
   "name": "Kerchief",
-  "category": "lpc",
-  "subcategory": "headwear/coverings/headbands",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/coverings/headbands",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 2.0, GPL 3.0",
   "credits": [
     {

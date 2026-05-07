@@ -1,9 +1,8 @@
 {
-  "id": "torso_clothes_tshirt_scoop",
   "name": "TShirt Scoop",
-  "category": "lpc",
-  "subcategory": "torso/shirts/shortsleeve",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/shirts/shortsleeve",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

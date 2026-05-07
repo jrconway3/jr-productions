@@ -1,9 +1,8 @@
 {
-  "id": "arms_armour",
   "name": "Armour",
-  "category": "lpc",
-  "subcategory": "arms",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "arms",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

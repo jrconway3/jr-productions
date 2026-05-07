@@ -1,9 +1,8 @@
 {
-  "id": "legs_leggings2",
   "name": "Leggings 2",
-  "category": "lpc",
-  "subcategory": "legs/leggings",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "legs/leggings",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, GPL 3.0",
   "credits": [
     {

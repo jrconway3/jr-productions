@@ -1,9 +1,8 @@
 {
-  "id": "belt_obi_knot_left",
   "name": "Obi Knot Left",
-  "category": "lpc",
-  "subcategory": "torso/waist/obi",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/waist/obi",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

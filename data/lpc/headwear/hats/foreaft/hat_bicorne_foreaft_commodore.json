@@ -1,9 +1,8 @@
 {
-  "id": "hat_bicorne_foreaft_commodore",
   "name": "Bicorne Foreaft Commodore",
-  "category": "lpc",
-  "subcategory": "headwear/hats/foreaft",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/foreaft",
+  "format": "spritesheet",
   "tags": [
     "bicorne",
     "foreaft",

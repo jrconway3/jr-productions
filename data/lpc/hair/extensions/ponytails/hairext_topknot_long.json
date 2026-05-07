@@ -1,9 +1,8 @@
 {
-  "id": "hairext_topknot_long",
   "name": "Long Topknot",
-  "category": "lpc",
-  "subcategory": "hair/extensions/ponytails",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/extensions/ponytails",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

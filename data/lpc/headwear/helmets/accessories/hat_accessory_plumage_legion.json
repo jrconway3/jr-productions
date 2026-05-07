@@ -1,9 +1,8 @@
 {
-  "id": "hat_accessory_plumage_legion",
   "name": "Legion Plumage",
-  "category": "lpc",
-  "subcategory": "headwear/helmets/accessories",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/helmets/accessories",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 2.0, GPL 3.0",
   "credits": [
     {

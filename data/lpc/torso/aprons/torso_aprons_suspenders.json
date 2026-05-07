@@ -1,9 +1,8 @@
 {
-  "id": "torso_aprons_suspenders",
   "name": "Suspenders",
-  "category": "lpc",
-  "subcategory": "torso/aprons",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/aprons",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

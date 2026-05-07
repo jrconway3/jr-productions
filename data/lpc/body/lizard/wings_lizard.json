@@ -1,9 +1,8 @@
 {
-  "id": "wings_lizard",
   "name": "Lizard Wings",
-  "category": "lpc",
-  "subcategory": "body/lizard",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "body/lizard",
+  "format": "spritesheet",
   "tags": [
     "wings"
   ],

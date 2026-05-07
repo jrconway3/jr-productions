@@ -1,9 +1,8 @@
 {
-  "id": "hairext_high_bun",
   "name": "High Bun",
-  "category": "lpc",
-  "subcategory": "hair/extensions/ties",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/extensions/ties",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

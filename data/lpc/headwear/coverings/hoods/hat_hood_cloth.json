@@ -1,9 +1,8 @@
 {
-  "id": "hat_hood_cloth",
   "name": "Hood",
-  "category": "lpc",
-  "subcategory": "headwear/coverings/hoods",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/coverings/hoods",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

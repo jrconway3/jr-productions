@@ -1,9 +1,8 @@
 {
-  "id": "hat_bandana2",
   "name": "Bordered Bandana",
-  "category": "lpc",
-  "subcategory": "headwear/coverings/bandana",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/coverings/bandana",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0",
   "credits": [
     {

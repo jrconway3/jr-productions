@@ -1,9 +1,8 @@
 {
-  "id": "hat_helmet_pointed",
   "name": "Pointed helm",
-  "category": "lpc",
-  "subcategory": "headwear/helmets/helmets",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/helmets/helmets",
+  "format": "spritesheet",
   "license": "CC-BY 3.0, CC-BY 4.0, OGA-BY 3.0, GPL 2.0, GPL 3.0",
   "credits": [
     {

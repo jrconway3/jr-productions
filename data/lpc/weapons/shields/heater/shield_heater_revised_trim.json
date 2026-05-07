@@ -1,9 +1,8 @@
 {
-  "id": "shield_heater_revised_trim",
   "name": "Revised Heater Shield Trim",
-  "category": "lpc",
-  "subcategory": "weapons/shields/heater",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "weapons/shields/heater",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

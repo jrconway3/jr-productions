@@ -1,9 +1,8 @@
 {
-  "id": "feet_shoes_ghillies",
   "name": "Ghillies",
-  "category": "lpc",
-  "subcategory": "feet/shoes",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "feet/shoes",
+  "format": "spritesheet",
   "license": "CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

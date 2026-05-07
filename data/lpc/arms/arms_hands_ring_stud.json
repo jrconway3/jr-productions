@@ -1,9 +1,8 @@
 {
-  "id": "arms_hands_ring_stud",
   "name": "Stud Ring",
-  "category": "lpc",
-  "subcategory": "arms",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "arms",
+  "format": "spritesheet",
   "license": "CC0",
   "credits": [
     {

@@ -1,9 +1,8 @@
 {
-  "id": "hat_magic_celestial_trim",
   "name": "Celestial Wizard Hat Second Color",
-  "category": "lpc",
-  "subcategory": "headwear/hats/magic",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/magic",
+  "format": "spritesheet",
   "tags": [
     "wizard",
     "hat_trim"

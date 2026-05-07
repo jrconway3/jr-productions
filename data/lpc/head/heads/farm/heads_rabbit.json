@@ -1,9 +1,8 @@
 {
-  "id": "heads_rabbit",
   "name": "Rabbit",
-  "category": "lpc",
-  "subcategory": "head/heads/farm",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/heads/farm",
+  "format": "spritesheet",
   "tags": [
     "animal",
     "adult"

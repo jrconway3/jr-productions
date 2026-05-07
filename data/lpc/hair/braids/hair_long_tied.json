@@ -1,9 +1,8 @@
 {
-  "id": "hair_long_tied",
   "name": "Long tied",
-  "category": "lpc",
-  "subcategory": "hair/braids",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/braids",
+  "format": "spritesheet",
   "license": "CC0",
   "credits": [
     {

@@ -1,9 +1,8 @@
 {
-  "id": "hair_long_straight",
   "name": "Long straight",
-  "category": "lpc",
-  "subcategory": "hair/long",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/long",
+  "format": "spritesheet",
   "license": "CC0",
   "credits": [
     {

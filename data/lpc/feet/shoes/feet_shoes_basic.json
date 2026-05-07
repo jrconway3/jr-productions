@@ -1,9 +1,8 @@
 {
-  "id": "feet_shoes_basic",
   "name": "Basic Shoes",
-  "category": "lpc",
-  "subcategory": "feet/shoes",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "feet/shoes",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

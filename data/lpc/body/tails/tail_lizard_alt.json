@@ -1,9 +1,8 @@
 {
-  "id": "tail_lizard_alt",
   "name": "Lizard Tail (Alt Colors)",
-  "category": "lpc",
-  "subcategory": "body/tails",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "body/tails",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

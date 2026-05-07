@@ -1,9 +1,8 @@
 {
-  "id": "torso_aprons_overalls",
   "name": "Overalls",
-  "category": "lpc",
-  "subcategory": "torso/aprons",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/aprons",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, GPL 3.0",
   "credits": [
     {

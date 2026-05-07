@@ -1,9 +1,8 @@
 {
-  "id": "legs_shorts",
   "name": "Shorts",
-  "category": "lpc",
-  "subcategory": "legs/shorts",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "legs/shorts",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, GPL 3.0",
   "credits": [
     {

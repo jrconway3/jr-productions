@@ -1,9 +1,8 @@
 {
-  "id": "dress_kimono_trim",
   "name": "Kimono Trim",
-  "category": "lpc",
-  "subcategory": "torso/dresses/kimono",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/dresses/kimono",
+  "format": "spritesheet",
   "tags": [
     "dress",
     "kimono_trim"

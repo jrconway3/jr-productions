@@ -1,9 +1,8 @@
 {
-  "id": "face_shame",
   "name": "Shame",
-  "category": "lpc",
-  "subcategory": "head/faces",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/faces",
+  "format": "spritesheet",
   "tags": [
     "expression"
   ],

@@ -1,9 +1,8 @@
 {
-  "id": "hair_parted_side_bangs2",
   "name": "Side Parted w/Bangs 2",
-  "category": "lpc",
-  "subcategory": "hair/short",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/short",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

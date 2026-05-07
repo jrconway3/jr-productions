@@ -1,9 +1,8 @@
 {
-  "id": "neck_capeclip",
   "name": "Capeclip",
-  "category": "lpc",
-  "subcategory": "head/neck",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/neck",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

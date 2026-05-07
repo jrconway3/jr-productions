@@ -1,9 +1,8 @@
 {
-  "id": "torso_clothes_longsleeves2",
   "name": "Longsleeves 2 Overlay",
-  "category": "lpc",
-  "subcategory": "torso/shirts/sleeves",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/shirts/sleeves",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

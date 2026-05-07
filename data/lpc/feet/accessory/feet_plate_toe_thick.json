@@ -1,9 +1,8 @@
 {
-  "id": "feet_plate_toe_thick",
   "name": "Thick Plated Toe",
-  "category": "lpc",
-  "subcategory": "feet/accessory",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "feet/accessory",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

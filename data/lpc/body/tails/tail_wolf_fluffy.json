@@ -1,9 +1,8 @@
 {
-  "id": "tail_wolf_fluffy",
   "name": "Fluffy Wolf Tail",
-  "category": "lpc",
-  "subcategory": "body/tails",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "body/tails",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

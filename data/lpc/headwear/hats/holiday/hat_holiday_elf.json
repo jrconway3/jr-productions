@@ -1,9 +1,8 @@
 {
-  "id": "hat_holiday_elf",
   "name": "Elf Trim",
-  "category": "lpc",
-  "subcategory": "headwear/hats/holiday",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/holiday",
+  "format": "spritesheet",
   "tags": [
     "santa",
     "santa_wool"

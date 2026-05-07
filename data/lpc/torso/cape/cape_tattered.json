@@ -1,9 +1,8 @@
 {
-  "id": "cape_tattered",
   "name": "Tattered",
-  "category": "lpc",
-  "subcategory": "torso/cape",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/cape",
+  "format": "spritesheet",
   "tags": [
     "back",
     "cape"

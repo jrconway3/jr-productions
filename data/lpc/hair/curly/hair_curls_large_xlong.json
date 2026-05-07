@@ -1,9 +1,8 @@
 {
-  "id": "hair_curls_large_xlong",
   "name": "Large Curls XLong",
-  "category": "lpc",
-  "subcategory": "hair/curly",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/curly",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0+",
   "credits": [
     {

@@ -1,9 +1,8 @@
 {
-  "id": "hair_longhawk",
   "name": "Longhawk",
-  "category": "lpc",
-  "subcategory": "hair/bald",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/bald",
+  "format": "spritesheet",
   "license": "CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

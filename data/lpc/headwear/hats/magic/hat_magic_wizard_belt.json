@@ -1,9 +1,8 @@
 {
-  "id": "hat_magic_wizard_belt",
   "name": "Wizard Hat Belt",
-  "category": "lpc",
-  "subcategory": "headwear/hats/magic",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/magic",
+  "format": "spritesheet",
   "tags": [
     "wizard",
     "hat_trim"

@@ -1,9 +1,8 @@
 {
-  "id": "feet_socks_high",
   "name": "High Socks",
-  "category": "lpc",
-  "subcategory": "feet/socks",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "feet/socks",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, GPL 3.0",
   "credits": [
     {

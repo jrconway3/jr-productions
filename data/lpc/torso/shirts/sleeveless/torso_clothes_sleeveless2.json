@@ -1,9 +1,8 @@
 {
-  "id": "torso_clothes_sleeveless2",
   "name": "Sleeveless 2",
-  "category": "lpc",
-  "subcategory": "torso/shirts/sleeveless",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/shirts/sleeveless",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

@@ -1,9 +1,8 @@
 {
-  "id": "torso_clothes_longsleeve_scoop",
   "name": "Scoop",
-  "category": "lpc",
-  "subcategory": "torso/shirts/longsleeve",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/shirts/longsleeve",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, GPL 3.0",
   "credits": [
     {

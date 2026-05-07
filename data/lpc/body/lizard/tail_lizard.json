@@ -1,9 +1,8 @@
 {
-  "id": "tail_lizard",
   "name": "Lizard tail",
-  "category": "lpc",
-  "subcategory": "body/lizard",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "body/lizard",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

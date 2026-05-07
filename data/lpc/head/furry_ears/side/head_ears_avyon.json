@@ -1,9 +1,8 @@
 {
-  "id": "head_ears_avyon",
   "name": "Feather Ears",
-  "category": "lpc",
-  "subcategory": "head/furry_ears/side",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "head/furry_ears/side",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

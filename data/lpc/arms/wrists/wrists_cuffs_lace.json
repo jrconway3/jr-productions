@@ -1,9 +1,8 @@
 {
-  "id": "wrists_cuffs_lace",
   "name": "Lace Cuffs",
-  "category": "lpc",
-  "subcategory": "arms/wrists",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "arms/wrists",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

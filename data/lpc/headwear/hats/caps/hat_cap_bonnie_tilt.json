@@ -1,9 +1,8 @@
 {
-  "id": "hat_cap_bonnie_tilt",
   "name": "Bonnie Alt Tilt",
-  "category": "lpc",
-  "subcategory": "headwear/hats/caps",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/caps",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

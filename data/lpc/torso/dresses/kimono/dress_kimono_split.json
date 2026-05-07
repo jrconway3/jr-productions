@@ -1,9 +1,8 @@
 {
-  "id": "dress_kimono_split",
   "name": "Split Kimono",
-  "category": "lpc",
-  "subcategory": "torso/dresses/kimono",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/dresses/kimono",
+  "format": "spritesheet",
   "tags": [
     "dress",
     "kimono",

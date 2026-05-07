@@ -1,9 +1,8 @@
 {
-  "id": "shield_heater_revised_wood",
   "name": "Revised Heater Shield Base",
-  "category": "lpc",
-  "subcategory": "weapons/shields/heater",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "weapons/shields/heater",
+  "format": "spritesheet",
   "tags": [
     "heater"
   ],

@@ -1,9 +1,8 @@
 {
-  "id": "torso_jacket_tabard",
   "name": "Tabard",
-  "category": "lpc",
-  "subcategory": "torso/jacket",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "torso/jacket",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

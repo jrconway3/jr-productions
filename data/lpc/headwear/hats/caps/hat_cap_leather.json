@@ -1,9 +1,8 @@
 {
-  "id": "hat_cap_leather",
   "name": "Leather Cap",
-  "category": "lpc",
-  "subcategory": "headwear/hats/caps",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/caps",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

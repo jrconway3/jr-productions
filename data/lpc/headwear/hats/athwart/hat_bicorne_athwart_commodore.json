@@ -1,9 +1,8 @@
 {
-  "id": "hat_bicorne_athwart_commodore",
   "name": "Bicorne Athwart Commodore",
-  "category": "lpc",
-  "subcategory": "headwear/hats/athwart",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/hats/athwart",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {

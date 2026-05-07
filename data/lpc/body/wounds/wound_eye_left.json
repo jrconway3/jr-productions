@@ -1,9 +1,8 @@
 {
-  "id": "wound_eye_left",
   "name": "Left Eye",
-  "category": "lpc",
-  "subcategory": "body/wounds",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "body/wounds",
+  "format": "spritesheet",
   "license": "CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

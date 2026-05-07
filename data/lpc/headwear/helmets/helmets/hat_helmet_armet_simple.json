@@ -1,9 +1,8 @@
 {
-  "id": "hat_helmet_armet_simple",
   "name": "Simple Armet",
-  "category": "lpc",
-  "subcategory": "headwear/helmets/helmets",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "headwear/helmets/helmets",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
   "credits": [
     {

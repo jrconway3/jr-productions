@@ -1,9 +1,8 @@
 {
-  "id": "hairext_xlong_curlyr",
   "name": "Right XLong Curly",
-  "category": "lpc",
-  "subcategory": "hair/extensions/bangs",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "hair/extensions/bangs",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
   "credits": [
     {

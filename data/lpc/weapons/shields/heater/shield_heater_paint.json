@@ -1,9 +1,8 @@
 {
-  "id": "shield_heater_paint",
   "name": "Heater Shield Paint",
-  "category": "lpc",
-  "subcategory": "weapons/shields/heater",
-  "type": "spritesheet",
+  "type": "lpc",
+  "path": "weapons/shields/heater",
+  "format": "spritesheet",
   "license": "OGA-BY 3.0",
   "credits": [
     {
