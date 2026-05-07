@@ -1,0 +1,93 @@
+{
+  "id": "belt_obi_knot_left",
+  "name": "Obi Knot Left",
+  "category": "lpc",
+  "subcategory": "torso/waist/obi",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-kimono-relm"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 66,
+      "path": "torso/waist/obi/knot/left/male",
+      "body_types": [
+        "male",
+        "muscular"
+      ]
+    },
+    {
+      "id": "thin",
+      "zPos": 66,
+      "path": "torso/waist/obi/knot/left/thin",
+      "body_types": [
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-kimono-relm"
+}

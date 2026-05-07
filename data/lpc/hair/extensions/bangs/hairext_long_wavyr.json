@@ -1,0 +1,53 @@
+{
+  "id": "hairext_long_wavyr",
+  "name": "Right Long Wavy",
+  "category": "lpc",
+  "subcategory": "hair/extensions/bangs",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-expanded-long-hair"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 128,
+      "path": "hair/extensions/bangs/long_wavyr/adult"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-long-hair"
+}

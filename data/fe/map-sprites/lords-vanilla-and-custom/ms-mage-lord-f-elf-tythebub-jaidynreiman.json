@@ -1,0 +1,22 @@
+{
+  "id": "ms-mage-lord-f-elf-tythebub-jaidynreiman",
+  "name": "Mage Lord (F) Elf",
+  "category": "fe",
+  "subcategory": "map-sprites/lords-vanilla-and-custom",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "TyTheBub",
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "preview": "Map Sprites/Lords - Vanilla and Custom/Edits/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
+  "download": ""
+}

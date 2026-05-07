@@ -1,0 +1,102 @@
+{
+  "id": "torso_armour_leather",
+  "name": "Leather",
+  "category": "lpc",
+  "subcategory": "torso/armour",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "Johannes Sjölund (wulax)",
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-clothing-updates",
+        "https://opengameart.org/content/lpc-expanded-armor"
+      ],
+      "notes": "adapted to v3 bases by bluecarrot16, reduced colors and climb/emote/jump by JaidynReiman"
+    },
+    {
+      "authors": [
+        "Michael Whitlock (bigbeargames)",
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)",
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-combat-armor-for-women",
+        "https://opengameart.org/content/lpc-clothing-updates",
+        "https://opengameart.org/content/lpc-expanded-armor"
+      ],
+      "notes": "recolor of torso/armour/leather/female/brown.png, adapted to v3 bases by bluecarrot16, reduced colors and climb/emote/jump by JaidynReiman"
+    },
+    {
+      "authors": [
+        "Michael Whitlock (bigbeargames)",
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)",
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-combat-armor-for-women",
+        "https://opengameart.org/content/lpc-clothing-updates",
+        "https://opengameart.org/content/lpc-expanded-armor"
+      ],
+      "notes": "adapted to v3 bases by bluecarrot16, teen version by JaidynReiman adapted from Male and Female versions"
+    }
+  ],
+  "body_types": [
+    "male",
+    "female",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "sit",
+    "emote",
+    "climb"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 60,
+      "path": "torso/armour/leather/male",
+      "body_types": [
+        "male"
+      ]
+    },
+    {
+      "id": "female",
+      "zPos": 60,
+      "path": "torso/armour/leather/female",
+      "body_types": [
+        "female"
+      ]
+    },
+    {
+      "id": "teen",
+      "zPos": 60,
+      "path": "torso/armour/leather/teen",
+      "body_types": [
+        "teen"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-armor"
+}

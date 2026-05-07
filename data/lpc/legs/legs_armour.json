@@ -1,0 +1,63 @@
+{
+  "id": "legs_armour",
+  "name": "Armour",
+  "category": "lpc",
+  "subcategory": "legs",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman",
+        "Michael Whitlock (bigbeargames)",
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+      ],
+      "notes": "reduced to 7 colors an adapted to v3 bases by bluecarrot16, climb/jump/sit/emotes by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "female",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "sit",
+    "emote",
+    "climb"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 20,
+      "path": "legs/armour/plate/male",
+      "body_types": [
+        "male"
+      ]
+    },
+    {
+      "id": "thin",
+      "zPos": 20,
+      "path": "legs/armour/plate/thin",
+      "body_types": [
+        "female",
+        "teen"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+}

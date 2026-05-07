@@ -1,0 +1,22 @@
+{
+  "id": "ms-dancer-f-larum-is",
+  "name": "Dancer (F) Larum",
+  "category": "fe",
+  "subcategory": "map-sprites/bards-dancers-supplies-misc",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "IS"
+      ]
+    }
+  ],
+  "animations": [
+    "dance",
+    "stand-move",
+    "stand-stand"
+  ],
+  "preview": "Map Sprites/Bards, Dancers, Supplies, Misc/Dancer (F) Larum {IS}-stand-stand.png",
+  "download": ""
+}

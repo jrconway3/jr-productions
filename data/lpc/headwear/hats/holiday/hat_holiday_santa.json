@@ -1,0 +1,86 @@
+{
+  "id": "hat_holiday_santa",
+  "name": "Santa Trim",
+  "category": "lpc",
+  "subcategory": "headwear/hats/holiday",
+  "type": "spritesheet",
+  "tags": [
+    "santa",
+    "santa_wool"
+  ],
+  "license": "OGA-BY 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-santa",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ],
+      "notes": "Santa Hat by bluecarrot16, split into layers by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "female",
+    "male",
+    "teen",
+    "pregnant",
+    "muscular"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "white",
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 131,
+      "path": "hat/holiday/santa/adult"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+}

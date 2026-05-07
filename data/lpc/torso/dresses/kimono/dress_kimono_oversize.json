@@ -1,0 +1,78 @@
+{
+  "id": "dress_kimono_oversize",
+  "name": "Kimono Oversized Sleeves",
+  "category": "lpc",
+  "subcategory": "torso/dresses/kimono",
+  "type": "spritesheet",
+  "tags": [
+    "arms",
+    "sleeves",
+    "kimono_over_sleeves"
+  ],
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-kimono-relm"
+      ]
+    }
+  ],
+  "body_types": [
+    "female",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "idle"
+  ],
+  "variants": [
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 31,
+      "path": "dress/kimono/sleeves_oversize/universal/female"
+    },
+    {
+      "id": "bg",
+      "zPos": 145,
+      "path": "dress/kimono/sleeves_oversize/universal/female_front"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-kimono-relm"
+}

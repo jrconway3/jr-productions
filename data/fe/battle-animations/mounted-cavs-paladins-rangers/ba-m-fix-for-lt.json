@@ -1,0 +1,26 @@
+{
+  "id": "ba-m-fix-for-lt",
+  "name": "Fix for LT (M)",
+  "category": "fe",
+  "subcategory": "battle-animations/mounted-cavs-paladins-rangers",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "weapon_types": [
+    "sword",
+    "lance",
+    "axe",
+    "handaxe",
+    "bow",
+    "unarmed"
+  ],
+  "preview": "",
+  "download": ""
+}

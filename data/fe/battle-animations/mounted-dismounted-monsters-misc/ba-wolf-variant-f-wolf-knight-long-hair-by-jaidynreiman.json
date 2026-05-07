@@ -1,0 +1,27 @@
+{
+  "id": "ba-wolf-variant-f-wolf-knight-long-hair-by-jaidynreiman",
+  "name": "Wolf Knight Long Hair (F)",
+  "category": "fe",
+  "subcategory": "battle-animations/mounted-dismounted-monsters-misc",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Wolf",
+  "weapon_types": [
+    "sword",
+    "lance",
+    "axe",
+    "handaxe",
+    "bow",
+    "unarmed"
+  ],
+  "preview": "",
+  "download": ""
+}

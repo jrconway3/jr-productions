@@ -1,0 +1,69 @@
+{
+  "id": "hairext_topknot_short",
+  "name": "Short Topknot",
+  "category": "lpc",
+  "subcategory": "hair/extensions/ponytails",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "adult",
+      "zPos": 128,
+      "path": "hair/extensions/ponytails/topknot_short/adult",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "child",
+      "zPos": 128,
+      "path": "hair/extensions/ponytails/topknot_short/child",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "ba-pirate-reskin-shirtless-m-by-teelvade",
+  "name": "Shirtless [M] by Teelvade",
+  "category": "fe",
+  "subcategory": "battle-animations/infantry-axe-brigs-pirates-zerkers",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Pirate",
+  "weapon_types": [
+    "axe",
+    "handaxe",
+    "unarmed"
+  ],
+  "preview": "",
+  "download": ""
+}

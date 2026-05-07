@@ -1,0 +1,20 @@
+{
+  "id": "icon-velvetkitsune-all-icons",
+  "name": "All Icons",
+  "category": "fe",
+  "subcategory": "item-icons",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "VelvetKitsune"
+      ]
+    }
+  ],
+  "tags": [
+    "custom"
+  ],
+  "preview": "Icons/Custom Sheets for LT/{VelvetKitsune} All Icons.png",
+  "download": ""
+}

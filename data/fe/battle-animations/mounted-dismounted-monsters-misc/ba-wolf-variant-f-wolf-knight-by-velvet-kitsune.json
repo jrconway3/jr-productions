@@ -1,0 +1,24 @@
+{
+  "id": "ba-wolf-variant-f-wolf-knight-by-velvet-kitsune",
+  "name": "Wolf Knight by Velvet Kitsune (F)",
+  "category": "fe",
+  "subcategory": "battle-animations/mounted-dismounted-monsters-misc",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Wolf",
+  "weapon_types": [
+    "lance",
+    "axe",
+    "bow"
+  ],
+  "preview": "",
+  "download": ""
+}

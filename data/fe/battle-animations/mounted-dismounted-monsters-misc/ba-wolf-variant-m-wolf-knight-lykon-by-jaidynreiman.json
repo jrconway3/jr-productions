@@ -1,0 +1,22 @@
+{
+  "id": "ba-wolf-variant-m-wolf-knight-lykon-by-jaidynreiman",
+  "name": "Wolf Knight Lykon (M)",
+  "category": "fe",
+  "subcategory": "battle-animations/mounted-dismounted-monsters-misc",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Wolf",
+  "weapon_types": [
+    "bow"
+  ],
+  "preview": "",
+  "download": ""
+}

@@ -1,0 +1,22 @@
+{
+  "id": "ms-muse-gypsy-f-alexsplode",
+  "name": "Muse_Gypsy (F)",
+  "category": "fe",
+  "subcategory": "map-sprites/bards-dancers-supplies-misc",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "Alexsplode"
+      ]
+    }
+  ],
+  "animations": [
+    "dance",
+    "move",
+    "stand"
+  ],
+  "preview": "Map Sprites/Bards, Dancers, Supplies, Misc/Muse_Gypsy (F) {Alexsplode}-stand.png",
+  "download": ""
+}

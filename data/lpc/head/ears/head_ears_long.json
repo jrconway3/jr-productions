@@ -1,0 +1,73 @@
+{
+  "id": "head_ears_long",
+  "name": "Long ears",
+  "category": "lpc",
+  "subcategory": "head/ears",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, GPL 3.0, CC-BY-SA 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "bluecarrot16",
+        "Nila122"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-long-ears",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "adapted to v3 base by bluecarrot16; expanded to other animations and child by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "teen",
+    "pregnant",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "adult",
+      "zPos": 126,
+      "path": "head/ears/long/adult",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "teen",
+        "pregnant"
+      ]
+    },
+    {
+      "id": "child",
+      "zPos": 126,
+      "path": "head/ears/long/child",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "http://opengameart.org/content/lpc-clothing-updates"
+}

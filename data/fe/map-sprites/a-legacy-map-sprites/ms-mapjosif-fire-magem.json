@@ -1,0 +1,21 @@
+{
+  "id": "ms-mapjosif-fire-magem",
+  "name": "MapJosif-Fire MageM",
+  "category": "fe",
+  "subcategory": "map-sprites/a-legacy-map-sprites",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "move"
+  ],
+  "preview": "Map Sprites/[A] Legacy Map Sprites/MapJosif-Fire MageM.png",
+  "download": ""
+}

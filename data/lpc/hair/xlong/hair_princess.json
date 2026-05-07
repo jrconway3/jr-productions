@@ -1,0 +1,60 @@
+{
+  "id": "hair_princess",
+  "name": "Princess",
+  "category": "lpc",
+  "subcategory": "hair/xlong",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Lanea Zimmerman (Sharm)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-expanded-hair"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 120,
+      "path": "hair/princess/adult/fg"
+    },
+    {
+      "id": "bg",
+      "zPos": 9,
+      "path": "hair/princess/adult/bg"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-hair"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "ms-noble-m-launch-t1-velvetkitsune",
+  "name": "Noble (M) Launch T1",
+  "category": "fe",
+  "subcategory": "map-sprites/lords-vanilla-and-custom",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "VelvetKitsune"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "preview": "Map Sprites/Lords - Vanilla and Custom/Touchups/Noble (M) Launch T1 {VelvetKitsune}-stand.png",
+  "download": ""
+}

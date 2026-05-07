@@ -1,0 +1,20 @@
+{
+  "id": "icon-peerless-all-icons",
+  "name": "All Icons",
+  "category": "fe",
+  "subcategory": "item-icons",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "Peerless"
+      ]
+    }
+  ],
+  "tags": [
+    "custom"
+  ],
+  "preview": "Icons/Custom Sheets for LT/{Peerless} All Icons.png",
+  "download": ""
+}

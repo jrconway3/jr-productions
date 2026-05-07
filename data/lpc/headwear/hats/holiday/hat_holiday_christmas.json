@@ -1,0 +1,86 @@
+{
+  "id": "hat_holiday_christmas",
+  "name": "Christmas Hat",
+  "category": "lpc",
+  "subcategory": "headwear/hats/holiday",
+  "type": "spritesheet",
+  "tags": [
+    "santa",
+    "santa_hat"
+  ],
+  "license": "OGA-BY 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-santa",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ],
+      "notes": "Santa/Elf Hat by bluecarrot16, untrimmed Santa Hat by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "female",
+    "male",
+    "teen",
+    "muscular",
+    "pregnant"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "red",
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 130,
+      "path": "hat/holiday/christmas/adult"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+}

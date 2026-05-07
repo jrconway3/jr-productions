@@ -1,0 +1,22 @@
+{
+  "id": "ba-fe8-eirika-base-f-t1-beta-eirika-fixed-by-jono-the-red",
+  "name": "T1 Beta Eirika Fixed by Jono the Red (F)",
+  "category": "fe",
+  "subcategory": "battle-animations/lords-vanilla-and-custom",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "FE8 Eirika",
+  "weapon_types": [
+    "sword"
+  ],
+  "preview": "",
+  "download": ""
+}

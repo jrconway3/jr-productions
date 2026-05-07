@@ -1,0 +1,65 @@
+{
+  "id": "wings_lizard",
+  "name": "Lizard Wings",
+  "category": "lpc",
+  "subcategory": "body/lizard",
+  "type": "spritesheet",
+  "tags": [
+    "wings"
+  ],
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Nila122",
+        "bluecarrot16"
+      ],
+      "urls": [
+        "https://opengameart.org/content/drakes-and-lizardfolk",
+        "https://opengameart.org/content/lpc-wings-new-animations"
+      ],
+      "notes": "edited for v3 bases and recolored by bluecarrot16, sit/jump/run/emote/revised combat by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 105,
+      "path": "body/wings/lizard/adult/fg"
+    },
+    {
+      "id": "bg",
+      "zPos": 5,
+      "path": "body/wings/lizard/adult/bg"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-wings-new-animations"
+}

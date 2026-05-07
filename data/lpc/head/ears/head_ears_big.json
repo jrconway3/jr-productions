@@ -1,0 +1,75 @@
+{
+  "id": "head_ears_big",
+  "name": "Big ears",
+  "category": "lpc",
+  "subcategory": "head/ears",
+  "type": "spritesheet",
+  "license": "GPL 3.0, CC-BY-SA 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "bluecarrot16",
+        "Thane Brimhall (pennomi)",
+        "laetissima",
+        "Matthew Krohn (makrohn)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-base-character-expressions",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "adapted to v3 base by bluecarrot16; expanded to other animations and child by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "teen",
+    "pregnant",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "adult",
+      "zPos": 105,
+      "path": "head/ears/big/adult",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "teen",
+        "pregnant"
+      ]
+    },
+    {
+      "id": "child",
+      "zPos": 105,
+      "path": "head/ears/big/child",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "http://opengameart.org/content/lpc-clothing-updates"
+}

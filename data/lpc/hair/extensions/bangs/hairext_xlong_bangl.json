@@ -1,0 +1,70 @@
+{
+  "id": "hairext_xlong_bangl",
+  "name": "Left XLong Bang",
+  "category": "lpc",
+  "subcategory": "hair/extensions/bangs",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-relm-hair-xlong-ponytail",
+        "https://opengameart.org/content/lpc-expanded-xlong-hair"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "adult",
+      "zPos": 128,
+      "path": "hair/extensions/bangs/xlong_bangl/adult",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "child",
+      "zPos": 128,
+      "path": "hair/extensions/bangs/xlong_bangl/child",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-xlong-hair"
+}

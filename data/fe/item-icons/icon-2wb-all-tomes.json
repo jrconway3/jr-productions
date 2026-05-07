@@ -1,0 +1,20 @@
+{
+  "id": "icon-2wb-all-tomes",
+  "name": "All Tomes",
+  "category": "fe",
+  "subcategory": "item-icons",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "2WB"
+      ]
+    }
+  ],
+  "tags": [
+    "custom"
+  ],
+  "preview": "Icons/Custom Sheets for LT/{2WB} All Tomes.png",
+  "download": ""
+}

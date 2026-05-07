@@ -1,0 +1,24 @@
+{
+  "id": "ba-myrmidon-base-f-vanilla-fe6-ponytail-bow",
+  "name": "Vanilla FE6 Ponytail +Bow (F)",
+  "category": "fe",
+  "subcategory": "battle-animations/infantry-swd-myrms-and-swordmasters",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Myrmidon",
+  "weapon_types": [
+    "sword",
+    "bow",
+    "unarmed"
+  ],
+  "preview": "",
+  "download": ""
+}

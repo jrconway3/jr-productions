@@ -1,0 +1,92 @@
+{
+  "id": "tail_lizard",
+  "name": "Lizard tail",
+  "category": "lpc",
+  "subcategory": "body/lizard",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "Nila122",
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/drakes-and-lizardfolk"
+      ],
+      "notes": "edited for v3 bases and recolored by bluecarrot16, additional animations added by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 85,
+      "path": "body/tail/lizard/adult/fg",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "fg",
+      "zPos": 85,
+      "path": "body/tail/lizard/child/fg",
+      "body_types": [
+        "child"
+      ]
+    },
+    {
+      "id": "bg",
+      "zPos": 5,
+      "path": "body/tail/lizard/adult/bg",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "bg",
+      "zPos": 5,
+      "path": "body/tail/lizard/child/bg",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/drakes-and-lizardfolk"
+}

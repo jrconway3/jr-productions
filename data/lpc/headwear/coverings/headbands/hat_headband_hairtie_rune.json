@@ -1,0 +1,96 @@
+{
+  "id": "hat_headband_hairtie_rune",
+  "name": "Hair Tie Rune",
+  "category": "lpc",
+  "subcategory": "headwear/coverings/headbands",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-relm-hair-xlong-ponytail",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ]
+    }
+  ],
+  "body_types": [
+    "female",
+    "male",
+    "muscular",
+    "pregnant",
+    "teen",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "adult",
+      "zPos": 126,
+      "path": "hat/headband/hairtie/rune/adult",
+      "body_types": [
+        "female",
+        "male",
+        "muscular",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "child",
+      "zPos": 126,
+      "path": "hat/headband/hairtie/rune/child",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "icon-kyrads-all-tomes",
+  "name": "All Tomes",
+  "category": "fe",
+  "subcategory": "item-icons",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "Kyrads"
+      ]
+    }
+  ],
+  "tags": [
+    "custom"
+  ],
+  "preview": "Icons/Custom Sheets for LT/{Kyrads} All Tomes.png",
+  "download": ""
+}

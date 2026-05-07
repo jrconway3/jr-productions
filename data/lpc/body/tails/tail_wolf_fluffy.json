@@ -1,0 +1,124 @@
+{
+  "id": "tail_wolf_fluffy",
+  "name": "Fluffy Wolf Tail",
+  "category": "lpc",
+  "subcategory": "body/tails",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-furry-ears-tails-for-rpg-sprites"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "blonde",
+    "ash",
+    "sandy",
+    "platinum",
+    "strawberry",
+    "redhead",
+    "ginger",
+    "carrot",
+    "chestnut",
+    "light brown",
+    "dark brown",
+    "black",
+    "raven",
+    "dark gray",
+    "gray",
+    "white",
+    "red",
+    "orange",
+    "gold",
+    "green",
+    "blue",
+    "navy",
+    "violet",
+    "purple",
+    "pink",
+    "rose",
+    "fur_black",
+    "fur_brown",
+    "fur_tan",
+    "fur_copper",
+    "fur_gold",
+    "fur_grey",
+    "fur_white"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 125,
+      "path": "body/tail/fluffy/adult/fg",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "fg",
+      "zPos": 125,
+      "path": "body/tail/fluffy/child/fg",
+      "body_types": [
+        "child"
+      ]
+    },
+    {
+      "id": "bg",
+      "zPos": 5,
+      "path": "body/tail/fluffy/adult/bg",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    },
+    {
+      "id": "bg",
+      "zPos": 5,
+      "path": "body/tail/fluffy/child/bg",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-furry-ears-tails-for-rpg-sprites"
+}

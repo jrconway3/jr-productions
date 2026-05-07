@@ -1,0 +1,64 @@
+{
+  "id": "legs_skirts_plain",
+  "name": "Plain skirt",
+  "category": "lpc",
+  "subcategory": "legs/skirts",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "Pierre Vigier (pvigier)",
+        "Johannes Sjölund (wulax)",
+        "Ahmad3366",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+      ],
+      "notes": "original by wulax, edited for female base by pvigier, edited for v3 base by bluecarrot16, idle & sit by Ahmad3366, color reduced & female sit/emote by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "female",
+    "teen",
+    "pregnant"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "climb",
+    "idle",
+    "sit",
+    "emote"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 20,
+      "path": "legs/skirts/plain/male",
+      "body_types": [
+        "male"
+      ]
+    },
+    {
+      "id": "thin",
+      "zPos": 20,
+      "path": "legs/skirts/plain/thin",
+      "body_types": [
+        "female",
+        "teen",
+        "pregnant"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+}

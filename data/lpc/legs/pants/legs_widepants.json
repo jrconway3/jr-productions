@@ -1,0 +1,63 @@
+{
+  "id": "legs_widepants",
+  "name": "Wide pants",
+  "category": "lpc",
+  "subcategory": "legs/pants",
+  "type": "spritesheet",
+  "license": "CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman",
+        "dalonedrau",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-muscular-pants",
+        "https://opengameart.org/content/lpc-muscular-swing-animation",
+        "https://opengameart.org/content/lpc-muscular-hurt-animation"
+      ],
+      "notes": "original muscular pants by ElizaWy, muscular by dalonedrau, cast and thrust frames by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "muscular"
+  ],
+  "variants": [
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 20,
+      "path": "legs/pants/muscular"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-muscular-hurt-animation"
+}

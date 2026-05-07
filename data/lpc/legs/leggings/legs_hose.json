@@ -1,0 +1,85 @@
+{
+  "id": "legs_hose",
+  "name": "Hose",
+  "category": "lpc",
+  "subcategory": "legs/leggings",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "ElizaWy",
+        "bluecarrot16",
+        "JaidynReiman",
+        "ElizaWy",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, original overalls and hose by ElizaWy, base animations adapted from v3 overalls by bluecarrot16, male hose by JaidynReiman"
+    },
+    {
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, original by ElizaWy, remaining frames by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "female",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 20,
+      "path": "legs/hose/male",
+      "body_types": [
+        "male"
+      ]
+    },
+    {
+      "id": "thin",
+      "zPos": 20,
+      "path": "legs/hose/thin",
+      "body_types": [
+        "female",
+        "teen"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-pants"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "ba-fe8-roy-reskin-m",
+  "name": "FE8 Roy (M)",
+  "category": "fe",
+  "subcategory": "battle-animations/lords-vanilla-and-custom",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "FE8 Roy",
+  "preview": "",
+  "download": ""
+}

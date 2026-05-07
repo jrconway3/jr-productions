@@ -1,0 +1,21 @@
+{
+  "id": "ms-mapsword-cavalierf",
+  "name": "MapSword CavalierF",
+  "category": "fe",
+  "subcategory": "map-sprites/a-legacy-map-sprites",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "move"
+  ],
+  "preview": "Map Sprites/[A] Legacy Map Sprites/MapSword CavalierF.png",
+  "download": ""
+}

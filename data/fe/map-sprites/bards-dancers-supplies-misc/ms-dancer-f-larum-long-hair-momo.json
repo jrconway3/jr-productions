@@ -1,0 +1,22 @@
+{
+  "id": "ms-dancer-f-larum-long-hair-momo",
+  "name": "Dancer (F) Larum Long Hair",
+  "category": "fe",
+  "subcategory": "map-sprites/bards-dancers-supplies-misc",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "Momo"
+      ]
+    }
+  ],
+  "animations": [
+    "dance",
+    "stand-move",
+    "stand-stand"
+  ],
+  "preview": "Map Sprites/Bards, Dancers, Supplies, Misc/Dancer (F) Larum Long Hair {Momo}-stand-stand.png",
+  "download": ""
+}

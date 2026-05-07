@@ -1,0 +1,20 @@
+{
+  "id": "icon-ereshkigal-all-tomes",
+  "name": "All Tomes",
+  "category": "fe",
+  "subcategory": "item-icons",
+  "type": "spritesheet",
+  "license": "F2U/F2E",
+  "credits": [
+    {
+      "authors": [
+        "Ereshkigal"
+      ]
+    }
+  ],
+  "tags": [
+    "custom"
+  ],
+  "preview": "Icons/Custom Sheets for LT/{Ereshkigal} All Tomes.png",
+  "download": ""
+}

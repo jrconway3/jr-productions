@@ -1,5 +1,12 @@
 export type AssetType = 'spritesheet' | 'gif' | 'tileset' | 'portrait';
 
+export interface AssetLayer {
+  id: string;
+  zPos: number;
+  path: string;
+  body_types?: string[];
+}
+
 export interface AssetCredit {
   authors: string[];
   urls: string[];
@@ -30,7 +37,7 @@ export interface Asset {
   palettes?: PaletteVariant[];
 
   // LPC-specific
-  layers?: string[];
+  layers?: AssetLayer[];
 
   // FE-specific
   animated?: boolean;

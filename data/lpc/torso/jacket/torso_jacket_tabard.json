@@ -1,0 +1,81 @@
+{
+  "id": "torso_jacket_tabard",
+  "name": "Tabard",
+  "category": "lpc",
+  "subcategory": "torso/jacket",
+  "type": "spritesheet",
+  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "original by wulax, edited to v3 base by bluecarrot16"
+    },
+    {
+      "authors": [
+        "JaidynReiman",
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://opengameart.org/content/lpc-combat-armor-for-women",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "original by wulax, edited to female base by makrohn and JaidynReiman, edited to v3 base by bluecarrot16"
+    }
+  ],
+  "body_types": [
+    "female",
+    "teen",
+    "male"
+  ],
+  "variants": [
+    "black",
+    "blue",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "sky",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "female",
+      "zPos": 55,
+      "path": "torso/jacket/tabard/female",
+      "body_types": [
+        "female",
+        "teen"
+      ]
+    },
+    {
+      "id": "male",
+      "zPos": 55,
+      "path": "torso/jacket/tabard/male",
+      "body_types": [
+        "male"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "http://opengameart.org/content/lpc-clothing-updates"
+}
