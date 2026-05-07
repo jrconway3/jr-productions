@@ -1,0 +1,39 @@
+{
+  "name": "Shirtless",
+  "type": "fe",
+  "path": "battle-animations/infantry-axe-brigs-pirates-zerkers",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "Wan/Eliwan"
+      ],
+      "notes": "Repalette"
+    },
+    {
+      "authors": [
+        "Teelvade"
+      ],
+      "notes": "Shirtless edit"
+    },
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Handaxe and Unarmed Shirtless edits"
+    }
+  ],
+  "animated": true,
+  "class": "Pirate",
+  "body_types": [
+    "male"
+  ],
+  "weapon_types": [
+    "axe",
+    "handaxe",
+    "unarmed"
+  ],
+  "preview": "",
+  "download": ""
+}

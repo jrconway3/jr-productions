@@ -1,0 +1,23 @@
+{
+  "name": "MapDark Mage_Bangs",
+  "type": "fe",
+  "path": "map-sprites/a-legacy-map-sprites",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "move"
+  ],
+  "body_types": [
+    "male"
+  ],
+  "preview": "Map Sprites/[A] Legacy Map Sprites/MapDark Mage_BangsM.png",
+  "download": ""
+}

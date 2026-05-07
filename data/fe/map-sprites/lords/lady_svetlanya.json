@@ -1,0 +1,24 @@
+{
+  "name": "Lady (F) Svetlanya",
+  "type": "fe",
+  "path": "map-sprites/lords-vanilla-and-custom",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "body_types": [
+    "female"
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Custom Sprite"
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "preview": "Map Sprites/Lords - Vanilla and Custom/Custom/Lady (F) Svetlanya {JaidynReiman}-stand.png",
+  "download": ""
+}

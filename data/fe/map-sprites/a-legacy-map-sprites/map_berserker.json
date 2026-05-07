@@ -1,0 +1,23 @@
+{
+  "name": "MapBerserker",
+  "type": "fe",
+  "path": "map-sprites/a-legacy-map-sprites",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "move"
+  ],
+  "body_types": [
+    "female"
+  ],
+  "preview": "Map Sprites/[A] Legacy Map Sprites/MapBerserkerF.png",
+  "download": ""
+}

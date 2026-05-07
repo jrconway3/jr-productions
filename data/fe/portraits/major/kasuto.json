@@ -1,0 +1,19 @@
+{
+  "name": "Kasuto",
+  "type": "fe",
+  "path": "portraits/major",
+  "format": "portrait",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "variants": [
+    "Hoodless",
+    "Final"
+  ],
+  "preview": ""
+}

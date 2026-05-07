@@ -1,0 +1,37 @@
+{
+  "name": "T1 Beta Eirika Fixed",
+  "type": "fe",
+  "path": "battle-animations/lords-vanilla-and-custom",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "IS"
+      ],
+      "notes": "Original animation"
+    },
+    {
+      "authors": [
+        "Jono the Red"
+      ],
+      "notes": "Fixed versions"
+    },
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Fixed Missing Sword"
+    }
+  ],
+  "animated": true,
+  "class": "FE8 Eirika",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "sword"
+  ],
+  "preview": "",
+  "download": ""
+}

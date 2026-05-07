@@ -1,0 +1,24 @@
+{
+  "name": "Lord (F) Elf Sword",
+  "type": "fe",
+  "path": "map-sprites/lords-vanilla-and-custom",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "body_types": [
+    "female"
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Elf Eirika (for Amaya)"
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "preview": "Map Sprites/Lords - Vanilla and Custom/Edits/Lord (F) Elf Sword {JaidynReiman}-stand.png",
+  "download": ""
+}

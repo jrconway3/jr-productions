@@ -1,0 +1,36 @@
+{
+  "name": "Wolf Knight Long Hair",
+  "type": "fe",
+  "path": "battle-animations/mounted-dismounted-monsters-misc",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "VelvetKitsune"
+      ],
+      "notes": "Animation"
+    },
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Bow Animation"
+    }
+  ],
+  "animated": true,
+  "class": "Wolf",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "sword",
+    "lance",
+    "axe",
+    "handaxe",
+    "bow",
+    "unarmed"
+  ],
+  "preview": "",
+  "download": ""
+}
