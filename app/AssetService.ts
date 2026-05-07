@@ -8,10 +8,16 @@ function isAssetFile(filename: string): boolean {
   return filename.endsWith('.json') && filename !== 'meta.json';
 }
 
+function loadAsset(filePath: string): Asset {
+  const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  return { ...data, id: path.basename(filePath, '.json') };
+}
+
 function readAssetsFromDir(dirPath: string): Asset[] {
   if (!fs.existsSync(dirPath)) return [];
-  const files = fs.readdirSync(dirPath).filter(isAssetFile);
-  return files.map((f) => JSON.parse(fs.readFileSync(path.join(dirPath, f), 'utf-8')) as Asset);
+  return fs.readdirSync(dirPath)
+    .filter(isAssetFile)
+    .map((f) => loadAsset(path.join(dirPath, f)));
 }
 
 export function getAssetsByCategory(categoryPath: string): Asset[] {
@@ -29,7 +35,7 @@ export function getAllAssets(): Asset[] {
       if (entry.isDirectory()) {
         walk(fullPath);
       } else if (isAssetFile(entry.name)) {
-        results.push(JSON.parse(fs.readFileSync(fullPath, 'utf-8')) as Asset);
+        results.push(loadAsset(fullPath));
       }
     }
   }

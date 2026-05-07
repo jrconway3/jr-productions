@@ -53,7 +53,7 @@ describe('LPC slug page', () => {
   });
 
   it('renders asset cards when assets are present', () => {
-    const asset: Asset = { id: 'h1', name: 'Braided Hair', category: 'lpc', type: 'spritesheet' };
+    const asset: Asset = { id: 'h1', name: 'Braided Hair', type: 'lpc', format: 'spritesheet' };
     render(<LpcSlug category={mockCategory} assets={[asset]} slugs={['hair']} />);
     expect(screen.getByText('Braided Hair')).toBeInTheDocument();
   });

@@ -54,7 +54,7 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
             <div className="sprite-collage-grid">
               {featuredAssets.length > 0
                 ? featuredAssets.slice(0, 12).map((asset) => (
-                    <Link key={asset.id} href={`/${asset.category}/${asset.id}`} className="block">
+                    <Link key={asset.id} href={`/${asset.type}/${asset.id}`} className="block">
                       <img
                         src={`/${asset.preview}`}
                         alt={asset.name}

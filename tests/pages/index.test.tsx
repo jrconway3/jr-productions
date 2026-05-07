@@ -38,7 +38,7 @@ describe('Home page', () => {
   });
 
   it('renders asset gallery when assets are present', () => {
-    const asset: Asset = { id: 'a1', name: 'My Sprite', category: 'lpc', type: 'spritesheet' };
+    const asset: Asset = { id: 'a1', name: 'My Sprite', type: 'lpc', format: 'spritesheet' };
     render(<Home categories={[]} featuredAssets={[asset]} />);
     expect(screen.getByText('My Sprite')).toBeInTheDocument();
   });

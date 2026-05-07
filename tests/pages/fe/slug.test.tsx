@@ -43,7 +43,7 @@ describe('FE slug page', () => {
   });
 
   it('renders asset cards when assets are present', () => {
-    const asset: Asset = { id: 'p1', name: 'Hero Portrait', category: 'fe', type: 'portrait' };
+    const asset: Asset = { id: 'p1', name: 'Hero Portrait', type: 'fe', format: 'portrait' };
     render(<FeSlug category={mockCategory} assets={[asset]} slugs={['portraits']} />);
     expect(screen.getByText('Hero Portrait')).toBeInTheDocument();
   });

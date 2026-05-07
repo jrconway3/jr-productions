@@ -41,7 +41,7 @@ describe('Collection detail page', () => {
   });
 
   it('renders asset cards when assets are present', () => {
-    const asset: Asset = { id: 'a1', name: 'Shield Sprite', category: 'fe', type: 'spritesheet' };
+    const asset: Asset = { id: 'a1', name: 'Shield Sprite', type: 'fe', format: 'spritesheet' };
     render(<CollectionDetail collection={mockCollection} assets={[asset]} />);
     expect(screen.getByText('Shield Sprite')).toBeInTheDocument();
   });
