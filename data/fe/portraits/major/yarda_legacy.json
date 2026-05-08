@@ -1,0 +1,13 @@
+{
+  "name": "Yarda Legacy",
+  "type": "fe",
+  "path": "portraits/major",
+  "format": "portrait",
+  "license": "F2U, F2E",
+  "credits": [],
+  "variants": [
+    "OC Yarda Old"
+  ],
+  "preview": "assets/fe/Portraits/Major/Yarda/legacy/{JaidynReiman} OC Yarda Old.png",
+  "download": ""
+}

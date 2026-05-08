@@ -4,24 +4,13 @@
   "path": "portraits/main",
   "format": "portrait",
   "license": "F2U, F2E",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman"
-      ]
-    }
-  ],
+  "credits": [],
   "variants": [
-    "(Elf) WIP V1",
-    "(Elf)",
-    "(Human) WIP V1",
-    "(Human)",
-    "(WIP) V1",
-    "(WIP) V2",
-    "Tan Veiled",
-    "Tan",
-    "Veiled",
-    "Final"
+    "[F2E] OC Svetlanya Tan Veiled",
+    "[F2E] OC Svetlanya Tan",
+    "[F2E] OC Svetlanya Veiled",
+    "[F2E] OC Svetlanya"
   ],
-  "preview": "Portraits/Main/Svetlanya/Previews/{JaidynReiman} [F2E] OC Svetlanya WIP (Animated Smile).gif"
+  "preview": "assets/fe/Portraits/Main/Svetlanya/{JaidynReiman} [F2E] OC Svetlanya Tan Veiled.png",
+  "download": ""
 }

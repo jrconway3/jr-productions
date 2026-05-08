@@ -1,18 +1,43 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const NAV_LINKS = [
-  { href: '/lpc', label: 'LPC', color: 'hover:text-lpc-accentLight' },
-  { href: '/fe', label: 'FE', color: 'hover:text-fe-accentLight' },
-  { href: '/collections', label: 'Collections', color: 'hover:text-site-text' },
-  { href: '/commissions', label: 'Commissions', color: 'hover:text-site-text' },
+const LPC_CATEGORY_LINKS = [
+  { href: '/lpc/arms', label: 'Arms' },
+  { href: '/lpc/body', label: 'Body' },
+  { href: '/lpc/feet', label: 'Feet' },
+  { href: '/lpc/hair', label: 'Hair' },
+  { href: '/lpc/head', label: 'Head' },
+  { href: '/lpc/headwear', label: 'Headwear' },
+  { href: '/lpc/legs', label: 'Legs' },
+  { href: '/lpc/tilesets', label: 'Tilesets' },
+  { href: '/lpc/tools', label: 'Tools' },
+  { href: '/lpc/torso', label: 'Torso' },
+  { href: '/lpc/weapons', label: 'Weapons' },
+];
+
+const FE_CATEGORY_LINKS = [
+  { href: '/fe/portraits', label: 'Portraits' },
+  { href: '/fe/battle-animations', label: 'Battle Animations' },
+  { href: '/fe/map-sprites', label: 'Map Sprites' },
+  { href: '/fe/autotiles', label: 'Autotiles' },
+  { href: '/fe/maps', label: 'Maps' },
+  { href: '/fe/icons', label: 'Icons' },
 ];
 
 export default function Layout({ children }: LayoutProps) {
+  const router = useRouter();
+  const currentPath = router.asPath.split('?')[0];
+
+  const isPathActive = (href: string): boolean => {
+    if (href === '/') return currentPath === '/';
+    return currentPath === href || currentPath.startsWith(`${href}/`);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="bg-site-surface border-b border-white/10 sticky top-0 z-50">
@@ -20,16 +45,51 @@ export default function Layout({ children }: LayoutProps) {
           <Link href="/" className="font-pixel text-base text-site-text hover:text-lpc-accentLight shrink-0">
             JR Productions
           </Link>
-          <div className="flex gap-6 ml-auto">
-            {NAV_LINKS.map(({ href, label, color }) => (
+
+          <div className="flex gap-6 ml-auto items-center">
+            <div className="nav-dropdown group">
               <Link
-                key={href}
-                href={href}
-                className={`font-pixel text-xs text-site-muted ${color} transition-colors`}
+                href="/lpc"
+                className={`font-pixel text-xs text-site-muted hover:text-lpc-accentLight transition-colors ${isPathActive('/lpc') ? 'nav-link-active nav-link-active-lpc' : ''}`}
+                aria-current={isPathActive('/lpc') ? 'page' : undefined}
               >
-                {label}
+                LPC
               </Link>
-            ))}
+              <div className="nav-dropdown-menu nav-dropdown-menu-lpc">
+                {LPC_CATEGORY_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`nav-dropdown-item ${isPathActive(item.href) ? 'nav-dropdown-item-active nav-dropdown-item-active-lpc' : ''}`}
+                    aria-current={isPathActive(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="nav-dropdown group">
+              <Link
+                href="/fe"
+                className={`font-pixel text-xs text-site-muted hover:text-fe-accentLight transition-colors ${isPathActive('/fe') ? 'nav-link-active nav-link-active-fe' : ''}`}
+                aria-current={isPathActive('/fe') ? 'page' : undefined}
+              >
+                FE
+              </Link>
+              <div className="nav-dropdown-menu nav-dropdown-menu-fe">
+                {FE_CATEGORY_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`nav-dropdown-item ${isPathActive(item.href) ? 'nav-dropdown-item-active nav-dropdown-item-active-fe' : ''}`}
+                    aria-current={isPathActive(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </nav>
       </header>

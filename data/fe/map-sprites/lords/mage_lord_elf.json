@@ -1,31 +1,28 @@
 {
-  "name": "Mage Lord (F) Elf",
+  "name": "Mage Lord Elf",
   "type": "fe",
-  "path": "map-sprites/lords-vanilla-and-custom",
+  "path": "map-sprites/lords",
   "format": "spritesheet",
   "license": "F2U, F2E",
   "body_types": [
-    "male",
-    "female"
+    "female",
+    "male"
   ],
   "credits": [
     {
       "authors": [
-        "TyTheBub"
-      ],
-      "notes": "Mage Lord"
-    },
-    {
-      "authors": [
+        "TyTheBub",
         "JaidynReiman"
-      ],
-      "notes": "Elf Ears"
+      ]
     }
   ],
   "animations": [
     "stand",
     "walk"
   ],
-  "preview": "Map Sprites/Lords - Vanilla and Custom/Edits/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
+  "variants": [
+    "Unarmed"
+  ],
+  "preview": "assets/fe/map_sprites/lords/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
   "download": ""
 }

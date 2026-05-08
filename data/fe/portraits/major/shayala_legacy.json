@@ -1,0 +1,17 @@
+{
+  "name": "Shayala Legacy",
+  "type": "fe",
+  "path": "portraits/major",
+  "format": "portrait",
+  "license": "F2U, F2E",
+  "credits": [],
+  "variants": [
+    "OC Shayala (Bust)",
+    "OC Shayala (Elf, Bust)",
+    "OC Shayala (Human, Bust)",
+    "OC Shayala V2 (Bust)",
+    "OC Shayala V2 (Bust, Facing Viewer)"
+  ],
+  "preview": "assets/fe/Portraits/Major/shayala/legacy/{JaidynReiman} OC Shayala (Bust).png",
+  "download": ""
+}

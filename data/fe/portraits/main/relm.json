@@ -4,20 +4,15 @@
   "path": "portraits/main",
   "format": "portrait",
   "license": "F2U, F2E",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman"
-      ]
-    }
-  ],
+  "credits": [],
   "variants": [
-    "Clip Hood Down",
-    "Clip Hooded",
-    "Hood Down",
-    "Hood",
-    "Wavy",
-    "Final"
+    "OC Relm Clip Hood Down",
+    "OC Relm Clip Hooded",
+    "OC Relm Hood Down",
+    "OC Relm Hood",
+    "OC Relm Wavy",
+    "OC Relm"
   ],
-  "preview": "Portraits/Main/Relm/Previews/{JaidynReiman} OC Relm Hood Down Smile.gif"
+  "preview": "assets/fe/Portraits/Main/Relm/{JaidynReiman} OC Relm Clip Hood Down.png",
+  "download": ""
 }

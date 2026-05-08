@@ -5,6 +5,7 @@ import type { Asset } from './models/Asset';
 const DATA_ROOT = path.join(process.cwd(), 'data');
 const PUBLIC_ROOT = path.join(process.cwd(), 'public');
 const LPC_PUBLIC_BASE = 'assets/lpc';
+const FE_PUBLIC_BASE = 'assets/fe';
 const LPC_CHARACTERS_ROOT = path.join(PUBLIC_ROOT, LPC_PUBLIC_BASE, 'characters');
 
 const HTTP_URL_PATTERN = /^https?:\/\//i;
@@ -12,7 +13,7 @@ const HTTP_URL_PATTERN = /^https?:\/\//i;
 function normalizeAssetPath(value?: string): string {
   if (!value) return '';
   if (HTTP_URL_PATTERN.test(value)) return value;
-  return value.replace(/^\/+/, '');
+  return value.replace(/\\/g, '/').replace(/^\/+/, '');
 }
 
 function resolveLpcPath(value?: string): string {
@@ -21,6 +22,13 @@ function resolveLpcPath(value?: string): string {
   if (normalized.startsWith(`${LPC_PUBLIC_BASE}/`)) return normalized;
   if (normalized.startsWith('characters/')) return `${LPC_PUBLIC_BASE}/${normalized}`;
   return `${LPC_PUBLIC_BASE}/characters/${normalized}`;
+}
+
+function resolveFePath(value?: string): string {
+  const normalized = normalizeAssetPath(value);
+  if (!normalized || HTTP_URL_PATTERN.test(normalized)) return normalized;
+  if (normalized.startsWith(`${FE_PUBLIC_BASE}/`)) return normalized;
+  return `${FE_PUBLIC_BASE}/${normalized}`;
 }
 
 function deriveLpcPreview(asset: Asset): string {
@@ -59,6 +67,14 @@ function deriveLpcPreview(asset: Asset): string {
 }
 
 function normalizeAsset(asset: Asset): Asset {
+  if (asset.type === 'fe') {
+    return {
+      ...asset,
+      preview: resolveFePath(asset.preview),
+      download: resolveFePath(asset.download),
+    };
+  }
+
   if (asset.type !== 'lpc') {
     return {
       ...asset,
@@ -95,6 +111,28 @@ function readAssetsFromDir(dirPath: string): Asset[] {
 export function getAssetsByCategory(categoryPath: string): Asset[] {
   const dirPath = path.join(DATA_ROOT, categoryPath);
   return readAssetsFromDir(dirPath);
+}
+
+export function getAssetsByCategoryTree(categoryPath: string): Asset[] {
+  const rootPath = path.join(DATA_ROOT, categoryPath);
+  if (!fs.existsSync(rootPath)) return [];
+
+  const results: Asset[] = [];
+
+  function walk(dirPath: string) {
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dirPath, entry.name);
+      if (entry.isDirectory()) {
+        walk(fullPath);
+      } else if (isAssetFile(entry.name)) {
+        results.push(loadAsset(fullPath));
+      }
+    }
+  }
+
+  walk(rootPath);
+  return results;
 }
 
 export function getAllAssets(): Asset[] {

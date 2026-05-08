@@ -1,0 +1,14 @@
+{
+  "name": "Serena",
+  "type": "fe",
+  "path": "portraits/major",
+  "format": "portrait",
+  "license": "F2U, F2E",
+  "credits": [],
+  "variants": [
+    "OC Serena (Tan)",
+    "OC Serena"
+  ],
+  "preview": "assets/fe/Portraits/Major/serena/{JaidynReiman} OC Serena (Tan).png",
+  "download": ""
+}

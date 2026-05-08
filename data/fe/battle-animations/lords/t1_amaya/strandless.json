@@ -1,0 +1,38 @@
+{
+  "name": "Strandless",
+  "type": "fe",
+  "path": "battle-animations/lords/t1_amaya",
+  "format": "gif",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "IS",
+        "Jono the Red"
+      ],
+      "notes": "Original animation by IS, fixed version by Jono the Red."
+    },
+    {
+      "authors": [
+        "JaidynReiman",
+        "HyperGammaSpace"
+      ],
+      "notes": "Full Amaya Reskin by JaidynReiman. Missing sword frames and script adjustments based on Gaiden Priestess by HyperGammaSpace, Jono."
+    },
+    {
+      "authors": [
+        "7743"
+      ],
+      "notes": "Special Thanks to 7743 for Celes Chere Reskin (used as inspiration for cleanup)."
+    }
+  ],
+  "animated": true,
+  "class": "T1 Amaya",
+  "body_types": [],
+  "weapon_types": [
+    "sword",
+    "unarmed"
+  ],
+  "preview": "assets/fe/battle_animations/lords/t1_amaya/strandless/sword/Sword.gif",
+  "download": ""
+}

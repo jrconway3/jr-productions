@@ -1,0 +1,29 @@
+{
+  "name": "Wolf Knight",
+  "type": "fe",
+  "path": "map-sprites/mounted",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "body_types": [
+    "female",
+    "male"
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "VelvetKitsune",
+        "Leif"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "variants": [
+    "Unarmed"
+  ],
+  "preview": "assets/fe/map_sprites/mounted/Wolf Knight (F) {JaidynReiman, VelvetKitsune, Leif}-stand.png",
+  "download": ""
+}

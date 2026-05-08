@@ -4,17 +4,11 @@
   "path": "portraits/major",
   "format": "portrait",
   "license": "F2U, F2E",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman"
-      ]
-    }
-  ],
+  "credits": [],
   "variants": [
-    "Old",
-    "Runeless",
-    "Final"
+    "OC Yarda Runeless",
+    "OC Yarda"
   ],
-  "preview": ""
+  "preview": "assets/fe/Portraits/Major/Yarda/{JaidynReiman} OC Yarda Runeless.png",
+  "download": ""
 }

@@ -4,18 +4,10 @@
   "path": "portraits/main",
   "format": "portrait",
   "license": "F2U, F2E",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman"
-      ]
-    }
-  ],
+  "credits": [],
   "variants": [
-    "(Elf) WIP V1",
-    "(Human) WIP V1",
-    "WIP V1",
-    "Final"
+    "OC Amaya"
   ],
-  "preview": "Portraits/Main/Amaya/Previews/{JaidynReiman} [F2E] OC Amaya WIP (Redrawn Hair, Smile).gif"
+  "preview": "assets/fe/Portraits/Main/Amaya/{JaidynReiman} OC Amaya.png",
+  "download": ""
 }

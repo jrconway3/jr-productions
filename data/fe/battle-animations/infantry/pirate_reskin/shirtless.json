@@ -1,0 +1,35 @@
+{
+  "name": "Shirtless",
+  "type": "fe",
+  "path": "battle-animations/infantry/pirate_reskin",
+  "format": "gif",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "Wan/Eliwan"
+      ],
+      "notes": "Repalette by Wan/Eliwan."
+    },
+    {
+      "authors": [
+        "Teelvade"
+      ],
+      "notes": "Shirtless edit by Teelvade"
+    },
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Axe (Fixed), Handaxe and Unarmed Shirtless edits by JaidynReiman."
+    }
+  ],
+  "animated": true,
+  "class": "Pirate Reskin",
+  "body_types": [],
+  "weapon_types": [
+    "unarmed"
+  ],
+  "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/axe_fixed/Axe.gif",
+  "download": ""
+}

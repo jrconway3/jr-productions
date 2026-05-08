@@ -5,3 +5,6 @@
 [submodule "public/assets/lpc"]
 	path = public/assets/lpc
 	url = https://github.com/jrconway3/lpc-jaidynreiman-assets.git
+[submodule "public/assets/fe"]
+	path = public/assets/fe
+	url = https://github.com/jrconway3/fegba-jaidynreiman-assets.git

@@ -4,16 +4,11 @@
   "path": "portraits/minor",
   "format": "portrait",
   "license": "F2U, F2E",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman"
-      ]
-    }
-  ],
+  "credits": [],
   "variants": [
-    "(No Veil)",
-    "Final"
+    "OC Frida (No Veil)",
+    "OC Frida"
   ],
-  "preview": "Portraits/Minor/Frida/Previews/Frida No Veil Smile.gif"
+  "preview": "assets/fe/Portraits/Minor/Frida/{JaidynReiman} OC Frida (No Veil).png",
+  "download": ""
 }

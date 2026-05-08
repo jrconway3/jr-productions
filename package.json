@@ -8,6 +8,8 @@
     "dev": "next dev",
     "build": "git submodule update --remote --merge && next build",
     "start": "next start",
+    "generate:fe:add": "node scripts/generate-fe-assets.mjs --mode=add-new",
+    "generate:fe:rebuild": "node scripts/generate-fe-assets.mjs --mode=rebuild",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
