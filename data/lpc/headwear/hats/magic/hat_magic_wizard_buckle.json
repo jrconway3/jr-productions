@@ -1,0 +1,71 @@
+{
+  "name": "Wizard Hat Buckle",
+  "type": "lpc",
+  "path": "headwear/hats/magic",
+  "format": "spritesheet",
+  "tags": [
+    "wizard",
+    "hat_buckle"
+  ],
+  "license": "CC-BY-SA 3.0, GPL 2.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "Michael Whitlock (bigbeargames)",
+        "Tuomo Untinen (reemax)",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-items-and-game-effects",
+        "https://opengameart.org/content/lpc-pointed-hats",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ],
+      "notes": "Original Wizard Hat and Recolors by bigbeargames and reemax; split into separate layers with new recolors by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "female",
+    "muscular",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "steel",
+    "iron",
+    "ceramic",
+    "brass",
+    "copper",
+    "bronze",
+    "silver",
+    "gold"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 132,
+      "path": "hat/magic/wizard/buckle/adult"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+}

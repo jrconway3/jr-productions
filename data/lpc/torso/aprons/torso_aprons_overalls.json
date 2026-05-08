@@ -1,0 +1,99 @@
+{
+  "name": "Overalls",
+  "type": "lpc",
+  "path": "torso/aprons",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "ElizaWy",
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-revised-character-basics",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "original overalls by ElizaWy, extended to all animation frames, adapted from teen to male base, and edited for v3 bases by bluecarrot16; extended to combat animations by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "female",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "leather",
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 38,
+      "path": "torso/aprons/overalls/male",
+      "body_types": [
+        "male"
+      ]
+    },
+    {
+      "id": "female",
+      "zPos": 38,
+      "path": "torso/aprons/overalls/female",
+      "body_types": [
+        "female"
+      ]
+    },
+    {
+      "id": "teen",
+      "zPos": 38,
+      "path": "torso/aprons/overalls/teen",
+      "body_types": [
+        "teen"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "http://opengameart.org/content/lpc-clothing-updates"
+}

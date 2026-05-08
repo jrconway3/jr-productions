@@ -1,0 +1,25 @@
+{
+  "name": "Female",
+  "type": "fe",
+  "path": "battle-animations/mounted/wolf_knight",
+  "format": "gif",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "VelvetKitsune"
+      ],
+      "notes": "Animation by VelvetKitsune."
+    }
+  ],
+  "animated": true,
+  "class": "Wolf Knight",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "bow"
+  ],
+  "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/axe_alt/Axe.gif",
+  "download": ""
+}

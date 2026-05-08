@@ -1,0 +1,103 @@
+{
+  "name": "Pantaloons",
+  "type": "lpc",
+  "path": "legs/pants",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0, GPL 2.0, GPL 3.0, CC-BY-SA 3.0",
+  "credits": [
+    {
+      "authors": [
+        "Nila122",
+        "JaidynReiman",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates",
+        "https://opengameart.org/content/more-lpc-clothes-and-hair",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, Original Pantaloons by Nila122, climb/jump/run/sit/emotes/revised combat by JaidynReiman"
+    },
+    {
+      "authors": [
+        "Nila122",
+        "JaidynReiman",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates",
+        "https://opengameart.org/content/more-lpc-clothes-and-hair",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, Original Pantaloons by Nila122, Female/Teen version by JaidynReiman"
+    },
+    {
+      "authors": [
+        "Nila122",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/more-lpc-clothes-and-hair"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 20,
+      "path": "legs/pantaloons/male",
+      "body_types": [
+        "male"
+      ]
+    },
+    {
+      "id": "muscular",
+      "zPos": 20,
+      "path": "legs/pantaloons/muscular",
+      "body_types": [
+        "muscular"
+      ]
+    },
+    {
+      "id": "thin",
+      "zPos": 20,
+      "path": "legs/pantaloons/thin",
+      "body_types": [
+        "female",
+        "pregnant",
+        "teen"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-pants"
+}

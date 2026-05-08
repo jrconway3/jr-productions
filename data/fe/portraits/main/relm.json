@@ -1,0 +1,18 @@
+{
+  "name": "Relm",
+  "type": "fe",
+  "path": "portraits/main",
+  "format": "portrait",
+  "license": "F2U, F2E",
+  "credits": [],
+  "variants": [
+    "OC Relm Clip Hood Down",
+    "OC Relm Clip Hooded",
+    "OC Relm Hood Down",
+    "OC Relm Hood",
+    "OC Relm Wavy",
+    "OC Relm"
+  ],
+  "preview": "assets/fe/Portraits/Main/Relm/{JaidynReiman} OC Relm Clip Hood Down.png",
+  "download": ""
+}

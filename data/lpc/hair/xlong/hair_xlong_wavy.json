@@ -1,0 +1,59 @@
+{
+  "name": "XLong Wavy",
+  "type": "lpc",
+  "path": "hair/xlong",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Nila122"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-expanded-xlong-hair"
+      ],
+      "notes": "Custom by JaidynReiman; inspiration for spellcast frames from Nila122's XLong"
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 120,
+      "path": "hair/xlong_wavy/adult/fg"
+    },
+    {
+      "id": "bg",
+      "zPos": 9,
+      "path": "hair/xlong_wavy/adult/bg"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-xlong-hair"
+}

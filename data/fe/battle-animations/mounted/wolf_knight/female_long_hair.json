@@ -1,0 +1,37 @@
+{
+  "name": "Female Long Hair",
+  "type": "fe",
+  "path": "battle-animations/mounted/wolf_knight",
+  "format": "gif",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "authors": [
+        "VelvetKitsune"
+      ],
+      "notes": "Animation by VelvetKitsune."
+    },
+    {
+      "authors": [
+        "JaidynReiman",
+        "Epicer"
+      ],
+      "notes": "Bow Animation by JaidynReiman. Original Bow based on SALVAGED Bow by Epicer. DATonDemand for providing tips on how to improve the animation!"
+    }
+  ],
+  "animated": true,
+  "class": "Wolf Knight",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "axe",
+    "bow",
+    "dagger",
+    "lance",
+    "sword",
+    "unarmed"
+  ],
+  "preview": "assets/fe/battle_animations/mounted/wolf_knight/female_long_hair/axe/Axe.gif",
+  "download": ""
+}

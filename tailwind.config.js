@@ -3,7 +3,7 @@ import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import aspectRatio from "@tailwindcss/aspect-ratio";
 
-export default {
+const config = {
   plugins: [forms, typography, aspectRatio],
   darkMode: 'class',
   content: [
@@ -39,3 +39,5 @@ export default {
     },
   },
 };
+
+export default config;

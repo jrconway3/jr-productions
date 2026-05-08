@@ -1,8 +1,15 @@
-export type AssetType = 'spritesheet' | 'gif' | 'tileset' | 'portrait';
+export type AssetFormat = 'spritesheet' | 'gif' | 'tileset' | 'portrait';
+
+export interface AssetLayer {
+  id: string;
+  zPos: number;
+  path: string;
+  body_types?: string[];
+}
 
 export interface AssetCredit {
   authors: string[];
-  urls: string[];
+  urls?: string[];
   notes?: string;
 }
 
@@ -15,9 +22,9 @@ export interface PaletteVariant {
 export interface Asset {
   id: string;
   name: string;
-  category: string;
-  subcategory?: string;
-  type: AssetType;
+  type: string;
+  path?: string;
+  format: AssetFormat;
   tags?: string[];
   license?: string;
   credits?: AssetCredit[];
@@ -30,11 +37,11 @@ export interface Asset {
   palettes?: PaletteVariant[];
 
   // LPC-specific
-  layers?: string[];
+  layers?: AssetLayer[];
 
   // FE-specific
   animated?: boolean;
   frames?: number;
   class?: string;
-  weapon_type?: string;
+  weapon_types?: string[];
 }

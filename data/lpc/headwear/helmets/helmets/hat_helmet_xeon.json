@@ -1,0 +1,55 @@
+{
+  "name": "Xeon helmet",
+  "type": "lpc",
+  "path": "headwear/helmets/helmets",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0",
+  "credits": [
+    {
+      "authors": [
+        "Stephen Challener (Redshrike)",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/four-characters-my-lpc-entries",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ],
+      "notes": "original version by Stephen Challener (Redshrike), color reduction by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "female",
+    "pregnant",
+    "male",
+    "muscular",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "fg",
+      "zPos": 130,
+      "path": "hat/helmet/xeon/adult"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+}

@@ -1,8 +1,10 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
 import { getTopLevelCategories } from 'app/CategoryService';
 import { getAllAssets } from 'app/AssetService';
+import { toPublicAssetUrl } from 'app/assetUrl';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard from 'components/gallery/AssetCard';
 import type { Category } from 'app/models/Category';
@@ -13,7 +15,86 @@ interface HomeProps {
   featuredAssets: Asset[];
 }
 
+const FEATURED_ASSET_COUNT = 36;
+const FEATURED_CACHE_KEY = 'home-featured-assets-v1';
+const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
+
+function pickRandomAssets(pool: Asset[], count: number): Asset[] {
+  if (pool.length <= count) return [...pool];
+  const shuffled = [...pool];
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+  return shuffled.slice(0, count);
+}
+
+function getCachedAssetIds(): string[] | null {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const raw = window.localStorage.getItem(FEATURED_CACHE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as { expiresAt?: number; ids?: string[] };
+    if (!parsed || !Array.isArray(parsed.ids) || typeof parsed.expiresAt !== 'number') return null;
+    if (Date.now() > parsed.expiresAt) return null;
+
+    return parsed.ids;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedAssetIds(ids: string[]): void {
+  if (typeof window === 'undefined') return;
+
+  try {
+    window.localStorage.setItem(
+      FEATURED_CACHE_KEY,
+      JSON.stringify({
+        ids,
+        expiresAt: Date.now() + FEATURED_CACHE_TTL_MS,
+      }),
+    );
+  } catch {
+    // Ignore storage errors (private mode/quota) and fall back to non-cached behavior.
+  }
+}
+
 export default function Home({ categories, featuredAssets }: HomeProps) {
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets.slice(0, FEATURED_ASSET_COUNT));
+
+  const featuredById = useMemo(() => {
+    return new Map(featuredAssets.map((asset) => [asset.id, asset]));
+  }, [featuredAssets]);
+
+  useEffect(() => {
+    const updateDisplayAssets = (assets: Asset[]) => {
+      queueMicrotask(() => {
+        setDisplayAssets(assets);
+      });
+    };
+
+    const cachedIds = getCachedAssetIds();
+    if (cachedIds && cachedIds.length > 0) {
+      const cachedAssets = cachedIds
+        .map((id) => featuredById.get(id))
+        .filter((asset): asset is Asset => Boolean(asset));
+
+      if (cachedAssets.length > 0) {
+        updateDisplayAssets(cachedAssets);
+        return;
+      }
+    }
+
+    const picked = pickRandomAssets(featuredAssets, FEATURED_ASSET_COUNT);
+    updateDisplayAssets(picked);
+    setCachedAssetIds(picked.map((asset) => asset.id));
+  }, [featuredAssets, featuredById]);
+
   return (
     <>
       <Head>
@@ -23,8 +104,8 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
 
       {/* Hero: title + sprite collage */}
       <div className="hero-banner">
-        <div className="page-wide py-12 flex flex-col lg:flex-row gap-8 items-center">
-          <div className="shrink-0">
+        <div className="page-wide py-12 flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
+          <div className="shrink-0 lg:flex lg:flex-col lg:justify-center">
             <h1 className="text-4xl xl:text-5xl mb-4 leading-tight">
               JaidynReiman<br />
               <span className="text-lpc-accent">Productions</span>
@@ -49,36 +130,21 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
             </div>
           </div>
 
-          {/* Sprite collage — replace inner content with <Image> tiles when assets are available */}
+          {/* Standalone hero banner area (intentionally not tied to featured asset cards). */}
           <div className="flex-1 w-full lg:w-auto">
-            <div className="sprite-collage-grid">
-              {featuredAssets.length > 0
-                ? featuredAssets.slice(0, 12).map((asset) => (
-                    <Link key={asset.id} href={`/${asset.category}/${asset.id}`} className="block">
-                      <img
-                        src={`/${asset.preview}`}
-                        alt={asset.name}
-                        className="w-full h-full object-contain"
-                        style={{ imageRendering: 'pixelated' }}
-                      />
-                    </Link>
-                  ))
-                : Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="sprite-collage-placeholder" />
-                  ))}
-            </div>
+            <div className="hero-standalone-banner hero-standalone-banner--hidden" aria-hidden="true" />
           </div>
         </div>
       </div>
 
       {/* Main: asset gallery or section nav */}
       <main className="page-wide py-10">
-        {featuredAssets.length > 0 ? (
+        {displayAssets.length > 0 ? (
           <>
-            <h2 className="font-pixel text-sm text-site-muted mb-6 tracking-widest uppercase">All Assets</h2>
-            <MasonryGrid>
-              {featuredAssets.map((asset) => (
-                <AssetCard key={asset.id} asset={asset} />
+            <h2 className="font-pixel text-sm text-site-muted mb-6 tracking-widest uppercase">Featured Picks</h2>
+            <MasonryGrid className="masonry-grid-featured">
+              {displayAssets.map((asset) => (
+                <AssetCard key={asset.id} asset={asset} sizeMode="featured" />
               ))}
             </MasonryGrid>
           </>
@@ -120,6 +186,8 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const categories = getTopLevelCategories();
-  const featuredAssets = getAllAssets().slice(0, 48);
+  const featuredAssets = getAllAssets()
+    .filter((asset) => Boolean(toPublicAssetUrl(asset.preview)))
+    .slice(0, 240);
   return { props: { categories, featuredAssets } };
 };

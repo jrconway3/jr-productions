@@ -1,8 +1,9 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { getCategoryBySlug, getTopLevelCategories } from 'app/CategoryService';
-import { getAssetsByCategory } from 'app/AssetService';
+import { useEffect, useMemo, useState } from 'react';
+import { getCategoryBySlug } from 'app/CategoryService';
+import { getAssetsByCategoryTree } from 'app/AssetService';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard from 'components/gallery/AssetCard';
 import type { Category } from 'app/models/Category';
@@ -10,11 +11,104 @@ import type { Asset } from 'app/models/Asset';
 
 interface LpcSlugProps {
   category: Category;
-  assets: Asset[];
+  section?: Category;
+  treeAssets?: Asset[];
+  assets?: Asset[];
   slugs: string[];
+  breadcrumbs?: Array<{ label: string; href: string }>;
 }
 
-export default function LpcSlug({ category, assets, slugs }: LpcSlugProps) {
+const FEATURED_ASSET_COUNT = 48;
+const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
+
+function pickRandomAssets(pool: Asset[], count: number): Asset[] {
+  if (pool.length <= count) return [...pool];
+  const shuffled = [...pool];
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+  return shuffled.slice(0, count);
+}
+
+function getCategoryCacheKey(path: string): string {
+  return `category-featured-v1:${path}`;
+}
+
+function getCachedAssetIds(cacheKey: string): string[] | null {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    const raw = window.localStorage.getItem(cacheKey);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as { expiresAt?: number; ids?: string[] };
+    if (!parsed || !Array.isArray(parsed.ids) || typeof parsed.expiresAt !== 'number') return null;
+    if (Date.now() > parsed.expiresAt) return null;
+
+    return parsed.ids;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedAssetIds(cacheKey: string, ids: string[]): void {
+  if (typeof window === 'undefined') return;
+
+  try {
+    window.localStorage.setItem(
+      cacheKey,
+      JSON.stringify({
+        ids,
+        expiresAt: Date.now() + FEATURED_CACHE_TTL_MS,
+      }),
+    );
+  } catch {
+    // Ignore storage failures and continue without cache.
+  }
+}
+
+export default function LpcSlug({ category, section, treeAssets, assets, slugs, breadcrumbs }: LpcSlugProps) {
+  const scopedAssets = treeAssets ?? assets ?? [];
+  const navBreadcrumbs = breadcrumbs ?? [{ label: 'LPC', href: '/lpc' }, { label: category.label, href: `/lpc/${slugsToPath(slugs)}` }];
+  const sectionCategory = section ?? {
+    ...category,
+    children: [],
+  };
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => scopedAssets.slice(0, FEATURED_ASSET_COUNT));
+
+  const treeAssetsById = useMemo(() => {
+    return new Map(scopedAssets.map((asset) => [asset.id, asset]));
+  }, [scopedAssets]);
+
+  useEffect(() => {
+    const cacheKey = getCategoryCacheKey(category.path);
+
+    const updateDisplayAssets = (nextAssets: Asset[]) => {
+      queueMicrotask(() => {
+        setDisplayAssets(nextAssets);
+      });
+    };
+
+    const cachedIds = getCachedAssetIds(cacheKey);
+    if (cachedIds && cachedIds.length > 0) {
+      const cachedAssets = cachedIds
+        .map((id) => treeAssetsById.get(id))
+        .filter((asset): asset is Asset => Boolean(asset));
+
+      if (cachedAssets.length > 0) {
+        updateDisplayAssets(cachedAssets);
+        return;
+      }
+    }
+
+    const picked = pickRandomAssets(scopedAssets, FEATURED_ASSET_COUNT);
+    updateDisplayAssets(picked);
+    setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
+  }, [category.path, scopedAssets, treeAssetsById]);
+
   return (
     <>
       <Head>
@@ -22,46 +116,71 @@ export default function LpcSlug({ category, assets, slugs }: LpcSlugProps) {
       </Head>
 
       <main className="section-lpc page-wide py-12">
-        <nav className="text-site-muted font-body text-sm mb-6">
-          <Link href="/lpc">LPC</Link>
-          {slugs.map((seg, i) => (
-            <span key={seg}>
-              {' / '}
-              <Link href={`/lpc/${slugs.slice(0, i + 1).join('/')}`}>{seg}</Link>
-            </span>
-          ))}
-        </nav>
+        <div className="content-with-sidebar">
+          <section>
+            <h1 className="text-2xl mb-2">{category.label}</h1>
 
-        <h1 className="text-2xl mb-2">{category.label}</h1>
+            {displayAssets.length > 0 ? (
+              <MasonryGrid>
+                {displayAssets.map((asset) => (
+                  <AssetCard key={asset.id} asset={asset} />
+                ))}
+              </MasonryGrid>
+            ) : (
+              <p className="text-site-muted font-body">No assets yet.</p>
+            )}
+          </section>
 
-        {category.children.length > 0 && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
-            {category.children.map((child) => (
-              <Link
-                key={child.slug}
-                href={`/lpc/${[...slugs, child.slug].join('/')}`}
-                className="sprite-card p-4 block hover:no-underline"
-              >
-                <h2 className="text-sm">{child.label}</h2>
-              </Link>
-            ))}
-          </div>
-        )}
+          <aside className="content-sidebar">
+            <nav className="text-site-muted font-body text-sm mb-6">
+              {navBreadcrumbs.map((crumb, index) => (
+                <span key={crumb.href}>
+                  {index > 0 && ' / '}
+                  <Link href={crumb.href}>{crumb.label}</Link>
+                </span>
+              ))}
+            </nav>
 
-        {assets.length > 0 && (
-          <MasonryGrid>
-            {assets.map((asset) => (
-              <AssetCard key={asset.id} asset={asset} />
-            ))}
-          </MasonryGrid>
-        )}
+            {category.children.length > 0 && (
+              <div className="mb-8">
+                <h2 className="font-pixel text-xs uppercase tracking-widest text-site-muted mb-3">In {category.label}</h2>
+                <div className="space-y-2">
+                  {category.children.map((child) => (
+                    <Link
+                      key={child.slug}
+                      href={`/lpc/${category.path.replace(/^lpc\/?/, '')}/${child.slug}`.replace(/\/+/g, '/')}
+                      className={`sprite-card p-3 block hover:no-underline ${category.path === child.path ? 'sidebar-link-active sidebar-link-active-lpc' : ''}`}
+                    >
+                      <h3 className="text-xs">{child.label}</h3>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
 
-        {assets.length === 0 && category.children.length === 0 && (
-          <p className="text-site-muted font-body">No assets yet.</p>
-        )}
+            <div>
+              <h2 className="font-pixel text-xs uppercase tracking-widest text-site-muted mb-3">All LPC Categories</h2>
+              <div className="space-y-2 max-h-[52vh] overflow-auto pr-1">
+                {sectionCategory.children.map((child) => (
+                  <Link
+                    key={child.slug}
+                    href={`/lpc/${child.slug}`}
+                    className={`sprite-card p-3 block hover:no-underline ${category.path === child.path || category.path.startsWith(`${child.path}/`) ? 'sidebar-link-active sidebar-link-active-lpc' : ''}`}
+                  >
+                    <h3 className="text-xs">{child.label}</h3>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>
       </main>
     </>
   );
+}
+
+function slugsToPath(slugs: string[]): string {
+  return slugs.join('/');
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -86,9 +205,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<LpcSlugProps> = async ({ params }) => {
   const slugs = params?.slug as string[];
+  const section = getCategoryBySlug(['lpc']);
   const category = getCategoryBySlug(['lpc', ...slugs]);
-  if (!category) return { notFound: true };
+  if (!category || !section) return { notFound: true };
 
-  const assets = getAssetsByCategory(['lpc', ...slugs].join('/'));
-  return { props: { category, assets, slugs } };
+  const breadcrumbs: Array<{ label: string; href: string }> = [{ label: 'LPC', href: '/lpc' }];
+  let current: Category | null = section;
+  for (let index = 0; index < slugs.length; index += 1) {
+    const slug = slugs[index];
+    const child: Category | null = current?.children.find((entry) => entry.slug === slug) ?? null;
+    if (!child) break;
+
+    breadcrumbs.push({
+      label: child.label,
+      href: `/lpc/${slugs.slice(0, index + 1).join('/')}`,
+    });
+    current = child;
+  }
+
+  const treeAssets = getAssetsByCategoryTree(['lpc', ...slugs].join('/'));
+  return { props: { category, section, treeAssets, slugs, breadcrumbs } };
 };

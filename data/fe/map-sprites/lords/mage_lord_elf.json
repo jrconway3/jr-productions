@@ -1,0 +1,28 @@
+{
+  "name": "Mage Lord Elf",
+  "type": "fe",
+  "path": "map-sprites/lords",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "body_types": [
+    "female",
+    "male"
+  ],
+  "credits": [
+    {
+      "authors": [
+        "TyTheBub",
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "variants": [
+    "Unarmed"
+  ],
+  "preview": "assets/fe/map_sprites/lords/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
+  "download": ""
+}

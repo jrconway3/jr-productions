@@ -1,0 +1,26 @@
+{
+  "name": "Lord Elf Sword",
+  "type": "fe",
+  "path": "map-sprites/lords",
+  "format": "spritesheet",
+  "license": "F2U, F2E",
+  "body_types": [
+    "female"
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animations": [
+    "stand",
+    "walk"
+  ],
+  "variants": [
+    "Sword"
+  ],
+  "preview": "assets/fe/map_sprites/lords/Lord (F) Elf Sword {JaidynReiman}-stand.png",
+  "download": ""
+}

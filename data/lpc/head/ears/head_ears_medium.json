@@ -1,0 +1,68 @@
+{
+  "name": "Medium Elven Ears",
+  "type": "lpc",
+  "path": "head/ears",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-new-elven-ear-variants"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "teen",
+    "pregnant",
+    "child"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "adult",
+      "zPos": 126,
+      "path": "head/ears/medium/adult",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "teen",
+        "pregnant"
+      ]
+    },
+    {
+      "id": "child",
+      "zPos": 126,
+      "path": "head/ears/medium/child",
+      "body_types": [
+        "child"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-new-elven-ear-variants"
+}

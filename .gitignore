@@ -1,3 +1,6 @@
+# Local scripts and scratch files — not committed
+.local/
+
 # Dependencies
 node_modules/
 

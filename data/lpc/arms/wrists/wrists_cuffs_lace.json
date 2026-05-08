@@ -1,0 +1,74 @@
+{
+  "name": "Lace Cuffs",
+  "type": "lpc",
+  "path": "arms/wrists",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates"
+      ],
+      "notes": "Original by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman"
+    },
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates"
+      ],
+      "notes": "Original by bluecarrot16, female/teen version by JaidynReiman"
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "teen",
+    "pregnant"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "climb",
+    "jump",
+    "sit",
+    "emote",
+    "run"
+  ],
+  "layers": [
+    {
+      "id": "male",
+      "zPos": 70,
+      "path": "arms/wrists/lace/male",
+      "body_types": [
+        "male",
+        "muscular"
+      ]
+    },
+    {
+      "id": "thin",
+      "zPos": 70,
+      "path": "arms/wrists/lace/thin",
+      "body_types": [
+        "female",
+        "teen",
+        "pregnant"
+      ]
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-pirates"
+}

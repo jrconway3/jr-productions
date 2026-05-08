@@ -1,0 +1,117 @@
+name: Deploy to SSH host
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    if: (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/production') || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'production')
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    env:
+      DEPLOY_SHA: ${{ github.event_name == 'workflow_dispatch' && github.sha || github.event.workflow_run.head_sha }}
+    steps:
+      - name: Verify CI succeeded for manual deploy commit
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const headSha = process.env.DEPLOY_SHA;
+
+            const response = await github.rest.actions.listWorkflowRuns({
+              owner,
+              repo,
+              workflow_id: 'ci.yml',
+              branch: 'production',
+              head_sha: headSha,
+              status: 'completed',
+              per_page: 20,
+            });
+
+            const hasSuccessfulCi = response.data.workflow_runs.some((run) => run.conclusion === 'success');
+
+            if (!hasSuccessfulCi) {
+              core.setFailed(`Manual deploy blocked: CI has not succeeded for commit ${headSha}.`);
+            }
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.DEPLOY_SHA }}
+          submodules: recursive
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Pull Production
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -euo pipefail
+            deploy_sha="${{ env.DEPLOY_SHA }}"
+
+            cd "${{ secrets.REMOTE_DIR }}"
+
+            # Sync working tree to the exact commit selected for this deploy
+            git fetch --prune origin
+            git checkout --force "$deploy_sha"
+            git reset --hard "$deploy_sha"
+
+            # Initialize submodules on first deploy; build script handles --remote update
+            git submodule update --init --recursive
+
+            # Clean stale static output
+            if [ -d out ]; then
+              rm -rf out
+            fi
+
+            # Install deps
+            npm ci
+
+            # Build static site (also runs git submodule update --remote --merge internally)
+            if ! npm run build; then
+              echo "Build failed on remote server"
+              exit 1
+            fi
+
+            # Validate required build artifacts
+            if [ ! -f out/index.html ]; then
+              echo "Missing out/index.html after build"
+              exit 1
+            fi
+
+            if [ ! -d out/_next/static ]; then
+              echo "Missing out/_next/static after build"
+              exit 1
+            fi
+
+            # Reload nginx to pick up any serving changes
+            if command -v systemctl >/dev/null 2>&1; then
+              sudo systemctl reload nginx 2>/dev/null || true
+            fi
+
+            # Verify homepage is reachable
+            sleep 2
+            if ! curl -fsS http://127.0.0.1/ -o /tmp/home.html; then
+              echo "Homepage check failed"
+              exit 1
+            fi
+
+            if ! grep -q '_next/static' /tmp/home.html; then
+              echo "Homepage did not reference a _next/static asset"
+              exit 1
+            fi

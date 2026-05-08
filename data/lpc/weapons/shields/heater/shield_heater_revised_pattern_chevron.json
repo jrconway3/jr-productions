@@ -1,0 +1,86 @@
+{
+  "name": "revised_chevron",
+  "type": "lpc",
+  "path": "weapons/shields/heater",
+  "format": "spritesheet",
+  "license": "OGA-BY 3.0",
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "Sander Frenken (castelonia)",
+        "ElizaWy",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-shields"
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "pregnant",
+    "teen"
+  ],
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "variants": [
+    "black",
+    "blue",
+    "bluegray",
+    "brown",
+    "charcoal",
+    "forest",
+    "gray",
+    "green",
+    "lavender",
+    "leather",
+    "maroon",
+    "navy",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "rose",
+    "sky",
+    "slate",
+    "tan",
+    "teal",
+    "walnut",
+    "white",
+    "yellow"
+  ],
+  "layers": [
+    {
+      "id": "bg",
+      "zPos": 4,
+      "path": "shield/heater/revised/pattern/chevron/bg"
+    },
+    {
+      "id": "fg",
+      "zPos": 112,
+      "path": "shield/heater/revised/pattern/chevron/fg"
+    }
+  ],
+  "preview": "",
+  "download": "https://opengameart.org/content/lpc-shields"
+}
