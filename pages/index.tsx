@@ -1,8 +1,10 @@
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getTopLevelCategories } from 'app/CategoryService';
 import { getAllAssets } from 'app/AssetService';
+import { toPublicAssetUrl } from 'app/assetUrl';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard from 'components/gallery/AssetCard';
 import type { Category } from 'app/models/Category';
@@ -53,16 +55,25 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
           <div className="flex-1 w-full lg:w-auto">
             <div className="sprite-collage-grid">
               {featuredAssets.length > 0
-                ? featuredAssets.slice(0, 12).map((asset) => (
-                    <Link key={asset.id} href={`/${asset.type}/${asset.id}`} className="block">
-                      <img
-                        src={`/${asset.preview}`}
-                        alt={asset.name}
-                        className="w-full h-full object-contain"
-                        style={{ imageRendering: 'pixelated' }}
-                      />
-                    </Link>
-                  ))
+                ? featuredAssets.slice(0, 12).map((asset) => {
+                    const previewUrl = toPublicAssetUrl(asset.preview);
+                    if (!previewUrl) {
+                      return <div key={asset.id} className="sprite-collage-placeholder" />;
+                    }
+
+                    return (
+                      <Link key={asset.id} href={`/${asset.type}/${asset.id}`} className="block">
+                        <Image
+                          src={previewUrl}
+                          alt={asset.name}
+                          width={256}
+                          height={256}
+                          className="w-full h-full object-contain"
+                          style={{ imageRendering: 'pixelated', width: '100%', height: '100%' }}
+                        />
+                      </Link>
+                    );
+                  })
                 : Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="sprite-collage-placeholder" />
                   ))}

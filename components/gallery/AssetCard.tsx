@@ -1,18 +1,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Asset } from 'app/models/Asset';
+import { toPublicAssetUrl } from 'app/assetUrl';
 
 interface AssetCardProps {
   asset: Asset;
 }
 
 export default function AssetCard({ asset }: AssetCardProps) {
+  const previewUrl = toPublicAssetUrl(asset.preview);
+  const downloadUrl = toPublicAssetUrl(asset.download);
+
   return (
     <div className="sprite-card overflow-hidden">
       <div className="relative w-full bg-black/40" style={{ minHeight: '80px' }}>
-        {asset.preview && (
+        {previewUrl && (
           <Image
-            src={`/${asset.preview}`}
+            src={previewUrl}
             alt={asset.name}
             width={256}
             height={256}
@@ -41,9 +45,9 @@ export default function AssetCard({ asset }: AssetCardProps) {
           </div>
         )}
 
-        {asset.download && (
+        {downloadUrl && (
           <a
-            href={`/${asset.download}`}
+            href={downloadUrl}
             download
             className="mt-3 block text-center font-body text-xs py-1.5 px-3 bg-lpc-accent hover:bg-lpc-accentDark text-white transition-colors"
           >

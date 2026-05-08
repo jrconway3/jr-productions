@@ -1,4 +1,7 @@
 # Git submodules for image content.
 # Run the following to add them (replace with actual repo URLs):
-#   git submodule add <lpc-repo-url> submodules/lpc
-#   git submodule add <fe-repo-url> submodules/fe
+#   git submodule add <lpc-repo-url> public/assets/lpc
+#   git submodule add <fegba-repo-url> public/assets/fegba
+[submodule "public/assets/lpc"]
+	path = public/assets/lpc
+	url = https://github.com/jrconway3/lpc-jaidynreiman-assets.git
