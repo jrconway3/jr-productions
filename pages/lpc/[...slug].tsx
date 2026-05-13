@@ -112,43 +112,45 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
 
         if (standaloneAnims.length === 0) continue;
 
-        const groupMap = new Map<string, string[]>();
-        const ungrouped: string[] = [];
+        // Pass 1: find groups whose every member is present in standaloneAnims.
+        // Only the spec that *defines* the group array (the primary) triggers group formation.
+        const standaloneAnimSet = new Set(standaloneAnims);
+        const claimed = new Set<string>();
+        const groups: { key: string; animNames: string[] }[] = [];
         for (const animName of standaloneAnims) {
-          const group = lpcSpec?.[animName]?.group;
-          if (group) {
-            if (!groupMap.has(group)) groupMap.set(group, []);
-            groupMap.get(group)!.push(animName);
-          } else {
-            ungrouped.push(animName);
+          const groupMembers = lpcSpec?.[animName]?.group;
+          if (!groupMembers?.length) continue;
+          if (groupMembers.every((m) => standaloneAnimSet.has(m))) {
+            groups.push({ key: animName, animNames: groupMembers });
+            for (const m of groupMembers) claimed.add(m);
           }
         }
 
-        for (const animName of ungrouped) {
+        // Pass 2: render unclaimed animations as standalone cards, then group cards.
+        for (const animName of standaloneAnims) {
           if (result.length >= MAX_CARDS) break;
+          if (claimed.has(animName)) continue;
           result.push(
             <LpcCard
               key={`${asset.id}:${bodyType ?? ''}:${animName}`}
               asset={asset} animName={animName} bodyType={bodyType}
-                backgroundLayers={asset.context_layers}
+              backgroundLayers={asset.context_layers}
               animSpec={lpcSpec?.[animName]} allAnimSpecs={lpcSpec}
             />,
           );
         }
 
-        for (const [groupKey, groupAnimNames] of groupMap) {
+        for (const { key, animNames: groupAnimNames } of groups) {
           if (result.length >= MAX_CARDS) break;
           const specs = groupAnimNames.map((n) => lpcSpec?.[n]);
-          if (groupAnimNames.length >= 2) {
-            result.push(
-              <LpcGroupCard
-                key={`${asset.id}:${bodyType ?? ''}:group:${groupKey}`}
-                asset={asset} animNames={groupAnimNames} specs={specs}
-                bodyType={bodyType} backgroundLayers={asset.context_layers}
-                allAnimSpecs={lpcSpec}
-              />,
-            );
-          }
+          result.push(
+            <LpcGroupCard
+              key={`${asset.id}:${bodyType ?? ''}:group:${key}`}
+              asset={asset} animNames={groupAnimNames} specs={specs}
+              bodyType={bodyType} backgroundLayers={asset.context_layers}
+              allAnimSpecs={lpcSpec}
+            />,
+          );
         }
       }
     }

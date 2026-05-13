@@ -8,16 +8,17 @@ import { toPublicAssetUrl } from 'app/assetUrl';
 import { resolveHomepageSpecs } from 'app/AnimationService';
 import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
-import AssetCard, { LpcCard, FeCard } from 'components/gallery/AssetCard';
+import AssetCard, { LpcCard, LpcGroupCard, FeCard } from 'components/gallery/AssetCard';
 import PageCredits from 'components/gallery/PageCredits';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
-import type { Asset, AnimationSpec, ResolvedFeSpec } from 'app/models/Asset';
+import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 
 interface HomeProps {
   categories: Category[];
   featuredAssets: Asset[];
-  resolvedSpecs: Record<string, AnimationSpec | ResolvedFeSpec>;
+  resolvedSpecs: Record<string, AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec>;
   animNames: Record<string, string>;
+  groupNames: Record<string, string[]>;
   bodyTypes: Record<string, string>;
   pageCredits: ResolvedPageCredit[];
 }
@@ -71,7 +72,7 @@ function setCachedAssetIds(ids: string[]): void {
   }
 }
 
-export default function Home({ categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, pageCredits }: HomeProps) {
+export default function Home({ categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits }: HomeProps) {
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets.slice(0, FEATURED_ASSET_COUNT));
 
   const featuredById = useMemo(() => {
@@ -103,6 +104,7 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
   }, [featuredAssets, featuredById]);
 
   const bodyTypeMap = useMemo(() => new Map(Object.entries(bodyTypes)), [bodyTypes]);
+  const groupNamesMap = useMemo(() => new Map(Object.entries(groupNames)), [groupNames]);
 
   return (
     <>
@@ -122,6 +124,21 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
                   const animName = animNames[asset.id] ?? asset.animations[0];
                   const fallbackTypes = asset.body_types?.length ? asset.body_types : collectLpcBodyTypes(asset.layers);
                   const bodyType = bodyTypeMap.get(asset.id) || fallbackTypes[0];
+                  const groupAnimNames = groupNamesMap.get(asset.id);
+                  if (groupAnimNames?.length) {
+                    const groupSpec = resolvedSpecs[asset.id] as ResolvedLpcSpec;
+                    return (
+                      <LpcGroupCard
+                        key={asset.id}
+                        asset={asset}
+                        animNames={groupAnimNames}
+                        specs={groupAnimNames.map((n) => groupSpec[n])}
+                        bodyType={bodyType}
+                        backgroundLayers={asset.context_layers}
+                        allAnimSpecs={groupSpec}
+                      />
+                    );
+                  }
                   return (
                     <LpcCard
                       key={asset.id}
@@ -188,10 +205,10 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const featuredAssets = getHomepageFeaturedAssets()
     .filter((asset) => Boolean(toPublicAssetUrl(asset.preview)))
     .slice(0, 400);
-  const { specs: resolvedSpecs, animNames, bodyTypes } = resolveHomepageSpecs(featuredAssets);
+  const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(featuredAssets);
   const pageCredits = [
     ...getSectionPageCredits('lpc'),
     ...getSectionPageCredits('fe'),
   ];
-  return { props: { categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, pageCredits } };
+  return { props: { categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits } };
 };

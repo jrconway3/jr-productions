@@ -65,8 +65,8 @@ export interface AnimationSpec {
   global_layers?: Array<string | AnimationSpecGlobalLayer>;
   /** Resolved layers to composite beneath this animation (additive with category-level layers). */
   background_layers?: BackgroundLayer[];
-  /** Group key — animations sharing a group are shown together in one card */
-  group?: string;
+  /** Animations to group into one combined card — array of member animation IDs (defined on the primary spec only) */
+  group?: string[];
   /** Body types that have sprite files for this animation; absent = all body types */
   body_types?: string[];
 }

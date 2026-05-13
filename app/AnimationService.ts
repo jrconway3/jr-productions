@@ -294,14 +294,27 @@ export function resolveAssetsSpecs(
 export function resolveHomepageSpecs(
   assets: Asset[],
 ): {
-  specs: Record<string, AnimationSpec | ResolvedFeSpec>;
+  specs: Record<string, AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec>;
   animNames: Record<string, string>;
   bodyTypes: Record<string, string>;
+  groupNames: Record<string, string[]>;
 } {
   const lpcSpecs = loadLpcSpecs();
-  const specs: Record<string, AnimationSpec | ResolvedFeSpec> = {};
+  const specs: Record<string, AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec> = {};
   const animNames: Record<string, string> = {};
   const bodyTypes: Record<string, string> = {};
+  const groupNames: Record<string, string[]> = {};
+
+  // Animations that are secondary members of a group (referenced in another spec's group
+  // array) should never be picked independently on the homepage.
+  const secondaryGroupMembers = new Set<string>();
+  for (const spec of Object.values(lpcSpecs)) {
+    if (spec.group?.length) {
+      for (const member of spec.group) {
+        if (member !== spec.id) secondaryGroupMembers.add(member);
+      }
+    }
+  }
 
   const supportsBodyType = (asset: Asset, animName: string, spec: AnimationSpec, bodyType: string): boolean => {
     const sourceFile = `${spec.source ?? animName}.png`;
@@ -340,6 +353,7 @@ export function resolveHomepageSpecs(
       const available = (asset.animations ?? []).filter((n) => {
         const s = lpcSpecs[n];
         if (!s || s.standalone === false) return false;
+        if (secondaryGroupMembers.has(n)) return false;
 
         const compatibleBodyTypes = candidateBodyTypes.filter((bodyType) => {
           if (s.body_types?.length && !s.body_types.includes(bodyType)) return false;
@@ -370,7 +384,16 @@ export function resolveHomepageSpecs(
           (a, b) => childPreference.indexOf(a) - childPreference.indexOf(b)
         );
         const bodyType = sortedByPreference[0];
-        specs[asset.id] = spec;
+        if (spec.group?.length) {
+          const groupSpec: ResolvedLpcSpec = {};
+          for (const member of spec.group) {
+            if (lpcSpecs[member]) groupSpec[member] = lpcSpecs[member];
+          }
+          specs[asset.id] = groupSpec;
+          groupNames[asset.id] = spec.group;
+        } else {
+          specs[asset.id] = spec;
+        }
         animNames[asset.id] = animName;
         bodyTypes[asset.id] = bodyType;
       }
@@ -380,5 +403,5 @@ export function resolveHomepageSpecs(
     }
   }
 
-  return { specs, animNames, bodyTypes };
+  return { specs, animNames, bodyTypes, groupNames };
 }

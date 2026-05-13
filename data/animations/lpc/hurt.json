@@ -1,6 +1,6 @@
 {
   "id": "hurt",
-  "group": "hurt_climb",
+  "group": ["hurt", "climb"],
   "frame_width": 64,
   "frame_height": 64,
   "fps": 8,
