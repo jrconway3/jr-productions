@@ -28,18 +28,18 @@ const mockCategory: Category = {
 
 describe('Home page', () => {
   it('renders heading with empty data', () => {
-    render(<Home categories={[]} featuredAssets={[]} resolvedSpecs={{}} animNames={{}} bodyTypes={{}} pageCredits={[]} />);
-    expect(screen.getByText('Productions')).toBeInTheDocument();
+    render(<Home categories={[]} featuredAssets={[]} resolvedSpecs={{}} animNames={{}} bodyTypes={{}} groupNames={{}} pageCredits={[]} />);
+    expect(screen.getByText('Browse by section')).toBeInTheDocument();
   });
 
   it('renders category navigation buttons', () => {
-    render(<Home categories={[mockCategory]} featuredAssets={[]} resolvedSpecs={{}} animNames={{}} bodyTypes={{}} pageCredits={[]} />);
+    render(<Home categories={[mockCategory]} featuredAssets={[]} resolvedSpecs={{}} animNames={{}} bodyTypes={{}} groupNames={{}} pageCredits={[]} />);
     expect(screen.getAllByText('LPC Assets').length).toBeGreaterThan(0);
   });
 
   it('renders asset gallery when assets are present', () => {
     const asset: Asset = { id: 'a1', name: 'My Sprite', type: 'lpc', format: 'spritesheet' };
-    render(<Home categories={[]} featuredAssets={[asset]} resolvedSpecs={{}} animNames={{}} bodyTypes={{}} pageCredits={[]} />);
+    render(<Home categories={[]} featuredAssets={[asset]} resolvedSpecs={{}} animNames={{}} bodyTypes={{}} groupNames={{}} pageCredits={[]} />);
     expect(screen.getByText('My Sprite')).toBeInTheDocument();
   });
 });
