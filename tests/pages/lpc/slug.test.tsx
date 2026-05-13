@@ -14,6 +14,8 @@ vi.mock('components/gallery/MasonryGrid', () => ({
 }));
 vi.mock('components/gallery/AssetCard', () => ({
   default: ({ asset }: { asset: Asset }) => <div>{asset.name}</div>,
+  LpcCard: ({ asset }: { asset: Asset }) => <div>{asset.name}</div>,
+  LpcGroupCard: ({ asset }: { asset: Asset }) => <div>{asset.name}</div>,
 }));
 
 const mockCategory: Category = {

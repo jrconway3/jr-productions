@@ -104,7 +104,7 @@ export default function Layout({ children }: LayoutProps) {
               &copy; {new Date().getFullYear()} JaidynReiman Productions
             </p>
             <p className="font-body text-site-muted text-xs opacity-70">
-              Assets licensed under OGA-BY 3.0, CC-BY-SA 3.0, GPL 2.0, and GPL 3.0.{' '}
+              Assets are provided under their respective licenses.{' '}
               <Link href="/credits" className="hover:text-site-text transition-colors">Credits →</Link>
             </p>
           </div>

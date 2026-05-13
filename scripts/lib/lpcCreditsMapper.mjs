@@ -2,7 +2,9 @@ export function mapLpcCredits(sourceCredits) {
   const credits = Array.isArray(sourceCredits) ? sourceCredits : [];
 
   const licenses = new Set();
-  const mappedCredits = credits.map((entry) => {
+  const mappedCredits = credits
+    .filter((entry) => entry && typeof entry === 'object')
+    .map((entry) => {
     for (const license of entry.licenses ?? []) {
       if (license) licenses.add(license);
     }

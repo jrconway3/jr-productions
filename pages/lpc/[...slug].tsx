@@ -7,7 +7,7 @@ import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService
 import { resolveAssetsSpecs } from 'app/AnimationService';
 import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
-import { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
+import AssetCard, { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
 import PageCredits from 'components/gallery/PageCredits';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, ResolvedLpcSpec, ResolvedFeSpec } from 'app/models/Asset';
@@ -110,7 +110,12 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
           return true;
         });
 
-        if (standaloneAnims.length === 0) continue;
+        if (standaloneAnims.length === 0) {
+          if (result.length < MAX_CARDS) {
+            result.push(<AssetCard key={asset.id} asset={asset} />);
+          }
+          continue;
+        }
 
         // Pass 1: find groups whose every member is present in standaloneAnims.
         // Only the spec that *defines* the group array (the primary) triggers group formation.

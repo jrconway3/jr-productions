@@ -268,7 +268,7 @@ export function getHomepageFeaturedAssets(): Asset[] {
         walk(fullPath);
       } else if (isAssetFile(entry.name)) {
         const asset = loadAsset(fullPath);
-        if (!hasPrerequisites(asset)) {
+        if (!asset.excluded && !hasPrerequisites(asset)) {
           results.push(asset);
         }
       }

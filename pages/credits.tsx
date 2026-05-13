@@ -31,7 +31,7 @@ export default function Credits({ groups }: CreditsProps) {
       <main className="page-wide py-12">
         <h1 className="text-2xl mb-2">Credits</h1>
         <p className="font-body text-site-muted text-sm mb-10">
-          All assets are released under open licenses. Source links and author attributions are listed below.
+          Assets are available under various free and open licenses. Source links and author attributions are listed below.
         </p>
 
         {groups.map((group) => (
@@ -87,7 +87,7 @@ export const getStaticProps: GetStaticProps<CreditsProps> = async () => {
     const license = asset.license ?? 'Unknown';
 
     for (const credit of asset.credits) {
-      const key = `${license}::${credit.authors.sort().join('|')}::${(credit.urls ?? []).sort().join('|')}`;
+      const key = `${license}::${[...credit.authors].sort().join('|')}::${[...(credit.urls ?? [])].sort().join('|')}`;
       if (!entryMap.has(key)) {
         entryMap.set(key, { credit, assetNames: new Set(), license });
       }
