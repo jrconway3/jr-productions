@@ -247,6 +247,8 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
             className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/35 text-white transition-colors"
             style={{ height: cw, aspectRatio: '1' }}
             title={playing ? 'Pause' : 'Play'}
+            aria-label={playing ? 'Pause portrait animation' : 'Play portrait animation'}
+            aria-pressed={playing}
           >
             {playing ? '⏸' : '▶'}
           </button>
@@ -255,6 +257,8 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
             className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/35 text-white transition-colors"
             style={{ height: cw, aspectRatio: '1' }}
             title={mouthVariant === 'mouth_smile' ? 'Neutral mouth' : 'Smile'}
+            aria-label={mouthVariant === 'mouth_smile' ? 'Switch to neutral mouth' : 'Switch to smiling mouth'}
+            aria-pressed={mouthVariant === 'mouth_smile'}
           >
             {mouthVariant === 'mouth_smile' ? <SmileIcon /> : <NeutralIcon />}
           </button>
@@ -264,6 +268,9 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
             onClick={onDownload}
             disabled={downloading}
             title="Download"
+            aria-label="Download portrait"
+            aria-busy={downloading}
+            aria-disabled={downloading}
             className="flex items-center justify-center bg-white/20 hover:bg-white/35 text-white/70 hover:text-white transition-colors disabled:opacity-40"
             style={{ width: cw * 2, height: Math.round(cw * 0.625) }}
           >

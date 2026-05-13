@@ -27,6 +27,14 @@ const FEATURED_ASSET_COUNT = 180;
 const FEATURED_CACHE_KEY = 'home-featured-assets-v1';
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
 
+function isAnimationSpec(value: AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec | undefined): value is AnimationSpec {
+  return Boolean(value && typeof value === 'object' && 'id' in value);
+}
+
+function isResolvedLpcSpec(value: AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec | undefined): value is ResolvedLpcSpec {
+  return Boolean(value && typeof value === 'object' && !('id' in value));
+}
+
 function pickRandomAssets(pool: Asset[], count: number): Asset[] {
   if (pool.length <= count) return [...pool];
   const shuffled = [...pool];
@@ -120,25 +128,52 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
             <h2 className="font-pixel text-sm text-site-muted mb-6 tracking-widest uppercase">Featured Picks</h2>
             <MasonryGrid className="masonry-grid-featured">
               {displayAssets.map((asset) => {
+                const resolvedSpec = resolvedSpecs[asset.id];
                 if (asset.type === 'lpc' && asset.animations?.length) {
                   const animName = animNames[asset.id] ?? asset.animations[0];
                   const fallbackTypes = asset.body_types?.length ? asset.body_types : collectLpcBodyTypes(asset.layers);
                   const bodyType = bodyTypeMap.get(asset.id) || fallbackTypes[0];
                   const groupAnimNames = groupNamesMap.get(asset.id);
                   if (groupAnimNames?.length) {
-                    const groupSpec = resolvedSpecs[asset.id] as ResolvedLpcSpec;
-                    return (
-                      <LpcGroupCard
-                        key={asset.id}
-                        asset={asset}
-                        animNames={groupAnimNames}
-                        specs={groupAnimNames.map((n) => groupSpec[n])}
-                        bodyType={bodyType}
-                        backgroundLayers={asset.context_layers}
-                        allAnimSpecs={groupSpec}
-                      />
-                    );
+                    const groupSpec = isResolvedLpcSpec(resolvedSpec) ? resolvedSpec : undefined;
+                    const validAnimNames = groupAnimNames.filter((name) => groupSpec?.[name]);
+                    if (validAnimNames.length > 1) {
+                      return (
+                        <LpcGroupCard
+                          key={asset.id}
+                          asset={asset}
+                          animNames={validAnimNames}
+                          specs={validAnimNames.map((name) => groupSpec?.[name])}
+                          bodyType={bodyType}
+                          backgroundLayers={asset.context_layers}
+                          allAnimSpecs={groupSpec}
+                        />
+                      );
+                    }
+
+                    if (validAnimNames.length === 1) {
+                      const fallbackAnimName = validAnimNames[0];
+                      return (
+                        <LpcCard
+                          key={asset.id}
+                          asset={asset}
+                          animName={fallbackAnimName}
+                          bodyType={bodyType}
+                          backgroundLayers={asset.context_layers}
+                          animSpec={groupSpec?.[fallbackAnimName]}
+                          allAnimSpecs={groupSpec}
+                        />
+                      );
+                    }
+
+                    return <AssetCard key={asset.id} asset={asset} />;
                   }
+
+                  const animSpec = isAnimationSpec(resolvedSpec) ? resolvedSpec : undefined;
+                  if (!animSpec) {
+                    return <AssetCard key={asset.id} asset={asset} />;
+                  }
+
                   return (
                     <LpcCard
                       key={asset.id}
@@ -146,7 +181,7 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
                       animName={animName}
                       bodyType={bodyType}
                       backgroundLayers={asset.context_layers}
-                      animSpec={resolvedSpecs[asset.id] as AnimationSpec | undefined}
+                      animSpec={animSpec}
                     />
                   );
                 }

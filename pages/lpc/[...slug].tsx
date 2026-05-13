@@ -105,6 +105,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
 
         const standaloneAnims = (asset.animations ?? []).filter((n) => {
           const spec = lpcSpec?.[n];
+          if (!spec) return false;
           if (spec?.standalone === false) return false;
           if (spec?.body_types?.length && (!bodyType || !spec.body_types.includes(bodyType))) return false;
           return true;
