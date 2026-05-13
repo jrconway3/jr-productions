@@ -1,0 +1,78 @@
+{
+  "name": "TShirt Buttoned",
+  "type": "lpc",
+  "category": "torso",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 35,
+      "assets": [
+        {
+          "path": "torso/clothes/shortsleeve/tshirt_buttoned/male",
+          "body_types": [
+            "male"
+          ]
+        },
+        {
+          "path": "torso/clothes/shortsleeve/tshirt_buttoned/female",
+          "body_types": [
+            "female"
+          ]
+        },
+        {
+          "path": "torso/clothes/shortsleeve/tshirt_buttoned/teen",
+          "body_types": [
+            "teen"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman",
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "http://opengameart.org/content/lpc-revised-character-basics",
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-simple-shirts"
+      ],
+      "notes": "original by ElizaWy; spellcast/thrust/shoot/hurt/male adapted from original by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

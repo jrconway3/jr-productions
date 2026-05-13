@@ -1,9 +1,52 @@
 {
   "name": "Pants",
   "type": "lpc",
-  "path": "legs/pants",
+  "category": "legs",
   "format": "spritesheet",
-  "license": "OGA-BY 3.0, GPL 3.0, CC-BY-SA 3.0",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 20,
+      "assets": [
+        {
+          "path": "legs/pants/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "legs/pants/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
   "credits": [
     {
       "authors": [
@@ -40,53 +83,12 @@
       "notes": "original male pants by wulax, edited for female by Joe White, recolors and edits to v3 base by bluecarrot16, teen legs by ElizaWy derived from base, climb/jump/run/sit/emotes/revised combat by JaidynReiman based on ElizaWy's LPC Revised"
     }
   ],
-  "body_types": [
-    "male",
-    "muscular",
-    "female",
-    "teen",
-    "pregnant"
-  ],
-  "animations": [
-    "spellcast",
-    "thrust",
-    "walk",
-    "slash",
-    "shoot",
-    "hurt",
-    "watering",
-    "idle",
-    "jump",
-    "run",
-    "sit",
-    "emote",
-    "climb",
-    "combat",
-    "1h_slash",
-    "1h_backslash",
-    "1h_halfslash"
-  ],
-  "layers": [
-    {
-      "id": "male",
-      "zPos": 20,
-      "path": "legs/pants/male",
-      "body_types": [
-        "male",
-        "muscular"
-      ]
-    },
-    {
-      "id": "thin",
-      "zPos": 20,
-      "path": "legs/pants/thin",
-      "body_types": [
-        "female",
-        "teen",
-        "pregnant"
-      ]
-    }
-  ],
-  "preview": "",
-  "download": "https://opengameart.org/content/lpc-expanded-pants"
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
 }

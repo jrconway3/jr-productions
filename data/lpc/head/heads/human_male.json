@@ -1,0 +1,84 @@
+{
+  "name": "Human Male",
+  "type": "lpc",
+  "category": "head",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 100,
+      "assets": [
+        {
+          "path": "head/heads/male",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "Benjamin K. Smith (BenCreating)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-character-bases"
+      ],
+      "notes": "original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16"
+    }
+  ],
+  "tags": [
+    "human",
+    "adult"
+  ],
+  "recolors": {
+    "color_1": {
+      "material": "body",
+      "palettes": [
+        "ulpc",
+        "lpcr",
+        "all.lpcr"
+      ]
+    },
+    "color_2": {
+      "type_name": "eyes",
+      "label": "Eye Color",
+      "material": "eye",
+      "palettes": [
+        "ulpc",
+        "lpcr"
+      ]
+    }
+  },
+  "match_body_color": true,
+  "preview": ""
+}

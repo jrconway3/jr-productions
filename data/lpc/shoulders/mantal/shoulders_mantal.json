@@ -1,0 +1,76 @@
+{
+  "name": "Mantal",
+  "type": "lpc",
+  "category": "shoulders",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "climb",
+    "idle",
+    "jump",
+    "sit",
+    "emote",
+    "run"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 75,
+      "assets": [
+        {
+          "path": "shoulders/mantal/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "shoulders/mantal/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates"
+      ],
+      "notes": "Original by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman"
+    },
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-pirates"
+      ],
+      "notes": "Original by bluecarrot16, female/teen version by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

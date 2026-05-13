@@ -1,26 +1,10 @@
 {
   "name": "Obi",
   "type": "lpc",
-  "path": "torso/waist/obi",
+  "category": "torso",
   "format": "spritesheet",
-  "license": "OGA-BY 3.0+, CC-BY 3.0+, GPL 3.0",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman"
-      ],
-      "urls": [
-        "https://opengameart.org/content/lpc-kimono-relm"
-      ]
-    }
-  ],
-  "body_types": [
-    "male",
-    "muscular",
-    "female",
-    "pregnant",
-    "teen"
-  ],
+  "animation_spec": "lpc",
+  "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",
   "animations": [
     "spellcast",
     "thrust",
@@ -40,53 +24,51 @@
     "1h_backslash",
     "1h_halfslash"
   ],
-  "variants": [
-    "black",
-    "blue",
-    "bluegray",
-    "brown",
-    "charcoal",
-    "forest",
-    "gray",
-    "green",
-    "lavender",
-    "leather",
-    "maroon",
-    "navy",
-    "orange",
-    "pink",
-    "purple",
-    "red",
-    "rose",
-    "sky",
-    "slate",
-    "tan",
-    "teal",
-    "walnut",
-    "white",
-    "yellow"
-  ],
   "layers": [
     {
-      "id": "male",
+      "id": "base",
       "zPos": 65,
-      "path": "torso/waist/obi/male",
-      "body_types": [
-        "male",
-        "muscular"
-      ]
-    },
-    {
-      "id": "thin",
-      "zPos": 65,
-      "path": "torso/waist/obi/thin",
-      "body_types": [
-        "female",
-        "pregnant",
-        "teen"
+      "assets": [
+        {
+          "path": "torso/waist/obi/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "torso/waist/obi/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
       ]
     }
   ],
-  "preview": "",
-  "download": "https://opengameart.org/content/lpc-kimono-relm"
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-kimono-relm"
+      ]
+    }
+  ],
+  "prerequisites": {
+    "asset": [
+      "belt_waistband"
+    ]
+  },
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
 }

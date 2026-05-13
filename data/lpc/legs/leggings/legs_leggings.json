@@ -1,9 +1,50 @@
 {
   "name": "Leggings",
   "type": "lpc",
-  "path": "legs/leggings",
+  "category": "legs",
   "format": "spritesheet",
-  "license": "OGA-BY 3.0, GPL 3.0",
+  "animation_spec": "lpc",
+  "license": "GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 20,
+      "assets": [
+        {
+          "path": "legs/leggings/male",
+          "body_types": [
+            "male"
+          ]
+        },
+        {
+          "path": "legs/leggings/thin",
+          "body_types": [
+            "female",
+            "teen"
+          ]
+        }
+      ]
+    }
+  ],
   "credits": [
     {
       "authors": [
@@ -39,49 +80,12 @@
       "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, adapted from sara's leggings to v3 bases by bluecarrot16, jump/run/sit by JaidynReiman based on ElizaWy's and modified to match"
     }
   ],
-  "body_types": [
-    "male",
-    "female",
-    "teen"
-  ],
-  "animations": [
-    "spellcast",
-    "thrust",
-    "walk",
-    "slash",
-    "shoot",
-    "hurt",
-    "watering",
-    "idle",
-    "jump",
-    "run",
-    "sit",
-    "emote",
-    "climb",
-    "combat",
-    "1h_slash",
-    "1h_backslash",
-    "1h_halfslash"
-  ],
-  "layers": [
-    {
-      "id": "male",
-      "zPos": 20,
-      "path": "legs/leggings/male",
-      "body_types": [
-        "male"
-      ]
-    },
-    {
-      "id": "thin",
-      "zPos": 20,
-      "path": "legs/leggings/thin",
-      "body_types": [
-        "female",
-        "teen"
-      ]
-    }
-  ],
-  "preview": "",
-  "download": "https://opengameart.org/content/lpc-expanded-pants"
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
 }
