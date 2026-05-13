@@ -114,7 +114,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
           if (result.length < MAX_CARDS) {
             result.push(<AssetCard key={asset.id} asset={asset} />);
           }
-          continue;
+          break;
         }
 
         // Pass 1: find groups whose every member is present in standaloneAnims.
