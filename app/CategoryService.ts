@@ -18,7 +18,7 @@ function buildCategory(dirPath: string, slug: string, relativePath: string): Cat
   const children: Category[] = entries
     .filter((e) => e.isDirectory())
     .map((e) => buildCategory(path.join(dirPath, e.name), e.name, `${relativePath}/${e.name}`))
-    .filter((c): c is Category => c !== null)
+    .filter((c): c is Category => c !== null && !c.excluded)
     .sort((a, b) => a.priority - b.priority);
 
   return { ...meta, slug, path: relativePath, children };

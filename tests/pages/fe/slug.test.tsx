@@ -28,23 +28,23 @@ const mockCategory: Category = {
 
 describe('FE slug page', () => {
   it('renders the category heading', () => {
-    render(<FeSlug category={mockCategory} assets={[]} slugs={['portraits']} />);
+    render(<FeSlug category={mockCategory} assets={[]} slugs={['portraits']} pageCredits={[]} />);
     expect(screen.getByRole('heading', { name: 'Portraits' })).toBeInTheDocument();
   });
 
   it('renders breadcrumb back to FE root', () => {
-    render(<FeSlug category={mockCategory} assets={[]} slugs={['portraits']} />);
+    render(<FeSlug category={mockCategory} assets={[]} slugs={['portraits']} pageCredits={[]} />);
     expect(screen.getByRole('link', { name: 'FE' })).toBeInTheDocument();
   });
 
   it('renders empty state when no assets and no children', () => {
-    render(<FeSlug category={mockCategory} assets={[]} slugs={['portraits']} />);
+    render(<FeSlug category={mockCategory} assets={[]} slugs={['portraits']} pageCredits={[]} />);
     expect(screen.getByText(/no assets yet/i)).toBeInTheDocument();
   });
 
   it('renders asset cards when assets are present', () => {
     const asset: Asset = { id: 'p1', name: 'Hero Portrait', type: 'fe', format: 'portrait' };
-    render(<FeSlug category={mockCategory} assets={[asset]} slugs={['portraits']} />);
+    render(<FeSlug category={mockCategory} assets={[asset]} slugs={['portraits']} pageCredits={[]} />);
     expect(screen.getByText('Hero Portrait')).toBeInTheDocument();
   });
 });

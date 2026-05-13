@@ -25,5 +25,5 @@
     "Unarmed"
   ],
   "preview": "assets/fe/map_sprites/mounted/Wolf Knight (F) {JaidynReiman, VelvetKitsune, Leif}-stand.png",
-  "download": ""
+  "animation_spec": "fe/map_sprite"
 }

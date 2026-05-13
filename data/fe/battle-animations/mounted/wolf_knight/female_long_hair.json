@@ -33,5 +33,5 @@
     "unarmed"
   ],
   "preview": "assets/fe/battle_animations/mounted/wolf_knight/female_long_hair/axe/Axe.gif",
-  "download": ""
+  "animation_spec": "fe/battle"
 }

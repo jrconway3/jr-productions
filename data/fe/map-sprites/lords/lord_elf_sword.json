@@ -22,5 +22,5 @@
     "Sword"
   ],
   "preview": "assets/fe/map_sprites/lords/Lord (F) Elf Sword {JaidynReiman}-stand.png",
-  "download": ""
+  "animation_spec": "fe/map_sprite"
 }

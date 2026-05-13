@@ -1,13 +1,16 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
-import { getAssetsByCategoryTree } from 'app/AssetService';
+import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
+import { resolveAssetsSpecs } from 'app/AnimationService';
+import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
-import AssetCard from 'components/gallery/AssetCard';
-import type { Category } from 'app/models/Category';
-import type { Asset } from 'app/models/Asset';
+import { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
+import PageCredits from 'components/gallery/PageCredits';
+import type { Category, ResolvedPageCredit } from 'app/models/Category';
+import type { Asset, ResolvedLpcSpec, ResolvedFeSpec } from 'app/models/Asset';
 
 interface LpcSlugProps {
   category: Category;
@@ -16,10 +19,17 @@ interface LpcSlugProps {
   assets?: Asset[];
   slugs: string[];
   breadcrumbs?: Array<{ label: string; href: string }>;
+  resolvedSpecs?: Record<string, ResolvedLpcSpec | ResolvedFeSpec>;
+  pageCredits: ResolvedPageCredit[];
 }
 
-const FEATURED_ASSET_COUNT = 48;
+const MAX_CARDS = 180;
+const FEATURED_ASSET_COUNT = 200;
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
+
+function sortNewFirst(assets: Asset[]): Asset[] {
+  return [...assets].sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
+}
 
 function pickRandomAssets(pool: Asset[], count: number): Asset[] {
   if (pool.length <= count) return [...pool];
@@ -70,25 +80,87 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function LpcSlug({ category, section, treeAssets, assets, slugs, breadcrumbs }: LpcSlugProps) {
+export default function LpcSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: LpcSlugProps) {
   const scopedAssets = treeAssets ?? assets ?? [];
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'LPC', href: '/lpc' }, { label: category.label, href: `/lpc/${slugsToPath(slugs)}` }];
-  const sectionCategory = section ?? {
-    ...category,
-    children: [],
-  };
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => scopedAssets.slice(0, FEATURED_ASSET_COUNT));
+  const sectionCategory = section ?? { ...category, children: [] };
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, FEATURED_ASSET_COUNT)));
 
   const treeAssetsById = useMemo(() => {
     return new Map(scopedAssets.map((asset) => [asset.id, asset]));
   }, [scopedAssets]);
+
+  const cards = useMemo(() => {
+    const result: React.ReactNode[] = [];
+    for (const asset of displayAssets) {
+      if (result.length >= MAX_CARDS) break;
+      const lpcSpec = resolvedSpecs?.[asset.id] as ResolvedLpcSpec | undefined;
+      const derivedBodyTypes = collectLpcBodyTypes(asset.layers);
+      const bodyTypes: (string | undefined)[] = asset.body_types?.length
+        ? asset.body_types
+        : (derivedBodyTypes.length > 0 ? derivedBodyTypes : [undefined]);
+
+      for (const bodyType of bodyTypes) {
+        if (result.length >= MAX_CARDS) break;
+
+        const standaloneAnims = (asset.animations ?? []).filter((n) => {
+          const spec = lpcSpec?.[n];
+          if (spec?.standalone === false) return false;
+          if (spec?.body_types?.length && (!bodyType || !spec.body_types.includes(bodyType))) return false;
+          return true;
+        });
+
+        if (standaloneAnims.length === 0) continue;
+
+        const groupMap = new Map<string, string[]>();
+        const ungrouped: string[] = [];
+        for (const animName of standaloneAnims) {
+          const group = lpcSpec?.[animName]?.group;
+          if (group) {
+            if (!groupMap.has(group)) groupMap.set(group, []);
+            groupMap.get(group)!.push(animName);
+          } else {
+            ungrouped.push(animName);
+          }
+        }
+
+        for (const animName of ungrouped) {
+          if (result.length >= MAX_CARDS) break;
+          result.push(
+            <LpcCard
+              key={`${asset.id}:${bodyType ?? ''}:${animName}`}
+              asset={asset} animName={animName} bodyType={bodyType}
+                backgroundLayers={asset.context_layers}
+              animSpec={lpcSpec?.[animName]} allAnimSpecs={lpcSpec}
+            />,
+          );
+        }
+
+        for (const [groupKey, groupAnimNames] of groupMap) {
+          if (result.length >= MAX_CARDS) break;
+          const specs = groupAnimNames.map((n) => lpcSpec?.[n]);
+          if (groupAnimNames.length >= 2) {
+            result.push(
+              <LpcGroupCard
+                key={`${asset.id}:${bodyType ?? ''}:group:${groupKey}`}
+                asset={asset} animNames={groupAnimNames} specs={specs}
+                bodyType={bodyType} backgroundLayers={asset.context_layers}
+                allAnimSpecs={lpcSpec}
+              />,
+            );
+          }
+        }
+      }
+    }
+    return result;
+  }, [displayAssets, resolvedSpecs]);
 
   useEffect(() => {
     const cacheKey = getCategoryCacheKey(category.path);
 
     const updateDisplayAssets = (nextAssets: Asset[]) => {
       queueMicrotask(() => {
-        setDisplayAssets(nextAssets);
+        setDisplayAssets(sortNewFirst(nextAssets));
       });
     };
 
@@ -120,15 +192,14 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
           <section>
             <h1 className="text-2xl mb-2">{category.label}</h1>
 
-            {displayAssets.length > 0 ? (
+            {cards.length > 0 ? (
               <MasonryGrid>
-                {displayAssets.map((asset) => (
-                  <AssetCard key={asset.id} asset={asset} />
-                ))}
+                {cards}
               </MasonryGrid>
             ) : (
               <p className="text-site-muted font-body">No assets yet.</p>
             )}
+            <PageCredits credits={pageCredits} />
           </section>
 
           <aside className="content-sidebar">
@@ -224,5 +295,7 @@ export const getStaticProps: GetStaticProps<LpcSlugProps> = async ({ params }) =
   }
 
   const treeAssets = getAssetsByCategoryTree(['lpc', ...slugs].join('/'));
-  return { props: { category, section, treeAssets, slugs, breadcrumbs } };
+  const resolvedSpecs = resolveAssetsSpecs(treeAssets);
+  const pageCredits = getSectionPageCredits('lpc');
+  return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits } };
 };

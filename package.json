@@ -10,13 +10,18 @@
     "start": "next start",
     "generate:fe:add": "node scripts/generate-fe-assets.mjs --mode=add-new",
     "generate:fe:rebuild": "node scripts/generate-fe-assets.mjs --mode=rebuild",
+    "generate:lpc:add": "node scripts/generate-lpc-assets.mjs --mode=add-new",
+    "generate:lpc:rebuild": "node scripts/generate-lpc-assets.mjs --mode=rebuild",
+    "generate:lpc:clear-new": "node scripts/generate-lpc-assets.mjs --clear-new",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest run"
   },
   "dependencies": {
+    "@types/jszip": "^3.4.0",
     "framer-motion": "^12.26.2",
+    "jszip": "^3.10.1",
     "next": "^16.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

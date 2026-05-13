@@ -31,5 +31,5 @@
   ],
   "weapon_types": [],
   "preview": "assets/fe/battle_animations/mounted/wolf_knight/male_lykon/lykon/bow/Bow.gif",
-  "download": ""
+  "animation_spec": "fe/battle"
 }

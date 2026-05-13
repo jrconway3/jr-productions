@@ -2,5 +2,16 @@
   "label": "Fire Emblem GBA Assets",
   "description": "",
   "priority": 1,
-  "accent": "warm"
+  "accent": "warm",
+  "page_credits": [
+    {
+      "label": "Fire Emblem GBA Style Assets",
+      "authors": ["Intelligent Systems", "Nintendo", "FE Graphics Repo"],
+      "notes": "Fire Emblem is a registered trademark of IS / Nintendo. Credits to the FE Fangame Community for many various asset modifications and cleanup.",
+      "license": "F2U, F2E",
+      "urls": [
+        "https://feessentials.com/sprites"
+       ]
+    }
+  ]
 }

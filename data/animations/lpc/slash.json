@@ -1,0 +1,88 @@
+{
+  "id": "slash",
+  "frame_width": 64,
+  "frame_height": 64,
+  "fps": 8,
+  "frames": 6,
+  "layout": "row",
+  "directions": [
+    "up",
+    "left",
+    "down",
+    "right"
+  ],
+  "cutouts": {
+    "up": {
+      "x": 0,
+      "y": 0,
+      "width": 384,
+      "height": 64
+    },
+    "left": {
+      "x": 0,
+      "y": 64,
+      "width": 384,
+      "height": 64
+    },
+    "down": {
+      "x": 0,
+      "y": 128,
+      "width": 384,
+      "height": 64
+    },
+    "right": {
+      "x": 0,
+      "y": 192,
+      "width": 384,
+      "height": 64
+    }
+  },
+  "global_layers": [
+    {
+      "asset": "body",
+      "id": "body",
+      "body_types": [
+        "male",
+        "muscular",
+        "female",
+        "teen",
+        "pregnant",
+        "child"
+      ]
+    },
+    {
+      "id": "head",
+      "asset": [
+        {
+          "asset": "human_male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "asset": "human_female",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        },
+        {
+          "asset": "human_child",
+          "body_types": [
+            "child"
+          ]
+        }
+      ]
+    }
+  ],
+  "body_types": [
+    "male",
+    "muscular",
+    "female",
+    "teen",
+    "pregnant",
+    "child"
+  ]
+}

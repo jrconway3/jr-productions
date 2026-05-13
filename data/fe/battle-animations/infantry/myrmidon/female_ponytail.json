@@ -43,5 +43,5 @@
     "unarmed"
   ],
   "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/bow/Bow.gif",
-  "download": ""
+  "animation_spec": "fe/battle"
 }
