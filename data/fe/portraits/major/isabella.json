@@ -11,5 +11,19 @@
     "OC Isabella"
   ],
   "preview": "assets/fe/Portraits/Major/isabella/{JaidynReiman} OC Isabella (Natural).png",
-  "download": ""
+  "animation_spec": "fe/portrait",
+  "cutouts": {
+    "mouth_neutral": {
+      "offset_x": 0,
+      "offset_y": 0
+    },
+    "mouth_smile": {
+      "offset_x": 0,
+      "offset_y": 0
+    },
+    "blink": {
+      "offset_x": 0,
+      "offset_y": 0
+    }
+  }
 }

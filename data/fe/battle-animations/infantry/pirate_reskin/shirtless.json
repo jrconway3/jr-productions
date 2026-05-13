@@ -25,11 +25,11 @@
     }
   ],
   "animated": true,
-  "class": "Pirate Reskin",
+  "class": "Pirate",
   "body_types": [],
   "weapon_types": [
     "unarmed"
   ],
   "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/axe_fixed/Axe.gif",
-  "download": ""
+  "animation_spec": "fe/battle"
 }

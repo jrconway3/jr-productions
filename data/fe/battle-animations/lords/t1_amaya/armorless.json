@@ -34,5 +34,5 @@
     "unarmed"
   ],
   "preview": "assets/fe/battle_animations/lords/t1_amaya/armorless/sword/Sword.gif",
-  "download": ""
+  "animation_spec": "fe/battle"
 }

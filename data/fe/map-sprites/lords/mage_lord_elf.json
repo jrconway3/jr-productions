@@ -24,5 +24,5 @@
     "Unarmed"
   ],
   "preview": "assets/fe/map_sprites/lords/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
-  "download": ""
+  "animation_spec": "fe/map_sprite"
 }

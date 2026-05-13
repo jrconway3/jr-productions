@@ -42,8 +42,9 @@ export default function Layout({ children }: LayoutProps) {
     <div className="min-h-screen flex flex-col">
       <header className="bg-site-surface border-b border-white/10 sticky top-0 z-50">
         <nav className="page-wide h-16 flex items-center gap-6">
-          <Link href="/" className="font-pixel text-base text-site-text hover:text-lpc-accentLight shrink-0">
-            JR Productions
+          <Link href="/" className="font-pixel text-sm leading-none shrink-0 whitespace-nowrap hover:opacity-80 transition-opacity">
+            <span className="text-site-text">JaidynReiman</span>
+            <span className="text-lpc-accent">{' '}Productions</span>
           </Link>
 
           <div className="flex gap-6 ml-auto items-center">
@@ -98,9 +99,15 @@ export default function Layout({ children }: LayoutProps) {
 
       <footer className="bg-site-surface border-t border-white/10 py-6 mt-16">
         <div className="page-wide flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-body text-site-muted text-sm">
-            &copy; {new Date().getFullYear()} JaidynReiman Productions
-          </p>
+          <div className="flex flex-col gap-1 items-center sm:items-start">
+            <p className="font-body text-site-muted text-sm">
+              &copy; {new Date().getFullYear()} JaidynReiman Productions
+            </p>
+            <p className="font-body text-site-muted text-xs opacity-70">
+              Assets are provided under their respective licenses.{' '}
+              <Link href="/credits" className="hover:text-site-text transition-colors">Credits →</Link>
+            </p>
+          </div>
           <a
             href="https://ko-fi.com/jaidynreiman"
             target="_blank"

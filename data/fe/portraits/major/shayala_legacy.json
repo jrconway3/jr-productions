@@ -13,5 +13,19 @@
     "OC Shayala V2 (Bust, Facing Viewer)"
   ],
   "preview": "assets/fe/Portraits/Major/shayala/legacy/{JaidynReiman} OC Shayala (Bust).png",
-  "download": ""
+  "animation_spec": "fe/portrait",
+  "cutouts": {
+    "mouth_neutral": {
+      "offset_x": 0,
+      "offset_y": 0
+    },
+    "mouth_smile": {
+      "offset_x": 0,
+      "offset_y": 0
+    },
+    "blink": {
+      "offset_x": 0,
+      "offset_y": 0
+    }
+  }
 }

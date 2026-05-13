@@ -14,5 +14,19 @@
     "OC Relm"
   ],
   "preview": "assets/fe/Portraits/Main/Relm/{JaidynReiman} OC Relm Clip Hood Down.png",
-  "download": ""
+  "animation_spec": "fe/portrait",
+  "cutouts": {
+    "mouth_neutral": {
+      "offset_x": 0,
+      "offset_y": 0
+    },
+    "mouth_smile": {
+      "offset_x": 0,
+      "offset_y": 0
+    },
+    "blink": {
+      "offset_x": 0,
+      "offset_y": 0
+    }
+  }
 }

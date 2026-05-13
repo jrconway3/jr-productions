@@ -12,13 +12,13 @@ function readMeta(dirPath: string): CategoryMeta | null {
 
 function buildCategory(dirPath: string, slug: string, relativePath: string): Category | null {
   const meta = readMeta(dirPath);
-  if (!meta) return null;
+  if (!meta || meta.excluded) return null;
 
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   const children: Category[] = entries
     .filter((e) => e.isDirectory())
     .map((e) => buildCategory(path.join(dirPath, e.name), e.name, `${relativePath}/${e.name}`))
-    .filter((c): c is Category => c !== null)
+    .filter((c): c is Category => c !== null && !c.excluded)
     .sort((a, b) => a.priority - b.priority);
 
   return { ...meta, slug, path: relativePath, children };
@@ -29,7 +29,7 @@ export function getTopLevelCategories(): Category[] {
   return entries
     .filter((e) => e.isDirectory())
     .map((e) => buildCategory(path.join(DATA_ROOT, e.name), e.name, e.name))
-    .filter((c): c is Category => c !== null && !c.hidden)
+    .filter((c): c is Category => c !== null && !c.excluded && !c.hidden)
     .sort((a, b) => a.priority - b.priority);
 }
 
