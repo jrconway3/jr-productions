@@ -104,6 +104,7 @@ export function LpcCard({ asset, animName, animSpec, bodyType, backgroundLayers,
         )}
         {specsForDownload && (asset.layers?.length ?? 0) > 0 && (
           <button onClick={handleDownload} disabled={downloading} title="Download ZIP"
+            aria-label="Download ZIP" aria-busy={downloading} aria-disabled={downloading}
             className="absolute top-1.5 right-1.5 bg-black/50 hover:bg-black/75 rounded p-1 text-white/70 hover:text-white transition-colors disabled:opacity-40">
             {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}
           </button>
@@ -162,6 +163,7 @@ export function LpcGroupCard({ asset, animNames, specs, bodyType, backgroundLaye
         })}
         {specsForDownload && (asset.layers?.length ?? 0) > 0 && (
           <button onClick={handleDownload} disabled={downloading} title="Download ZIP"
+            aria-label="Download ZIP" aria-busy={downloading} aria-disabled={downloading}
             className="absolute top-1.5 right-1.5 bg-black/50 hover:bg-black/75 rounded p-1 text-white/70 hover:text-white transition-colors disabled:opacity-40">
             {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}
           </button>
@@ -231,6 +233,7 @@ export function FeCard({ asset, feSpec }: FeCardProps) {
         {renderViewer()}
         {previewUrl && !isPortrait && (
           <button onClick={handleDownload} disabled={downloading} title="Download"
+            aria-label="Download" aria-busy={downloading} aria-disabled={downloading}
             className="absolute top-1.5 right-1.5 bg-black/50 hover:bg-black/75 rounded p-1 text-white/70 hover:text-white transition-colors disabled:opacity-40">
             {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}
           </button>

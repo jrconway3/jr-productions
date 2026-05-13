@@ -10,6 +10,8 @@ import { expandLpcLayers } from 'app/lpcLayers';
 
 const LPC_BASE = '/assets/lpc/characters';
 
+const DEFAULT_DIRECTIONS = ['up', 'left', 'down', 'right'];
+
 function DownloadIcon() {
   return (
     <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5" aria-hidden="true">
@@ -54,7 +56,7 @@ const LAYOUT_CLASS: Record<string, string> = {
 };
 
 export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundLayers }: LpcAnimViewerProps) {
-  const directions = animSpec.directions ?? ['up', 'left', 'down', 'right'];
+  const directions = animSpec.directions ?? DEFAULT_DIRECTIONS;
   const layout = animSpec.layout ?? 'row';
   const cutouts = animSpec.cutouts as Record<string, AnimationCutout> | undefined;
   const rowsByDirection = Object.fromEntries(
@@ -188,10 +190,15 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
     if (!canvas || !previewUrl) return;
 
     loopRef.current?.stop();
-    const loop = createFePortraitLoop(canvas, previewUrl, cutouts, { mouthVariant, playing });
+    const loop = createFePortraitLoop(canvas, previewUrl, cutouts);
     loopRef.current = loop;
     return () => loop.stop();
   }, [previewUrl, cutouts]);
+
+  // Sync interactive state into the running loop without re-creating it.
+  useEffect(() => {
+    loopRef.current?.updateState({ mouthVariant, playing });
+  }, [mouthVariant, playing]);
 
   const togglePlaying = useCallback(() => {
     const next = !playing;

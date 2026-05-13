@@ -87,7 +87,7 @@ export const getStaticProps: GetStaticProps<CreditsProps> = async () => {
     const license = asset.license ?? 'Unknown';
 
     for (const credit of asset.credits) {
-      const key = `${license}::${[...credit.authors].sort().join('|')}::${[...(credit.urls ?? [])].sort().join('|')}`;
+      const key = `${license}::${[...credit.authors].sort().join('|')}::${[...(credit.urls ?? [])].sort().join('|')}::${credit.notes ?? ''}`;
       if (!entryMap.has(key)) {
         entryMap.set(key, { credit, assetNames: new Set(), license });
       }

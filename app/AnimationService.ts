@@ -8,6 +8,7 @@ const LPC_DATA_ROOT = path.join(process.cwd(), 'data', 'lpc');
 const LPC_PUBLIC_ROOT = path.join(process.cwd(), 'public', 'assets', 'lpc', 'characters');
 
 let lpcAssetIndex: Map<string, string> | null = null;
+let lpcSpecsCache: ResolvedLpcSpec | null = null;
 
 function buildLpcAssetIndex(): Map<string, string> {
   if (lpcAssetIndex) return lpcAssetIndex;
@@ -175,9 +176,10 @@ function loadSpecFile(filePath: string): AnimationSpec {
 }
 
 function loadLpcSpecs(): ResolvedLpcSpec {
+  if (lpcSpecsCache) return lpcSpecsCache;
   const dir = path.join(ANIMATIONS_ROOT, 'lpc');
   if (!fs.existsSync(dir)) return {};
-  return Object.fromEntries(
+  lpcSpecsCache = Object.fromEntries(
     fs.readdirSync(dir)
       .filter((f) => f.endsWith('.json'))
       .map((f) => {
@@ -185,6 +187,7 @@ function loadLpcSpecs(): ResolvedLpcSpec {
         return [spec.id, spec];
       }),
   );
+  return lpcSpecsCache;
 }
 
 function loadFeSpec(name: string): AnimationSpec | null {

@@ -125,7 +125,8 @@ export interface Asset {
 
   // Animation spec fields
   animation_spec?: string;
-  cutouts?: Record<string, Record<string, Partial<AnimationCutout>>>;
+  /** LPC: `cutouts[animName][direction]`; FE: flat `cutouts[cutoutName]` */
+  cutouts?: Record<string, Record<string, Partial<AnimationCutout>>> | Record<string, Partial<AnimationCutout>>;
 
   /** Exclude this asset from gallery listings entirely */
   excluded?: boolean;
