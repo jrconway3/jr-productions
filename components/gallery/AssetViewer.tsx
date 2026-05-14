@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import type { Asset, AnimationCutout, AnimationSpec, ResolvedFeSpec } from 'app/models/Asset';
 import type { BackgroundLayer } from 'app/models/Category';
 import {
@@ -39,6 +39,25 @@ function NeutralIcon() {
   );
 }
 
+function BlinkOnIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="w-4 h-4" aria-hidden="true">
+      <path d="M2 8c1.5-2 3.5-3 6-3s4.5 1 6 3c-1.5 2-3.5 3-6 3S3.5 10 2 8z" />
+      <circle cx="8" cy="8" r="1.5" />
+    </svg>
+  );
+}
+
+function BlinkOffIcon() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="w-4 h-4" aria-hidden="true">
+      <path d="M2 8c1.5-2 3.5-3 6-3s4.5 1 6 3" />
+      <path d="M3 11l10-6" />
+      <path d="M3 5l10 6" />
+    </svg>
+  );
+}
+
 // --- LPC: all directions at once ---
 
 interface LpcAnimViewerProps {
@@ -58,6 +77,7 @@ const LAYOUT_CLASS: Record<string, string> = {
 export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundLayers }: LpcAnimViewerProps) {
   const directions = animSpec.directions ?? DEFAULT_DIRECTIONS;
   const layout = animSpec.layout ?? 'row';
+  const [hasRenderableLayers, setHasRenderableLayers] = useState(true);
   const cutouts = animSpec.cutouts as Record<string, AnimationCutout> | undefined;
   const rowsByDirection = Object.fromEntries(
     directions.map((dir) => {
@@ -73,6 +93,9 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
 
   useEffect(() => {
     stopRef.current?.();
+    setHasRenderableLayers(true);
+
+    let cancelled = false;
 
     const canvases: Record<string, HTMLCanvasElement> = {};
     for (const dir of directions) {
@@ -131,30 +154,52 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
     ];
 
     const layerUrls = allLayers.sort((a, b) => a.zPos - b.zPos);
-    if (layerUrls.length === 0) return;
+    if (layerUrls.length === 0) {
+      setHasRenderableLayers(false);
+      return;
+    }
 
-    const { stop } = createLpcMultiDirectionLoop(canvases, layerUrls, animSpec);
+    const loop = createLpcMultiDirectionLoop(canvases, layerUrls, animSpec);
+    loop.ready
+      .then((layerCount) => {
+        if (!cancelled) setHasRenderableLayers(layerCount > 0);
+      })
+      .catch(() => {
+        if (!cancelled) setHasRenderableLayers(false);
+      });
+
+    const { stop } = loop;
     stopRef.current = stop;
-    return () => stop();
+    return () => {
+      cancelled = true;
+      stop();
+    };
   }, [asset, animName, animSpec, directions, bodyType, backgroundLayers]);
 
   const layoutClass = LAYOUT_CLASS[layout] ?? LAYOUT_CLASS.row;
 
   return (
-    <div className={`${layoutClass} w-full gap-px`}>
-      {directions.map((dir) => (
-        <canvas
-          key={dir}
-          ref={(el) => { canvasRefs.current[dir] = el; }}
-          width={64}
-          height={64 * (rowsByDirection[dir] ?? 1)}
-          className="flex-1 min-w-0"
-          style={{
-            imageRendering: 'pixelated',
-            aspectRatio: `1 / ${rowsByDirection[dir] ?? 1}`,
-          }}
-        />
-      ))}
+    <div className="relative w-full">
+      <div className={`${layoutClass} w-full gap-px`}>
+        {directions.map((dir) => (
+          <canvas
+            key={dir}
+            ref={(el) => { canvasRefs.current[dir] = el; }}
+            width={64}
+            height={64 * (rowsByDirection[dir] ?? 1)}
+            className="flex-1 min-w-0"
+            style={{
+              imageRendering: 'pixelated',
+              aspectRatio: `1 / ${rowsByDirection[dir] ?? 1}`,
+            }}
+          />
+        ))}
+      </div>
+      {!hasRenderableLayers && (
+        <div className="absolute inset-0 flex items-center justify-center px-2 text-center text-[10px] font-body text-site-muted opacity-80">
+          Preview unavailable
+        </div>
+      )}
     </div>
   );
 }
@@ -173,6 +218,7 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
   const loopRef = useRef<{ stop: () => void; updateState: (p: object) => void } | null>(null);
 
   const [playing, setPlaying] = useState(true);
+  const [blinkEnabled, setBlinkEnabled] = useState(false);
   const [mouthVariant, setMouthVariant] = useState<'mouth_smile' | 'mouth_neutral'>('mouth_neutral');
 
   const cutouts = resolvedSpec.cutouts as Record<string, AnimationCutout>;
@@ -190,15 +236,15 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
     if (!canvas || !previewUrl) return;
 
     loopRef.current?.stop();
-    const loop = createFePortraitLoop(canvas, previewUrl, cutouts);
+    const loop = createFePortraitLoop(canvas, previewUrl, cutouts, { blinkEnabled: false });
     loopRef.current = loop;
     return () => loop.stop();
   }, [previewUrl, cutouts]);
 
   // Sync interactive state into the running loop without re-creating it.
   useEffect(() => {
-    loopRef.current?.updateState({ mouthVariant, playing });
-  }, [mouthVariant, playing]);
+    loopRef.current?.updateState({ mouthVariant, playing, blinkEnabled });
+  }, [mouthVariant, playing, blinkEnabled]);
 
   const togglePlaying = useCallback(() => {
     const next = !playing;
@@ -211,6 +257,12 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
     setMouthVariant(next);
     loopRef.current?.updateState({ mouthVariant: next });
   }, [mouthVariant]);
+
+  const toggleBlink = useCallback(() => {
+    const next = !blinkEnabled;
+    setBlinkEnabled(next);
+    loopRef.current?.updateState({ blinkEnabled: next });
+  }, [blinkEnabled]);
 
   const cw = chibi?.width ?? 32;
   const ch = chibi?.height ?? 32;
@@ -252,6 +304,22 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
           >
             {playing ? '⏸' : '▶'}
           </button>
+          {onDownload && (
+            <button
+              onClick={onDownload}
+              disabled={downloading}
+              title="Download"
+              aria-label="Download portrait"
+              aria-busy={downloading}
+              aria-disabled={downloading}
+              className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/35 text-white/70 hover:text-white transition-colors disabled:opacity-40"
+              style={{ height: cw, aspectRatio: '1' }}
+            >
+              {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}
+            </button>
+          )}
+        </div>
+        <div className="flex" style={{ width: cw * 2 }}>
           <button
             onClick={toggleMouth}
             className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/35 text-white transition-colors"
@@ -262,21 +330,17 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
           >
             {mouthVariant === 'mouth_smile' ? <SmileIcon /> : <NeutralIcon />}
           </button>
-        </div>
-        {onDownload && (
           <button
-            onClick={onDownload}
-            disabled={downloading}
-            title="Download"
-            aria-label="Download portrait"
-            aria-busy={downloading}
-            aria-disabled={downloading}
-            className="flex items-center justify-center bg-white/20 hover:bg-white/35 text-white/70 hover:text-white transition-colors disabled:opacity-40"
-            style={{ width: cw * 2, height: Math.round(cw * 0.625) }}
+            onClick={toggleBlink}
+            className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/35 text-white transition-colors"
+            style={{ height: cw, aspectRatio: '1' }}
+            title={blinkEnabled ? 'Disable blink' : 'Enable blink'}
+            aria-label={blinkEnabled ? 'Disable portrait blink animation' : 'Enable portrait blink animation'}
+            aria-pressed={blinkEnabled}
           >
-            {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}
+            {blinkEnabled ? <BlinkOnIcon /> : <BlinkOffIcon />}
           </button>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -289,61 +353,165 @@ interface FeMapSpriteViewerProps {
   resolvedSpec: ResolvedFeSpec;
 }
 
-export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const stopRef = useRef<(() => void) | null>(null);
+interface MapSpriteRenderEntry {
+  id: string;
+  label: string;
+  sourceKey: string;
+  cutoutKey: string;
+}
 
-  const animations = asset.animations ?? ['stand'];
+const WALK_RENDER_ORDER = ['left', 'right', 'up', 'down', 'cast'];
+
+function buildMapSpriteRenderEntries(
+  animations: string[],
+  cutouts: Record<string, AnimationCutout>,
+): MapSpriteRenderEntry[] {
+  const entries: MapSpriteRenderEntry[] = [];
+
+  for (const animation of animations) {
+    const lowerAnim = animation.toLowerCase();
+
+    if (lowerAnim === 'move' || lowerAnim === 'walk') {
+      const walkKeys = WALK_RENDER_ORDER.filter((key) => cutouts[key]);
+      if (walkKeys.length > 0) {
+        for (const key of walkKeys) {
+          entries.push({
+            id: `${animation}:${key}`,
+            label: key,
+            sourceKey: animation,
+            cutoutKey: key,
+          });
+        }
+        continue;
+      }
+    }
+
+    const fallbackCutoutKey = resolveMapSpriteCutoutKey(cutouts, animation);
+    if (!fallbackCutoutKey) continue;
+    entries.push({
+      id: animation,
+      label: animation,
+      sourceKey: animation,
+      cutoutKey: fallbackCutoutKey,
+    });
+  }
+
+  return entries;
+}
+
+function resolveMapSpriteCutoutKey(cutouts: Record<string, AnimationCutout>, animation: string): string | null {
+  const lowerAnim = animation.toLowerCase();
+  if (cutouts[lowerAnim]) return lowerAnim;
+  // move animation → show walk-left direction from the walk spec
+  if (lowerAnim === 'move' && cutouts.left) return 'left';
+  if (lowerAnim === 'move' && cutouts.walk) return 'walk';
+  if (lowerAnim === 'walk' && cutouts.left) return 'left';
+  return Object.keys(cutouts).find((key) => key.toLowerCase() === lowerAnim) ?? null;
+}
+
+/** Compute per-frame pixel dimensions from a cutout's bounding box + frame count. */
+function getCutoutFrameDims(
+  cutout: AnimationCutout,
+  fallbackW: number,
+  fallbackH: number,
+): { w: number; h: number } {
+  const isVertical = cutout.frame_direction === 'vertical';
+  const frames = Math.max(1, cutout.frames ?? 1);
+  if (isVertical) {
+    return {
+      w: cutout.width ?? fallbackW,
+      h: Math.floor((cutout.height ?? fallbackH * frames) / frames),
+    };
+  }
+  return {
+    w: Math.floor((cutout.width ?? fallbackW * frames) / frames),
+    h: cutout.height ?? fallbackH,
+  };
+}
+
+export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProps) {
+  const canvasRefs = useRef<Record<string, HTMLCanvasElement | null>>({});
+  const stopRefs = useRef<Record<string, () => void>>({});
+
+  const animations = useMemo(
+    () => [...new Set(asset.animations ?? ['stand'])],
+    [asset.animations],
+  );
   const cutouts = resolvedSpec.cutouts as Record<string, AnimationCutout>;
   const fw = resolvedSpec.frame_width ?? 16;
   const fh = resolvedSpec.frame_height ?? 16;
-
-  const previewUrl = asset.preview
-    ? (asset.preview.startsWith('/') ? asset.preview : `/${asset.preview}`)
-    : '';
-
-  // Derive stand URL from preview (preview is typically the stand file)
-  const selectedAnim = animations[0] ?? 'stand';
-  const fileUrl = previewUrl;
+  const animationSources = useMemo(
+    () => asset.animation_sources ?? {},
+    [asset.animation_sources],
+  );
+  const renderEntries = useMemo(
+    () => buildMapSpriteRenderEntries(animations, cutouts),
+    [animations, cutouts],
+  );
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas || !fileUrl) return;
+    for (const stop of Object.values(stopRefs.current)) stop();
+    stopRefs.current = {};
 
-    stopRef.current?.();
-    const cutout = cutouts[selectedAnim];
-    if (!cutout) return;
+    for (const entry of renderEntries) {
+      const canvas = canvasRefs.current[entry.id];
+      const cutout = cutouts[entry.cutoutKey];
+      const sourceUrl = animationSources[entry.sourceKey];
+      if (!canvas || !cutout || !sourceUrl) continue;
 
-    const { stop } = createFeMapSpriteLoop(canvas, fileUrl, cutout, fw, fh);
-    stopRef.current = stop;
-    return () => stop();
-  }, [fileUrl, cutouts, selectedAnim, fw, fh]);
+      const { stop } = createFeMapSpriteLoop(canvas, sourceUrl.startsWith('/') ? sourceUrl : `/${sourceUrl}`, cutout, fw, fh);
+      stopRefs.current[entry.id] = stop;
+    }
+
+    return () => {
+      for (const stop of Object.values(stopRefs.current)) stop();
+      stopRefs.current = {};
+    };
+  }, [animationSources, cutouts, fw, fh, renderEntries]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={fw}
-      height={fh}
-      className="w-full aspect-square"
-      style={{ imageRendering: 'pixelated' }}
-    />
+    <div className="grid w-full grid-flow-col auto-cols-fr gap-px items-start">
+      {renderEntries.map((entry) => (
+        (() => {
+          const cutout = cutouts[entry.cutoutKey];
+          const dims = cutout ? getCutoutFrameDims(cutout, fw, fh) : { w: fw, h: fh };
+          return (
+            <canvas
+              key={entry.id}
+              ref={(el) => { canvasRefs.current[entry.id] = el; }}
+              width={dims.w}
+              height={dims.h}
+              className="w-full"
+              title={entry.label}
+              style={{
+                imageRendering: 'pixelated',
+                aspectRatio: `${dims.w} / ${dims.h}`,
+                height: 'auto',
+              }}
+            />
+          );
+        })()
+      ))}
+    </div>
   );
 }
 
 // --- FE Battle: just display the GIF ---
 
-export function FeBattleViewer({ asset }: { asset: Asset }) {
+export function FeBattleViewer({ asset }: { asset: Asset; resolvedSpec?: ResolvedFeSpec }) {
   const url = asset.preview
     ? (asset.preview.startsWith('/') ? asset.preview : `/${asset.preview}`)
     : '';
   if (!url) return null;
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={url}
-      alt={asset.name}
-      className="w-full h-auto block"
-      style={{ imageRendering: 'pixelated' }}
-    />
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={url}
+        alt={asset.name}
+        className="w-full h-auto block object-contain object-top"
+        style={{ imageRendering: 'pixelated' }}
+      />
+    </>
   );
 }

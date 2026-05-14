@@ -3,26 +3,36 @@
   "type": "fe",
   "path": "portraits/major",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "but you are free to use the portrait for any reason",
+        "Character &copy"
+      ]
+    }
+  ],
+  "description": "Serena is a Queiza which take inspiration from mermaids or other merfolk, though they have legs and finlike tails. Unlike the Queizol (Amaya) they very much look more mermaid like which is why I gave her a greener skintone.\n\nMy intent is for her to be a mentor-like figure to Svetlanya.",
   "variants": [
-    "OC Serena (Tan)",
+    "OC Serena Tan",
     "OC Serena"
   ],
-  "preview": "assets/fe/Portraits/Major/serena/{JaidynReiman} OC Serena (Tan).png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/major/serena/{JaidynReiman} OC Serena Tan.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 32,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

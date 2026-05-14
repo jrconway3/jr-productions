@@ -19,6 +19,16 @@ const DATA_ROOT = path.join(PROJECT_ROOT, 'data', 'lpc');
 const SOURCE_ROOT = process.env.LPC_SOURCE_ROOT
   ?? path.join(PROJECT_ROOT, '..', '..', 'assets', 'lpc', 'lpc-jaidynreiman-assets', 'characters');
 
+const EXCLUDED_OUTPUT_FILES = new Set([
+  // Removed from this site's catalog by request.
+  'legs/pants/legs_pregnantpants.json',
+  'legs/pants/legs_widepants.json',
+  // Base head layers are used by animation composition and should not be standalone cards.
+  'head/heads/human_male.json',
+  'head/heads/human_female.json',
+  'head/heads/human_child.json',
+]);
+
 const ROOT_META = {
   label: 'Liberated Pixel Cup Assets',
   description: '',
@@ -270,10 +280,17 @@ function runBuild(mode) {
 
   let written = 0;
   let skipped = 0;
+  let excluded = 0;
 
   for (const sourcePath of sourceJsonFiles) {
     const compiled = buildCompiledAsset(sourcePath);
     const rel = compiled.relativeOutputPath;
+
+    if (EXCLUDED_OUTPUT_FILES.has(rel)) {
+      excluded += 1;
+      continue;
+    }
+
     expectedRelativePaths.add(rel);
     categories.add(compiled.topLevelCategory);
     
@@ -308,6 +325,7 @@ function runBuild(mode) {
 
   console.log(`LPC generation complete (${mode}).`);
   console.log(`- Source assets scanned: ${sourceJsonFiles.length}`);
+  console.log(`- Source assets excluded: ${excluded}`);
   console.log(`- Assets written: ${written}`);
   if (mode === MODE_ADD_NEW) console.log(`- Existing assets skipped: ${skipped}`);
   if (mode === MODE_REBUILD) console.log(`- Stale output assets deleted: ${deleted}`);

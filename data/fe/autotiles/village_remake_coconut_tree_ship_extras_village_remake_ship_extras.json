@@ -1,0 +1,20 @@
+{
+  "name": "Autotiles for Village - Remake + Coconut Tree Ship Extras",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "flasuban",
+        "N426",
+        "ZoramineFae",
+        "Venno"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/village_remake_coconut-tree_ship-extras/village_remake_ship_extras.png",
+  "download": "",
+  "description": "I created the sheets for the \"Ship Extras\" part, but unforunately, the ship tiles don't work right now. I'm going to re-evaluate these again in the future to figure out why they keep failing. I'm certain I have done everything possible to make them work, they just won't."
+}

@@ -1,35 +1,59 @@
 {
-  "name": "Shirtless",
+  "name": "Pirate Shirtless",
   "type": "fe",
   "path": "battle-animations/infantry/pirate_reskin",
   "format": "gif",
+  "animation_spec": "fe/battle",
   "license": "F2U, F2E",
   "credits": [
     {
+      "type": "Pirate",
       "authors": [
-        "Wan/Eliwan"
-      ],
-      "notes": "Repalette by Wan/Eliwan."
+        "IS"
+      ]
     },
     {
+      "type": "Shirtless",
       "authors": [
         "Teelvade"
-      ],
-      "notes": "Shirtless edit by Teelvade"
+      ]
     },
     {
+      "type": "Fixes",
       "authors": [
         "JaidynReiman"
-      ],
-      "notes": "Axe (Fixed), Handaxe and Unarmed Shirtless edits by JaidynReiman."
+      ]
+    },
+    {
+      "type": "Shirtless Handaxe",
+      "authors": [
+        "JaidynReiman"
+      ]
     }
   ],
   "animated": true,
-  "class": "Pirate",
-  "body_types": [],
+  "class": "Pirate Reskin",
+  "body_types": [
+    "male"
+  ],
   "weapon_types": [
-    "unarmed"
+    "axe",
+    "handaxe"
+  ],
+  "weapon_variants": [
+    {
+      "id": "axe_fixed",
+      "weapon": "axe",
+      "label": "Axe",
+      "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/axe_fixed/Axe.gif"
+    },
+    {
+      "id": "handaxe",
+      "weapon": "handaxe",
+      "label": "Handaxe",
+      "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/handaxe/Handaxe.gif"
+    }
   ],
   "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/axe_fixed/Axe.gif",
-  "animation_spec": "fe/battle"
+  "download": ""
 }

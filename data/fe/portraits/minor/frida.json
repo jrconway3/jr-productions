@@ -3,26 +3,36 @@
   "type": "fe",
   "path": "portraits/minor",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "but you are free to use the portrait for any reason",
+        "Character &copy"
+      ]
+    }
+  ],
+  "description": "In my writing of an early chapter I had Svetlanya speak to a cleric who I ended up making into Kasuto. During that conversation a generic cleric ran up to her. I decided to create a concept design for what geeric Lykon clerics look like, and it wound up being Frida.",
   "variants": [
-    "OC Frida (No Veil)",
+    "OC Frida No Veil",
     "OC Frida"
   ],
-  "preview": "assets/fe/Portraits/Minor/Frida/{JaidynReiman} OC Frida (No Veil).png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/minor/Frida/{JaidynReiman} OC Frida No Veil.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 24,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 24,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 24,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

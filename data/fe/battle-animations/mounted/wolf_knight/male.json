@@ -1,0 +1,78 @@
+{
+  "name": "Wolf Knight",
+  "type": "fe",
+  "path": "battle-animations/mounted/wolf_knight",
+  "format": "gif",
+  "animation_spec": "fe/battle",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "type": "Mouthe Dauge",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Wolf Knight",
+      "authors": [
+        "VelvetKitsune"
+      ]
+    },
+    {
+      "type": "Weapons",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Weapons",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Long Hair",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Lykon",
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Wolf Knight",
+  "body_types": [
+    "male"
+  ],
+  "weapon_types": [
+    "axe",
+    "bow",
+    "lance"
+  ],
+  "weapon_variants": [
+    {
+      "id": "axe_alt",
+      "weapon": "axe",
+      "label": "Axe Alt",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/male/axe_alt/Axe.gif"
+    },
+    {
+      "id": "bow",
+      "weapon": "bow",
+      "label": "Bow",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/male/bow/Bow.gif"
+    },
+    {
+      "id": "lance_alt",
+      "weapon": "lance",
+      "label": "Lance Alt",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/male/lance_alt/Lance.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/mounted/wolf_knight/male/axe_alt/Axe.gif",
+  "download": ""
+}

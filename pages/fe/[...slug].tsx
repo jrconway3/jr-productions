@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
 import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
 import { resolveAssetsSpecs } from 'app/AnimationService';
+import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import { FeCard } from 'components/gallery/AssetCard';
 import PageCredits from 'components/gallery/PageCredits';
@@ -22,23 +23,10 @@ interface FeSlugProps {
   pageCredits: ResolvedPageCredit[];
 }
 
-const FEATURED_ASSET_COUNT = 48;
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
 
 function sortNewFirst(assets: Asset[]): Asset[] {
   return [...assets].sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
-}
-
-function pickRandomAssets(pool: Asset[], count: number): Asset[] {
-  if (pool.length <= count) return [...pool];
-  const shuffled = [...pool];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i];
-    shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
-  }
-  return shuffled.slice(0, count);
 }
 
 function getCategoryCacheKey(path: string): string {
@@ -80,12 +68,13 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
 
 export default function FeSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: FeSlugProps) {
   const scopedAssets = treeAssets ?? assets ?? [];
+  const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'FE', href: '/fe' }, { label: category.label, href: `/fe/${slugsToPath(slugs)}` }];
   const sectionCategory = section ?? {
     ...category,
     children: [],
   };
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, FEATURED_ASSET_COUNT)));
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, featuredAssetCount)));
 
   const treeAssetsById = useMemo(() => {
     return new Map(scopedAssets.map((asset) => [asset.id, asset]));
@@ -112,10 +101,10 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
       }
     }
 
-    const picked = pickRandomAssets(scopedAssets, FEATURED_ASSET_COUNT);
+    const picked = pickRandomAssetsPreferUnrestricted(scopedAssets, featuredAssetCount);
     updateDisplayAssets(picked);
     setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
-  }, [category.path, scopedAssets, treeAssetsById]);
+  }, [category.path, scopedAssets, treeAssetsById, featuredAssetCount]);
 
   return (
     <>

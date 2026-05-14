@@ -3,28 +3,38 @@
   "type": "fe",
   "path": "portraits/main",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "but you are free to use the portrait for any reason",
+        "Character &copy"
+      ]
+    }
+  ],
+  "description": "Svetlanya is one of my newer characters and she's gotten a lot of development quickly. She's a \"water dragon\" or \"water elf\". She is intended to have somewhat of a mermaid like appearance but she still has two legs, not that its visible in this portrait.\n\nThe tan variants are just for more natural skintones, but I was aiming for a slightly more unnatural pink tone for her design. That said, I may tweak her design and lean even more into it.",
   "variants": [
     "[F2E] OC Svetlanya Tan Veiled",
     "[F2E] OC Svetlanya Tan",
     "[F2E] OC Svetlanya Veiled",
     "[F2E] OC Svetlanya"
   ],
-  "preview": "assets/fe/Portraits/Main/Svetlanya/{JaidynReiman} [F2E] OC Svetlanya Tan Veiled.png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/main/Svetlanya/{JaidynReiman} [F2E] OC Svetlanya Tan Veiled.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 32,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

@@ -1,0 +1,55 @@
+{
+  "name": "Wolf Knight Lykon",
+  "type": "fe",
+  "path": "battle-animations/mounted/wolf_knight",
+  "format": "gif",
+  "animation_spec": "fe/battle",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "type": "Mouthe Dauge",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Wolf Knight",
+      "authors": [
+        "VelvetKitsune"
+      ]
+    },
+    {
+      "type": "Weapons",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Weapons",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Long Hair",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Lykon",
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Wolf Knight",
+  "body_types": [
+    "male"
+  ],
+  "weapon_types": [],
+  "weapon_variants": [],
+  "preview": "assets/fe/battle_animations/mounted/wolf_knight/lykon_male/lykon/bow/Bow.gif",
+  "download": ""
+}

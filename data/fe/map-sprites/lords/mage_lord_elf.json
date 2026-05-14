@@ -3,6 +3,7 @@
   "type": "fe",
   "path": "map-sprites/lords",
   "format": "spritesheet",
+  "animation_spec": "fe/map_sprite",
   "license": "F2U, F2E",
   "body_types": [
     "female",
@@ -10,19 +11,39 @@
   ],
   "credits": [
     {
+      "type": "Original: Eliwood",
       "authors": [
-        "TyTheBub",
+        "IS"
+      ],
+      "notes": "Original: Eliwood"
+    },
+    {
+      "type": "Edit: Mage Lord",
+      "authors": [
+        "TyTheBub"
+      ],
+      "notes": "Edit: Mage Lord"
+    },
+    {
+      "type": "Edit: Elf",
+      "authors": [
         "JaidynReiman"
-      ]
+      ],
+      "notes": "Edit: Elf"
     }
   ],
   "animations": [
     "stand",
-    "walk"
+    "move"
   ],
+  "animation_sources": {
+    "stand": "assets/fe/map_sprites/lords/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
+    "move": "assets/fe/map_sprites/lords/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-walk.png"
+  },
   "variants": [
     "Unarmed"
   ],
   "preview": "assets/fe/map_sprites/lords/Mage Lord (F) Elf {TyTheBub, JaidynReiman}-stand.png",
-  "animation_spec": "fe/map_sprite"
+  "download": "",
+  "description": "This is a super minor edit of TyTheBub's \"Mage Lord\" to add elf-style ears. Originally I planned to do a more advanced edit later, but now I just plan to make customs instead."
 }
