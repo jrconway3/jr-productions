@@ -16,7 +16,7 @@ export default function CollectionDetail({ collection, assets }: CollectionDetai
   return (
     <>
       <Head>
-        <title>{collection.label} — Collections — JaidynReiman Productions</title>
+        <title>{collection.label} - Collections - JaidynReiman Productions</title>
       </Head>
 
       <main className="page-wide py-12">

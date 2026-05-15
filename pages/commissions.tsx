@@ -4,7 +4,7 @@ export default function Commissions() {
   return (
     <>
       <Head>
-        <title>Commission Rates — JaidynReiman Productions</title>
+        <title>Commission Rates - JaidynReiman Productions</title>
       </Head>
 
       <main className="page-wide py-12">

@@ -109,7 +109,7 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
   return (
     <>
       <Head>
-        <title>JaidynReiman Productions — Sprite &amp; Game Asset Portfolio</title>
+        <title>JaidynReiman Productions - Sprite &amp; Game Asset Portfolio</title>
         <meta name="description" content="Pixel art sprites, tilesets, and game assets by JaidynReiman." />
       </Head>
 
