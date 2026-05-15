@@ -1,0 +1,175 @@
+[
+  {
+    "id": "lt_autotiles",
+    "name": "Autotiles for Lex Talionis",
+    "category": "fe",
+    "description": "I will convert existing map animations into an autotiles sheet for Lex Talionis.",
+    "price_min": 120,
+    "price_max": 160,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "cynons_metropolis_metropolis_water_tiles_cynon"
+      }
+    ]
+  },
+  {
+    "id": "fe_portrait_spliced",
+    "name": "Portrait (Spliced)",
+    "category": "fe",
+    "description": "Portrait created by splicing from existing parts.",
+    "price_min": 20,
+    "price_max": 30,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "kasuto"
+      }
+    ]
+  },
+  {
+    "id": "fe_portrait_custom",
+    "name": "Portrait (Custom)",
+    "category": "fe",
+    "description": "Fully custom original portrait.",
+    "price_min": 50,
+    "price_max": 60,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "svetlanya"
+      }
+    ]
+  },
+  {
+    "id": "fe_battle_repalette",
+    "name": "Battle Animation Repalette",
+    "category": "fe",
+    "description": "Adjust the palette frame-by-frame to add more or less colors to certain palettes or emphasize different parts of the design. Priced per unique frame.",
+    "price_min": 5,
+    "price_max": 5,
+    "price_per": "frame",
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "t1_eirika_repal_magus",
+        "weapon": "magic"
+      }
+    ]
+  },
+  {
+    "id": "fe_battle_reskin",
+    "name": "Battle Animation Reskin",
+    "category": "fe",
+    "description": "Take an existing animation and significantly alter the design of the character while keeping the same pose and animation.",
+    "price_min": 5,
+    "price_max": 10,
+    "price_per": "frame",
+    "price_base": 20,
+    "price_note": "$20 for base frame, then $5–$10 per additional unique frame depending on complexity.",
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "t1_amaya_strandless"
+      }
+    ]
+  },
+  {
+    "id": "fe_battle_weapon",
+    "name": "Battle Animation (Weapon)",
+    "category": "fe",
+    "description": "Add a custom weapon to an existing battle animation.",
+    "price_min": 5,
+    "price_max": 10,
+    "price_per": "frame",
+    "price_base": 10,
+    "price_note": "$10 for base frame, then $5–$10 per additional unique frame depending on complexity.",
+    "addon": false,
+    "inquire": true,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "wolf_knight_male",
+        "weapon": "bow"
+      }
+    ]
+  },
+  {
+    "id": "fe_battle_custom_still",
+    "name": "Battle Animation Custom Still",
+    "category": "fe",
+    "description": "Single custom still frame for a battle animation.",
+    "price_min": 30,
+    "price_max": 40,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": []
+  },
+  {
+    "id": "fe_battle_custom_full",
+    "name": "Battle Animation (Custom Full)",
+    "category": "fe",
+    "description": "Fully custom battle animation. Price varies significantly — contact for a quote.",
+    "price_min": null,
+    "price_max": null,
+    "addon": false,
+    "inquire": true,
+    "kofi_url": null,
+    "examples": []
+  },
+  {
+    "id": "fe_battle_custom_other",
+    "name": "Battle Animation (Custom Other)",
+    "category": "fe",
+    "description": "Fully custom battle animation that doesn't match the other categories. Contact for an analysis, but I cannot guarantee I can complete what you're asking.",
+    "price_min": null,
+    "price_max": null,
+    "addon": false,
+    "inquire": true,
+    "kofi_url": null,
+    "examples": []
+  },
+  {
+    "id": "fe_map_sprite_spliced",
+    "name": "Map Sprite (Spliced)",
+    "category": "fe",
+    "description": "Spliced or edited map sprite including stand pose and 4-directional walk cycle.",
+    "price_min": 30,
+    "price_max": 40,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "wolf_knight"
+      }
+    ]
+  },
+  {
+    "id": "fe_map_sprite_custom",
+    "name": "Map Sprite (Custom)",
+    "category": "fe",
+    "description": "Custom map sprite including stand pose and 4-directional walk cycle.",
+    "price_min": 45,
+    "price_max": 60,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "mage_lord_svetlanya"
+      }
+    ]
+  }
+]

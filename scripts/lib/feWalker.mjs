@@ -513,6 +513,7 @@ export function scanBattleAnimations(sourceRoot, publicRoot) {
   const metas = [];
   const readmeByKey = parseBattleAnimationReadmeMetadata(publicRoot);
   const typeDirs = listNonUnderscoreDirs(sourceRoot);
+  const BASE_VARIANT_NAMES = ['base', 'standard', 'default'];
 
   typeDirs.forEach((typeDirName, typeIndex) => {
     const typeDir = path.join(sourceRoot, typeDirName);
@@ -569,7 +570,7 @@ export function scanBattleAnimations(sourceRoot, publicRoot) {
           }
         }
         assetName = assetName.replace(/\s{2,}/g, ' ').trim();
-        const isBodyTypeOnlyDir = /^(male|female|universal|monster)$/i.test(variantDirName);
+        const isBodyTypeOnlyDir = /^(male|female|universal|animal|monster)$/i.test(variantDirName);
         if (!assetName) {
           if (variant?.label) assetName = variant.label;
           else assetName = isBodyTypeOnlyDir ? '' : titleCaseFromSlug(variantDirName);
@@ -607,10 +608,11 @@ export function scanBattleAnimations(sourceRoot, publicRoot) {
 
         const cardName = composeBattleBaseName(assetName, classDirName);
         const fallbackPreview = weaponVariants[0]?.preview ?? (previewFile ? relativePublicAssetPath(previewFile, publicRoot) : '');
+        const slug = slugifyUnderscore(classDirName + ' ' + variantDirName);
 
         assets.push({
           relativeDir: path.join('battle-animations', typeDirName, classDirName),
-          fileSlug: slugifyUnderscore(variantDirName),
+          fileSlug: slugifyUnderscore(`${classDirName} ${variantDirName}`),
           data: {
             name: cardName,
             type: 'fe',

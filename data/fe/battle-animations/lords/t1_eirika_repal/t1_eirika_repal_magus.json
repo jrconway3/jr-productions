@@ -36,8 +36,24 @@
   "body_types": [
     "female"
   ],
-  "weapon_types": [],
-  "weapon_variants": [],
-  "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magic_magus/Magic.gif",
+  "weapon_types": [
+    "magic",
+    "staff"
+  ],
+  "weapon_variants": [
+    {
+      "id": "magic",
+      "weapon": "magic",
+      "label": "Magic",
+      "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magus/magic/Magic.gif"
+    },
+    {
+      "id": "staff",
+      "weapon": "staff",
+      "label": "Staff",
+      "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magus/staff/Staff.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magus/magic/Magic.gif",
   "download": ""
 }

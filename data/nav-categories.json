@@ -1,0 +1,80 @@
+{
+  "categories": {
+    "lpc": [
+      {
+        "href": "/lpc/arms",
+        "label": "Arms"
+      },
+      {
+        "href": "/lpc/body",
+        "label": "Body"
+      },
+      {
+        "href": "/lpc/dress",
+        "label": "Dress"
+      },
+      {
+        "href": "/lpc/feet",
+        "label": "Feet"
+      },
+      {
+        "href": "/lpc/hair",
+        "label": "Hair"
+      },
+      {
+        "href": "/lpc/head",
+        "label": "Head"
+      },
+      {
+        "href": "/lpc/legs",
+        "label": "Legs"
+      },
+      {
+        "href": "/lpc/shoulders",
+        "label": "Shoulders"
+      },
+      {
+        "href": "/lpc/torso",
+        "label": "Torso"
+      },
+      {
+        "href": "/lpc/eyes",
+        "label": "Eyes"
+      },
+      {
+        "href": "/lpc/facial",
+        "label": "Facial"
+      },
+      {
+        "href": "/lpc/hat",
+        "label": "Hat"
+      },
+      {
+        "href": "/lpc/neck",
+        "label": "Neck"
+      }
+    ],
+    "fe": [
+      {
+        "href": "/fe/portraits",
+        "label": "Portraits"
+      },
+      {
+        "href": "/fe/battle-animations",
+        "label": "Battle Animations"
+      },
+      {
+        "href": "/fe/map-sprites",
+        "label": "Map Sprites"
+      },
+      {
+        "href": "/fe/autotiles",
+        "label": "Autotiles"
+      },
+      {
+        "href": "/fe/maps",
+        "label": "Maps"
+      }
+    ]
+  }
+}

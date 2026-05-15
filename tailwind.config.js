@@ -19,6 +19,12 @@ const config = {
           text: "#86efac",
           muted: "#4a7a60",
         },
+        open: {
+          line: "#c9d74d",
+          text: "#f7fbc6",
+          bg: "#273a15",
+          glow: "#d9e266",
+        },
         lpc: {
           accent: "#4ade80",
           accentLight: "#86efac",

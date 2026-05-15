@@ -186,6 +186,7 @@ export function LpcGroupCard({ asset, animNames, specs, bodyType, backgroundLaye
 interface FeCardProps {
   asset: Asset;
   feSpec?: ResolvedFeSpec;
+  weapon?: string;
 }
 
 function formatBattleWeaponLabel(value: string): string {
@@ -259,7 +260,7 @@ function FeCardSingle({ asset, feSpec }: FeCardProps) {
   );
 }
 
-export function FeCard({ asset, feSpec }: FeCardProps) {
+export function FeCard({ asset, feSpec, weapon }: FeCardProps) {
   const isBattle = feSpec?.format === 'gif' || asset.animation_spec === 'fe/battle';
   const battleVariants = (asset.weapon_variants ?? []).filter((variant) => Boolean(variant.preview));
 
@@ -267,6 +268,7 @@ export function FeCard({ asset, feSpec }: FeCardProps) {
     return (
       <>
         {battleVariants.map((variant) => {
+          if (weapon && variant.weapon !== weapon) return null;
           const weaponLabel = variant.label || formatBattleWeaponLabel(variant.id || variant.weapon);
           const cardName = `${asset.name} ${weaponLabel}`.replace(/\s{2,}/g, ' ').trim();
           const cardAsset: Asset = {
@@ -283,7 +285,7 @@ export function FeCard({ asset, feSpec }: FeCardProps) {
     );
   }
 
-  return <FeCardSingle asset={asset} feSpec={feSpec} />;
+  return <FeCardSingle asset={asset} feSpec={feSpec} weapon={weapon} />;
 }
 
 // --- Legacy default export for non-animation fallback ---

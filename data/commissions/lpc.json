@@ -1,0 +1,407 @@
+[
+  {
+    "id": "lpc_head_static",
+    "name": "Static Head Asset",
+    "category": "lpc",
+    "description": "Four directional frames plus mapping to all animation frames.",
+    "price_min": 25,
+    "price_max": 30,
+    "price_note": "Final price depends on complexity.",
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "head_ears_dragon",
+        "animation": "shoot",
+        "body_type": "teen"
+      }
+    ]
+  },
+  {
+    "id": "lpc_torso_only",
+    "name": "Torso Only",
+    "category": "lpc",
+    "description": "Upper body asset with no arms. Includes Walk and Idle.",
+    "price_min": 30,
+    "price_max": 30,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_armour_plate",
+        "animation": "walk",
+        "body_type": "teen"
+      }
+    ]
+  },
+  {
+    "id": "lpc_torso_arms",
+    "name": "Torso + Arms",
+    "category": "lpc",
+    "description": "Full upper body asset including arms. Includes Walk and Idle.",
+    "price_min": 40,
+    "price_max": 40,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_clothes_longsleeve2_buttoned",
+        "animation": "walk"
+      }
+    ]
+  },
+  {
+    "id": "lpc_full_hanging",
+    "name": "Full Body Hanging",
+    "category": "lpc",
+    "description": "Full body asset for simplistic \"hanging\" torso assets like robes, chainmail, and dresses. Includes Walk and Idle.",
+    "price_min": 45,
+    "price_max": 45,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "dress_kimono",
+        "animation": "walk",
+        "body_type": "female"
+      }
+    ]
+  },
+  {
+    "id": "lpc_legs_only",
+    "name": "Legs Only",
+    "category": "lpc",
+    "description": "Lower body asset. Includes Walk, Idle, Emote, and Spellcast leg frames.",
+    "price_min": 50,
+    "price_max": 50,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "legs_armour",
+        "animation": "walk"
+      }
+    ]
+  },
+  {
+    "id": "lpc_full_body",
+    "name": "Full Body",
+    "category": "lpc",
+    "description": "Full body asset including torso, arms, and legs. Includes Walk and Idle.",
+    "price_min": 80,
+    "price_max": 80,
+    "addon": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_armour_legion",
+        "animation": "walk",
+        "body_type": "male"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_sit_torso",
+    "name": "Sit (Torso)",
+    "category": "lpc",
+    "description": "Sit animation for torso assets. Simple and quick.",
+    "applies_to": [
+      "lpc_torso_only",
+      "lpc_torso_arms"
+    ],
+    "price_min": 20,
+    "price_max": 20,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_clothes_sleeveless2",
+        "animation": "sit"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_emote",
+    "name": "Emote",
+    "category": "lpc",
+    "description": "Emote animation. Torso + Arms assets only.",
+    "applies_to": [
+      "lpc_torso_arms",
+      "lpc_full_body"
+    ],
+    "price_min": 25,
+    "price_max": 25,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_clothes_shortsleeve_polo",
+        "animation": "emote"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_sit_legs",
+    "name": "Sit (Legs)",
+    "category": "lpc",
+    "description": "Sit animation for leg assets. More complex than torso sit.",
+    "applies_to": [
+      "lpc_legs_only",
+      "lpc_full_body"
+    ],
+    "price_min": 30,
+    "price_max": 30,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "legs_pants2",
+        "animation": "sit"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_hurt",
+    "name": "Hurt and/or Climb",
+    "category": "lpc",
+    "description": "Adds asset to both Hurt & Climb animations. Applies to any base asset. $10 for one.",
+    "applies_to": [],
+    "price_min": 10,
+    "price_max": 20,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_clothes_longsleeve2",
+        "animation": "hurt"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_jump",
+    "name": "Jump",
+    "category": "lpc",
+    "description": "Jump animation. Applies to any base asset.",
+    "applies_to": [],
+    "price_min": 20,
+    "price_max": 20,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "feet_boots_basic",
+        "animation": "jump"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_spellcast",
+    "name": "Spellcast",
+    "category": "lpc",
+    "description": "Spellcast animation. Torso + Arms assets only. Leg frames are included in Walk/Idle.",
+    "applies_to": [
+      "lpc_torso_arms",
+      "lpc_full_body"
+    ],
+    "price_min": 30,
+    "price_max": 40,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_armour_plate",
+        "animation": "spellcast"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_thrust",
+    "name": "Thrust",
+    "category": "lpc",
+    "description": "Thrust animation. Applies to any base asset.",
+    "applies_to": [],
+    "price_min": 30,
+    "price_max": 30,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "arms_armour",
+        "animation": "thrust"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_shoot_no_arms",
+    "name": "Shoot (No Arms)",
+    "category": "lpc",
+    "description": "Shoot animation for assets without arms (torso or leg assets).",
+    "applies_to": [
+      "lpc_torso_only",
+      "lpc_legs_only"
+    ],
+    "price_min": 30,
+    "price_max": 30,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "legs_leggings",
+        "animation": "shoot",
+        "body_type": "male"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_shoot_arms",
+    "name": "Shoot (With Arms)",
+    "category": "lpc",
+    "description": "Shoot animation for assets with arms. Significantly more work due to arm frame count.",
+    "applies_to": [
+      "lpc_torso_arms",
+      "lpc_full_body"
+    ],
+    "price_min": 50,
+    "price_max": 50,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "arms_gloves",
+        "animation": "shoot"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_run",
+    "name": "Run",
+    "category": "lpc",
+    "description": "Run animation. High effort — essentially equivalent to creating Walk from scratch.",
+    "applies_to": [],
+    "price_min": 60,
+    "price_max": 60,
+    "addon": true,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "torso_clothes_longsleeve2_polo",
+        "animation": "run"
+      }
+    ]
+  },
+  {
+    "id": "lpc_anim_revised_combat",
+    "name": "Revised Combat",
+    "category": "lpc",
+    "description": "Bundle covering Backslash (13 frames), Halfslash (3 additional frames), and Combat Idle (derived). High effort — treated as starting from scratch regardless of existing assets.",
+    "applies_to": [],
+    "price_min": 80,
+    "price_max": 80,
+    "addon": true,
+    "bundle": true,
+    "bundle_items": [
+      "backslash",
+      "halfslash",
+      "combat_idle"
+    ],
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "shoulders_pauldrons",
+        "animation": "combat"
+      }
+    ]
+  },
+  {
+    "id": "flowy_walk",
+    "name": "Flowy Walk",
+    "description": "Natural flowing animation for hanging assets (capes, long hair, tails, etc.). Applied per animation type.",
+    "applies_to": ["walk"],
+    "price_min": 20,
+    "price_max": 20,
+    "addon": true,
+    "bundle": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "hair_relm_short",
+        "animation": "walk"
+      }
+    ]
+  },
+  {
+    "id": "flowy_run",
+    "name": "Flowy Run",
+    "description": "Natural flowing animation for hanging assets during run cycle.",
+    "applies_to": ["run"],
+    "price_min": 40,
+    "price_max": 40,
+    "addon": true,
+    "bundle": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "hair_xlong",
+        "animation": "run",
+        "body_type": "female"
+      }
+    ]
+  },
+  {
+    "id": "flowy_jump",
+    "name": "Flowy Jump",
+    "description": "Natural flowing animation for hanging assets during jump.",
+    "applies_to": ["jump"],
+    "price_min": 20,
+    "price_max": 20,
+    "addon": true,
+    "bundle": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "hair_relm_short",
+        "animation": "jump"
+      }
+    ]
+  },
+  {
+    "id": "flowy_extra_long",
+    "name": "Flowy Extra Long",
+    "description": "Additional charge for very long assets requiring larger and more complex dynamic animations. Applies to very long hair, long tails, floor-length capes, and similar. Charged per animation.",
+    "applies_to": ["walk", "run", "jump"],
+    "price_min": 10,
+    "price_max": 15,
+    "price_note": "Per animation. Only applies when dynamic animation is also selected.",
+    "addon": true,
+    "bundle": false,
+    "inquire": false,
+    "kofi_url": null,
+    "examples": [
+      {
+        "asset_id": "hair_relm_ponytail",
+        "animation": "run",
+        "body_type": "female"
+      }
+    ]
+  }
+]

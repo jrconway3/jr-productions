@@ -1,0 +1,52 @@
+{
+  "menus": [
+    {
+      "id": "lpc",
+      "label": "LPC",
+      "href": "/lpc",
+      "accent": "lpc",
+      "source": {
+        "type": "category",
+        "key": "lpc"
+      }
+    },
+    {
+      "id": "fe",
+      "label": "FE",
+      "href": "/fe",
+      "accent": "fe",
+      "source": {
+        "type": "category",
+        "key": "fe"
+      }
+    },
+    {
+      "id": "commissions",
+      "label": "Commissions",
+      "href": "/commissions",
+      "accent": "commissions",
+      "status_label": {
+        "open": "OPEN!",
+        "closed": "Closed",
+        "waitlist": "Waitlist"
+      },
+      "links": [
+        { "href": "/commissions", "label": "Commissions" },
+        { "href": "https://ko-fi.com/jaidynreiman", "label": "Ko-Fi", "external": true }
+      ]
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "href": "https://jrplays.net/about-me",
+      "accent": "about",
+      "external": true,
+      "links": [
+        { "href": "https://jrplays.net/about-me", "label": "About Me", "external": true },
+        { "href": "https://jrplays.net", "label": "My Blog", "external": true },
+        { "href": "https://www.youtube.com/jaidynreiman", "label": "YouTube", "external": true },
+        { "href": "https://www.twitch.tv/jaidynreiman", "label": "Twitch", "external": true }
+      ]
+    }
+  ]
+}
