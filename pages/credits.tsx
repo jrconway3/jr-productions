@@ -25,7 +25,7 @@ export default function Credits({ groups }: CreditsProps) {
   return (
     <>
       <Head>
-        <title>Credits — JaidynReiman Productions</title>
+        <title>Credits - JaidynReiman Productions</title>
       </Head>
 
       <main className="page-wide py-12">
