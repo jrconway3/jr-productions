@@ -1,5 +1,5 @@
 {
-  "name": "Wolf Knight Lykon",
+  "name": "Wolf Knight Lykon (F)",
   "type": "fe",
   "path": "battle-animations/mounted/wolf_knight",
   "format": "gif",
@@ -16,12 +16,6 @@
       "type": "Wolf Knight",
       "authors": [
         "VelvetKitsune"
-      ]
-    },
-    {
-      "type": "Weapons",
-      "authors": [
-        "JaidynReiman"
       ]
     },
     {
