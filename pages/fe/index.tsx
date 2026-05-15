@@ -60,7 +60,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
 }
 
 export default function FeIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {} }: FeIndexProps) {
-  const allAssets = treeAssets ?? [];
+  const allAssets = useMemo(() => treeAssets ?? [], [treeAssets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, featuredAssetCount));
 

@@ -70,7 +70,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
 }
 
 export default function LpcSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: LpcSlugProps) {
-  const scopedAssets = treeAssets ?? assets ?? [];
+  const scopedAssets = useMemo(() => treeAssets ?? assets ?? [], [treeAssets, assets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'lpc'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'LPC', href: '/lpc' }, { label: category.label, href: `/lpc/${slugsToPath(slugs)}` }];
   const sectionCategory = section ?? { ...category, children: [] };

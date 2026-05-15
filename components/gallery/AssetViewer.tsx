@@ -93,7 +93,6 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
 
   useEffect(() => {
     stopRef.current?.();
-    setHasRenderableLayers(true);
 
     let cancelled = false;
 
@@ -155,8 +154,8 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
 
     const layerUrls = allLayers.sort((a, b) => a.zPos - b.zPos);
     if (layerUrls.length === 0) {
-      setHasRenderableLayers(false);
-      return;
+      Promise.resolve().then(() => { if (!cancelled) setHasRenderableLayers(false); });
+      return () => { cancelled = true; };
     }
 
     const loop = createLpcMultiDirectionLoop(canvases, layerUrls, animSpec);
