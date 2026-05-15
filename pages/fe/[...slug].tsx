@@ -67,7 +67,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
 }
 
 export default function FeSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: FeSlugProps) {
-  const scopedAssets = treeAssets ?? assets ?? [];
+  const scopedAssets = useMemo(() => treeAssets ?? assets ?? [], [treeAssets, assets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'FE', href: '/fe' }, { label: category.label, href: `/fe/${slugsToPath(slugs)}` }];
   const sectionCategory = section ?? {

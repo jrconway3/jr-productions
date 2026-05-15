@@ -60,7 +60,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
 }
 
 export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {} }: LpcIndexProps) {
-  const allAssets = treeAssets ?? [];
+  const allAssets = useMemo(() => treeAssets ?? [], [treeAssets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'lpc'), [category.path]);
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, featuredAssetCount));
 
