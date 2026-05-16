@@ -266,8 +266,27 @@ export function resolveAssetSpecs(asset: Asset): ResolvedLpcSpec | ResolvedFeSpe
   }
 
   if (spec === 'fe/map_sprite') {
-    const base = loadFeSpec('map_sprite');
-    return base as ResolvedFeSpec | null;
+    const standSpecName = asset.map_sprite_stand_spec ?? 'stand';
+    const stand = loadFeSpec(standSpecName) ?? loadFeSpec('stand');
+    const walk = loadFeSpec('walk');
+    const baseCutouts: Record<string, AnimationCutout> = {
+      ...((stand?.cutouts ?? {}) as Record<string, AnimationCutout>),
+      ...((walk?.cutouts ?? {}) as Record<string, AnimationCutout>),
+    };
+    const assetCutoutOverrides = asset.cutouts as
+      | Record<string, Partial<AnimationCutout>>
+      | undefined;
+    const mergedCutouts: Record<string, AnimationCutout> = {};
+    for (const [key, cutout] of Object.entries(baseCutouts)) {
+      const override = assetCutoutOverrides?.[key];
+      mergedCutouts[key] = override ? mergeCutout(cutout, override) : cutout;
+    }
+    return {
+      id: 'fe_map_sprite',
+      frame_width: stand?.frame_width ?? 16,
+      frame_height: stand?.frame_height ?? 16,
+      cutouts: mergedCutouts,
+    } as ResolvedFeSpec;
   }
 
   if (spec === 'fe/battle') {

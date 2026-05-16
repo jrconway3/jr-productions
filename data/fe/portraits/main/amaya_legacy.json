@@ -3,27 +3,35 @@
   "type": "fe",
   "path": "portraits/main",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
-  "variants": [
-    "OC Amaya (Elf) WIP V1",
-    "OC Amaya (Human) WIP V1",
-    "OC Amaya WIP V1"
-  ],
-  "preview": "assets/fe/Portraits/Main/Amaya/legacy/{JaidynReiman} OC Amaya (Elf) WIP V1.png",
   "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "My repeated failures to make this version look good is what got me to start remaking them all in the same style as Shayala's \"bust-style\" to begin with. Still, I have a few old variants you're free to try out if you like.\n\nLike with Svetlanya's legacy version, too, these are traced from an AI portrait design. The final sprite design has no elements brought in from the AI portrait, its completely redrawn from scratch with the trace, so do what you will with that.",
+  "variants": [
+    "OC Amaya V1 Elf",
+    "OC Amaya V1 Human",
+    "OC Amaya V1"
+  ],
+  "preview": "assets/fe/Portraits/main/Amaya/legacy/{JaidynReiman} OC Amaya V1 Elf.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 24,
+      "offset_y": 24
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 24,
+      "offset_y": 40
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 24,
+      "offset_y": 40
     }
-  }
+  },
+  "download": ""
 }

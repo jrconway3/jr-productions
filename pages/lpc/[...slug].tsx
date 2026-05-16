@@ -5,6 +5,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
 import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
 import { resolveAssetsSpecs } from 'app/AnimationService';
+import { toPublicAssetUrl } from 'app/assetUrl';
+import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
 import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard, { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
@@ -24,23 +26,10 @@ interface LpcSlugProps {
 }
 
 const MAX_CARDS = 180;
-const FEATURED_ASSET_COUNT = 200;
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
 
 function sortNewFirst(assets: Asset[]): Asset[] {
   return [...assets].sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
-}
-
-function pickRandomAssets(pool: Asset[], count: number): Asset[] {
-  if (pool.length <= count) return [...pool];
-  const shuffled = [...pool];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i];
-    shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
-  }
-  return shuffled.slice(0, count);
 }
 
 function getCategoryCacheKey(path: string): string {
@@ -81,10 +70,11 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
 }
 
 export default function LpcSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: LpcSlugProps) {
-  const scopedAssets = treeAssets ?? assets ?? [];
+  const scopedAssets = useMemo(() => treeAssets ?? assets ?? [], [treeAssets, assets]);
+  const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'lpc'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'LPC', href: '/lpc' }, { label: category.label, href: `/lpc/${slugsToPath(slugs)}` }];
   const sectionCategory = section ?? { ...category, children: [] };
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, FEATURED_ASSET_COUNT)));
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, featuredAssetCount)));
 
   const treeAssetsById = useMemo(() => {
     return new Map(scopedAssets.map((asset) => [asset.id, asset]));
@@ -94,6 +84,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
     const result: React.ReactNode[] = [];
     for (const asset of displayAssets) {
       if (result.length >= MAX_CARDS) break;
+      const assetStartCount = result.length;
       const lpcSpec = resolvedSpecs?.[asset.id] as ResolvedLpcSpec | undefined;
       const derivedBodyTypes = collectLpcBodyTypes(asset.layers);
       const bodyTypes: (string | undefined)[] = asset.body_types?.length
@@ -112,10 +103,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
         });
 
         if (standaloneAnims.length === 0) {
-          if (result.length < MAX_CARDS) {
-            result.push(<AssetCard key={asset.id} asset={asset} />);
-          }
-          break;
+          continue;
         }
 
         // Pass 1: find groups whose every member is present in standaloneAnims.
@@ -159,6 +147,10 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
           );
         }
       }
+
+      if (result.length === assetStartCount && result.length < MAX_CARDS && toPublicAssetUrl(asset.preview)) {
+        result.push(<AssetCard key={asset.id} asset={asset} />);
+      }
     }
     return result;
   }, [displayAssets, resolvedSpecs]);
@@ -184,15 +176,15 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
       }
     }
 
-    const picked = pickRandomAssets(scopedAssets, FEATURED_ASSET_COUNT);
+    const picked = pickRandomAssetsPreferUnrestricted(scopedAssets, featuredAssetCount);
     updateDisplayAssets(picked);
     setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
-  }, [category.path, scopedAssets, treeAssetsById]);
+  }, [category.path, scopedAssets, treeAssetsById, featuredAssetCount]);
 
   return (
     <>
       <Head>
-        <title>{category.label} — LPC — JaidynReiman Productions</title>
+        <title>{`${category.label} - LPC - JaidynReiman Productions`}</title>
       </Head>
 
       <main className="section-lpc page-wide py-12">

@@ -1,0 +1,35 @@
+{
+  "id": "fe_walk",
+  "frame_width": 32,
+  "frame_height": 32,
+  "cutouts": {
+    "cast": {
+      "x": 0, "y": 384, "width": 32, "height": 96,
+      "frames": 3, "fps": 4,
+      "frame_sequence": [1, 2, 3, 2],
+      "frame_direction": "vertical",
+      "flip": "horizontal"
+    },
+    "left": {
+      "x": 0, "y": 0, "width": 32, "height": 128,
+      "frames": 4, "fps": 4,
+      "frame_direction": "vertical"
+    },
+    "right": {
+      "x": 0, "y": 0, "width": 32, "height": 128,
+      "frames": 4, "fps": 4,
+      "frame_direction": "vertical",
+      "flip": "horizontal"
+    },
+    "up": {
+      "x": 0, "y": 128, "width": 32, "height": 128,
+      "frames": 4, "fps": 4,
+      "frame_direction": "vertical"
+    },
+    "down": {
+      "x": 0, "y": 256, "width": 32, "height": 128,
+      "frames": 4, "fps": 4,
+      "frame_direction": "vertical"
+    }
+  }
+}

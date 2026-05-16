@@ -1,0 +1,19 @@
+{
+  "name": "Autotiles for Final Stronghold",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "flasuban",
+        "N426",
+        "ZoramineFae"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/final_stronghold/castle_final_stronghold_water_autotiles.png",
+  "download": "",
+  "description": "Autumn Goza(Ru)dolf also helped restructure the map animations from separate files into a proper sheet. I started from there to finish the full animations for each tile."
+}

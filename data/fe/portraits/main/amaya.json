@@ -3,25 +3,33 @@
   "type": "fe",
   "path": "portraits/main",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "Amaya's earliest design was a female knight based on an RPG Maker XP custom sprite. She's come a long way since then I think.\n\nAmaya is of the Queiza race which are related to the \"water dragon\". She's specifically a Queizol, a variant that look more \"generic elf like\". I have special lore I can't really share about them just yet.",
   "variants": [
     "OC Amaya"
   ],
-  "preview": "assets/fe/Portraits/Main/Amaya/{JaidynReiman} OC Amaya.png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/main/Amaya/{JaidynReiman} OC Amaya.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 32,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

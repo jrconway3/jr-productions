@@ -1,9 +1,20 @@
 {
-  "name": "Ch5",
+  "name": "Chapter 5: The Dohma Brigade",
   "type": "fe",
   "path": "maps/chapters",
   "format": "spritesheet",
-  "license": "F2U, F2E",
-  "credits": [],
-  "preview": "assets/fe/maps/chapters/ch5.png"
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "type": "FE8 - Fields - Remaster - Super Fields",
+      "authors": [
+        "WAve",
+        "RandomWizard",
+        "Beast"
+      ]
+    }
+  ],
+  "description": "May change the palette later, but this is what I decided for now. This is the forest just outside of the Chapter 6 map. In my original plan this was going to be after that map instead of before.",
+  "preview": "assets/fe/maps/chapters/ch5.png",
+  "download": ""
 }

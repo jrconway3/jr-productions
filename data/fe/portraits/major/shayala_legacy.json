@@ -3,29 +3,37 @@
   "type": "fe",
   "path": "portraits/major",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
-  "variants": [
-    "OC Shayala (Bust)",
-    "OC Shayala (Elf, Bust)",
-    "OC Shayala (Human, Bust)",
-    "OC Shayala V2 (Bust)",
-    "OC Shayala V2 (Bust, Facing Viewer)"
-  ],
-  "preview": "assets/fe/Portraits/Major/shayala/legacy/{JaidynReiman} OC Shayala (Bust).png",
   "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "This one was a complete accident. I was using Klokgen to come up with designs and I came up with a really nice design that suited her well. When I traced the portrait, I tried to encompass her entire upper torso. Upon sharing it in the FE Graphics Repo this \"style\" was really well liked there, so I decided to use this \"Bust\" design for all my future character portraits.\n\nThis design is nowhere near her final design, I intend on redrawing it from scratch. I am using it temporarily until I redraw it from scratch.",
+  "variants": [
+    "OC Shayala V1 Elf",
+    "OC Shayala V1 Human",
+    "OC Shayala V1",
+    "OC Shayala V2 Forward",
+    "OC Shayala V2"
+  ],
+  "preview": "assets/fe/Portraits/major/shayala/legacy/{JaidynReiman} OC Shayala V1 Elf.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 24,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 24,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 24,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

@@ -2,11 +2,5 @@
   "label": "Liberated Pixel Cup Assets",
   "description": "",
   "priority": 2,
-  "accent": "saturated",
-  "page_credits": [
-    {
-      "label": "LPC Base Character Assets",
-      "asset_ids": ["body", "human_male", "human_female"]
-    }
-  ]
+  "accent": "saturated"
 }

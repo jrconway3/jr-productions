@@ -1,0 +1,17 @@
+{
+  "name": "Autotiles for Castle Improved",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "N426"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/castle_improved/castle_improved_autotiles.png",
+  "download": "",
+  "description": "After finishing up Final Stronghold, I decided to do Castle Improved as well. I figured I might as well since I was already using these tiles for my own maps."
+}

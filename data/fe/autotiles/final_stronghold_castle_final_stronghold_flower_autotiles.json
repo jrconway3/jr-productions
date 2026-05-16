@@ -1,0 +1,19 @@
+{
+  "name": "Autotiles for Final Stronghold Flowers",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "flasuban",
+        "N426",
+        "ZoramineFae"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/final_stronghold/castle_final_stronghold_flower_autotiles.png",
+  "download": "",
+  "description": "There were enough Flower variants I decided to put them all in one sheet."
+}

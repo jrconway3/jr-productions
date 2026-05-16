@@ -116,19 +116,31 @@ function writeGeneratedAssets(assets, overwrite) {
   return written;
 }
 
+function collectMissingCredits(assets) {
+  return assets
+    .filter((entry) => !Array.isArray(entry.data?.credits) || entry.data.credits.length === 0)
+    .map((entry) => `${normalizeSlashes(entry.relativeDir)}/${entry.fileSlug}`);
+}
+
 function generateCategory(config, overwrite) {
   const sourcePath = path.join(FE_SOURCE_ROOT, config.sourceRoot);
   if (!fs.existsSync(sourcePath)) {
-    return { category: config.dataRoot, assetCount: 0, metaCount: 0 };
+    return { category: config.dataRoot, assetCount: 0, metaCount: 0, missingCredits: [] };
+  }
+
+  const scanResult = config.scanner(sourcePath, PUBLIC_ROOT);
+
+  if (scanResult.assets.length === 0) {
+    return { category: config.dataRoot, assetCount: 0, metaCount: 0, missingCredits: [] };
   }
 
   writeCategoryMeta(config, overwrite);
 
-  const scanResult = config.scanner(sourcePath, PUBLIC_ROOT);
   const metaCount = writeGeneratedMetas(scanResult.metas, overwrite);
   const assetCount = writeGeneratedAssets(scanResult.assets, overwrite);
+  const missingCredits = collectMissingCredits(scanResult.assets);
 
-  return { category: config.dataRoot, assetCount, metaCount };
+  return { category: config.dataRoot, assetCount, metaCount, missingCredits };
 }
 
 function run() {
@@ -146,13 +158,27 @@ function run() {
 
   const totalAssets = results.reduce((sum, item) => sum + item.assetCount, 0);
   const totalMetas = results.reduce((sum, item) => sum + item.metaCount, 0);
+  const totalMissingCredits = results.reduce((sum, item) => sum + item.missingCredits.length, 0);
 
   console.log(`FE generation complete (${mode}).`);
   for (const result of results) {
     const label = titleCaseFromSlug(mapSourceRootToDataRoot(result.category));
     console.log(`- ${label}: ${result.assetCount} assets, ${result.metaCount} metas`);
+
+    if (result.missingCredits.length > 0) {
+      console.warn(`  ! Missing credits (${result.missingCredits.length})`);
+      for (const item of result.missingCredits.slice(0, 8)) {
+        console.warn(`    - ${item}`);
+      }
+      if (result.missingCredits.length > 8) {
+        console.warn(`    - ...and ${result.missingCredits.length - 8} more`);
+      }
+    }
   }
   console.log(`Total: ${totalAssets} assets, ${totalMetas} metas.`);
+  if (totalMissingCredits > 0) {
+    console.warn(`Missing credits summary: ${totalMissingCredits} asset imports still need credits metadata.`);
+  }
 }
 
 run();

@@ -3,8 +3,16 @@
   "type": "fe",
   "path": "portraits/main",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "Another one of my oldest OC's, Relm is a pretty critical character in my planned concepts and works. She is definitely intended to take an \"Asian\" inspiration here.\n\nRelm's initial design is the \"Clip Hooded\" version, but her final design is the black Kimono, that's been her final planned design for almost 20 years now. She has had some modifications over the years, such as her ear design being changed... Well, some of the variants in here make it clear why.",
   "variants": [
     "OC Relm Clip Hood Down",
     "OC Relm Clip Hooded",
@@ -13,20 +21,20 @@
     "OC Relm Wavy",
     "OC Relm"
   ],
-  "preview": "assets/fe/Portraits/Main/Relm/{JaidynReiman} OC Relm Clip Hood Down.png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/main/Relm/{JaidynReiman} OC Relm Clip Hood Down.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 32,
+      "offset_y": 24
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 40
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 40
     }
-  }
+  },
+  "download": ""
 }

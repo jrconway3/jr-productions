@@ -1,35 +1,28 @@
 {
-  "name": "Female Ponytail",
+  "name": "Myrmidon Tailed (F)",
   "type": "fe",
   "path": "battle-animations/infantry/myrmidon",
   "format": "gif",
+  "animation_spec": "fe/battle",
   "license": "F2U, F2E",
   "credits": [
     {
+      "type": "Myrmidon",
       "authors": [
         "IS"
-      ],
-      "notes": "Base animation by IS."
+      ]
     },
     {
+      "type": "Myrmidon Tail",
       "authors": [
-        "N426"
-      ],
-      "notes": "Bow by N426."
-    },
-    {
-      "authors": [
-        "Zacara'sDaydreamer"
-      ],
-      "notes": "Magic by Zacara'sDaydreamer."
-    },
-    {
-      "authors": [
-        "JaidynReiman",
-        "original Vanilla FE6-8 Generic Myrmidon Sword",
         "Seliost1"
-      ],
-      "notes": "Tails by JaidynReiman, based on original Vanilla FE6-8 Generic Myrmidon Sword and Unarmed (Tail) by Seliost1."
+      ]
+    },
+    {
+      "type": "Tailed Female Myrmidon",
+      "authors": [
+        "JaidynReiman"
+      ]
     }
   ],
   "animated": true,
@@ -39,9 +32,22 @@
   ],
   "weapon_types": [
     "bow",
-    "sword",
-    "unarmed"
+    "sword"
+  ],
+  "weapon_variants": [
+    {
+      "id": "bow",
+      "weapon": "bow",
+      "label": "Bow",
+      "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/bow/Bow.gif"
+    },
+    {
+      "id": "sword",
+      "weapon": "sword",
+      "label": "Sword",
+      "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/sword/Sword.gif"
+    }
   ],
   "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/bow/Bow.gif",
-  "animation_spec": "fe/battle"
+  "download": ""
 }

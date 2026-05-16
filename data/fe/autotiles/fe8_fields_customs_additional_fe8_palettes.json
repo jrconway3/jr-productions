@@ -1,0 +1,21 @@
+{
+  "name": "Autotiles for FE8 Fields Additional Palettes",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "N426",
+        "Dark",
+        "Unkown",
+        "WAve",
+        "IS"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/fe8_fields_customs/additional_fe8_palettes.png",
+  "download": "",
+  "description": "This covers edge cases for additional palettes that have been added to FE8 Fields."
+}

@@ -1,0 +1,59 @@
+{
+  "name": "T1 Eirika Repal Magus",
+  "type": "fe",
+  "path": "battle-animations/lords/t1_eirika_repal",
+  "format": "gif",
+  "animation_spec": "fe/battle",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "type": "Eirika",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Eirika T1 Repal + Weapons",
+      "authors": [
+        "Teraspark"
+      ]
+    },
+    {
+      "type": "Eirika Magus",
+      "authors": [
+        "Teraspark"
+      ]
+    },
+    {
+      "type": "Magus",
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "T1 Eirika Repal",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "magic",
+    "staff"
+  ],
+  "weapon_variants": [
+    {
+      "id": "magic",
+      "weapon": "magic",
+      "label": "Magic",
+      "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magus/magic/Magic.gif"
+    },
+    {
+      "id": "staff",
+      "weapon": "staff",
+      "label": "Staff",
+      "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magus/staff/Staff.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/lords/t1_eirika_repal/magus/magic/Magic.gif",
+  "download": ""
+}

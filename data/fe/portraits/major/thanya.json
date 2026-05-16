@@ -3,27 +3,35 @@
   "type": "fe",
   "path": "portraits/major",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "Thanya is the daughter of Serena's husband, though he had not seen her for years before she was brought to him. She's an adult woman but has some major disabilities due to her memory, so she mostly acts as a helper to others as its difficult for her to be independent. Serena tends to keep her close by as Thanya's father doesn't really care for her much.",
   "variants": [
     "OC Thanya Natural",
     "OC Thanya Zabos",
     "OC Thanya"
   ],
-  "preview": "assets/fe/Portraits/Major/thanya/{JaidynReiman} OC Thanya Natural.png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/major/thanya/{JaidynReiman} OC Thanya Natural.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 32,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

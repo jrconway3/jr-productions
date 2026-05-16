@@ -1,15 +1,40 @@
 {
-  "name": "Female",
+  "name": "Wolf Knight",
   "type": "fe",
   "path": "battle-animations/mounted/wolf_knight",
   "format": "gif",
+  "animation_spec": "fe/battle",
   "license": "F2U, F2E",
   "credits": [
     {
+      "type": "Mouthe Dauge",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Wolf Knight",
       "authors": [
         "VelvetKitsune"
-      ],
-      "notes": "Animation by VelvetKitsune."
+      ]
+    },
+    {
+      "type": "Weapons",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Long Hair",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Lykon",
+      "authors": [
+        "JaidynReiman"
+      ]
     }
   ],
   "animated": true,
@@ -18,8 +43,63 @@
     "female"
   ],
   "weapon_types": [
-    "bow"
+    "axe",
+    "bow",
+    "dagger",
+    "handaxe",
+    "lance",
+    "sword"
   ],
-  "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/axe_alt/Axe.gif",
-  "animation_spec": "fe/battle"
+  "weapon_variants": [
+    {
+      "id": "axe",
+      "weapon": "axe",
+      "label": "Axe",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/axe/Axe.gif"
+    },
+    {
+      "id": "axe_alt",
+      "weapon": "axe",
+      "label": "Axe Alt",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/axe_alt/Axe.gif"
+    },
+    {
+      "id": "bow",
+      "weapon": "bow",
+      "label": "Bow",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/bow/Bow.gif"
+    },
+    {
+      "id": "dagger",
+      "weapon": "dagger",
+      "label": "Dagger",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/dagger/Sword.gif"
+    },
+    {
+      "id": "handaxe",
+      "weapon": "handaxe",
+      "label": "Handaxe",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/handaxe/Handaxe.gif"
+    },
+    {
+      "id": "lance",
+      "weapon": "lance",
+      "label": "Lance",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/lance/Lance.gif"
+    },
+    {
+      "id": "lance_alt",
+      "weapon": "lance",
+      "label": "Lance Alt",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/lance_alt/Lance.gif"
+    },
+    {
+      "id": "sword",
+      "weapon": "sword",
+      "label": "Sword",
+      "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/sword/Sword.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/mounted/wolf_knight/female/axe/Axe.gif",
+  "download": ""
 }

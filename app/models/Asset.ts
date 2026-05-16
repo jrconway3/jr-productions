@@ -11,6 +11,9 @@ export interface AnimationCutout {
   fps?: number;
   frame_direction?: 'horizontal' | 'vertical';
   frame_order?: 'forward' | 'reverse';
+  /** Optional explicit frame playback order (supports one-based values like [1,2,3,2]). */
+  frame_sequence?: number[];
+  flip?: 'horizontal' | 'vertical';
   overlay?: string;
   offset_x?: number;
   offset_y?: number;
@@ -42,6 +45,8 @@ export interface AnimationSpec {
   id: string;
   source?: string;
   format?: string;
+  width?: number;
+  height?: number;
   frame_width?: number;
   frame_height?: number;
   fps?: number;
@@ -102,9 +107,17 @@ export interface PaletteVariant {
   swaps: Record<string, string>;
 }
 
+export interface FeBattleWeaponVariant {
+  id: string;
+  weapon: string;
+  label: string;
+  preview: string;
+}
+
 export interface Asset {
   id: string;
   name: string;
+  description?: string;
   type: string;
   category?: string;
   format: AssetFormat;
@@ -125,6 +138,10 @@ export interface Asset {
 
   // Animation spec fields
   animation_spec?: string;
+  /** FE map sprites: stand spec file name under data/animations/fe (e.g. stand_mounted). */
+  map_sprite_stand_spec?: string;
+  /** Optional explicit source file paths per animation key (used for FE map sprites). */
+  animation_sources?: Record<string, string>;
   /** LPC: `cutouts[animName][direction]`; FE: flat `cutouts[cutoutName]` */
   cutouts?: Record<string, Record<string, Partial<AnimationCutout>>> | Record<string, Partial<AnimationCutout>>;
 
@@ -141,4 +158,6 @@ export interface Asset {
   frames?: number;
   class?: string;
   weapon_types?: string[];
+  /** FE battle animations: per-weapon previews used to fan out one asset into multiple cards. */
+  weapon_variants?: FeBattleWeaponVariant[];
 }

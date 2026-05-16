@@ -3,26 +3,34 @@
   "type": "fe",
   "path": "portraits/major",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "Yarda's outfit design was inspired by a Sari. Her people's origins are intended to be inspired by Middle Eastern/Arabic nations (India, Egypt, etc). Her race is Zabos, which have feline characteristics.\n\nI'm not fully happy with her design, I'll probably adjust it later.",
   "variants": [
     "OC Yarda Runeless",
     "OC Yarda"
   ],
-  "preview": "assets/fe/Portraits/Major/Yarda/{JaidynReiman} OC Yarda Runeless.png",
-  "animation_spec": "fe/portrait",
+  "preview": "assets/fe/Portraits/major/yarda/{JaidynReiman} OC Yarda Runeless.png",
   "cutouts": {
+    "blink": {
+      "offset_x": 32,
+      "offset_y": 16
+    },
     "mouth_neutral": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     },
     "mouth_smile": {
-      "offset_x": 0,
-      "offset_y": 0
-    },
-    "blink": {
-      "offset_x": 0,
-      "offset_y": 0
+      "offset_x": 32,
+      "offset_y": 32
     }
-  }
+  },
+  "download": ""
 }

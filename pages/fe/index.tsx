@@ -4,30 +4,23 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
 import { getAssetsByCategoryTree } from 'app/AssetService';
+import { resolveHomepageSpecs } from 'app/AnimationService';
+import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
 import MasonryGrid from 'components/gallery/MasonryGrid';
-import AssetCard from 'components/gallery/AssetCard';
+import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import type { Category } from 'app/models/Category';
-import type { Asset } from 'app/models/Asset';
+import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 
 interface FeIndexProps {
   category: Category;
   treeAssets?: Asset[];
+  resolvedSpecs?: Record<string, AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec>;
+  animNames?: Record<string, string>;
+  bodyTypes?: Record<string, string>;
+  groupNames?: Record<string, string[]>;
 }
 
-const FEATURED_ASSET_COUNT = 48;
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
-
-function pickRandomAssets(pool: Asset[], count: number): Asset[] {
-  if (pool.length <= count) return [...pool];
-  const shuffled = [...pool];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i];
-    shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
-  }
-  return shuffled.slice(0, count);
-}
 
 function getCategoryCacheKey(path: string): string {
   return `category-featured-v1:${path}`;
@@ -66,9 +59,10 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function FeIndex({ category, treeAssets }: FeIndexProps) {
-  const allAssets = treeAssets ?? [];
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, FEATURED_ASSET_COUNT));
+export default function FeIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {} }: FeIndexProps) {
+  const allAssets = useMemo(() => treeAssets ?? [], [treeAssets]);
+  const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, featuredAssetCount));
 
   const treeAssetsById = useMemo(() => {
     return new Map(allAssets.map((asset) => [asset.id, asset]));
@@ -95,15 +89,15 @@ export default function FeIndex({ category, treeAssets }: FeIndexProps) {
       }
     }
 
-    const picked = pickRandomAssets(allAssets, FEATURED_ASSET_COUNT);
+    const picked = pickRandomAssetsPreferUnrestricted(allAssets, featuredAssetCount);
     updateDisplayAssets(picked);
     setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
-  }, [category.path, allAssets, treeAssetsById]);
+  }, [category.path, allAssets, treeAssetsById, featuredAssetCount]);
 
   return (
     <>
       <Head>
-        <title>{category.label} — JaidynReiman Productions</title>
+        <title>{category.label} - JaidynReiman Productions</title>
       </Head>
 
       <main className="section-fe page-wide py-12">
@@ -117,7 +111,14 @@ export default function FeIndex({ category, treeAssets }: FeIndexProps) {
             {displayAssets.length > 0 ? (
               <MasonryGrid>
                 {displayAssets.map((asset) => (
-                  <AssetCard key={asset.id} asset={asset} />
+                  <UnifiedAssetCard
+                    key={asset.id}
+                    asset={asset}
+                    resolvedSpec={resolvedSpecs[asset.id]}
+                    animName={animNames[asset.id] ?? asset.animations?.[0]}
+                    bodyType={bodyTypes[asset.id]}
+                    groupAnimNames={groupNames[asset.id]}
+                  />
                 ))}
               </MasonryGrid>
             ) : (
@@ -156,5 +157,6 @@ export const getStaticProps: GetStaticProps<FeIndexProps> = async () => {
   if (!category) return { notFound: true };
 
   const treeAssets = getAssetsByCategoryTree('fe');
-  return { props: { category, treeAssets } };
+  const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(treeAssets);
+  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames } };
 };

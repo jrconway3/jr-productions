@@ -1,0 +1,17 @@
+{
+  "name": "Autotiles for FE6 Fields - SnowyRemake",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "N426"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/fe6_fields_snowy_remake/snowy_fields_water_remake.png",
+  "download": "",
+  "description": "Silvio from the LT Discord tried to get these working but was unable to figure it out. I went ahead and made them myself instead.\n\nSome of the tiles do not match exactly with the original sheet, I suspect this worked fine in FE Builder because the animation is directly chosen for each specific tile, but in LT they need to be replaced with the base tile in the tileset instead."
+}

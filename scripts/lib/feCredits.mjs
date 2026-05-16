@@ -1,6 +1,20 @@
 import fs from 'fs';
 import path from 'path';
 
+function parseBraceAuthors(text) {
+  const authors = [];
+  const matches = text.match(/\{[^}]*\}/g) ?? [];
+  for (const match of matches) {
+    const body = match.slice(1, -1).trim();
+    if (!body) continue;
+    for (const rawPart of body.split(',')) {
+      const author = rawPart.trim();
+      if (author) authors.push(author);
+    }
+  }
+  return uniqueAuthors(authors);
+}
+
 function uniqueAuthors(authors) {
   return [...new Set(authors.map((value) => value.trim()).filter(Boolean))];
 }
@@ -174,6 +188,74 @@ function dedupeAuthorsAcrossEntries(credits) {
   }
 
   return deduped;
+}
+
+export function normalizeMarkdownKey(value) {
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+}
+
+export function parseAuthorsFromText(text) {
+  const line = String(text ?? '').trim();
+  if (!line) return [];
+
+  const authors = new Set();
+  for (const author of parseBraceAuthors(line)) authors.add(author);
+
+  for (const author of extractAuthorsFromSentence(cleanSentence(line))) {
+    authors.add(author);
+  }
+
+  const meMatch = line.match(/\bto me\s*,\s*([^.;]+)/i);
+  if (meMatch) {
+    for (const part of meMatch[1].replace(/\sand\s/gi, ',').split(',')) {
+      const author = part.trim();
+      if (author) authors.add(author);
+    }
+  }
+
+  const creditsMatch = line.match(/\bcredits?\s*:\s*([^.;]+)/i);
+  if (creditsMatch) {
+    for (const part of creditsMatch[1].replace(/\sand\s/gi, ',').split(',')) {
+      const author = part.trim();
+      if (author) authors.add(author);
+    }
+  }
+
+  return [...authors];
+}
+
+export function readMarkdownSections(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+
+  const lines = fs.readFileSync(filePath, 'utf-8').split(/\r?\n/);
+  const sections = [];
+  let current = null;
+
+  function pushCurrent() {
+    if (!current) return;
+    sections.push(current);
+  }
+
+  for (const line of lines) {
+    const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      pushCurrent();
+      current = {
+        level: headingMatch[1].length,
+        title: headingMatch[2].trim(),
+        lines: [],
+      };
+      continue;
+    }
+
+    if (!current) continue;
+    current.lines.push(line);
+  }
+
+  pushCurrent();
+  return sections;
 }
 
 export function parseCreditsFile(filePath) {

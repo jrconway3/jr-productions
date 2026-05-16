@@ -188,7 +188,16 @@ interface FeCardProps {
   feSpec?: ResolvedFeSpec;
 }
 
-export function FeCard({ asset, feSpec }: FeCardProps) {
+function formatBattleWeaponLabel(value: string): string {
+  return value
+    .replace(/^weapon[_-]?/i, '')
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(' ');
+}
+
+function FeCardSingle({ asset, feSpec }: FeCardProps) {
   const [downloading, setDownloading] = useState(false);
   const previewUrl = toPublicAssetUrl(asset.preview);
 
@@ -199,6 +208,7 @@ export function FeCard({ asset, feSpec }: FeCardProps) {
 
   const displayName = asset.name;
   const credits = creditsLine(asset);
+  const bodyType = asset.body_types?.length === 1 ? asset.body_types[0] : undefined;
 
   const handleDownload = async () => {
     if (downloading) return;
@@ -207,29 +217,27 @@ export function FeCard({ asset, feSpec }: FeCardProps) {
     finally { setDownloading(false); }
   };
 
-  const aspectRatio = isPortrait || isBattle ? undefined : '1 / 1';
-
   const renderViewer = () => {
     if (!feSpec) {
       return previewUrl ? (
         <Image src={previewUrl} alt={asset.name} width={256} height={256}
-          className="w-full h-full object-contain object-top"
+          className="w-full h-auto block object-contain object-top"
           style={{ imageRendering: 'pixelated' }} unoptimized />
       ) : null;
     }
-    if (isBattle) return <FeBattleViewer asset={asset} />;
+    if (isBattle) return <FeBattleViewer asset={asset} resolvedSpec={feSpec} />;
     if (isPortrait) return <FePortraitViewer asset={asset} resolvedSpec={feSpec} onDownload={previewUrl ? handleDownload : undefined} downloading={downloading} />;
     if (isMapSprite) return <FeMapSpriteViewer asset={asset} resolvedSpec={feSpec} />;
     return previewUrl ? (
       <Image src={previewUrl} alt={asset.name} width={256} height={256}
-        className="w-full h-full object-contain object-top"
+        className="w-full h-auto block object-contain object-top"
         style={{ imageRendering: 'pixelated' }} unoptimized />
     ) : null;
   };
 
   return (
     <div className="sprite-card overflow-hidden">
-      <div className="relative w-full asset-preview-surface" style={{ aspectRatio }}>
+      <div className="relative w-full asset-preview-surface">
         {renderViewer()}
         {previewUrl && !isPortrait && (
           <button onClick={handleDownload} disabled={downloading} title="Download"
@@ -241,11 +249,41 @@ export function FeCard({ asset, feSpec }: FeCardProps) {
       </div>
 
       <div className="px-2 py-1.5">
-        <p className="text-xs font-pixel leading-tight break-words">{displayName}</p>
+        <div className="flex items-baseline justify-between gap-1">
+          <p className="text-xs font-pixel leading-tight break-words">{displayName}</p>
+          {bodyType && <p className="text-[10px] font-pixel leading-tight opacity-30 shrink-0">{formatSlug(bodyType)}</p>}
+        </div>
         {credits && <p className="font-body text-xs opacity-50 leading-tight break-words">{credits}</p>}
       </div>
     </div>
   );
+}
+
+export function FeCard({ asset, feSpec }: FeCardProps) {
+  const isBattle = feSpec?.format === 'gif' || asset.animation_spec === 'fe/battle';
+  const battleVariants = (asset.weapon_variants ?? []).filter((variant) => Boolean(variant.preview));
+
+  if (isBattle && battleVariants.length > 0) {
+    return (
+      <>
+        {battleVariants.map((variant) => {
+          const weaponLabel = variant.label || formatBattleWeaponLabel(variant.id || variant.weapon);
+          const cardName = `${asset.name} ${weaponLabel}`.replace(/\s{2,}/g, ' ').trim();
+          const cardAsset: Asset = {
+            ...asset,
+            id: `${asset.id}:${variant.id || variant.weapon}`,
+            name: cardName,
+            preview: variant.preview,
+            weapon_types: [variant.weapon],
+            weapon_variants: undefined,
+          };
+          return <FeCardSingle key={cardAsset.id} asset={cardAsset} feSpec={feSpec} />;
+        })}
+      </>
+    );
+  }
+
+  return <FeCardSingle asset={asset} feSpec={feSpec} />;
 }
 
 // --- Legacy default export for non-animation fallback ---

@@ -12,7 +12,7 @@ export default function CollectionsIndex({ collections }: CollectionsIndexProps)
   return (
     <>
       <Head>
-        <title>Collections — JaidynReiman Productions</title>
+        <title>Collections - JaidynReiman Productions</title>
       </Head>
 
       <main className="page-wide py-12">

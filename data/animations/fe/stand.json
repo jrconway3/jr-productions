@@ -1,17 +1,13 @@
 {
-  "id": "fe_map_sprite",
+  "id": "fe_stand",
   "frame_width": 16,
   "frame_height": 16,
   "cutouts": {
     "stand": {
       "x": 0, "y": 0, "width": 16, "height": 48,
       "frames": 3, "fps": 4,
+      "frame_sequence": [1, 2, 3, 2],
       "frame_direction": "vertical"
-    },
-    "walk": {
-      "x": 0, "y": 0, "width": 32, "height": 480,
-      "frames": 60, "fps": 8,
-      "frame_direction": "horizontal"
     }
   }
 }

@@ -7,8 +7,11 @@ export interface LayerImage {
 
 export interface FePortraitState {
   blinkFrame: number;
+  blinkVisible: boolean;
   mouthFrame: number;
+  mouthVisible: boolean;
   mouthVariant: 'mouth_smile' | 'mouth_neutral';
+  blinkEnabled: boolean;
   playing: boolean;
 }
 
@@ -115,12 +118,22 @@ export function createLpcMultiDirectionLoop(
   canvases: Record<string, HTMLCanvasElement>,
   layerUrls: { url: string; zPos: number }[],
   spec: AnimationSpec,
-): { stop: () => void } {
+): { stop: () => void; ready: Promise<number> } {
   let rafId: number | null = null;
   let stopped = false;
   const startFrame = spec.start_frame ?? 0;
   let frameIndex = startFrame;
   let lastTime = 0;
+  let readyResolved = false;
+
+  let resolveReady: (layerCount: number) => void = () => {};
+  const ready = new Promise<number>((resolve) => {
+    resolveReady = (layerCount) => {
+      if (readyResolved) return;
+      readyResolved = true;
+      resolve(layerCount);
+    };
+  });
 
   const fps = spec.fps ?? 8;
   const msPerFrame = 1000 / fps;
@@ -135,7 +148,9 @@ export function createLpcMultiDirectionLoop(
     ),
   ).then((results) => {
     const layers = results.filter((r): r is LayerImage => r !== null);
+    resolveReady(layers.length);
     if (stopped) return;
+    if (layers.length === 0) return;
 
     // Draw start_frame immediately so there's no blank flash before the loop starts.
     for (const dir of directions) {
@@ -159,6 +174,8 @@ export function createLpcMultiDirectionLoop(
     }
 
     rafId = requestAnimationFrame(tick);
+  }).catch(() => {
+    resolveReady(0);
   });
 
   return {
@@ -166,6 +183,7 @@ export function createLpcMultiDirectionLoop(
       stopped = true;
       if (rafId !== null) cancelAnimationFrame(rafId);
     },
+    ready,
   };
 }
 
@@ -190,10 +208,8 @@ export function drawFePortraitFrame(
     0, 0, ctx.canvas.width, ctx.canvas.height,
   );
 
-  if (!state.playing) return;
-
   const blink = cutouts['blink'];
-  if (blink) {
+  if (state.playing && state.blinkEnabled && state.blinkVisible && blink) {
     const fw = blink.width ?? 32;
     const fh = blink.height ?? 16;
     const { sx, sy } = getPortraitOverlaySrcXY(blink, state.blinkFrame);
@@ -205,7 +221,7 @@ export function drawFePortraitFrame(
   }
 
   const mouth = cutouts[state.mouthVariant];
-  if (mouth) {
+  if (state.playing && state.mouthVisible && mouth) {
     const fw = mouth.width ?? 32;
     const fh = mouth.height ?? 16;
     const { sx, sy } = getPortraitOverlaySrcXY(mouth, state.mouthFrame);
@@ -219,6 +235,7 @@ export function drawFePortraitFrame(
 
 export interface FePortraitLoopOptions {
   mouthVariant?: 'mouth_smile' | 'mouth_neutral';
+  blinkEnabled?: boolean;
   playing?: boolean;
 }
 
@@ -237,19 +254,59 @@ export function createFePortraitLoop(
   const mouthSpec = cutouts[mouthVariant];
 
   const blinkFps = blinkSpec?.fps ?? 8;
-  const mouthFps = mouthSpec?.fps ?? 6;
   const blinkFrames = blinkSpec?.frames ?? 1;
+  const mouthFps = mouthSpec?.fps ?? 6;
   const mouthFrames = mouthSpec?.frames ?? 1;
 
-  const state: FePortraitState = {
-    blinkFrame: 0,
-    mouthFrame: 0,
-    mouthVariant,
-    playing: options.playing !== false,
+  const HIDE_OVERLAY = -1;
+
+  const buildOverlaySequence = (cutout: AnimationCutout | undefined, totalFrames: number): number[] => {
+    if (!cutout) return [HIDE_OVERLAY];
+    const rawSequence = cutout.frame_sequence ?? [];
+    if (rawSequence.length > 0) {
+      const sequence = rawSequence
+        .map((n) => {
+          const parsed = Math.floor(n);
+          if (!Number.isFinite(parsed)) return undefined;
+          // 0 is a special sentinel: hide overlay for this step.
+          if (parsed === 0) return HIDE_OVERLAY;
+          // Positive values are one-based frame numbers.
+          const idx = parsed - 1;
+          if (idx < 0 || idx >= totalFrames) return undefined;
+          return idx;
+        })
+        .filter((idx): idx is number => idx !== undefined);
+      if (sequence.length > 0) return sequence;
+    }
+
+    if (cutout.frame_order === 'reverse') {
+      return Array.from({ length: totalFrames }, (_, idx) => totalFrames - 1 - idx);
+    }
+    return Array.from({ length: totalFrames }, (_, idx) => idx);
   };
 
+  const blinkSequence = buildOverlaySequence(blinkSpec, blinkFrames);
+  let blinkSequenceIndex = 0;
+  const blinkStepMs = 1000 / blinkFps;
   let blinkAccum = 0;
+
+  const getMouthSpec = (variant: 'mouth_smile' | 'mouth_neutral') => cutouts[variant];
+  let activeMouthSpec = getMouthSpec(mouthVariant);
+  let activeMouthFrames = activeMouthSpec?.frames ?? mouthFrames;
+  let activeMouthFps = activeMouthSpec?.fps ?? mouthFps;
+  let mouthSequence = buildOverlaySequence(activeMouthSpec, activeMouthFrames);
+  let mouthSequenceIndex = 0;
   let mouthAccum = 0;
+
+  const state: FePortraitState = {
+    blinkFrame: blinkSequence[0] === HIDE_OVERLAY ? 0 : (blinkSequence[0] ?? 0),
+    blinkVisible: blinkSequence[0] !== HIDE_OVERLAY,
+    mouthFrame: mouthSequence[0] === HIDE_OVERLAY ? 0 : (mouthSequence[0] ?? 0),
+    mouthVisible: mouthSequence[0] !== HIDE_OVERLAY,
+    mouthVariant,
+    blinkEnabled: options.blinkEnabled !== false,
+    playing: options.playing !== false,
+  };
 
   loadImage(imageUrl).then((image) => {
     if (stopped) return;
@@ -265,19 +322,33 @@ export function createFePortraitLoop(
       lastTime = now;
 
       if (state.playing) {
-        blinkAccum += dt;
-        if (blinkSpec && blinkAccum >= 1000 / blinkFps) {
-          state.blinkFrame = (state.blinkFrame + 1) % blinkFrames;
-          blinkAccum -= 1000 / blinkFps;
+        if (blinkSpec && state.blinkEnabled) {
+          blinkAccum += dt;
+          if (blinkAccum >= blinkStepMs) {
+            blinkAccum = 0;
+            blinkSequenceIndex = (blinkSequenceIndex + 1) % Math.max(1, blinkSequence.length);
+            const step = blinkSequence[blinkSequenceIndex] ?? HIDE_OVERLAY;
+            state.blinkVisible = step !== HIDE_OVERLAY;
+            if (state.blinkVisible) state.blinkFrame = step;
+          }
+        } else {
+          state.blinkVisible = false;
+          blinkAccum = 0;
+          blinkSequenceIndex = 0;
         }
 
-        mouthAccum += dt;
-        const mouthSpec2 = cutouts[state.mouthVariant];
-        const mouthFps2 = mouthSpec2?.fps ?? mouthFps;
-        const mouthFrames2 = mouthSpec2?.frames ?? mouthFrames;
-        if (mouthSpec2 && mouthAccum >= 1000 / mouthFps2) {
-          state.mouthFrame = (state.mouthFrame + 1) % mouthFrames2;
-          mouthAccum -= 1000 / mouthFps2;
+        if (activeMouthSpec) {
+          const mouthStepMs = 1000 / Math.max(1, activeMouthFps);
+          mouthAccum += dt;
+          if (mouthAccum >= mouthStepMs) {
+            mouthAccum = 0;
+            mouthSequenceIndex = (mouthSequenceIndex + 1) % Math.max(1, mouthSequence.length);
+            const step = mouthSequence[mouthSequenceIndex] ?? HIDE_OVERLAY;
+            state.mouthVisible = step !== HIDE_OVERLAY;
+            if (state.mouthVisible) state.mouthFrame = step;
+          }
+        } else {
+          state.mouthVisible = false;
         }
       }
 
@@ -296,8 +367,25 @@ export function createFePortraitLoop(
     updateState(patch) {
       Object.assign(state, patch);
       if (patch.mouthVariant) {
-        state.mouthFrame = 0;
+        activeMouthSpec = getMouthSpec(patch.mouthVariant);
+        activeMouthFrames = activeMouthSpec?.frames ?? mouthFrames;
+        activeMouthFps = activeMouthSpec?.fps ?? mouthFps;
+        mouthSequence = buildOverlaySequence(activeMouthSpec, activeMouthFrames);
+        mouthSequenceIndex = 0;
+        state.mouthVisible = (mouthSequence[0] ?? HIDE_OVERLAY) !== HIDE_OVERLAY;
+        if (state.mouthVisible) state.mouthFrame = mouthSequence[0] ?? 0;
         mouthAccum = 0;
+      }
+      if (patch.blinkEnabled === false) {
+        state.blinkVisible = false;
+        blinkAccum = 0;
+        blinkSequenceIndex = 0;
+      }
+      if (patch.blinkEnabled === true) {
+        blinkSequenceIndex = 0;
+        state.blinkVisible = (blinkSequence[0] ?? HIDE_OVERLAY) !== HIDE_OVERLAY;
+        if (state.blinkVisible) state.blinkFrame = blinkSequence[0] ?? 0;
+        blinkAccum = 0;
       }
     },
   };
@@ -309,25 +397,53 @@ export function createFeMapSpriteLoop(
   canvas: HTMLCanvasElement,
   imageUrl: string,
   cutout: AnimationCutout,
-  frameWidth: number,
-  frameHeight: number,
+  fallbackFW = 16,
+  fallbackFH = 16,
 ): { stop: () => void } {
   let rafId: number | null = null;
   let stopped = false;
-  let frameIndex = 0;
+  let sequenceIndex = 0;
   let lastTime = 0;
 
   const fps = cutout.fps ?? 4;
   const msPerFrame = 1000 / fps;
   const frames = cutout.frames ?? 1;
-  const totalWidth = cutout.width ?? frameWidth;
-  const cols = Math.max(1, Math.floor(totalWidth / frameWidth));
+  const isVertical = cutout.frame_direction === 'vertical';
+  const flip = cutout.flip === 'horizontal';
 
-  function getXY(idx: number) {
-    return {
-      sx: (cutout.x ?? 0) + (idx % cols) * frameWidth,
-      sy: (cutout.y ?? 0) + Math.floor(idx / cols) * frameHeight,
-    };
+  // Derive per-frame pixel dimensions from the cutout bounding box.
+  // For vertical strips: height is total strip height, divide by frames to get per-frame height.
+  // For horizontal strips: width is total strip width, divide by frames.
+  const perFrameW = isVertical
+    ? (cutout.width ?? fallbackFW)
+    : Math.floor((cutout.width ?? fallbackFW * frames) / frames);
+  const perFrameH = isVertical
+    ? Math.floor((cutout.height ?? fallbackFH * frames) / frames)
+    : (cutout.height ?? fallbackFH);
+
+  const rawSequence = cutout.frame_sequence ?? [];
+  const hasZero = rawSequence.some((n) => n === 0);
+  const frameSequence = rawSequence.length > 0
+    ? rawSequence
+      .map((n) => {
+        const parsed = Math.floor(n);
+        if (!Number.isFinite(parsed)) return null;
+        // If the sequence contains 0, treat values as zero-based.
+        // Otherwise, allow one-based authoring (e.g. [1,2,3,2]).
+        const idx = hasZero ? parsed : parsed - 1;
+        if (idx < 0 || idx >= frames) return null;
+        return idx;
+      })
+      .filter((idx): idx is number => idx !== null)
+    : cutout.frame_order === 'reverse'
+      ? Array.from({ length: frames }, (_, idx) => frames - 1 - idx)
+      : Array.from({ length: frames }, (_, idx) => idx);
+
+  function getXY(idx: number): { sx: number; sy: number } {
+    if (isVertical) {
+      return { sx: cutout.x ?? 0, sy: (cutout.y ?? 0) + idx * perFrameH };
+    }
+    return { sx: (cutout.x ?? 0) + idx * perFrameW, sy: cutout.y ?? 0 };
   }
 
   loadImage(imageUrl).then((image) => {
@@ -340,17 +456,25 @@ export function createFeMapSpriteLoop(
     const draw = (idx: number) => {
       const { sx, sy } = getXY(idx);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(image, sx, sy, frameWidth, frameHeight, 0, 0, canvas.width, canvas.height);
+      if (flip) {
+        ctx.save();
+        ctx.scale(-1, 1);
+        ctx.drawImage(image, sx, sy, perFrameW, perFrameH, -canvas.width, 0, canvas.width, canvas.height);
+        ctx.restore();
+      } else {
+        ctx.drawImage(image, sx, sy, perFrameW, perFrameH, 0, 0, canvas.width, canvas.height);
+      }
     };
 
-    draw(0);
+    draw(frameSequence[0] ?? 0);
+    sequenceIndex = frameSequence.length > 1 ? 1 : 0;
 
     function tick(now: number) {
       if (stopped) return;
       if (lastTime === 0) lastTime = now;
       if (now - lastTime >= msPerFrame) {
-        draw(frameIndex);
-        frameIndex = (frameIndex + 1) % frames;
+        draw(frameSequence[sequenceIndex] ?? 0);
+        sequenceIndex = (sequenceIndex + 1) % Math.max(1, frameSequence.length);
         lastTime = now;
       }
       rafId = requestAnimationFrame(tick);
