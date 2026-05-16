@@ -1,6 +1,6 @@
 import type { Asset } from './models/Asset';
 
-function hasPrerequisites(asset: Asset): boolean {
+export function hasPrerequisites(asset: Asset): boolean {
   const prerequisites = asset.prerequisites;
   if (!prerequisites) return false;
   return (prerequisites.asset?.length ?? 0) > 0 || (prerequisites.category?.length ?? 0) > 0;
@@ -34,7 +34,7 @@ export function pickRandomAssetsPreferUnrestricted(
       let running = 0;
       for (let i = 0; i < available.length; i += 1) {
         running += available[i].weight;
-        if (pick <= running) {
+        if (pick < running) {
           pickedIndex = i;
           break;
         }

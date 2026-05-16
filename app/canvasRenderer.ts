@@ -357,6 +357,8 @@ export function createFePortraitLoop(
     }
 
     rafId = requestAnimationFrame(tick);
+  }).catch(() => {
+    // Image failed to load; canvas remains blank.
   });
 
   return {

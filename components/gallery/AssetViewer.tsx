@@ -126,10 +126,10 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
     // Extra defensive: for each ID, pick ONLY the first matching layer
     // (this handles case where multiple assets in one layer ID both match bodyType)
     const deduplicatedAssetLayers: typeof filteredExpandedLayers = [];
-    const seenIds = new Set<string | undefined>();
+    const seenIds = new Set<string>();
     for (const layer of filteredExpandedLayers) {
-      if (!seenIds.has(layer.id)) {
-        seenIds.add(layer.id);
+      if (!layer.id || !seenIds.has(layer.id)) {
+        if (layer.id) seenIds.add(layer.id);
         deduplicatedAssetLayers.push(layer);
       }
     }
@@ -140,10 +140,10 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
     const activeBgLayers = filteredBgLayers.filter((l) => !l.id || !assetLayerIds.has(l.id));
 
     // Extra defensive: deduplicate background layers by ID as well
-    const bgLayerIds = new Set<string | undefined>();
+    const bgLayerIds = new Set<string>();
     const deduplicatedBgLayers = activeBgLayers.filter((layer) => {
-      if (bgLayerIds.has(layer.id)) return false;
-      bgLayerIds.add(layer.id);
+      if (layer.id && bgLayerIds.has(layer.id)) return false;
+      if (layer.id) bgLayerIds.add(layer.id);
       return true;
     });
 
@@ -220,7 +220,7 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
   const [blinkEnabled, setBlinkEnabled] = useState(false);
   const [mouthVariant, setMouthVariant] = useState<'mouth_smile' | 'mouth_neutral'>('mouth_neutral');
 
-  const cutouts = resolvedSpec.cutouts as Record<string, AnimationCutout>;
+  const cutouts = useMemo(() => resolvedSpec.cutouts as Record<string, AnimationCutout>, [resolvedSpec]);
   const previewUrl = asset.preview
     ? (asset.preview.startsWith('/') ? asset.preview : `/${asset.preview}`)
     : '';

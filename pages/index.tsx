@@ -6,6 +6,7 @@ import { getTopLevelCategories } from 'app/CategoryService';
 import { getHomepageFeaturedAssets, getSectionPageCredits } from 'app/AssetService';
 import { toPublicAssetUrl } from 'app/assetUrl';
 import { resolveHomepageSpecs } from 'app/AnimationService';
+import { pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
 import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
@@ -26,18 +27,6 @@ interface HomeProps {
 const FEATURED_ASSET_COUNT = 180;
 const FEATURED_CACHE_KEY = 'home-featured-assets-v1';
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
-
-function pickRandomAssets(pool: Asset[], count: number): Asset[] {
-  if (pool.length <= count) return [...pool];
-  const shuffled = [...pool];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i];
-    shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
-  }
-  return shuffled.slice(0, count);
-}
 
 function getCachedAssetIds(): string[] | null {
   if (typeof window === 'undefined') return null;
@@ -73,7 +62,7 @@ function setCachedAssetIds(ids: string[]): void {
 }
 
 export default function Home({ categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits }: HomeProps) {
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets.slice(0, FEATURED_ASSET_COUNT));
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets);
 
   const featuredById = useMemo(() => {
     return new Map(featuredAssets.map((asset) => [asset.id, asset]));
@@ -98,9 +87,9 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
       }
     }
 
-    const picked = pickRandomAssets(featuredAssets, FEATURED_ASSET_COUNT);
+    const picked = pickRandomAssetsPreferUnrestricted(featuredAssets, FEATURED_ASSET_COUNT);
     updateDisplayAssets(picked);
-    setCachedAssetIds(picked.map((asset) => asset.id));
+    setCachedAssetIds(picked.map((asset: Asset) => asset.id));
   }, [featuredAssets, featuredById]);
 
   const bodyTypeMap = useMemo(() => new Map(Object.entries(bodyTypes)), [bodyTypes]);
@@ -174,7 +163,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const categories = getTopLevelCategories();
   const featuredAssets = getHomepageFeaturedAssets()
     .filter((asset) => Boolean(toPublicAssetUrl(asset.preview)))
-    .slice(0, 400);
+    .slice(0, FEATURED_ASSET_COUNT);
   const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(featuredAssets);
   const pageCredits = [
     ...getSectionPageCredits('lpc'),

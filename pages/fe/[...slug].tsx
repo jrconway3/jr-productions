@@ -223,6 +223,6 @@ export const getStaticProps: GetStaticProps<FeSlugProps> = async ({ params }) =>
 
   const treeAssets = getAssetsByCategoryTree(['fe', ...slugs].join('/'));
   const resolvedSpecs = resolveAssetsSpecs(treeAssets);
-  const pageCredits = getSectionPageCredits('fe');
+  const pageCredits = getSectionPageCredits(['fe', ...slugs].join('/'));
   return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits } };
 };
