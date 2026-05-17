@@ -30,7 +30,20 @@ const mockData: ResolvedCommissionData = {
     },
   ],
   lpc_addons: [],
-  fe_base: [],
+  fe_base: [
+    {
+      id: 'fe_portrait_static',
+      name: 'Static Portrait',
+      category: 'fe',
+      description: 'A single portrait frame.',
+      price_min: 20,
+      price_max: 25,
+      addon: false,
+      inquire: false,
+      kofi_url: null,
+      examples: [],
+    },
+  ],
   fe_addons: [],
   examplesByEntryId: {},
 };

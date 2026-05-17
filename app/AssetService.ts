@@ -3,6 +3,7 @@ import path from 'path';
 import type { Asset } from './models/Asset';
 import type { BackgroundLayer, PageCreditEntry, ResolvedPageCredit } from './models/Category';
 import { expandLpcLayers } from './lpcLayers';
+import { hasPrerequisites } from './assetSampling';
 
 const DATA_ROOT = path.join(process.cwd(), 'data');
 const PUBLIC_ROOT = path.join(process.cwd(), 'public');
@@ -135,12 +136,6 @@ function loadAsset(filePath: string): Asset {
   return normalizeAsset(asset);
 }
 
-function hasPrerequisites(asset: Asset): boolean {
-  const prerequisites = asset.prerequisites;
-  if (!prerequisites) return false;
-  return (prerequisites.asset?.length ?? 0) > 0 || (prerequisites.category?.length ?? 0) > 0;
-}
-
 function readAssetsFromDir(dirPath: string): Asset[] {
   if (!fs.existsSync(dirPath)) return [];
   return fs.readdirSync(dirPath)
@@ -224,8 +219,15 @@ function findAssetsByIds(ids: Set<string>): Map<string, Asset> {
 }
 
 export function getSectionPageCredits(sectionPath: string): ResolvedPageCredit[] {
-  const dirPath = path.join(DATA_ROOT, sectionPath);
-  const meta = readDirMeta(dirPath);
+  // Walk up the path hierarchy to find the nearest meta.json with page_credits.
+  const parts = sectionPath.split('/').filter(Boolean);
+  let meta = null;
+  for (let i = parts.length; i >= 1; i--) {
+    const tryPath = parts.slice(0, i).join('/');
+    meta = readDirMeta(path.join(DATA_ROOT, tryPath));
+    if (meta?.page_credits?.length) break;
+    meta = null;
+  }
   if (!meta?.page_credits?.length) return [];
 
   const neededIds = new Set<string>(meta.page_credits.flatMap((e) => e.asset_ids ?? []));

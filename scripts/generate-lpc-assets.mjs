@@ -66,6 +66,8 @@ function writeJson(filePath, data) {
 }
 
 function clearDataRootKeepMeta() {
+  // WARNING: --rebuild deletes all subdirs, including any manually-edited subcategory
+  // meta.json files. Back up custom meta.json edits before running --rebuild.
   ensureDir(DATA_ROOT);
   const entries = fs.readdirSync(DATA_ROOT, { withFileTypes: true });
   for (const entry of entries) {
@@ -302,16 +304,13 @@ function runBuild(mode) {
   writeCategoryMetaFromConfig(categories);
   writeLeafCategoryMeta(leafDirs);
 
-  let deleted = 0;
-  if (mode === MODE_REBUILD) {
-    deleted = deleteStaleOutputs(expectedRelativePaths);
-  }
+  const deleted = deleteStaleOutputs(expectedRelativePaths);
 
   console.log(`LPC generation complete (${mode}).`);
   console.log(`- Source assets scanned: ${sourceJsonFiles.length}`);
   console.log(`- Assets written: ${written}`);
   if (mode === MODE_ADD_NEW) console.log(`- Existing assets skipped: ${skipped}`);
-  if (mode === MODE_REBUILD) console.log(`- Stale output assets deleted: ${deleted}`);
+  console.log(`- Stale output assets deleted: ${deleted}`);
   console.log(`- Categories meta written: ${categories.size}`);
   console.log(`- Leaf categories meta written: ${leafDirs.size}`);
 }

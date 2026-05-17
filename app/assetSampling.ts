@@ -1,6 +1,6 @@
 import type { Asset } from './models/Asset';
 
-function hasPrerequisites(asset: Asset): boolean {
+export function hasPrerequisites(asset: Asset): boolean {
   const prerequisites = asset.prerequisites;
   if (!prerequisites) return false;
   return (prerequisites.asset?.length ?? 0) > 0 || (prerequisites.category?.length ?? 0) > 0;
@@ -21,24 +21,20 @@ export function pickRandomAssetsPreferUnrestricted(
 ): Asset[] {
   if (count <= 0 || pool.length === 0) return [];
 
-  const available = [...pool];
+  const available = pool.map((asset) => ({ asset, weight: getAssetWeight(asset, restrictedWeight) }));
+  let totalWeight = available.reduce((sum, x) => sum + x.weight, 0);
   const targetCount = Math.min(count, available.length);
   const result: Asset[] = [];
 
   while (result.length < targetCount && available.length > 0) {
-    let totalWeight = 0;
-    for (const asset of available) {
-      totalWeight += getAssetWeight(asset, restrictedWeight);
-    }
-
     let pickedIndex = 0;
 
     if (totalWeight > 0) {
       const pick = Math.random() * totalWeight;
       let running = 0;
       for (let i = 0; i < available.length; i += 1) {
-        running += getAssetWeight(available[i], restrictedWeight);
-        if (pick <= running) {
+        running += available[i].weight;
+        if (pick < running) {
           pickedIndex = i;
           break;
         }
@@ -47,8 +43,9 @@ export function pickRandomAssetsPreferUnrestricted(
       pickedIndex = Math.floor(Math.random() * available.length);
     }
 
-    const [pickedAsset] = available.splice(pickedIndex, 1);
-    result.push(pickedAsset);
+    const [picked] = available.splice(pickedIndex, 1);
+    totalWeight -= picked.weight;
+    result.push(picked.asset);
   }
 
   return result;

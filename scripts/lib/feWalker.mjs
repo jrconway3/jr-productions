@@ -146,7 +146,7 @@ function firstHeadingMatchByKey(sections, key) {
     const headingWords = section.title.toLowerCase().split(/\W+/).filter(Boolean);
     return headingWords.some(word => {
       const normalizedWord = normalizeMarkdownKey(word);
-      return normalizedWord === normalizedTarget || normalizedWord.includes(normalizedTarget);
+      return normalizedWord === normalizedTarget;
     });
   }) ?? null;
 }
@@ -380,9 +380,16 @@ function parseBattleAnimationReadmeMetadata(publicRoot) {
       continue;
     }
 
+    const seen = new Set();
     const allCredits = variants
       .filter((v) => v.authors.size > 0)
-      .map((v) => ({ type: v.label || v.type, authors: [...v.authors] }));
+      .map((v) => ({ type: v.label || v.type, authors: [...v.authors].sort() }))
+      .filter((c) => {
+        const key = `${c.type}|${c.authors.join(',')}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
 
     const jaidynVariants = variants.filter((v) =>
       [...v.authors].some((a) => a.toLowerCase() === 'jaidynreiman'),
@@ -404,7 +411,7 @@ function findBattleAnimationSection(byKey, classDirName) {
   const normalizedClass = normalizeMarkdownKey(classDirName);
   // Check for explicit exclusion first (null entry whose key contains the class name)
   for (const [key, entry] of byKey) {
-    if (entry === null && key.includes(normalizedClass)) return null;
+    if (entry === null && key === normalizedClass) return null;
   }
   // Find best matching section by word overlap (ignoring tier prefixes like t1, t2)
   const dirWords = classDirName.toLowerCase().split(/[_\s-]+/).filter((w) => w.length > 2 && !/^t\d+$/.test(w));
@@ -495,15 +502,10 @@ function getBattleWeaponDisplayName(dirName, weaponKey) {
 
 function composeBattleBaseName(baseName, classDirName) {
   const cleanedClass = titleCaseFromSlug(classDirName).replace(/\bReskin\b/gi, '').replace(/\s{2,}/g, ' ').trim();
-  const normalizedBase = normalizeMarkdownKey(baseName);
-  const normalizedClass = normalizeMarkdownKey(cleanedClass);
-  let name = baseName;
-
-  if (cleanedClass && normalizedClass && !normalizedBase.includes(normalizedClass)) {
-    name = `${cleanedClass} ${name}`;
-  }
-
-  return name.replace(/\s{2,}/g, ' ').trim();
+  if (!cleanedClass) return baseName;
+  const classWords = new Set(cleanedClass.toLowerCase().split(/\s+/).filter(Boolean));
+  const filteredBase = baseName.split(/\s+/).filter((w) => !classWords.has(w.toLowerCase())).join(' ').trim();
+  return (filteredBase ? `${cleanedClass} ${filteredBase}` : cleanedClass).replace(/\s{2,}/g, ' ').trim();
 }
 
 
@@ -551,10 +553,16 @@ export function scanBattleAnimations(sourceRoot, publicRoot) {
         const previewFile = pickPreviewFromFiles(candidateFiles);
         const weaponDirs = listNonUnderscoreDirs(variantDir).filter((name) => normalizeBattleWeaponKey(name) !== null);
 
+        const isBodyTypeOnlyDir = /^(male|female|universal|animal|monster)$/i.test(variantDirName);
+        const variantDirWords = variantDirName.toLowerCase().split(/[_\s-]+/).filter(Boolean);
         let assetName = variant?.label ?? titleCaseFromSlug(variantDirName);
+        let genderSuffix = '';
         for (const bodyType of bodyTypes) {
           if (bodyType === 'male' || bodyType === 'female') {
             assetName = assetName.replace(new RegExp(`\\b${bodyType}\\b`, 'ig'), ' ');
+            if (!isBodyTypeOnlyDir && variantDirWords.includes(bodyType)) {
+              genderSuffix = bodyType === 'male' ? ' (M)' : ' (F)';
+            }
           }
         }
         assetName = assetName.replace(/\b(handaxe|magic|staff|bow|sword|axe|lance|dagger|unarmed)\b/ig, ' ');
@@ -570,7 +578,6 @@ export function scanBattleAnimations(sourceRoot, publicRoot) {
           }
         }
         assetName = assetName.replace(/\s{2,}/g, ' ').trim();
-        const isBodyTypeOnlyDir = /^(male|female|universal|animal|monster)$/i.test(variantDirName);
         if (!assetName) {
           if (variant?.label) assetName = variant.label;
           else assetName = isBodyTypeOnlyDir ? '' : titleCaseFromSlug(variantDirName);
@@ -606,7 +613,7 @@ export function scanBattleAnimations(sourceRoot, publicRoot) {
           });
         }
 
-        const cardName = composeBattleBaseName(assetName, classDirName);
+        const cardName = composeBattleBaseName(assetName, classDirName) + genderSuffix;
         const fallbackPreview = weaponVariants[0]?.preview ?? (previewFile ? relativePublicAssetPath(previewFile, publicRoot) : '');
         const slug = slugifyUnderscore(classDirName + ' ' + variantDirName);
 
@@ -727,9 +734,8 @@ export function scanPortraits(sourceRoot, publicRoot) {
           .map((filePath) => path.basename(filePath, path.extname(filePath)).replace(/\{[^}]*\}/g, '').trim())
           .filter(Boolean);
 
-        const credits = firstHeadingMatchByKey(readmeEntries, `${titleCaseFromSlug(charDirName)} ${titleCaseFromSlug(childDirName)}`)?.credits
-          ?? baseSection?.credits
-          ?? [];
+        const childSection = firstHeadingMatchByKey(readmeEntries, `${titleCaseFromSlug(charDirName)} ${titleCaseFromSlug(childDirName)}`);
+        const credits = childSection?.credits ?? baseSection?.credits ?? [];
 
         // Skip if no credits found
         if (credits.length === 0) {
@@ -746,14 +752,12 @@ export function scanPortraits(sourceRoot, publicRoot) {
             path: `portraits/${tierName.toLowerCase()}`,
             format: 'portrait',
             animation_spec: 'fe/portrait',
-            license: firstHeadingMatchByKey(readmeEntries, `${titleCaseFromSlug(charDirName)} ${titleCaseFromSlug(childDirName)}`)?.license || baseSection?.license || 'F2U, F2E',
+            license: childSection?.license || baseSection?.license || 'F2U, F2E',
             credits,
-            description: firstHeadingMatchByKey(readmeEntries, `${titleCaseFromSlug(charDirName)} ${titleCaseFromSlug(childDirName)}`)?.description
-              || baseSection?.description
-              || undefined,
+            description: childSection?.description || baseSection?.description || undefined,
             variants: [...new Set(variants)],
             preview: previewFile ? relativePublicAssetPath(previewFile, publicRoot) : '',
-            cutouts: firstHeadingMatchByKey(readmeEntries, `${titleCaseFromSlug(charDirName)} ${titleCaseFromSlug(childDirName)}`)?.offsets
+            cutouts: childSection?.offsets
               ?? baseSection?.offsets
               ?? {
                 blink: { offset_x: 0, offset_y: 0 },
@@ -813,7 +817,7 @@ function parseMapSpriteReadmeMetadata(publicRoot) {
     if (value === 'stand') return 'stand';
     if (value.startsWith('stand_')) return value;
     if (value.startsWith('fe_stand_')) return value.replace(/^fe_/, '');
-    if (value.startsWith('fe_')) return value.replace(/^fe_/, '');
+    if (value.startsWith('fe_')) return `stand_${value.slice('fe_'.length)}`;
     return `stand_${value}`;
   }
 
