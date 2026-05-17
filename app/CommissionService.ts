@@ -5,38 +5,48 @@ import { getAllAssets } from './AssetService';
 import { collectLpcBodyTypes } from './lpcLayers';
 import type { Asset } from './models/Asset';
 import type {
+  CommissionCategoryData,
   CommissionData,
   CommissionEntry,
   CommissionExampleInput,
+  CommissionSectionData,
   ResolvedCommissionData,
   ResolvedCommissionExample,
 } from './CommissionTypes';
 
 const COMMISSION_DIR = path.join(process.cwd(), 'data', 'commissions');
 
-function loadJSON(filename: string) {
-  const filePath = path.join(COMMISSION_DIR, filename);
+function loadJSON(filePath: string) {
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
+function walkSection(sectionDir: string, sectionName: string): CommissionSectionData {
+  const sectionMeta = loadJSON(path.join(sectionDir, 'meta.json'));
+  const entries = fs.readdirSync(sectionDir)
+    .filter(f => f.endsWith('.json') && f !== 'meta.json')
+    .map(f => ({ id: path.basename(f, '.json'), ...loadJSON(path.join(sectionDir, f)) } as CommissionEntry))
+    .sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
+  return { key: sectionName, label: sectionMeta.label, description: sectionMeta.description, entries };
+}
+
+function walkCategory(categoryDir: string): CommissionCategoryData {
+  const meta = loadJSON(path.join(categoryDir, 'meta.json'));
+  const sectionDirs = fs.readdirSync(categoryDir, { withFileTypes: true })
+    .filter(e => e.isDirectory())
+    .map(e => {
+      const sectionMeta = loadJSON(path.join(categoryDir, e.name, 'meta.json'));
+      return { name: e.name, priority: sectionMeta?.priority ?? 999 };
+    })
+    .sort((a, b) => a.priority - b.priority);
+
+  const sections = sectionDirs.map(({ name }) => walkSection(path.join(categoryDir, name), name));
+  return { key: path.basename(categoryDir), label: meta.label, description: meta.description, sections };
+}
+
 export function getCommissionData(): CommissionData {
-  const meta = loadJSON('meta.json');
-  const lpcEntries: CommissionEntry[] = loadJSON('lpc.json');
-  const feEntries: CommissionEntry[] = loadJSON('fe.json');
-
-  // Separate base assets from add-ons
-  const lpc_base = lpcEntries.filter((e) => !e.addon);
-  const lpc_addons = lpcEntries.filter((e) => e.addon);
-  const fe_base = feEntries.filter((e) => !e.addon);
-  const fe_addons = feEntries.filter((e) => e.addon);
-
-  return {
-    meta,
-    lpc_base,
-    lpc_addons,
-    fe_base,
-    fe_addons
-  };
+  const meta = loadJSON(path.join(COMMISSION_DIR, 'meta.json'));
+  const categories = ['lpc', 'fe'].map(key => walkCategory(path.join(COMMISSION_DIR, key)));
+  return { meta, categories };
 }
 
 function normalizeExampleInput(input: CommissionExampleInput): { assetId: string; animation?: string; bodyType?: string; weapon?: string } | null {
@@ -105,7 +115,7 @@ function resolveEntryExample(entry: CommissionEntry, assetsById: Map<string, Ass
 
 export function getResolvedCommissionData(): ResolvedCommissionData {
   const data = getCommissionData();
-  const allEntries = [...data.lpc_base, ...data.lpc_addons, ...data.fe_base, ...data.fe_addons];
+  const allEntries = data.categories.flatMap(cat => cat.sections.flatMap(s => s.entries));
   const assetsById = new Map(getAllAssets().map((asset) => [asset.id, asset]));
 
   const examplesByEntryId: Record<string, ResolvedCommissionExample> = {};
@@ -120,30 +130,4 @@ export function getResolvedCommissionData(): ResolvedCommissionData {
   };
 }
 
-export function formatPrice(entry: CommissionEntry): string {
-  if (entry.inquire) {
-    return 'Inquire for quote';
-  }
-
-  if (entry.price_min === null || entry.price_max === null) {
-    return 'Contact for pricing';
-  }
-
-  let priceStr: string;
-
-  if (entry.price_min === entry.price_max) {
-    priceStr = `$${entry.price_min}`;
-  } else {
-    priceStr = `$${entry.price_min}–$${entry.price_max}`;
-  }
-
-  if (entry.price_base !== undefined && entry.price_per) {
-    return `$${entry.price_base} base + ${priceStr}/${entry.price_per}`;
-  }
-
-  if (entry.price_per) {
-    return `${priceStr}/${entry.price_per}`;
-  }
-
-  return priceStr;
-}
+export { formatPrice } from './commissionUtils';

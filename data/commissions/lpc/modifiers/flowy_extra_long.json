@@ -1,0 +1,18 @@
+{
+  "name": "Flowy Extra Long",
+  "description": "Additional charge for very long assets requiring larger and more complex dynamic animations. Applies to very long hair, long tails, floor-length capes, and similar. Charged per animation.",
+  "applies_to": ["walk", "run", "jump"],
+  "price_min": 10,
+  "price_max": 15,
+  "price_note": "Per animation. Only applies when dynamic animation is also selected.",
+  "priority": 40,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "hair_relm_ponytail",
+      "animation": "run",
+      "body_type": "female"
+    }
+  ]
+}

@@ -96,7 +96,7 @@ export default function Layout({ children }: LayoutProps) {
                     >
                       {menu.accent === 'commissions' ? (
                         <>
-                          <span className="nav-commissions-word">{menu.label}</span>
+                          {menu.label}
                           <span
                             className={`nav-commissions-status nav-commissions-status-${menu.commissionStatus || 'closed'}`}
                           >

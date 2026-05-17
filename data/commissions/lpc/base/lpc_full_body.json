@@ -1,0 +1,16 @@
+{
+  "name": "Full Body",
+  "description": "Full body asset including torso, arms, and legs. Includes Walk and Idle.",
+  "price_min": 80,
+  "price_max": 80,
+  "priority": 60,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "torso_armour_legion",
+      "animation": "walk",
+      "body_type": "male"
+    }
+  ]
+}

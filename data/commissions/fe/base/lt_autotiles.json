@@ -1,0 +1,14 @@
+{
+  "name": "Autotiles for Lex Talionis",
+  "description": "I will convert existing map animations into an autotiles sheet for Lex Talionis.",
+  "price_min": 120,
+  "price_max": 160,
+  "priority": 10,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "cynons_metropolis_metropolis_water_tiles_cynon"
+    }
+  ]
+}

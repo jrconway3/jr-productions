@@ -1,0 +1,16 @@
+{
+  "name": "Shoot (With Arms)",
+  "description": "Shoot animation for assets with arms. Significantly more work due to arm frame count.",
+  "applies_to": ["lpc_torso_arms", "lpc_full_body"],
+  "price_min": 50,
+  "price_max": 50,
+  "priority": 90,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "arms_gloves",
+      "animation": "shoot"
+    }
+  ]
+}

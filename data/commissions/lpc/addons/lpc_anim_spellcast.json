@@ -1,0 +1,16 @@
+{
+  "name": "Spellcast",
+  "description": "Spellcast animation. Torso + Arms assets only. Leg frames are included in Walk/Idle.",
+  "applies_to": ["lpc_torso_arms", "lpc_full_body"],
+  "price_min": 30,
+  "price_max": 40,
+  "priority": 60,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "torso_armour_plate",
+      "animation": "spellcast"
+    }
+  ]
+}

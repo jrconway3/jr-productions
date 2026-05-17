@@ -1,7 +1,6 @@
 export interface CommissionEntry {
   id: string;
   name: string;
-  category: 'lpc' | 'fe';
   description: string;
   applies_to?: string[];
   price_min: number | null;
@@ -11,15 +10,15 @@ export interface CommissionEntry {
   price_note?: string;
   bundle?: boolean;
   bundle_items?: string[];
-  addon: boolean;
   inquire: boolean;
   kofi_url: string | null;
   examples?: CommissionExampleInput[];
   status?: string;
+  priority?: number;
 }
 
 export type CommissionExampleInput = string | {
-    asset_id: string; 
+    asset_id: string;
     animation?: string; body_type?: string;
     weapon?: string
 };
@@ -32,30 +31,33 @@ export interface ResolvedCommissionExample {
   groupAnimNames?: string[];
 }
 
-export interface Modifier {
-  id: string;
-  name: string;
-  description: string;
-  applies_to_animations: string[];
-  price_min: number;
-  price_max: number;
-  price_note?: string;
+export interface CommissionSectionData {
+  key: string;
+  label: string;
+  description?: string;
+  entries: CommissionEntry[];
+}
+
+export interface CommissionCategoryData {
+  key: string;
+  label: string;
+  description?: string;
+  sections: CommissionSectionData[];
 }
 
 export interface CommissionMeta {
   status: 'open' | 'closed' | 'waitlist';
   status_note: string;
+  intro?: string;
   contact_note: string;
   license_note: string;
+  license_note_fe?: string;
   payment_methods: string[];
 }
 
 export interface CommissionData {
   meta: CommissionMeta;
-  lpc_base: CommissionEntry[];
-  lpc_addons: CommissionEntry[];
-  fe_base: CommissionEntry[];
-  fe_addons: CommissionEntry[];
+  categories: CommissionCategoryData[];
 }
 
 export interface ResolvedCommissionData extends CommissionData {

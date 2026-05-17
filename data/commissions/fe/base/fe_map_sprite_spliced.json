@@ -1,0 +1,14 @@
+{
+  "name": "Map Sprite (Spliced)",
+  "description": "Spliced or edited map sprite including stand pose and 4-directional walk cycle.",
+  "price_min": 30,
+  "price_max": 40,
+  "priority": 100,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "wolf_knight"
+    }
+  ]
+}
