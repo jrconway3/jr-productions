@@ -75,6 +75,6 @@ export async function downloadFeAsset(asset: Asset): Promise<void> {
   const blob = await fetchBlob(url);
   if (!blob) return;
 
-  const ext = url.split('.').pop() ?? 'gif';
+  const ext = url.includes('.') ? (url.split('.').pop() ?? 'gif') : 'gif';
   triggerDownload(blob, `${asset.id}.${ext}`);
 }

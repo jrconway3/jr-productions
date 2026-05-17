@@ -195,6 +195,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   height: 100%;
+  padding: 0 0.6rem;
 }
 
 .nav-dropdown-menu {
@@ -203,12 +204,15 @@ h1, h2, h3, h4, h5, h6 {
   top: 100%;
   margin-top: 0;
   display: block;
-  min-width: 220px;
+  min-width: 180px;
+  width: max-content;
   max-height: 60vh;
   overflow: auto;
-  background: rgba(6, 24, 16, 0.98);
-  border: 1px solid rgba(74,222,128,0.28);
-  padding: 0.4rem;
+  background: rgba(6, 24, 16, 0.97);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(74,222,128,0.35);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  padding: 0.35rem;
   z-index: 60;
   opacity: 0;
   visibility: hidden;
@@ -237,11 +241,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-dropdown-item {
   display: block;
+  width: 100%;
   font-family: 'Commodore 64', monospace;
   font-size: 0.65rem;
   color: #9ca3af;
-  padding: 0.4rem 0.5rem;
+  padding: 0.45rem 0.75rem;
   border-left: 2px solid transparent;
+  white-space: nowrap;
 }
 
 .nav-dropdown-menu-lpc .nav-dropdown-item:hover {

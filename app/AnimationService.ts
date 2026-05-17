@@ -183,8 +183,10 @@ function loadLpcSpecs(): ResolvedLpcSpec {
     fs.readdirSync(dir)
       .filter((f) => f.endsWith('.json'))
       .map((f) => {
+        const fileId = path.basename(f, '.json');
         const spec = resolveGlobalLayers(loadSpecFile(path.join(dir, f)));
-        return [spec.id, spec];
+        spec.id = fileId;
+        return [fileId, spec];
       }),
   );
   return lpcSpecsCache;
@@ -327,6 +329,13 @@ export function resolveHomepageSpecs(
   const bodyTypes: Record<string, string> = {};
   const groupNames: Record<string, string[]> = {};
 
+  // Cache existence checks to avoid repeated fs.existsSync calls per-asset × per-body-type × per-animation.
+  const existsCache = new Map<string, boolean>();
+  const cachedExists = (p: string): boolean => {
+    if (!existsCache.has(p)) existsCache.set(p, fs.existsSync(p));
+    return existsCache.get(p)!;
+  };
+
   // Animations that are secondary members of a group (referenced in another spec's group
   // array) should never be picked independently on the homepage.
   const secondaryGroupMembers = new Set<string>();
@@ -363,7 +372,7 @@ export function resolveHomepageSpecs(
     if (allLayerPaths.length === 0) return false;
     
     // All layer files must exist
-    return allLayerPaths.every((layerPath) => fs.existsSync(path.join(LPC_PUBLIC_ROOT, layerPath, sourceFile)));
+    return allLayerPaths.every((layerPath) => cachedExists(path.join(LPC_PUBLIC_ROOT, layerPath, sourceFile)));
   };
 
   for (const asset of assets) {

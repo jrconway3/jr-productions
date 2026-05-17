@@ -76,6 +76,8 @@ function writeJson(filePath, data) {
 }
 
 function clearDataRootKeepMeta() {
+  // WARNING: --rebuild deletes all subdirs, including any manually-edited subcategory
+  // meta.json files. Back up custom meta.json edits before running --rebuild.
   ensureDir(DATA_ROOT);
   const entries = fs.readdirSync(DATA_ROOT, { withFileTypes: true });
   for (const entry of entries) {
