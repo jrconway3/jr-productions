@@ -1,0 +1,17 @@
+{
+  "name": "Static Head Asset",
+  "description": "Four directional frames plus mapping to all animation frames.",
+  "price_min": 25,
+  "price_max": 30,
+  "price_note": "Final price depends on complexity.",
+  "priority": 10,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "head_ears_dragon",
+      "animation": "shoot",
+      "body_type": "teen"
+    }
+  ]
+}

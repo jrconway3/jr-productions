@@ -1,0 +1,16 @@
+{
+  "name": "Sit (Torso)",
+  "description": "Sit animation for torso assets. Simple and quick.",
+  "applies_to": ["lpc_torso_only", "lpc_torso_arms"],
+  "price_min": 20,
+  "price_max": 20,
+  "priority": 10,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "torso_clothes_sleeveless2",
+      "animation": "sit"
+    }
+  ]
+}

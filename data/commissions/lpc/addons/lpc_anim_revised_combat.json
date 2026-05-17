@@ -1,0 +1,17 @@
+{
+  "name": "Revised Combat",
+  "description": "Bundle covering Backslash (13 frames), Halfslash (3 additional frames), and Combat Idle (derived). High effort — treated as starting from scratch regardless of existing assets.",
+  "price_min": 80,
+  "price_max": 80,
+  "priority": 110,
+  "bundle": true,
+  "bundle_items": ["backslash", "halfslash", "combat_idle"],
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "shoulders_pauldrons",
+      "animation": "combat"
+    }
+  ]
+}

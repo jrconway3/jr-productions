@@ -1,0 +1,15 @@
+{
+  "name": "Thrust",
+  "description": "Thrust animation. Applies to any base asset.",
+  "price_min": 30,
+  "price_max": 30,
+  "priority": 70,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "arms_armour",
+      "animation": "thrust"
+    }
+  ]
+}

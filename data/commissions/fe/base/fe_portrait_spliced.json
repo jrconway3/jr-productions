@@ -1,0 +1,14 @@
+{
+  "name": "Portrait (Spliced)",
+  "description": "Portrait created by splicing from existing parts.",
+  "price_min": 20,
+  "price_max": 30,
+  "priority": 20,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "kasuto"
+    }
+  ]
+}

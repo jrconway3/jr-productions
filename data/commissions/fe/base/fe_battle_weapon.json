@@ -1,0 +1,18 @@
+{
+  "name": "Battle Animation (Weapon)",
+  "description": "Add a custom weapon to an existing battle animation.",
+  "price_min": 5,
+  "price_max": 10,
+  "price_per": "frame",
+  "price_base": 10,
+  "price_note": "$10 for base frame, then $5–$10 per additional unique frame depending on complexity.",
+  "priority": 60,
+  "inquire": true,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "wolf_knight_male",
+      "weapon": "bow"
+    }
+  ]
+}

@@ -264,6 +264,34 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+.nav-dropdown-menu-commissions-open .nav-dropdown-item:hover {
+  color: #a7f3d0;
+  background: rgba(16,185,129,0.1);
+  border-left-color: rgba(16,185,129,0.75);
+  text-decoration: none;
+}
+
+.nav-dropdown-menu-commissions-waitlist .nav-dropdown-item:hover {
+  color: #fde68a;
+  background: rgba(245,158,11,0.12);
+  border-left-color: rgba(245,158,11,0.78);
+  text-decoration: none;
+}
+
+.nav-dropdown-menu-commissions-closed .nav-dropdown-item:hover {
+  color: #fda4af;
+  background: rgba(244,63,94,0.12);
+  border-left-color: rgba(244,63,94,0.78);
+  text-decoration: none;
+}
+
+.nav-dropdown-menu-about .nav-dropdown-item:hover {
+  color: #e5e7eb;
+  background: rgba(229,231,235,0.08);
+  border-left-color: rgba(229,231,235,0.5);
+  text-decoration: none;
+}
+
 .nav-link-active {
   text-shadow: 0 0 8px rgba(74,222,128,0.35);
 }
@@ -282,6 +310,84 @@ h1, h2, h3, h4, h5, h6 {
   text-shadow: 0 0 8px rgba(251,191,36,0.35);
 }
 
+.nav-commissions-status {
+  display: inline-block;
+  margin-left: 0.32rem;
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+}
+
+.nav-commissions-status-open {
+  font-weight: 700;
+  color: #f7fbc6;
+  text-shadow:
+    0 0 6px rgba(217,226,102,0.45),
+    0 0 12px rgba(201,215,77,0.35);
+  animation: commissions-open-glow 2.2s ease-in-out infinite;
+}
+
+.nav-commissions-status-waitlist {
+  color: #fde68a;
+}
+
+.nav-commissions-status-closed {
+  color: #fecdd3;
+}
+
+.nav-link-prominent-commissions-open {
+  color: #cbd5e1;
+}
+
+.nav-link-prominent-commissions-open:hover {
+  color: #e2e8f0;
+}
+
+.nav-link-active-commissions-open .nav-commissions-status {
+  color: #f7fbc6;
+  text-shadow:
+    0 0 8px rgba(217,226,102,0.58),
+    0 0 16px rgba(201,215,77,0.5),
+    0 0 24px rgba(217,226,102,0.34);
+}
+
+.nav-link-prominent-commissions-open:hover .nav-commissions-status-open {
+  color: #fbffd9;
+  text-shadow:
+    0 0 8px rgba(217,226,102,0.62),
+    0 0 15px rgba(201,215,77,0.5),
+    0 0 24px rgba(217,226,102,0.32);
+}
+
+.nav-link-prominent-commissions-waitlist {
+  text-shadow: 0 0 8px rgba(245,158,11,0.45);
+}
+
+.nav-link-prominent-commissions-waitlist:hover {
+  text-shadow: 0 0 10px rgba(245,158,11,0.56);
+}
+
+.nav-link-active-commissions-waitlist {
+  text-shadow: 0 0 10px rgba(245,158,11,0.5);
+}
+
+.nav-link-prominent-commissions-closed {
+  text-shadow: 0 0 8px rgba(244,63,94,0.5);
+}
+
+.nav-link-prominent-commissions-closed:hover {
+  text-shadow: 0 0 10px rgba(244,63,94,0.62);
+}
+
+.nav-link-active-commissions-closed {
+  text-shadow: 0 0 10px rgba(244,63,94,0.6);
+}
+
+.nav-link-active-about {
+  color: #e5e7eb;
+  text-shadow: 0 0 8px rgba(229,231,235,0.25);
+}
+
 .nav-dropdown-item-active-lpc {
   color: #86efac;
   background: rgba(74,222,128,0.08);
@@ -292,6 +398,57 @@ h1, h2, h3, h4, h5, h6 {
   color: #fde68a;
   background: rgba(251,191,36,0.1);
   border-left-color: rgba(251,191,36,0.7);
+}
+
+.nav-dropdown-item-active-commissions-open {
+  color: #a7f3d0;
+  background: rgba(16,185,129,0.1);
+  border-left-color: rgba(16,185,129,0.75);
+}
+
+.nav-dropdown-item-active-commissions-waitlist {
+  color: #fde68a;
+  background: rgba(245,158,11,0.12);
+  border-left-color: rgba(245,158,11,0.78);
+}
+
+.nav-dropdown-item-active-commissions-closed {
+  color: #fda4af;
+  background: rgba(244,63,94,0.12);
+  border-left-color: rgba(244,63,94,0.78);
+}
+
+.nav-dropdown-item-active-about {
+  color: #e5e7eb;
+  background: rgba(229,231,235,0.08);
+  border-left-color: rgba(229,231,235,0.5);
+}
+
+@keyframes commissions-open-glow {
+  0% {
+    text-shadow:
+      0 0 5px rgba(217,226,102,0.42),
+      0 0 10px rgba(201,215,77,0.3),
+      0 0 14px rgba(217,226,102,0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(217,226,102,0.6),
+      0 0 14px rgba(201,215,77,0.48),
+      0 0 20px rgba(217,226,102,0.32);
+  }
+  100% {
+    text-shadow:
+      0 0 7px rgba(217,226,102,0.54),
+      0 0 12px rgba(201,215,77,0.42),
+      0 0 18px rgba(217,226,102,0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link-prominent-commissions-open {
+    animation: none;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -334,4 +491,8 @@ h1, h2, h3, h4, h5, h6 {
 .masonry-grid > * {
   break-inside: avoid;
   margin-bottom: 1rem;
+}
+
+.commission-example-host > .sprite-card > div:last-child {
+  display: none;
 }

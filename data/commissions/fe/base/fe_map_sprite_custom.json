@@ -1,0 +1,14 @@
+{
+  "name": "Map Sprite (Custom)",
+  "description": "Custom map sprite including stand pose and 4-directional walk cycle.",
+  "price_min": 45,
+  "price_max": 60,
+  "priority": 110,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "mage_lord_svetlanya"
+    }
+  ]
+}

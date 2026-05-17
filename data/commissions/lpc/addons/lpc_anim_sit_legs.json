@@ -1,0 +1,16 @@
+{
+  "name": "Sit (Legs)",
+  "description": "Sit animation for leg assets. More complex than torso sit.",
+  "applies_to": ["lpc_legs_only", "lpc_full_body"],
+  "price_min": 30,
+  "price_max": 30,
+  "priority": 30,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "legs_pants2",
+      "animation": "sit"
+    }
+  ]
+}

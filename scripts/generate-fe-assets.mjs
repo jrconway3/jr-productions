@@ -98,6 +98,7 @@ function writeGeneratedMetas(metas, overwrite) {
 function writeGeneratedAssets(assets, overwrite) {
   let written = 0;
   const usedPerDirectory = new Map();
+  const writtenPaths = new Set();
 
   for (const assetEntry of assets) {
     const relativeDir = normalizeSlashes(assetEntry.relativeDir);
@@ -110,10 +111,38 @@ function writeGeneratedAssets(assets, overwrite) {
     const uniqueSlug = ensureUniqueSlug(assetEntry.fileSlug, usedSlugs);
     const targetPath = path.join(targetDir, `${uniqueSlug}.json`);
 
+    writtenPaths.add(targetPath);
     if (writeJsonFile(targetPath, assetEntry.data, { overwrite })) written += 1;
   }
 
-  return written;
+  return { written, writtenPaths };
+}
+
+function deleteStaleAssets(categoryDataRoot, expectedPaths) {
+  const existingFiles = [];
+
+  function walk(dirPath) {
+    if (!fs.existsSync(dirPath)) return;
+    for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+      const full = path.join(dirPath, entry.name);
+      if (entry.isDirectory()) {
+        walk(full);
+      } else if (entry.isFile() && entry.name.endsWith('.json') && entry.name !== 'meta.json') {
+        existingFiles.push(full);
+      }
+    }
+  }
+
+  walk(categoryDataRoot);
+
+  let deleted = 0;
+  for (const file of existingFiles) {
+    if (!expectedPaths.has(file)) {
+      fs.rmSync(file, { force: true });
+      deleted += 1;
+    }
+  }
+  return deleted;
 }
 
 function collectMissingCredits(assets) {
@@ -125,22 +154,26 @@ function collectMissingCredits(assets) {
 function generateCategory(config, overwrite) {
   const sourcePath = path.join(FE_SOURCE_ROOT, config.sourceRoot);
   if (!fs.existsSync(sourcePath)) {
-    return { category: config.dataRoot, assetCount: 0, metaCount: 0, missingCredits: [] };
+    return { category: config.dataRoot, assetCount: 0, metaCount: 0, deletedCount: 0, missingCredits: [] };
   }
 
   const scanResult = config.scanner(sourcePath, PUBLIC_ROOT);
 
   if (scanResult.assets.length === 0) {
-    return { category: config.dataRoot, assetCount: 0, metaCount: 0, missingCredits: [] };
+    return { category: config.dataRoot, assetCount: 0, metaCount: 0, deletedCount: 0, missingCredits: [] };
   }
 
   writeCategoryMeta(config, overwrite);
 
   const metaCount = writeGeneratedMetas(scanResult.metas, overwrite);
-  const assetCount = writeGeneratedAssets(scanResult.assets, overwrite);
+  const { written: assetCount, writtenPaths } = writeGeneratedAssets(scanResult.assets, overwrite);
   const missingCredits = collectMissingCredits(scanResult.assets);
 
-  return { category: config.dataRoot, assetCount, metaCount, missingCredits };
+  // In rebuild mode removeDataChildrenKeepRootMeta() already cleared everything;
+  // stale deletion is only needed in add-new mode.
+  const deletedCount = overwrite ? 0 : deleteStaleAssets(path.join(FE_DATA_ROOT, config.dataRoot), writtenPaths);
+
+  return { category: config.dataRoot, assetCount, metaCount, deletedCount, missingCredits };
 }
 
 function run() {
@@ -158,12 +191,13 @@ function run() {
 
   const totalAssets = results.reduce((sum, item) => sum + item.assetCount, 0);
   const totalMetas = results.reduce((sum, item) => sum + item.metaCount, 0);
+  const totalDeleted = results.reduce((sum, item) => sum + item.deletedCount, 0);
   const totalMissingCredits = results.reduce((sum, item) => sum + item.missingCredits.length, 0);
 
   console.log(`FE generation complete (${mode}).`);
   for (const result of results) {
     const label = titleCaseFromSlug(mapSourceRootToDataRoot(result.category));
-    console.log(`- ${label}: ${result.assetCount} assets, ${result.metaCount} metas`);
+    console.log(`- ${label}: ${result.assetCount} assets, ${result.metaCount} metas, ${result.deletedCount} stale deleted`);
 
     if (result.missingCredits.length > 0) {
       console.warn(`  ! Missing credits (${result.missingCredits.length})`);
@@ -175,7 +209,7 @@ function run() {
       }
     }
   }
-  console.log(`Total: ${totalAssets} assets, ${totalMetas} metas.`);
+  console.log(`Total: ${totalAssets} assets, ${totalMetas} metas, ${totalDeleted} stale deleted.`);
   if (totalMissingCredits > 0) {
     console.warn(`Missing credits summary: ${totalMissingCredits} asset imports still need credits metadata.`);
   }

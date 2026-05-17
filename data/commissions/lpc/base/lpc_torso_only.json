@@ -1,0 +1,16 @@
+{
+  "name": "Torso Only",
+  "description": "Upper body asset with no arms. Includes Walk and Idle.",
+  "price_min": 30,
+  "price_max": 30,
+  "priority": 20,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "torso_armour_plate",
+      "animation": "walk",
+      "body_type": "teen"
+    }
+  ]
+}

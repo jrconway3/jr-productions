@@ -1,0 +1,10 @@
+{
+  "name": "Battle Animation Custom Still",
+  "description": "Single custom still frame for a battle animation.",
+  "price_min": 30,
+  "price_max": 40,
+  "priority": 70,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": []
+}

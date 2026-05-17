@@ -1,0 +1,17 @@
+{
+  "name": "Shoot (No Arms)",
+  "description": "Shoot animation for assets without arms (torso or leg assets).",
+  "applies_to": ["lpc_torso_only", "lpc_legs_only"],
+  "price_min": 30,
+  "price_max": 30,
+  "priority": 80,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "legs_leggings",
+      "animation": "shoot",
+      "body_type": "male"
+    }
+  ]
+}

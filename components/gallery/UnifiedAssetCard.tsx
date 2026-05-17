@@ -15,11 +15,12 @@ interface UnifiedAssetCardProps {
   asset: Asset;
   resolvedSpec?: AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec;
   animName?: string;
+  weapon?: string;
   bodyType?: string;
   groupAnimNames?: string[];
 }
 
-export default function UnifiedAssetCard({ asset, resolvedSpec, animName, bodyType, groupAnimNames }: UnifiedAssetCardProps) {
+export default function UnifiedAssetCard({ asset, resolvedSpec, animName, weapon, bodyType, groupAnimNames }: UnifiedAssetCardProps) {
   const hasPreview = Boolean(toPublicAssetUrl(asset.preview));
 
   if (asset.type === 'lpc' && asset.animations?.length) {
@@ -81,7 +82,7 @@ export default function UnifiedAssetCard({ asset, resolvedSpec, animName, bodyTy
   }
 
   if (asset.type === 'fe') {
-    return <FeCard asset={asset} feSpec={resolvedSpec as ResolvedFeSpec | undefined} />;
+    return <FeCard asset={asset} feSpec={resolvedSpec as ResolvedFeSpec | undefined} weapon={weapon} />;
   }
 
   return <AssetCard asset={asset} />;

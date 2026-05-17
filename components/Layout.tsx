@@ -1,42 +1,67 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { getNavMenus, type NavMenuItem } from 'app/NavService';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const LPC_CATEGORY_LINKS = [
-  { href: '/lpc/arms', label: 'Arms' },
-  { href: '/lpc/body', label: 'Body' },
-  { href: '/lpc/feet', label: 'Feet' },
-  { href: '/lpc/hair', label: 'Hair' },
-  { href: '/lpc/head', label: 'Head' },
-  { href: '/lpc/headwear', label: 'Headwear' },
-  { href: '/lpc/legs', label: 'Legs' },
-  { href: '/lpc/tilesets', label: 'Tilesets' },
-  { href: '/lpc/tools', label: 'Tools' },
-  { href: '/lpc/torso', label: 'Torso' },
-  { href: '/lpc/weapons', label: 'Weapons' },
-];
+function menuAccentClass(menu: NavMenuItem, active: boolean): string {
+  const common = 'font-pixel text-xs transition-colors';
 
-const FE_CATEGORY_LINKS = [
-  { href: '/fe/portraits', label: 'Portraits' },
-  { href: '/fe/battle-animations', label: 'Battle Animations' },
-  { href: '/fe/map-sprites', label: 'Map Sprites' },
-  { href: '/fe/autotiles', label: 'Autotiles' },
-  { href: '/fe/maps', label: 'Maps' },
-  { href: '/fe/icons', label: 'Icons' },
-];
+  if (menu.accent === 'lpc') {
+    return `${common} text-site-muted hover:text-lpc-accentLight ${active ? 'nav-link-active nav-link-active-lpc' : ''}`;
+  }
+
+  if (menu.accent === 'fe') {
+    return `${common} text-site-muted hover:text-fe-accentLight ${active ? 'nav-link-active nav-link-active-fe' : ''}`;
+  }
+
+  if (menu.accent === 'commissions') {
+    const status = menu.commissionStatus || 'closed';
+    const activeClass = `nav-link-active nav-link-active-commissions-${status}`;
+    const prominentClass = `nav-link-prominent-commissions-${status}`;
+    return `${common} ${active ? activeClass : prominentClass}`;
+  }
+
+  return `${common} text-site-muted hover:text-site-text ${active ? 'nav-link-active nav-link-active-about' : ''}`;
+}
+
+function menuWrapperClass(menu: NavMenuItem): string {
+  if (menu.accent === 'lpc') return 'nav-dropdown-menu nav-dropdown-menu-lpc';
+  if (menu.accent === 'fe') return 'nav-dropdown-menu nav-dropdown-menu-fe';
+  if (menu.accent === 'commissions') {
+    const status = menu.commissionStatus || 'closed';
+    return `nav-dropdown-menu nav-dropdown-menu-commissions nav-dropdown-menu-commissions-${status}`;
+  }
+  return 'nav-dropdown-menu nav-dropdown-menu-about';
+}
+
+function menuItemClass(menu: NavMenuItem, active: boolean): string {
+  if (menu.accent === 'lpc') {
+    return `nav-dropdown-item ${active ? 'nav-dropdown-item-active nav-dropdown-item-active-lpc' : ''}`;
+  }
+  if (menu.accent === 'fe') {
+    return `nav-dropdown-item ${active ? 'nav-dropdown-item-active nav-dropdown-item-active-fe' : ''}`;
+  }
+  if (menu.accent === 'commissions') {
+    const status = menu.commissionStatus || 'closed';
+    return `nav-dropdown-item ${active ? `nav-dropdown-item-active nav-dropdown-item-active-commissions-${status}` : ''}`;
+  }
+  return `nav-dropdown-item ${active ? 'nav-dropdown-item-active nav-dropdown-item-active-about' : ''}`;
+}
+
+function linkIsActive(currentPath: string, href: string): boolean {
+  if (!href.startsWith('/')) return false;
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
 
 export default function Layout({ children }: LayoutProps) {
   const router = useRouter();
   const currentPath = router.asPath.split('?')[0];
-
-  const isPathActive = (href: string): boolean => {
-    if (href === '/') return currentPath === '/';
-    return currentPath === href || currentPath.startsWith(`${href}/`);
-  };
+  const menus = getNavMenus();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -48,49 +73,76 @@ export default function Layout({ children }: LayoutProps) {
           </Link>
 
           <div className="flex gap-6 ml-auto items-center">
-            <div className="nav-dropdown group">
-              <Link
-                href="/lpc"
-                className={`font-pixel text-xs text-site-muted hover:text-lpc-accentLight transition-colors ${isPathActive('/lpc') ? 'nav-link-active nav-link-active-lpc' : ''}`}
-                aria-current={isPathActive('/lpc') ? 'page' : undefined}
-              >
-                LPC
-              </Link>
-              <div className="nav-dropdown-menu nav-dropdown-menu-lpc">
-                {LPC_CATEGORY_LINKS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`nav-dropdown-item ${isPathActive(item.href) ? 'nav-dropdown-item-active nav-dropdown-item-active-lpc' : ''}`}
-                    aria-current={isPathActive(item.href) ? 'page' : undefined}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {menus.map((menu) => {
+              const active = linkIsActive(currentPath, menu.href);
+              const topClassName = menuAccentClass(menu, active);
 
-            <div className="nav-dropdown group">
-              <Link
-                href="/fe"
-                className={`font-pixel text-xs text-site-muted hover:text-fe-accentLight transition-colors ${isPathActive('/fe') ? 'nav-link-active nav-link-active-fe' : ''}`}
-                aria-current={isPathActive('/fe') ? 'page' : undefined}
-              >
-                FE
-              </Link>
-              <div className="nav-dropdown-menu nav-dropdown-menu-fe">
-                {FE_CATEGORY_LINKS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`nav-dropdown-item ${isPathActive(item.href) ? 'nav-dropdown-item-active nav-dropdown-item-active-fe' : ''}`}
-                    aria-current={isPathActive(item.href) ? 'page' : undefined}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+              return (
+                <div key={menu.id} className="nav-dropdown group">
+                  {menu.external ? (
+                    <a
+                      href={menu.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={topClassName}
+                    >
+                      {menu.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={menu.href}
+                      className={topClassName}
+                      aria-current={active ? 'page' : undefined}
+                    >
+                      {menu.accent === 'commissions' ? (
+                        <>
+                          {menu.label}
+                          <span
+                            className={`nav-commissions-status nav-commissions-status-${menu.commissionStatus || 'closed'}`}
+                          >
+                            {menu.commissionStatusText || 'Closed'}
+                          </span>
+                        </>
+                      ) : (
+                        menu.label
+                      )}
+                    </Link>
+                  )}
+
+                  <div className={menuWrapperClass(menu)}>
+                    {menu.links.map((item) => {
+                      const itemActive = linkIsActive(currentPath, item.href);
+                      const className = menuItemClass(menu, itemActive);
+
+                      if (item.external) {
+                        return (
+                          <a
+                            key={`${menu.id}:${item.href}`}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={className}
+                          >
+                            {item.label}
+                          </a>
+                        );
+                      }
+
+                      return (
+                        <Link
+                          key={`${menu.id}:${item.href}`}
+                          href={item.href}
+                          className={className}
+                          aria-current={itemActive ? 'page' : undefined}
+                        >
+                          {item.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </nav>
       </header>

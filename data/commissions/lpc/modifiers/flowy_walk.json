@@ -1,0 +1,16 @@
+{
+  "name": "Flowy Walk",
+  "description": "Natural flowing animation for hanging assets (capes, long hair, tails, etc.). Applied per animation type.",
+  "applies_to": ["walk"],
+  "price_min": 20,
+  "price_max": 20,
+  "priority": 10,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "hair_relm_short",
+      "animation": "walk"
+    }
+  ]
+}

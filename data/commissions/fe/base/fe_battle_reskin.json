@@ -1,0 +1,17 @@
+{
+  "name": "Battle Animation Reskin",
+  "description": "Take an existing animation and significantly alter the design of the character while keeping the same pose and animation.",
+  "price_min": 5,
+  "price_max": 10,
+  "price_per": "frame",
+  "price_base": 20,
+  "price_note": "$20 for base frame, then $5–$10 per additional unique frame depending on complexity.",
+  "priority": 50,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "t1_amaya_strandless"
+    }
+  ]
+}
