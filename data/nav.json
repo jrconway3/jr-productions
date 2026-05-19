@@ -21,21 +21,6 @@
       }
     },
     {
-      "id": "commissions",
-      "label": "Commissions",
-      "href": "/commissions",
-      "accent": "commissions",
-      "status_label": {
-        "open": "OPEN!",
-        "closed": "Closed",
-        "waitlist": "Waitlist"
-      },
-      "links": [
-        { "href": "/commissions", "label": "Commissions" },
-        { "href": "https://ko-fi.com/jaidynreiman", "label": "Ko-Fi", "external": true }
-      ]
-    },
-    {
       "id": "about",
       "label": "About",
       "href": "https://jrplays.net/about-me",
