@@ -16,7 +16,7 @@
   "variants": [
     "OC Yarda Old"
   ],
-  "preview": "assets/fe/Portraits/major/yarda/legacy/{JaidynReiman} OC Yarda Old.png",
+  "preview": "assets/fe/portraits/major/yarda/legacy/{JaidynReiman} OC Yarda Old.png",
   "cutouts": {
     "blink": {
       "offset_x": 32,
