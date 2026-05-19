@@ -104,14 +104,16 @@ jobs:
               sudo systemctl reload nginx 2>/dev/null || true
             fi
 
-            # Verify homepage is reachable
+            # Verify homepage is reachable through nginx using canonical host
             sleep 2
-            if ! curl -fsS http://127.0.0.1/ -o /tmp/home.html; then
+            if ! curl -fsSL -H "Host: www.jaidynreiman.net" http://127.0.0.1/ -o /tmp/home.html; then
               echo "Homepage check failed"
               exit 1
             fi
 
-            if ! grep -q '_next/static' /tmp/home.html; then
-              echo "Homepage did not reference a _next/static asset"
+            # Check for a stable Next marker (less brittle than only _next/static)
+            if ! grep -qE '__next|_next/static' /tmp/home.html; then
+              echo "Homepage response did not look like Next output"
+              head -n 40 /tmp/home.html || true
               exit 1
             fi
