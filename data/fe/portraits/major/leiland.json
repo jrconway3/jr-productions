@@ -16,7 +16,7 @@
   "variants": [
     "OC Leiland"
   ],
-  "preview": "assets/fe/Portraits/major/leiland/{JaidynReiman} OC Leiland.png",
+  "preview": "assets/fe/portraits/major/leiland/{JaidynReiman} OC Leiland.png",
   "cutouts": {
     "blink": {
       "offset_x": 24,

@@ -16,7 +16,7 @@
   "variants": [
     "OC Amaya"
   ],
-  "preview": "assets/fe/Portraits/main/amaya/{JaidynReiman} OC Amaya.png",
+  "preview": "assets/fe/portraits/main/amaya/{JaidynReiman} OC Amaya.png",
   "cutouts": {
     "blink": {
       "offset_x": 32,

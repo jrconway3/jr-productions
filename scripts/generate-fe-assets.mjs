@@ -24,11 +24,11 @@ const FE_SOURCE_ROOT = path.join(PUBLIC_ROOT, 'assets', 'fe');
 const FE_DATA_ROOT = path.join(PROJECT_ROOT, 'data', 'fe');
 
 const CATEGORY_CONFIG = [
-  { sourceRoot: 'Portraits', dataRoot: 'portraits', label: 'Portraits', priority: 10, scanner: scanPortraits },
+  { sourceRoot: 'portraits', dataRoot: 'portraits', label: 'Portraits', priority: 10, scanner: scanPortraits },
   { sourceRoot: 'battle_animations', dataRoot: 'battle-animations', label: 'Battle Animations', priority: 20, scanner: scanBattleAnimations },
   { sourceRoot: 'map_sprites', dataRoot: 'map-sprites', label: 'Map Sprites', priority: 30, scanner: scanMapSprites },
   { sourceRoot: 'autotiles', dataRoot: 'autotiles', label: 'Autotiles', priority: 40, scanner: scanAutotiles },
-  { sourceRoot: 'Icons', dataRoot: 'icons', label: 'Icons', priority: 50, scanner: scanIcons },
+  { sourceRoot: 'icons', dataRoot: 'icons', label: 'Icons', priority: 50, scanner: scanIcons },
   { sourceRoot: 'maps', dataRoot: 'maps', label: 'Maps', priority: 60, scanner: scanMaps },
 ];
 
