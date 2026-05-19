@@ -1,10 +1,21 @@
 {
-  "name": "Ch6 Legacy",
+  "name": "Chapter 6: Healer of Dohma",
   "type": "fe",
   "path": "maps/chapters",
   "format": "spritesheet",
-  "license": "F2U, F2E",
-  "credits": [],
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "type": "Village - Remake + Coconut Tree + Ship Extras",
+      "authors": [
+        "flasuban",
+        "N426",
+        "ZoramineFae",
+        "Venno"
+      ]
+    }
+  ],
+  "description": "Originally was the Prologue, but I decided to set the Prologue much further back in time. As such, this will not encompass the whole village, but it also means the village needs to be redesigned to work better as a proper battle map.\n\nI used Village Remake with Ship Extras because I wanted the ship in the village tileset I was using, but I don't need the ship in this particular map. So its possible I may swap it for a different tileset later, but I haven't decided yet.",
   "preview": "assets/fe/maps/chapters/ch6-legacy.png",
   "download": ""
 }

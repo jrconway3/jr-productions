@@ -1,0 +1,31 @@
+{
+  "id": "fe_portrait",
+  "controls": { "type": "portrait" },
+  "cutouts": {
+    "portrait": {
+      "x": 0, "y": 0, "width": 96, "height": 80
+    },
+    "chibi": {
+      "x": 96, "y": 16, "width": 32, "height": 32
+    },
+    "blink": {
+      "x": 96, "y": 48, "width": 32, "height": 16,
+      "frames": 2, "fps": 3,
+      "frame_sequence": [0, 0, 0, 0, 1, 2, 1],
+      "frame_direction": "vertical",
+      "overlay": "portrait", "offset_x": 0, "offset_y": 0
+    },
+    "mouth_smile": {
+      "x": 0, "y": 80, "width": 32, "height": 16,
+      "frames": 3, "fps": 6,
+      "frame_order": "reverse",
+      "overlay": "portrait", "offset_x": 0, "offset_y": 0
+    },
+    "mouth_neutral": {
+      "x": 0, "y": 96, "width": 32, "height": 16,
+      "frames": 3, "fps": 6,
+      "frame_order": "reverse",
+      "overlay": "portrait", "offset_x": 0, "offset_y": 0
+    }
+  }
+}

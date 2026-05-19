@@ -1,9 +1,24 @@
 {
   "name": "Pregnancy pants",
   "type": "lpc",
-  "path": "legs/pants",
+  "category": "legs",
   "format": "spritesheet",
+  "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0",
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 20,
+      "assets": [
+        {
+          "path": "legs/pants/pregnant",
+          "body_types": [
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
   "credits": [
     {
       "authors": [
@@ -24,37 +39,13 @@
       "notes": "original male pants by wulax; edited for female by Joe White; recolors by JaidynReiman; walkcycle adapted to pregnant base by ElizaWy; remaining animations, recolors and edits to v3 base by bluecarrot16"
     }
   ],
-  "body_types": [
-    "pregnant"
-  ],
-  "variants": [
-    "black",
-    "blue",
-    "forest",
-    "gray",
-    "green",
-    "lavender",
-    "leather",
-    "maroon",
-    "navy",
-    "orange",
-    "pink",
-    "purple",
-    "red",
-    "sky",
-    "tan",
-    "teal",
-    "walnut",
-    "white",
-    "yellow"
-  ],
-  "layers": [
-    {
-      "id": "fg",
-      "zPos": 20,
-      "path": "legs/pants/pregnant"
-    }
-  ],
-  "preview": "",
-  "download": "http://opengameart.org/content/lpc-clothing-updates"
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
 }

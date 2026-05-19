@@ -1,0 +1,69 @@
+{
+  "name": "Page2",
+  "type": "lpc",
+  "category": "hair",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 120,
+      "assets": [
+        {
+          "path": "hair/page2/adult",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "ElizaWy",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Hair",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more"
+      ],
+      "notes": "Original by Johannes Sjölund (wulax). Edited, animated, and recolored by ElizaWy."
+    }
+  ],
+  "recolors": {
+    "material": "hair",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

@@ -1,29 +1,10 @@
 {
   "name": "Xlong",
   "type": "lpc",
-  "path": "hair/xlong",
+  "category": "hair",
   "format": "spritesheet",
-  "license": "OGA-BY 3.0, CC-BY-SA 3.0, GPL 2.0, GPL 3.0",
-  "credits": [
-    {
-      "authors": [
-        "JaidynReiman",
-        "Nila122"
-      ],
-      "urls": [
-        "https://opengameart.org/content/lpc-clothes-and-hair",
-        "https://opengameart.org/content/lpc-expanded-xlong-hair"
-      ],
-      "notes": "Original by Nila122; cleaned up, resplit into separate layers, and added jump/run/sit/revised combat by JaidynReiman"
-    }
-  ],
-  "body_types": [
-    "male",
-    "muscular",
-    "female",
-    "pregnant",
-    "teen"
-  ],
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 2.0, GPL 3.0, OGA-BY 3.0",
   "animations": [
     "spellcast",
     "thrust",
@@ -45,16 +26,58 @@
   ],
   "layers": [
     {
-      "id": "fg",
-      "zPos": 120,
-      "path": "hair/xlong/adult/fg"
-    },
-    {
       "id": "bg",
       "zPos": 9,
-      "path": "hair/xlong/adult/bg"
+      "assets": [
+        {
+          "path": "hair/xlong/adult/bg",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fg",
+      "zPos": 120,
+      "assets": [
+        {
+          "path": "hair/xlong/adult/fg",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
     }
   ],
-  "preview": "",
-  "download": "https://opengameart.org/content/lpc-expanded-xlong-hair"
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Nila122"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-clothes-and-hair",
+        "https://opengameart.org/content/lpc-expanded-xlong-hair"
+      ],
+      "notes": "Original by Nila122; cleaned up, resplit into separate layers, and added jump/run/sit/revised combat by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "hair",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
 }

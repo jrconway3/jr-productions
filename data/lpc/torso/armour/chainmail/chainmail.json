@@ -1,0 +1,65 @@
+{
+  "name": "Chainmail",
+  "type": "lpc",
+  "category": "torso",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "climb",
+    "idle",
+    "jump",
+    "sit",
+    "emote"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 50,
+      "assets": [
+        {
+          "path": "torso/armour/chainmail/torso/chainmail/male",
+          "body_types": [
+            "male"
+          ]
+        },
+        {
+          "path": "torso/armour/chainmail/torso/chainmail/female",
+          "body_types": [
+            "female",
+            "teen"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "Johannes Sjölund (wulax)",
+        "Napsio (Vitruvian Studio)",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
+      ],
+      "notes": "minor edits by bluecarrot16, reduced colors by Napsio, adjusted Male colors and Idle/Sit/Emote/Climb by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "metal",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

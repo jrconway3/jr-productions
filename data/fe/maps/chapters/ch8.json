@@ -1,10 +1,20 @@
 {
-  "name": "Ch8",
+  "name": "Chapter 8: The Sage Princess",
   "type": "fe",
   "path": "maps/chapters",
   "format": "spritesheet",
-  "license": "F2U, F2E",
-  "credits": [],
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "type": "FE8 - Fields - Remaster - Super Fields",
+      "authors": [
+        "WAve",
+        "RandomWizard",
+        "Beast"
+      ]
+    }
+  ],
+  "description": "This map was originally the next map after Chapter 6, but now there's an extra gap map. This one is set in the mountains northwest of the Chapter 6 map. The southeast corner is the starting position.\n\nI'm heavily considering recreating this using a mountain tileset or perhaps Frontier Remake. I think it might look better.",
   "preview": "assets/fe/maps/chapters/ch8.png",
   "download": ""
 }

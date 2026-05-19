@@ -1,0 +1,86 @@
+{
+  "name": "Batlike Lizard Wings",
+  "type": "lpc",
+  "category": "body",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "bg",
+      "zPos": 5,
+      "assets": [
+        {
+          "path": "body/wings/bat/lizard/adult/bg",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fg",
+      "zPos": 105,
+      "assets": [
+        {
+          "path": "body/wings/bat/lizard/adult/fg",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-wings-new-animations"
+      ],
+      "notes": "Original by ElizaWy, added to most remaining frames by JaidynReiman"
+    }
+  ],
+  "tags": [
+    "wings"
+  ],
+  "recolors": {
+    "material": "body",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "match_body_color": true,
+  "preview": ""
+}

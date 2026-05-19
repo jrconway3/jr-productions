@@ -1,0 +1,80 @@
+{
+  "name": "Barbarian Viking",
+  "type": "lpc",
+  "category": "hat",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY 3.0, CC-BY 4.0, GPL 2.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 130,
+      "assets": [
+        {
+          "path": "hat/helmet/barbarian_viking/adult",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "JaidynReiman",
+        "Napsio (Vitruvian Studio)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-helmets",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ],
+      "notes": "original version by bluecarrot16, color reduction by Napsio (Vitruvian Studio)"
+    }
+  ],
+  "recolors": {
+    "color_1": {
+      "material": "metal",
+      "palettes": [
+        "ulpc",
+        "lpcr",
+        "all.lpcr"
+      ]
+    },
+    "color_2": {
+      "type_name": "hat_secondary",
+      "label": "Helmet Strands",
+      "material": "cloth",
+      "base": "brown",
+      "palettes": [
+        "ulpc",
+        "all.lpcr"
+      ]
+    }
+  },
+  "preview": ""
+}

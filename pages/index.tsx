@@ -3,33 +3,30 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getTopLevelCategories } from 'app/CategoryService';
-import { getAllAssets } from 'app/AssetService';
+import { getHomepageFeaturedAssets, getSectionPageCredits } from 'app/AssetService';
 import { toPublicAssetUrl } from 'app/assetUrl';
+import { resolveHomepageSpecs } from 'app/AnimationService';
+import { pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
+import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
-import AssetCard from 'components/gallery/AssetCard';
-import type { Category } from 'app/models/Category';
-import type { Asset } from 'app/models/Asset';
+import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
+import PageCredits from 'components/gallery/PageCredits';
+import type { Category, ResolvedPageCredit } from 'app/models/Category';
+import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 
 interface HomeProps {
   categories: Category[];
   featuredAssets: Asset[];
+  resolvedSpecs: Record<string, AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec>;
+  animNames: Record<string, string>;
+  groupNames: Record<string, string[]>;
+  bodyTypes: Record<string, string>;
+  pageCredits: ResolvedPageCredit[];
 }
 
-const FEATURED_ASSET_COUNT = 36;
+const FEATURED_ASSET_COUNT = 180;
 const FEATURED_CACHE_KEY = 'home-featured-assets-v1';
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 6;
-
-function pickRandomAssets(pool: Asset[], count: number): Asset[] {
-  if (pool.length <= count) return [...pool];
-  const shuffled = [...pool];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i];
-    shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
-  }
-  return shuffled.slice(0, count);
-}
 
 function getCachedAssetIds(): string[] | null {
   if (typeof window === 'undefined') return null;
@@ -64,8 +61,8 @@ function setCachedAssetIds(ids: string[]): void {
   }
 }
 
-export default function Home({ categories, featuredAssets }: HomeProps) {
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets.slice(0, FEATURED_ASSET_COUNT));
+export default function Home({ categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits }: HomeProps) {
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets);
 
   const featuredById = useMemo(() => {
     return new Map(featuredAssets.map((asset) => [asset.id, asset]));
@@ -90,52 +87,20 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
       }
     }
 
-    const picked = pickRandomAssets(featuredAssets, FEATURED_ASSET_COUNT);
+    const picked = pickRandomAssetsPreferUnrestricted(featuredAssets, FEATURED_ASSET_COUNT);
     updateDisplayAssets(picked);
-    setCachedAssetIds(picked.map((asset) => asset.id));
+    setCachedAssetIds(picked.map((asset: Asset) => asset.id));
   }, [featuredAssets, featuredById]);
+
+  const bodyTypeMap = useMemo(() => new Map(Object.entries(bodyTypes)), [bodyTypes]);
+  const groupNamesMap = useMemo(() => new Map(Object.entries(groupNames)), [groupNames]);
 
   return (
     <>
       <Head>
-        <title>JaidynReiman Productions — Sprite &amp; Game Asset Portfolio</title>
+        <title>JaidynReiman Productions - Sprite &amp; Game Asset Portfolio</title>
         <meta name="description" content="Pixel art sprites, tilesets, and game assets by JaidynReiman." />
       </Head>
-
-      {/* Hero: title + sprite collage */}
-      <div className="hero-banner">
-        <div className="page-wide py-12 flex flex-col lg:flex-row gap-8 items-center lg:items-stretch">
-          <div className="shrink-0 lg:flex lg:flex-col lg:justify-center">
-            <h1 className="text-4xl xl:text-5xl mb-4 leading-tight">
-              JaidynReiman<br />
-              <span className="text-lpc-accent">Productions</span>
-            </h1>
-            <p className="font-body text-site-muted text-base max-w-sm mb-6">
-              Pixel art sprites, game assets, and tilesets — free to use under open licenses.
-            </p>
-            <div className="flex gap-3 flex-wrap">
-              {categories.map((cat) => (
-                <Link
-                  key={cat.slug}
-                  href={`/${cat.slug}`}
-                  className="font-pixel text-xs px-4 py-2 border transition-colors"
-                  style={{
-                    borderColor: cat.accent === 'warm' ? 'var(--accent-fe)' : 'var(--accent-lpc)',
-                    color: cat.accent === 'warm' ? 'var(--accent-fe)' : 'var(--accent-lpc)',
-                  }}
-                >
-                  {cat.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Standalone hero banner area (intentionally not tied to featured asset cards). */}
-          <div className="flex-1 w-full lg:w-auto">
-            <div className="hero-standalone-banner hero-standalone-banner--hidden" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
 
       {/* Main: asset gallery or section nav */}
       <main className="page-wide py-10">
@@ -143,10 +108,20 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
           <>
             <h2 className="font-pixel text-sm text-site-muted mb-6 tracking-widest uppercase">Featured Picks</h2>
             <MasonryGrid className="masonry-grid-featured">
-              {displayAssets.map((asset) => (
-                <AssetCard key={asset.id} asset={asset} sizeMode="featured" />
-              ))}
+              {displayAssets.map((asset) => {
+                return (
+                  <UnifiedAssetCard
+                    key={asset.id}
+                    asset={asset}
+                    resolvedSpec={resolvedSpecs[asset.id]}
+                    animName={animNames[asset.id] ?? asset.animations?.[0]}
+                    bodyType={bodyTypeMap.get(asset.id)}
+                    groupAnimNames={groupNamesMap.get(asset.id)}
+                  />
+                );
+              })}
             </MasonryGrid>
+            <PageCredits credits={pageCredits} />
           </>
         ) : (
           <>
@@ -186,8 +161,13 @@ export default function Home({ categories, featuredAssets }: HomeProps) {
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const categories = getTopLevelCategories();
-  const featuredAssets = getAllAssets()
+  const featuredAssets = getHomepageFeaturedAssets()
     .filter((asset) => Boolean(toPublicAssetUrl(asset.preview)))
-    .slice(0, 240);
-  return { props: { categories, featuredAssets } };
+    .slice(0, FEATURED_ASSET_COUNT);
+  const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(featuredAssets);
+  const pageCredits = [
+    ...getSectionPageCredits('lpc'),
+    ...getSectionPageCredits('fe'),
+  ];
+  return { props: { categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits } };
 };

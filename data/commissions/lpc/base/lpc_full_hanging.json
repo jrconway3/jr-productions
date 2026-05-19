@@ -1,0 +1,16 @@
+{
+  "name": "Full Body Hanging",
+  "description": "Full body asset for simplistic \"hanging\" torso assets like robes, chainmail, and dresses. Includes Walk and Idle.",
+  "price_min": 45,
+  "price_max": 45,
+  "priority": 40,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "dress_kimono",
+      "animation": "walk",
+      "body_type": "female"
+    }
+  ]
+}

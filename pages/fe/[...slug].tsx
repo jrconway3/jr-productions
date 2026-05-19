@@ -3,11 +3,14 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
-import { getAssetsByCategoryTree } from 'app/AssetService';
+import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
+import { resolveAssetsSpecs } from 'app/AnimationService';
+import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
 import MasonryGrid from 'components/gallery/MasonryGrid';
-import AssetCard from 'components/gallery/AssetCard';
-import type { Category } from 'app/models/Category';
-import type { Asset } from 'app/models/Asset';
+import { FeCard } from 'components/gallery/AssetCard';
+import PageCredits from 'components/gallery/PageCredits';
+import type { Category, ResolvedPageCredit } from 'app/models/Category';
+import type { Asset, ResolvedLpcSpec, ResolvedFeSpec } from 'app/models/Asset';
 
 interface FeSlugProps {
   category: Category;
@@ -16,21 +19,14 @@ interface FeSlugProps {
   assets?: Asset[];
   slugs: string[];
   breadcrumbs?: Array<{ label: string; href: string }>;
+  resolvedSpecs?: Record<string, ResolvedLpcSpec | ResolvedFeSpec>;
+  pageCredits: ResolvedPageCredit[];
 }
 
-const FEATURED_ASSET_COUNT = 48;
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
 
-function pickRandomAssets(pool: Asset[], count: number): Asset[] {
-  if (pool.length <= count) return [...pool];
-  const shuffled = [...pool];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i];
-    shuffled[i] = shuffled[j];
-    shuffled[j] = temp;
-  }
-  return shuffled.slice(0, count);
+function sortNewFirst(assets: Asset[]): Asset[] {
+  return [...assets].sort((a, b) => (b.new ? 1 : 0) - (a.new ? 1 : 0));
 }
 
 function getCategoryCacheKey(path: string): string {
@@ -70,14 +66,15 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function FeSlug({ category, section, treeAssets, assets, slugs, breadcrumbs }: FeSlugProps) {
-  const scopedAssets = treeAssets ?? assets ?? [];
+export default function FeSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: FeSlugProps) {
+  const scopedAssets = useMemo(() => treeAssets ?? assets ?? [], [treeAssets, assets]);
+  const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'FE', href: '/fe' }, { label: category.label, href: `/fe/${slugsToPath(slugs)}` }];
   const sectionCategory = section ?? {
     ...category,
     children: [],
   };
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => scopedAssets.slice(0, FEATURED_ASSET_COUNT));
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, featuredAssetCount)));
 
   const treeAssetsById = useMemo(() => {
     return new Map(scopedAssets.map((asset) => [asset.id, asset]));
@@ -88,7 +85,7 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
 
     const updateDisplayAssets = (nextAssets: Asset[]) => {
       queueMicrotask(() => {
-        setDisplayAssets(nextAssets);
+        setDisplayAssets(sortNewFirst(nextAssets));
       });
     };
 
@@ -104,15 +101,15 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
       }
     }
 
-    const picked = pickRandomAssets(scopedAssets, FEATURED_ASSET_COUNT);
+    const picked = pickRandomAssetsPreferUnrestricted(scopedAssets, featuredAssetCount);
     updateDisplayAssets(picked);
     setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
-  }, [category.path, scopedAssets, treeAssetsById]);
+  }, [category.path, scopedAssets, treeAssetsById, featuredAssetCount]);
 
   return (
     <>
       <Head>
-        <title>{category.label} — FE — JaidynReiman Productions</title>
+        <title>{category.label} - FE - JaidynReiman Productions</title>
       </Head>
 
       <main className="section-fe page-wide py-12">
@@ -123,12 +120,13 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
             {displayAssets.length > 0 ? (
               <MasonryGrid>
                 {displayAssets.map((asset) => (
-                  <AssetCard key={asset.id} asset={asset} />
+                  <FeCard key={asset.id} asset={asset} feSpec={resolvedSpecs?.[asset.id] as ResolvedFeSpec | undefined} />
                 ))}
               </MasonryGrid>
             ) : (
               <p className="text-site-muted font-body">No assets yet.</p>
             )}
+            <PageCredits credits={pageCredits} />
           </section>
 
           <aside className="content-sidebar">
@@ -224,5 +222,7 @@ export const getStaticProps: GetStaticProps<FeSlugProps> = async ({ params }) =>
   }
 
   const treeAssets = getAssetsByCategoryTree(['fe', ...slugs].join('/'));
-  return { props: { category, section, treeAssets, slugs, breadcrumbs } };
+  const resolvedSpecs = resolveAssetsSpecs(treeAssets);
+  const pageCredits = getSectionPageCredits(['fe', ...slugs].join('/'));
+  return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits } };
 };

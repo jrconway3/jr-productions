@@ -1,0 +1,15 @@
+{
+  "name": "Jump",
+  "description": "Jump animation. Applies to any base asset.",
+  "price_min": 20,
+  "price_max": 20,
+  "priority": 50,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "feet_boots_basic",
+      "animation": "jump"
+    }
+  ]
+}

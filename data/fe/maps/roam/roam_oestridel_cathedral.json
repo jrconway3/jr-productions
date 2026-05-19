@@ -1,0 +1,24 @@
+{
+  "name": "Oestridel Cathedral",
+  "type": "fe",
+  "path": "maps/roam",
+  "format": "spritesheet",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "type": "FE8 Castle + Customs - Improved Tileset",
+      "authors": [
+        "N426"
+      ]
+    },
+    {
+      "type": "Cynon's Metropolis 0.80",
+      "authors": [
+        "Cynon"
+      ]
+    }
+  ],
+  "description": "This is inside the large cathedral in the town. The idea is that region events at the edge of the cathedral let you walk into it. Because there's no \"pews\" or \"chairs\" in castle maps, I settled on the idea of having bookshelves and water. The rough idea here is that the sanctuary is on the second floor and won't be accessible.\n\nOnly the exterior portion of the second version of this map has Cynon's Metropolis as the exterior. This wouldn't work in FE Builder, but it does work in LT Maker.",
+  "preview": "assets/fe/maps/roam/roam-oestridel_cathedral.png",
+  "download": ""
+}

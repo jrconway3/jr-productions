@@ -1,0 +1,17 @@
+{
+  "name": "Autotiles for Cynon's Metropolis Streetlamp Palette Animations",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Cynon"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/cynons_metropolis/metropolis_streetlamp_palette_animations_cynon.png",
+  "download": "",
+  "description": "I manually created every streetlamp palette animation as autotiles.\n\nUnforunately, the autotiles for the lanterns do not work correctly. Autotiles do not seem to work well with palette shift animations, as instead of working they simply fill out all animations with the same color. You can make them work with some manual tweaking, but its not easy."
+}

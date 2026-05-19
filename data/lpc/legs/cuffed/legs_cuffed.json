@@ -1,0 +1,87 @@
+{
+  "name": "Cuffed Pants",
+  "type": "lpc",
+  "category": "legs",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 20,
+      "assets": [
+        {
+          "path": "legs/cuffed/male",
+          "body_types": [
+            "male"
+          ]
+        },
+        {
+          "path": "legs/cuffed/thin",
+          "body_types": [
+            "female",
+            "teen"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "ElizaWy",
+        "Bluecarrot16",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, original overalls by ElizaWy, base animations adapted from v3 overalls by bluecarrot16, pants by JaidynReiman"
+    },
+    {
+      "authors": [
+        "ElizaWy",
+        "JaidynReiman",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+        "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original bases by Redshrike, thrust/shoot bases by Wulax, original cuffed pants by ElizaWy, climb/jump/run/sit/emotes/revised combat by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

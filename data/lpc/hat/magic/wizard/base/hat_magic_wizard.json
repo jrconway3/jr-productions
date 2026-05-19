@@ -1,0 +1,73 @@
+{
+  "name": "Wizard Hat Base",
+  "type": "lpc",
+  "category": "hat",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 2.0, GPL 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 130,
+      "assets": [
+        {
+          "path": "hat/magic/wizard/base/adult",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "Michael Whitlock (bigbeargames)",
+        "Tuomo Untinen (reemax)",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-items-and-game-effects",
+        "https://opengameart.org/content/lpc-pointed-hats",
+        "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+      ],
+      "notes": "Original Wizard Hat and Recolors by bigbeargames and reemax; split into separate layers with new recolors by JaidynReiman"
+    }
+  ],
+  "tags": [
+    "wizard",
+    "pointed_wizard"
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

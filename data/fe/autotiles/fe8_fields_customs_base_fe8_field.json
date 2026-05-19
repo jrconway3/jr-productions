@@ -1,0 +1,17 @@
+{
+  "name": "Autotiles for FE8 Fields",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "IS"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/fe8_fields_customs/base_fe8_field.png",
+  "download": "",
+  "description": "Apparently FE8 Fields never got made into autotiles for LT. I guess Rain based the tiles mostly on FE7."
+}

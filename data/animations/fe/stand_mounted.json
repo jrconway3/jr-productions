@@ -1,0 +1,16 @@
+{
+  "id": "fe_stand_mounted",
+  "frame_width": 16,
+  "frame_height": 32,
+  "cutouts": {
+    "stand": {
+      "x": 0,
+      "y": 0,
+      "width": 16,
+      "height": 96,
+      "frames": 3,
+      "fps": 4,
+      "frame_direction": "vertical"
+    }
+  }
+}

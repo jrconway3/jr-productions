@@ -1,0 +1,74 @@
+{
+  "name": "Pauldrons",
+  "type": "lpc",
+  "category": "shoulders",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "climb",
+    "idle",
+    "jump",
+    "sit",
+    "emote",
+    "run",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 60,
+      "assets": [
+        {
+          "path": "shoulders/pauldrons/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "shoulders/pauldrons/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)",
+        "bluecarrot16",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "adapted to female base by makrohn, adapted to v3 bases by bluecarrot16, climb/jump/sit/emote/run/revised combat by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "metal.ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

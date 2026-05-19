@@ -1,0 +1,75 @@
+{
+  "name": "Necktie",
+  "type": "lpc",
+  "category": "neck",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 90,
+      "assets": [
+        {
+          "path": "neck/tie/necktie/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "neck/tie/necktie/female",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "bluecarrot16",
+        "Thane Brimhall (pennomi)",
+        "laetissima",
+        "Makrohn"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-2-characters",
+        "https://opengameart.org/content/lpc-gentleman"
+      ],
+      "notes": "Originally by pennomi/laetissima/Makrohn, edited by bluecarrot16, animations and recolors by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

@@ -1,0 +1,59 @@
+{
+  "name": "Pirate Shirtless",
+  "type": "fe",
+  "path": "battle-animations/infantry/pirate_reskin",
+  "format": "gif",
+  "animation_spec": "fe/battle",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "type": "Pirate",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Shirtless",
+      "authors": [
+        "Teelvade"
+      ]
+    },
+    {
+      "type": "Fixes",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Shirtless Handaxe",
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Pirate Reskin",
+  "body_types": [
+    "male"
+  ],
+  "weapon_types": [
+    "axe",
+    "handaxe"
+  ],
+  "weapon_variants": [
+    {
+      "id": "axe_fixed",
+      "weapon": "axe",
+      "label": "Axe",
+      "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/axe_fixed/Axe.gif"
+    },
+    {
+      "id": "handaxe",
+      "weapon": "handaxe",
+      "label": "Handaxe",
+      "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/handaxe/Handaxe.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/infantry/pirate_reskin/shirtless/axe_fixed/Axe.gif",
+  "download": ""
+}

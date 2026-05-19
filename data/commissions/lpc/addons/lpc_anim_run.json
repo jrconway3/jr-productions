@@ -1,0 +1,15 @@
+{
+  "name": "Run",
+  "description": "Run animation. High effort — essentially equivalent to creating Walk from scratch.",
+  "price_min": 60,
+  "price_max": 60,
+  "priority": 100,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "torso_clothes_longsleeve2_polo",
+      "animation": "run"
+    }
+  ]
+}

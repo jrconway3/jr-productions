@@ -1,0 +1,19 @@
+{
+  "name": "Autotiles for Final Stronghold Flames",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "flasuban",
+        "N426",
+        "ZoramineFae"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/final_stronghold/castle_final_stronghold_flame_autotiles.png",
+  "download": "",
+  "description": "I put the Flames off into a separate sheet as well, just to break things down into smaller sheets."
+}

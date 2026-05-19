@@ -3,6 +3,7 @@
   "type": "fe",
   "path": "map-sprites/mounted",
   "format": "spritesheet",
+  "animation_spec": "fe/map_sprite",
   "license": "F2U, F2E",
   "body_types": [
     "female",
@@ -10,20 +11,47 @@
   ],
   "credits": [
     {
+      "type": "Original: Mouthe Dauge, Nomad",
       "authors": [
-        "JaidynReiman",
-        "VelvetKitsune",
+        "IS"
+      ],
+      "notes": "Original: Mouthe Dauge, Nomad"
+    },
+    {
+      "type": "Edit: Wolf",
+      "authors": [
+        "VelvetKitsune"
+      ],
+      "notes": "Edit: Wolf"
+    },
+    {
+      "type": "Edit: Nomad Dagger",
+      "authors": [
         "Leif"
-      ]
+      ],
+      "notes": "Edit: Nomad Dagger"
+    },
+    {
+      "type": "Splice",
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Splice"
     }
   ],
   "animations": [
     "stand",
-    "walk"
+    "move"
   ],
+  "animation_sources": {
+    "stand": "assets/fe/map_sprites/mounted/Wolf Knight (F) {JaidynReiman, VelvetKitsune, Leif}-stand.png",
+    "move": "assets/fe/map_sprites/mounted/Wolf Knight (F) {JaidynReiman, VelvetKitsune, Leif}-walk.png"
+  },
+  "map_sprite_stand_spec": "stand_mounted",
   "variants": [
     "Unarmed"
   ],
   "preview": "assets/fe/map_sprites/mounted/Wolf Knight (F) {JaidynReiman, VelvetKitsune, Leif}-stand.png",
-  "download": ""
+  "download": "",
+  "description": "There wasn't any Wolf Knight map sprites, so I made one! I really liked the Wolf Knight concept and just had to figure out how the pose should go.\n\nWhat I did here was I took the Nomad sprite edits by Leif and merged them into VelvetKitsune's Wolf sprite to create Wolf Knight."
 }

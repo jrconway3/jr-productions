@@ -1,0 +1,103 @@
+{
+  "name": "Fur Pants",
+  "type": "lpc",
+  "category": "legs",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 20,
+      "assets": [
+        {
+          "path": "legs/fur/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "legs/fur/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "Bluecarrot16",
+        "JaidynReiman",
+        "Evert",
+        "ElizaWy",
+        "Nila122",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-faun-and-minotaur",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original pants by Stephen Challener (Redshrike), thrust/shoot bases by Wulax, Fur Pants Color by Evert, Edited to V3 Bases by Bluecarrot16, climb/jump/run/sit/emotes/revised combat by JaidynReiman"
+    },
+    {
+      "authors": [
+        "Bluecarrot16",
+        "JaidynReiman",
+        "Evert",
+        "ElizaWy",
+        "Nila122",
+        "Johannes Sjölund (wulax)",
+        "Stephen Challener (Redshrike)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+        "https://opengameart.org/content/lpc-faun-and-minotaur",
+        "https://opengameart.org/content/lpc-expanded-pants"
+      ],
+      "notes": "Original pants by Stephen Challener (Redshrike), thrust/shoot bases by Wulax, Fur Pants Color by Evert, Edited to V3 Bases by Bluecarrot16, Female/Thin version by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "base": null,
+    "source": [
+      "#1d131e",
+      "#3a200e",
+      "#4B2B13",
+      "#663a1a",
+      "#975f43",
+      "#996B4A"
+    ],
+    "palettes": [
+      "ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

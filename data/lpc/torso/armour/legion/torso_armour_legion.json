@@ -1,0 +1,76 @@
+{
+  "name": "Legion",
+  "type": "lpc",
+  "category": "torso",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 2.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 60,
+      "assets": [
+        {
+          "path": "torso/armour/legion/male",
+          "body_types": [
+            "male"
+          ]
+        },
+        {
+          "path": "torso/armour/legion/female",
+          "body_types": [
+            "female"
+          ]
+        },
+        {
+          "path": "torso/armour/legion/teen",
+          "body_types": [
+            "teen"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "Napsio (Vitruvian Studio)",
+        "JaidynReiman",
+        "bluecarrot16",
+        "Nila122"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-roman-armor"
+      ],
+      "notes": "adapted to v3 bases by bluecarrot16, jump/run/sit/combat and teen by JaidynReiman, color reduction to 6 colors inspired by Napsio (Vitruvian Studio)"
+    }
+  ],
+  "recolors": {
+    "material": "metal",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

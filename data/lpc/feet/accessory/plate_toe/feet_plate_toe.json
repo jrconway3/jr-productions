@@ -1,0 +1,70 @@
+{
+  "name": "Plated Toe",
+  "type": "lpc",
+  "category": "feet",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 27,
+      "assets": [
+        {
+          "path": "feet/accessory/plate_toe/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "feet/accessory/plate_toe/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-kimono-relm",
+        "https://opengameart.org/content/lpc-expanded-socks-shoes"
+      ]
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

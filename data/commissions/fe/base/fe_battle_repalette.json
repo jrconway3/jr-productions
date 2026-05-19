@@ -1,0 +1,16 @@
+{
+  "name": "Battle Animation Repalette",
+  "description": "Adjust the palette frame-by-frame to add more or less colors to certain palettes or emphasize different parts of the design. Priced per unique frame.",
+  "price_min": 5,
+  "price_max": 5,
+  "price_per": "frame",
+  "priority": 40,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "t1_eirika_repal_magus",
+      "weapon": "magic"
+    }
+  ]
+}

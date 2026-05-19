@@ -56,7 +56,11 @@ export function relativePublicAssetPath(absolutePath, publicRoot) {
 
 export function parseCreditAuthorsFromBraces(text) {
   const authors = [];
-  const matches = text.match(/\{[^}]*\}/g) ?? [];
+  // Match both {Author} (correct) and (Author} (mismatched-bracket typo)
+  const matches = [
+    ...(text.match(/\{[^}]*\}/g) ?? []),
+    ...(text.match(/\([^)]*\}/g) ?? []),
+  ];
   for (const match of matches) {
     const inside = match.slice(1, -1).trim();
     if (!inside) continue;
@@ -70,8 +74,9 @@ export function parseCreditAuthorsFromBraces(text) {
 
 export function stripCreditsAndBodyMarkers(text) {
   return text
-    .replace(/\{[^}]*\}/g, ' ')
-    .replace(/\((M|F|U)\)/gi, ' ')
+    .replace(/\{[^}]*\}/g, ' ')      // {Author} correct format
+    .replace(/\([^)]*\}/g, ' ')       // (Author} mismatched-bracket typo
+    .replace(/\((M|F|U)\)/gi, ' ')   // body-type markers
     .replace(/\s+/g, ' ')
     .trim();
 }

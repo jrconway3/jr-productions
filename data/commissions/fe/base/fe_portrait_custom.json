@@ -1,0 +1,14 @@
+{
+  "name": "Portrait (Custom)",
+  "description": "Fully custom original portrait.",
+  "price_min": 50,
+  "price_max": 60,
+  "priority": 30,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": [
+    {
+      "asset_id": "svetlanya"
+    }
+  ]
+}

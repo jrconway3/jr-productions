@@ -1,0 +1,17 @@
+{
+  "name": "Autotiles for Cynon's Metropolis Additional Water Tiles",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Cynon"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/cynons_metropolis/metropolis_water_tiles_cynon.png",
+  "download": "",
+  "description": "These water tiles animations were part of Cynon's Metropolis, but they seem to work in a variety of different tilesets."
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Myrmidon Tailed (F)",
+  "type": "fe",
+  "path": "battle-animations/infantry/myrmidon",
+  "format": "gif",
+  "animation_spec": "fe/battle",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "type": "Myrmidon",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Myrmidon Tail",
+      "authors": [
+        "Seliost1"
+      ]
+    },
+    {
+      "type": "Tailed Female Myrmidon",
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "Myrmidon",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "bow",
+    "sword"
+  ],
+  "weapon_variants": [
+    {
+      "id": "bow",
+      "weapon": "bow",
+      "label": "Bow",
+      "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/bow/Bow.gif"
+    },
+    {
+      "id": "sword",
+      "weapon": "sword",
+      "label": "Sword",
+      "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/sword/Sword.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/infantry/myrmidon/female_ponytail/bow/Bow.gif",
+  "download": ""
+}

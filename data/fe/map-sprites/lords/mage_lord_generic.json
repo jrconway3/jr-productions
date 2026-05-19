@@ -1,0 +1,34 @@
+{
+  "name": "Generic Mage Lord",
+  "type": "fe",
+  "path": "map-sprites/lords",
+  "format": "spritesheet",
+  "animation_spec": "fe/map_sprite",
+  "license": "F2U, F2E",
+  "body_types": [
+    "female"
+  ],
+  "credits": [
+    {
+      "type": "Original: Generic",
+      "authors": [
+        "JaidynReiman"
+      ],
+      "notes": "Original: Generic"
+    }
+  ],
+  "animations": [
+    "stand",
+    "move"
+  ],
+  "animation_sources": {
+    "stand": "assets/fe/map_sprites/lords/Mage Lord (F) Generic (JaidynReiman}-stand.png",
+    "move": "assets/fe/map_sprites/lords/Mage Lord (F) Svetlanya (JaidynReiman}-walk.png"
+  },
+  "variants": [
+    "Unarmed"
+  ],
+  "preview": "assets/fe/map_sprites/lords/Mage Lord (F) Generic (JaidynReiman}-stand.png",
+  "download": "",
+  "description": "This is just Svetlanya's design without her non-human physical attributes, making her \"generic\". This is designed for people who like the sprite and just want to use her.\n\nNo Move animation exists _yet_, but I will create one later. Its not that hard, but I have to make some minor alterations to make it work. A better variant would probably be not making her hair white either so she's truly \"generic\".\n\nUntil a Generic Move is made, just use Svetlanya's move animation."
+}

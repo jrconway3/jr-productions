@@ -1,0 +1,75 @@
+{
+  "name": "Kimono Sleeves Trim",
+  "type": "lpc",
+  "category": "dress",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "idle"
+  ],
+  "layers": [
+    {
+      "id": "bg",
+      "zPos": 32,
+      "assets": [
+        {
+          "path": "dress/kimono/sleeves/trim/universal/female/bg",
+          "body_types": [
+            "female",
+            "teen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fg",
+      "zPos": 146,
+      "assets": [
+        {
+          "path": "dress/kimono/sleeves/trim/universal/female/fg",
+          "body_types": [
+            "female",
+            "teen"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Stephen Challener (Redshrike)",
+        "Johannes Sjölund (wulax)"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-kimono-relm"
+      ]
+    }
+  ],
+  "prerequisites": {
+    "asset": [
+      "dress_kimono_longsleeve"
+    ]
+  },
+  "tags": [
+    "arms",
+    "sleeves_trim"
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

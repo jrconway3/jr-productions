@@ -1,0 +1,70 @@
+{
+  "name": "High Bun",
+  "type": "lpc",
+  "category": "hair",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "run",
+    "sit",
+    "emote",
+    "climb",
+    "combat",
+    "1h_slash",
+    "1h_backslash",
+    "1h_halfslash"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 128,
+      "assets": [
+        {
+          "path": "hair/extensions/ties/high_bun/adult",
+          "body_types": [
+            "male",
+            "muscular",
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-expanded-xlong-hair"
+      ],
+      "notes": "Custom by JaidynReiman"
+    }
+  ],
+  "prerequisites": {
+    "category": [
+      "hair"
+    ]
+  },
+  "recolors": {
+    "material": "hair",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

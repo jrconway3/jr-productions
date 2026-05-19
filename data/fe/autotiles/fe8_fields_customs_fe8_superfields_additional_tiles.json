@@ -1,0 +1,23 @@
+{
+  "name": "Autotiles for FE8 Fields Super Fields",
+  "type": "fe",
+  "path": "autotiles",
+  "format": "tileset",
+  "license": "F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "WAve",
+        "RandomWizard",
+        "Beast",
+        "Dark",
+        "LiefOClaude",
+        "Zarg",
+        "IS"
+      ]
+    }
+  ],
+  "preview": "assets/fe/autotiles/fe8_fields_customs/fe8_superfields_additional_tiles.png",
+  "download": "",
+  "description": "Apparently Super Fields literally just uses the exact same animations as Fields. However, with new tiles means new water-adjacent tiles as well."
+}

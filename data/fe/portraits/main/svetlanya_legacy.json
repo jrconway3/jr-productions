@@ -3,16 +3,38 @@
   "type": "fe",
   "path": "portraits/main",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
-  "variants": [
-    "[F2E] OC Svetlanya (Elf) WIP V1",
-    "[F2E] OC Svetlanya (Elf)",
-    "[F2E] OC Svetlanya (Human) WIP V1",
-    "[F2E] OC Svetlanya (Human)",
-    "[F2E] OC Svetlanya (WIP) V1",
-    "[F2E] OC Svetlanya (WIP) V2"
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
   ],
-  "preview": "assets/fe/Portraits/Main/Svetlanya/legacy/{JaidynReiman} [F2E] OC Svetlanya (Elf) WIP V1.png",
+  "description": "This is an old design that is primarily traced from and based on an AI generated portrait. No parts of the AI art were used in the final, this was simply a trace / recreation. I still did all the shading myself.\n\nThere's several variants because I kept trying to improve on the design, before I ended up scrapping it entirely.",
+  "variants": [
+    "[F2E] OC Svetlanya  V1",
+    "[F2E] OC Svetlanya  V2",
+    "[F2E] OC Svetlanya Elf",
+    "[F2E] OC Svetlanya Human",
+    "[F2E] OC Svetlanya V1 Elf",
+    "[F2E] OC Svetlanya V1 Human"
+  ],
+  "preview": "assets/fe/Portraits/main/Svetlanya/legacy/{JaidynReiman} [F2E] OC Svetlanya  V1.png",
+  "cutouts": {
+    "blink": {
+      "offset_x": 24,
+      "offset_y": 32
+    },
+    "mouth_neutral": {
+      "offset_x": 24,
+      "offset_y": 48
+    },
+    "mouth_smile": {
+      "offset_x": 24,
+      "offset_y": 48
+    }
+  },
   "download": ""
 }

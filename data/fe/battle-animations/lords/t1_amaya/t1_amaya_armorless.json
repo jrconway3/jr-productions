@@ -1,0 +1,65 @@
+{
+  "name": "T1 Amaya Armorless",
+  "type": "fe",
+  "path": "battle-animations/lords/t1_amaya",
+  "format": "gif",
+  "animation_spec": "fe/battle",
+  "license": "F2U, F2E",
+  "credits": [
+    {
+      "type": "Beta Eirika",
+      "authors": [
+        "IS"
+      ]
+    },
+    {
+      "type": "Fixes",
+      "authors": [
+        "Jono the Red"
+      ]
+    },
+    {
+      "type": "Gaiden Priestess",
+      "authors": [
+        "HyperSpaceGamma",
+        "Jono the Red"
+      ]
+    },
+    {
+      "type": "Amaya",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Strandless Amaya",
+      "authors": [
+        "JaidynReiman"
+      ]
+    },
+    {
+      "type": "Armorless Amaya",
+      "authors": [
+        "JaidynReiman"
+      ]
+    }
+  ],
+  "animated": true,
+  "class": "T1 Amaya",
+  "body_types": [
+    "female"
+  ],
+  "weapon_types": [
+    "sword"
+  ],
+  "weapon_variants": [
+    {
+      "id": "sword",
+      "weapon": "sword",
+      "label": "Sword",
+      "preview": "assets/fe/battle_animations/lords/t1_amaya/armorless/sword/Sword.gif"
+    }
+  ],
+  "preview": "assets/fe/battle_animations/lords/t1_amaya/armorless/sword/Sword.gif",
+  "download": ""
+}

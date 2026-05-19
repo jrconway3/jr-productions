@@ -3,12 +3,33 @@
   "type": "fe",
   "path": "portraits/major",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "My first male portrait I completed! He's the prince of House Renald and Svetlanya's adoptive older brother. Leiland is a Lykon, which are wolf-like elves. His ears are furry on purpose. He has a tail but its not visible.",
   "variants": [
-    "Leiland",
     "OC Leiland"
   ],
-  "preview": "assets/fe/Portraits/Major/leiland/Leiland.png",
+  "preview": "assets/fe/Portraits/major/leiland/{JaidynReiman} OC Leiland.png",
+  "cutouts": {
+    "blink": {
+      "offset_x": 24,
+      "offset_y": 16
+    },
+    "mouth_neutral": {
+      "offset_x": 24,
+      "offset_y": 32
+    },
+    "mouth_smile": {
+      "offset_x": 24,
+      "offset_y": 32
+    }
+  },
   "download": ""
 }

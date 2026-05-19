@@ -3,13 +3,35 @@
   "type": "fe",
   "path": "portraits/major",
   "format": "portrait",
-  "license": "F2U, F2E",
-  "credits": [],
+  "animation_spec": "fe/portrait",
+  "license": "CC0, F2E, F2U",
+  "credits": [
+    {
+      "authors": [
+        "Character copyright to JaidynReiman but portrait is free to use for any reason"
+      ]
+    }
+  ],
+  "description": "Princess of Siegwang living in Estbalc, or East Oestridel. She is a Chiylo, who have lizard-like attributes. This includes small horns (though the size varies) and colored scaled skin.\n\nIsabella has a unique trait where she can alter her appearance like a chameleon, though it can't fully change her appearance. That's how she's able to have a more natural skintone variant. Her real skintone is the red version.\n\nI like the design of the scales, but I admit I'm unhappy by the head pose. I was trying to have her leaning forward a lot more but it looks off.",
   "variants": [
-    "OC Isabella (Natural)",
-    "OC Isabella (Old)",
+    "OC Isabella Legacy",
+    "OC Isabella Natural",
     "OC Isabella"
   ],
-  "preview": "assets/fe/Portraits/Major/isabella/{JaidynReiman} OC Isabella (Natural).png",
+  "preview": "assets/fe/Portraits/major/isabella/{JaidynReiman} OC Isabella Legacy.png",
+  "cutouts": {
+    "blink": {
+      "offset_x": 24,
+      "offset_y": 16
+    },
+    "mouth_neutral": {
+      "offset_x": 24,
+      "offset_y": 32
+    },
+    "mouth_smile": {
+      "offset_x": 24,
+      "offset_y": 32
+    }
+  },
   "download": ""
 }
