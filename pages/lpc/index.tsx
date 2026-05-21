@@ -161,6 +161,6 @@ export const getStaticProps: GetStaticProps<LpcIndexProps> = async () => {
 
   const treeAssets = getAssetsByCategoryTree('lpc');
   const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(treeAssets);
-  const pageCredits = getSectionPageCredits('lpc');
+  const pageCredits = getSectionPageCredits('lpc', treeAssets);
   return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits } };
 };

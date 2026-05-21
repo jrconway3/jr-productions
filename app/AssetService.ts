@@ -285,12 +285,17 @@ function getLpcGlobalLayerCreditBucket(asset: Asset): { key: string; label: stri
   return { key: `lpc:asset:${asset.id}`, label: fallbackLabel };
 }
 
-function buildLpcGlobalLayerCredits(sectionPath: string, existingLabels: Set<string>): ResolvedPageCredit[] {
-  const sectionAssets = getAssetsByCategoryTree(sectionPath).filter((asset) => asset.type === 'lpc');
-  if (sectionAssets.length === 0) return [];
+function buildLpcGlobalLayerCredits(
+  sectionPath: string,
+  existingLabels: Set<string>,
+  sectionAssets?: Asset[],
+): ResolvedPageCredit[] {
+  const sourceAssets = sectionAssets ?? getAssetsByCategoryTree(sectionPath);
+  const lpcSectionAssets = sourceAssets.filter((asset) => asset.type === 'lpc');
+  if (lpcSectionAssets.length === 0) return [];
 
   const neededIds = new Set<string>();
-  for (const asset of sectionAssets) {
+  for (const asset of lpcSectionAssets) {
     for (const animationName of asset.animations ?? []) {
       const globalLayerAssetIds = getLpcGlobalLayerAssetIdsForAnimation(animationName);
       for (const assetId of globalLayerAssetIds) neededIds.add(assetId);
@@ -362,7 +367,7 @@ function buildLpcGlobalLayerCredits(sectionPath: string, existingLabels: Set<str
   return autoCredits;
 }
 
-export function getSectionPageCredits(sectionPath: string): ResolvedPageCredit[] {
+export function getSectionPageCredits(sectionPath: string, sectionAssets?: Asset[]): ResolvedPageCredit[] {
   // Walk up the path hierarchy to find the nearest meta.json with page_credits.
   const parts = sectionPath.split('/').filter(Boolean);
   let meta = null;
@@ -407,7 +412,7 @@ export function getSectionPageCredits(sectionPath: string): ResolvedPageCredit[]
     resolvedMetaCredits.map((credit) => credit.label.toLowerCase()),
   );
 
-  const autoLayerCredits = buildLpcGlobalLayerCredits(sectionPath, existingLabels);
+  const autoLayerCredits = buildLpcGlobalLayerCredits(sectionPath, existingLabels, sectionAssets);
   return [...resolvedMetaCredits, ...autoLayerCredits];
 }
 

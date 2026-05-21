@@ -296,6 +296,6 @@ export const getStaticProps: GetStaticProps<LpcSlugProps> = async ({ params }) =
 
   const treeAssets = getAssetsByCategoryTree(['lpc', ...slugs].join('/'));
   const resolvedSpecs = resolveAssetsSpecs(treeAssets);
-  const pageCredits = getSectionPageCredits(['lpc', ...slugs].join('/'));
+  const pageCredits = getSectionPageCredits(['lpc', ...slugs].join('/'), treeAssets);
   return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits } };
 };

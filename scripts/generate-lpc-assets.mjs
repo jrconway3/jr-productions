@@ -32,7 +32,7 @@ const CATEGORY_CONFIG = {
   dress: { label: 'Dress', priority: 30, accent: 'saturated' },
   feet: { label: 'Feet', priority: 40, accent: 'saturated' },
   hair: { label: 'Hair', priority: 50, accent: 'saturated' },
-  head: { label: 'Head', priority: 60, accent: 'saturated', excluded: true },
+  head: { label: 'Head', priority: 60, accent: 'saturated' },
   headwear: { label: 'Headwear', priority: 70, accent: 'saturated' },
   legs: { label: 'Legs', priority: 80, accent: 'saturated' },
   shoulders: { label: 'Shoulders', priority: 90, accent: 'saturated' },
@@ -40,6 +40,10 @@ const CATEGORY_CONFIG = {
   torso: { label: 'Torso', priority: 110, accent: 'saturated' },
   weapons: { label: 'Weapons', priority: 120, accent: 'saturated' },
   tilesets: { label: 'Tilesets', priority: 130, accent: 'saturated' },
+};
+
+const LEAF_META_OVERRIDES = {
+  'head/heads': { excluded: true },
 };
 
 function parseModeFromArgs() {
@@ -223,15 +227,34 @@ function writeCategoryMetaFromConfig(categorySet) {
 function writeLeafCategoryMeta(leafDirs) {
   for (const leafDir of leafDirs) {
     const metaPath = path.join(leafDir, 'meta.json');
+    const leafRelativePath = leafDir.replace(`${DATA_ROOT}${path.sep}`, '').replace(/\\/g, '/');
+    const override = LEAF_META_OVERRIDES[leafRelativePath] ?? null;
+
     // Only create if it doesn't exist
     if (!fs.existsSync(metaPath)) {
       const dirName = path.basename(leafDir);
-      writeJson(metaPath, {
+      const leafMeta = {
         label: titleCaseFromSlug(dirName),
         description: '',
         priority: 500,
         accent: 'saturated',
-      });
+      };
+      writeJson(metaPath, override ? { ...leafMeta, ...override } : leafMeta);
+      continue;
+    }
+
+    if (!override) continue;
+
+    const existingMeta = loadJson(metaPath);
+    let changed = false;
+    for (const [key, value] of Object.entries(override)) {
+      if (existingMeta[key] === value) continue;
+      existingMeta[key] = value;
+      changed = true;
+    }
+
+    if (changed) {
+      writeJson(metaPath, existingMeta);
     }
   }
 }
