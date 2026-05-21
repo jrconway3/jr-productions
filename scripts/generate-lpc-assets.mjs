@@ -32,7 +32,7 @@ const CATEGORY_CONFIG = {
   dress: { label: 'Dress', priority: 30, accent: 'saturated' },
   feet: { label: 'Feet', priority: 40, accent: 'saturated' },
   hair: { label: 'Hair', priority: 50, accent: 'saturated' },
-  head: { label: 'Head', priority: 60, accent: 'saturated' },
+  head: { label: 'Head', priority: 60, accent: 'saturated', excluded: true },
   headwear: { label: 'Headwear', priority: 70, accent: 'saturated' },
   legs: { label: 'Legs', priority: 80, accent: 'saturated' },
   shoulders: { label: 'Shoulders', priority: 90, accent: 'saturated' },
@@ -206,12 +206,17 @@ function writeCategoryMetaFromConfig(categorySet) {
     categoryIndex += 1;
 
     const metaPath = path.join(DATA_ROOT, category, 'meta.json');
-    writeJson(metaPath, {
+    const nextMeta = {
       label: configured.label,
       description: '',
       priority: configured.priority,
       accent: configured.accent,
-    });
+    };
+
+    if (configured.excluded === true) nextMeta.excluded = true;
+    if (configured.hidden === true) nextMeta.hidden = true;
+
+    writeJson(metaPath, nextMeta);
   }
 }
 
