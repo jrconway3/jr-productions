@@ -42,6 +42,10 @@ const CATEGORY_CONFIG = {
   tilesets: { label: 'Tilesets', priority: 130, accent: 'saturated' },
 };
 
+const LEAF_META_OVERRIDES = {
+  'head/heads': { excluded: true },
+};
+
 function parseModeFromArgs() {
   if (process.argv.includes('--rebuild')) return MODE_REBUILD;
   if (process.argv.includes('--clear-new')) return MODE_CLEAR_NEW;
@@ -206,27 +210,51 @@ function writeCategoryMetaFromConfig(categorySet) {
     categoryIndex += 1;
 
     const metaPath = path.join(DATA_ROOT, category, 'meta.json');
-    writeJson(metaPath, {
+    const nextMeta = {
       label: configured.label,
       description: '',
       priority: configured.priority,
       accent: configured.accent,
-    });
+    };
+
+    if (configured.excluded === true) nextMeta.excluded = true;
+    if (configured.hidden === true) nextMeta.hidden = true;
+
+    writeJson(metaPath, nextMeta);
   }
 }
 
 function writeLeafCategoryMeta(leafDirs) {
   for (const leafDir of leafDirs) {
     const metaPath = path.join(leafDir, 'meta.json');
+    const leafRelativePath = leafDir.replace(`${DATA_ROOT}${path.sep}`, '').replace(/\\/g, '/');
+    const override = LEAF_META_OVERRIDES[leafRelativePath] ?? null;
+
     // Only create if it doesn't exist
     if (!fs.existsSync(metaPath)) {
       const dirName = path.basename(leafDir);
-      writeJson(metaPath, {
+      const leafMeta = {
         label: titleCaseFromSlug(dirName),
         description: '',
         priority: 500,
         accent: 'saturated',
-      });
+      };
+      writeJson(metaPath, override ? { ...leafMeta, ...override } : leafMeta);
+      continue;
+    }
+
+    if (!override) continue;
+
+    const existingMeta = loadJson(metaPath);
+    let changed = false;
+    for (const [key, value] of Object.entries(override)) {
+      if (existingMeta[key] === value) continue;
+      existingMeta[key] = value;
+      changed = true;
+    }
+
+    if (changed) {
+      writeJson(metaPath, existingMeta);
     }
   }
 }

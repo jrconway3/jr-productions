@@ -126,7 +126,6 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
             ) : (
               <p className="text-site-muted font-body">No assets yet.</p>
             )}
-            <PageCredits credits={pageCredits} />
           </section>
 
           <aside className="content-sidebar">
@@ -158,7 +157,7 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
 
             <div>
               <h2 className="font-pixel text-xs uppercase tracking-widest text-site-muted mb-3">All FE Categories</h2>
-              <div className="space-y-2 max-h-[52vh] overflow-auto pr-1">
+              <div className="space-y-2">
                 {sectionCategory.children.map((child) => (
                   <Link
                     key={child.slug}
@@ -172,6 +171,7 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
             </div>
           </aside>
         </div>
+        <PageCredits credits={pageCredits} />
       </main>
     </>
   );
@@ -223,6 +223,6 @@ export const getStaticProps: GetStaticProps<FeSlugProps> = async ({ params }) =>
 
   const treeAssets = getAssetsByCategoryTree(['fe', ...slugs].join('/'));
   const resolvedSpecs = resolveAssetsSpecs(treeAssets);
-  const pageCredits = getSectionPageCredits(['fe', ...slugs].join('/'));
+  const pageCredits = getSectionPageCredits(['fe', ...slugs].join('/'), treeAssets);
   return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits } };
 };

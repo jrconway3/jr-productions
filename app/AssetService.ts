@@ -10,6 +10,9 @@ const PUBLIC_ROOT = path.join(process.cwd(), 'public');
 const LPC_PUBLIC_BASE = 'assets/lpc';
 const FE_PUBLIC_BASE = 'assets/fe';
 const LPC_CHARACTERS_ROOT = path.join(PUBLIC_ROOT, LPC_PUBLIC_BASE, 'characters');
+const LPC_ANIMATIONS_ROOT = path.join(DATA_ROOT, 'animations', 'lpc');
+
+const lpcGlobalLayerAssetIdsByAnimation = new Map<string, string[]>();
 
 const HTTP_URL_PATTERN = /^https?:\/\//i;
 
@@ -218,7 +221,153 @@ function findAssetsByIds(ids: Set<string>): Map<string, Asset> {
   return result;
 }
 
-export function getSectionPageCredits(sectionPath: string): ResolvedPageCredit[] {
+function collectLpcGlobalLayerAssetIds(ref: unknown, collector: Set<string>): void {
+  if (typeof ref === 'string') {
+    const normalized = ref.replace(/\\/g, '/').replace(/^\/+/, '');
+    const id = path.basename(normalized, '.json');
+    if (id) collector.add(id);
+    return;
+  }
+
+  if (!ref || typeof ref !== 'object') return;
+  const rawRef = ref as Record<string, unknown>;
+  const assetRef = rawRef.asset;
+
+  if (typeof assetRef === 'string') {
+    collector.add(assetRef);
+    return;
+  }
+
+  if (!Array.isArray(assetRef)) return;
+  for (const conditionalRef of assetRef) {
+    if (!conditionalRef || typeof conditionalRef !== 'object') continue;
+    const conditionalAssetRef = (conditionalRef as Record<string, unknown>).asset;
+    if (typeof conditionalAssetRef === 'string') collector.add(conditionalAssetRef);
+  }
+}
+
+function getLpcGlobalLayerAssetIdsForAnimation(animationName: string): string[] {
+  const cached = lpcGlobalLayerAssetIdsByAnimation.get(animationName);
+  if (cached) return cached;
+
+  const specPath = path.join(LPC_ANIMATIONS_ROOT, `${animationName}.json`);
+  if (!fs.existsSync(specPath)) {
+    lpcGlobalLayerAssetIdsByAnimation.set(animationName, []);
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(fs.readFileSync(specPath, 'utf-8')) as { global_layers?: unknown[] };
+    const collected = new Set<string>();
+    for (const ref of parsed.global_layers ?? []) {
+      collectLpcGlobalLayerAssetIds(ref, collected);
+    }
+
+    const ids = [...collected];
+    lpcGlobalLayerAssetIdsByAnimation.set(animationName, ids);
+    return ids;
+  } catch {
+    lpcGlobalLayerAssetIdsByAnimation.set(animationName, []);
+    return [];
+  }
+}
+
+function getLpcGlobalLayerCreditBucket(asset: Asset): { key: string; label: string } {
+  if (asset.category === 'head') {
+    return { key: 'lpc:head', label: 'Head' };
+  }
+
+  if (asset.category === 'body' || asset.id === 'body') {
+    return { key: 'lpc:body', label: 'Body' };
+  }
+
+  const fallbackLabel = asset.name?.trim() || asset.id;
+  return { key: `lpc:asset:${asset.id}`, label: fallbackLabel };
+}
+
+function buildLpcGlobalLayerCredits(
+  sectionPath: string,
+  existingLabels: Set<string>,
+  sectionAssets?: Asset[],
+): ResolvedPageCredit[] {
+  const sourceAssets = sectionAssets ?? getAssetsByCategoryTree(sectionPath);
+  const lpcSectionAssets = sourceAssets.filter((asset) => asset.type === 'lpc');
+  if (lpcSectionAssets.length === 0) return [];
+
+  const neededIds = new Set<string>();
+  for (const asset of lpcSectionAssets) {
+    for (const animationName of asset.animations ?? []) {
+      const globalLayerAssetIds = getLpcGlobalLayerAssetIdsForAnimation(animationName);
+      for (const assetId of globalLayerAssetIds) neededIds.add(assetId);
+    }
+  }
+
+  const assetMap = findAssetsByIds(neededIds);
+  const grouped = new Map<string, {
+    label: string;
+    authors: Set<string>;
+    urls: Set<string>;
+    licenses: Set<string>;
+    notes: Set<string>;
+  }>();
+
+  const sortedAssets = [...assetMap.values()].sort((a, b) => {
+    const aName = a.name?.trim() || a.id;
+    const bName = b.name?.trim() || b.id;
+    return aName.localeCompare(bName);
+  });
+
+  for (const asset of sortedAssets) {
+    const { key, label } = getLpcGlobalLayerCreditBucket(asset);
+    const normalizedLabel = label.toLowerCase();
+    if (existingLabels.has(normalizedLabel)) continue;
+
+    let bucket = grouped.get(key);
+    if (!bucket) {
+      bucket = {
+        label,
+        authors: new Set<string>(),
+        urls: new Set<string>(),
+        licenses: new Set<string>(),
+        notes: new Set<string>(),
+      };
+      grouped.set(key, bucket);
+    }
+
+    if (asset.license) bucket.licenses.add(asset.license);
+    for (const credit of asset.credits ?? []) {
+      for (const author of credit.authors ?? []) bucket.authors.add(author);
+      for (const url of credit.urls ?? []) bucket.urls.add(url);
+      if (credit.notes) bucket.notes.add(credit.notes);
+    }
+  }
+
+  const autoCredits: ResolvedPageCredit[] = [];
+  const orderedBuckets = [...grouped.values()].sort((a, b) => a.label.localeCompare(b.label));
+  for (const bucket of orderedBuckets) {
+    const resolvedCredit: ResolvedPageCredit = {
+      label: bucket.label,
+      authors: [...bucket.authors],
+      urls: [...bucket.urls],
+    };
+
+    if (bucket.licenses.size > 0) resolvedCredit.license = [...bucket.licenses].join(', ');
+    if (bucket.notes.size > 0) resolvedCredit.notes = [...bucket.notes].join(' | ');
+
+    const hasMetadata = resolvedCredit.authors.length > 0
+      || resolvedCredit.urls.length > 0
+      || Boolean(resolvedCredit.license)
+      || Boolean(resolvedCredit.notes);
+    if (!hasMetadata) continue;
+
+    existingLabels.add(bucket.label.toLowerCase());
+    autoCredits.push(resolvedCredit);
+  }
+
+  return autoCredits;
+}
+
+export function getSectionPageCredits(sectionPath: string, sectionAssets?: Asset[]): ResolvedPageCredit[] {
   // Walk up the path hierarchy to find the nearest meta.json with page_credits.
   const parts = sectionPath.split('/').filter(Boolean);
   let meta = null;
@@ -228,33 +377,43 @@ export function getSectionPageCredits(sectionPath: string): ResolvedPageCredit[]
     if (meta?.page_credits?.length) break;
     meta = null;
   }
-  if (!meta?.page_credits?.length) return [];
+  const resolvedMetaCredits: ResolvedPageCredit[] = [];
+  if (meta?.page_credits?.length) {
+    const neededIds = new Set<string>(meta.page_credits.flatMap((e) => e.asset_ids ?? []));
+    const assetMap = findAssetsByIds(neededIds);
 
-  const neededIds = new Set<string>(meta.page_credits.flatMap((e) => e.asset_ids ?? []));
-  const assetMap = findAssetsByIds(neededIds);
+    for (const entry of meta.page_credits) {
+      const authors = new Set<string>(entry.authors ?? []);
+      const urls = new Set<string>(entry.urls ?? []);
+      const licenses = new Set<string>();
 
-  return meta.page_credits.map((entry) => {
-    const authors = new Set<string>(entry.authors ?? []);
-    const urls = new Set<string>(entry.urls ?? []);
-    const licenses = new Set<string>();
-
-    for (const assetId of entry.asset_ids ?? []) {
-      const asset = assetMap.get(assetId);
-      if (asset?.credits) {
-        for (const c of asset.credits) {
-          for (const author of c.authors) authors.add(author);
-          for (const url of c.urls ?? []) urls.add(url);
+      for (const assetId of entry.asset_ids ?? []) {
+        const asset = assetMap.get(assetId);
+        if (asset?.credits) {
+          for (const c of asset.credits) {
+            for (const author of c.authors) authors.add(author);
+            for (const url of c.urls ?? []) urls.add(url);
+          }
         }
+        if (asset?.license) licenses.add(asset.license);
       }
-      if (asset?.license) licenses.add(asset.license);
-    }
 
-    const credit: ResolvedPageCredit = { label: entry.label, authors: [...authors], urls: [...urls] };
-    const resolvedLicense = entry.license ?? (licenses.size > 0 ? [...licenses].join(', ') : undefined);
-    if (resolvedLicense != null) credit.license = resolvedLicense;
-    if (entry.notes != null) credit.notes = entry.notes;
-    return credit;
-  });
+      const credit: ResolvedPageCredit = { label: entry.label, authors: [...authors], urls: [...urls] };
+      const resolvedLicense = entry.license ?? (licenses.size > 0 ? [...licenses].join(', ') : undefined);
+      if (resolvedLicense != null) credit.license = resolvedLicense;
+      if (entry.notes != null) credit.notes = entry.notes;
+      resolvedMetaCredits.push(credit);
+    }
+  }
+
+  if (!sectionPath.startsWith('lpc')) return resolvedMetaCredits;
+
+  const existingLabels = new Set<string>(
+    resolvedMetaCredits.map((credit) => credit.label.toLowerCase()),
+  );
+
+  const autoLayerCredits = buildLpcGlobalLayerCredits(sectionPath, existingLabels, sectionAssets);
+  return [...resolvedMetaCredits, ...autoLayerCredits];
 }
 
 export function getHomepageFeaturedAssets(): Asset[] {
