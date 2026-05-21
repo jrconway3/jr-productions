@@ -199,7 +199,6 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
             ) : (
               <p className="text-site-muted font-body">No assets yet.</p>
             )}
-            <PageCredits credits={pageCredits} />
           </section>
 
           <aside className="content-sidebar">
@@ -231,7 +230,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
 
             <div>
               <h2 className="font-pixel text-xs uppercase tracking-widest text-site-muted mb-3">All LPC Categories</h2>
-              <div className="space-y-2 max-h-[52vh] overflow-auto pr-1">
+              <div className="space-y-2">
                 {sectionCategory.children.map((child) => (
                   <Link
                     key={child.slug}
@@ -245,6 +244,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
             </div>
           </aside>
         </div>
+        <PageCredits credits={pageCredits} />
       </main>
     </>
   );

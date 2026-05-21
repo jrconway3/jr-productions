@@ -2,6 +2,5 @@
   "label": "Head",
   "description": "",
   "priority": 60,
-  "accent": "saturated",
-  "excluded": true
+  "accent": "saturated"
 }

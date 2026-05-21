@@ -22,6 +22,10 @@
         "label": "Hair"
       },
       {
+        "href": "/lpc/head",
+        "label": "Head"
+      },
+      {
         "href": "/lpc/legs",
         "label": "Legs"
       },

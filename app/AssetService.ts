@@ -272,6 +272,19 @@ function getLpcGlobalLayerAssetIdsForAnimation(animationName: string): string[] 
   }
 }
 
+function getLpcGlobalLayerCreditBucket(asset: Asset): { key: string; label: string } {
+  if (asset.category === 'head') {
+    return { key: 'lpc:head', label: 'Head' };
+  }
+
+  if (asset.category === 'body' || asset.id === 'body') {
+    return { key: 'lpc:body', label: 'Body' };
+  }
+
+  const fallbackLabel = asset.name?.trim() || asset.id;
+  return { key: `lpc:asset:${asset.id}`, label: fallbackLabel };
+}
+
 function buildLpcGlobalLayerCredits(sectionPath: string, existingLabels: Set<string>): ResolvedPageCredit[] {
   const sectionAssets = getAssetsByCategoryTree(sectionPath).filter((asset) => asset.type === 'lpc');
   if (sectionAssets.length === 0) return [];
@@ -285,34 +298,56 @@ function buildLpcGlobalLayerCredits(sectionPath: string, existingLabels: Set<str
   }
 
   const assetMap = findAssetsByIds(neededIds);
-  const autoCredits: ResolvedPageCredit[] = [];
-  const sortedAssets = [...assetMap.values()].sort((a, b) => a.name.localeCompare(b.name));
+  const grouped = new Map<string, {
+    label: string;
+    authors: Set<string>;
+    urls: Set<string>;
+    licenses: Set<string>;
+    notes: Set<string>;
+  }>();
+
+  const sortedAssets = [...assetMap.values()].sort((a, b) => {
+    const aName = a.name?.trim() || a.id;
+    const bName = b.name?.trim() || b.id;
+    return aName.localeCompare(bName);
+  });
 
   for (const asset of sortedAssets) {
-    const label = asset.name?.trim();
-    if (!label) continue;
-
+    const { key, label } = getLpcGlobalLayerCreditBucket(asset);
     const normalizedLabel = label.toLowerCase();
     if (existingLabels.has(normalizedLabel)) continue;
 
-    const authors = new Set<string>();
-    const urls = new Set<string>();
-    const notes = new Set<string>();
-
-    for (const credit of asset.credits ?? []) {
-      for (const author of credit.authors ?? []) authors.add(author);
-      for (const url of credit.urls ?? []) urls.add(url);
-      if (credit.notes) notes.add(credit.notes);
+    let bucket = grouped.get(key);
+    if (!bucket) {
+      bucket = {
+        label,
+        authors: new Set<string>(),
+        urls: new Set<string>(),
+        licenses: new Set<string>(),
+        notes: new Set<string>(),
+      };
+      grouped.set(key, bucket);
     }
 
+    if (asset.license) bucket.licenses.add(asset.license);
+    for (const credit of asset.credits ?? []) {
+      for (const author of credit.authors ?? []) bucket.authors.add(author);
+      for (const url of credit.urls ?? []) bucket.urls.add(url);
+      if (credit.notes) bucket.notes.add(credit.notes);
+    }
+  }
+
+  const autoCredits: ResolvedPageCredit[] = [];
+  const orderedBuckets = [...grouped.values()].sort((a, b) => a.label.localeCompare(b.label));
+  for (const bucket of orderedBuckets) {
     const resolvedCredit: ResolvedPageCredit = {
-      label,
-      authors: [...authors],
-      urls: [...urls],
+      label: bucket.label,
+      authors: [...bucket.authors],
+      urls: [...bucket.urls],
     };
 
-    if (asset.license) resolvedCredit.license = asset.license;
-    if (notes.size > 0) resolvedCredit.notes = [...notes].join(' | ');
+    if (bucket.licenses.size > 0) resolvedCredit.license = [...bucket.licenses].join(', ');
+    if (bucket.notes.size > 0) resolvedCredit.notes = [...bucket.notes].join(' | ');
 
     const hasMetadata = resolvedCredit.authors.length > 0
       || resolvedCredit.urls.length > 0
@@ -320,7 +355,7 @@ function buildLpcGlobalLayerCredits(sectionPath: string, existingLabels: Set<str
       || Boolean(resolvedCredit.notes);
     if (!hasMetadata) continue;
 
-    existingLabels.add(normalizedLabel);
+    existingLabels.add(bucket.label.toLowerCase());
     autoCredits.push(resolvedCredit);
   }
 

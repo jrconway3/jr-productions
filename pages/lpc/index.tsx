@@ -3,12 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
-import { getAssetsByCategoryTree } from 'app/AssetService';
+import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
 import { resolveHomepageSpecs } from 'app/AnimationService';
 import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
 import MasonryGrid from 'components/gallery/MasonryGrid';
+import PageCredits from 'components/gallery/PageCredits';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
-import type { Category } from 'app/models/Category';
+import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 
 interface LpcIndexProps {
@@ -18,6 +19,7 @@ interface LpcIndexProps {
   animNames?: Record<string, string>;
   bodyTypes?: Record<string, string>;
   groupNames?: Record<string, string[]>;
+  pageCredits?: ResolvedPageCredit[];
 }
 
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
@@ -59,7 +61,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {} }: LpcIndexProps) {
+export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {}, pageCredits = [] }: LpcIndexProps) {
   const allAssets = useMemo(() => treeAssets ?? [], [treeAssets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'lpc'), [category.path]);
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, featuredAssetCount));
@@ -133,7 +135,7 @@ export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, ani
 
             <div>
               <h2 className="font-pixel text-xs uppercase tracking-widest text-site-muted mb-3">All LPC Categories</h2>
-              <div className="space-y-2 max-h-[52vh] overflow-auto pr-1">
+              <div className="space-y-2">
                 {category.children.map((child) => (
                   <Link
                     key={child.slug}
@@ -147,6 +149,7 @@ export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, ani
             </div>
           </aside>
         </div>
+        <PageCredits credits={pageCredits} />
       </main>
     </>
   );
@@ -158,5 +161,6 @@ export const getStaticProps: GetStaticProps<LpcIndexProps> = async () => {
 
   const treeAssets = getAssetsByCategoryTree('lpc');
   const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(treeAssets);
-  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames } };
+  const pageCredits = getSectionPageCredits('lpc');
+  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits } };
 };
