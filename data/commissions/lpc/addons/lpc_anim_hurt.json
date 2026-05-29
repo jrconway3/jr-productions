@@ -5,7 +5,7 @@
   "price_max": 20,
   "priority": 40,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/59025ef4de",
   "examples": [
     {
       "asset_id": "torso_clothes_longsleeve2",

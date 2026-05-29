@@ -27,7 +27,7 @@
       "accent": "commissions",
       "links": [
         { "href": "/commissions", "label": "Commissions" },
-        { "href": "https://ko-fi.com/jaidynreiman", "label": "Ko-fi", "external": true }
+        { "href": "https://ko-fi.com/jaidynreiman/commissions", "label": "Ko-fi", "external": true }
       ]
     },
     {

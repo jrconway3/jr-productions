@@ -6,7 +6,7 @@
   "price_max": 30,
   "priority": 30,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/9abcb6a505",
   "examples": [
     {
       "asset_id": "legs_pants2",

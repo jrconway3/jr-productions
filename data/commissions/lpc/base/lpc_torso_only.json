@@ -5,7 +5,7 @@
   "price_max": 30,
   "priority": 20,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/1a115d6d61",
   "examples": [
     {
       "asset_id": "torso_armour_plate",
