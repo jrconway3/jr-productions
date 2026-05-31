@@ -6,7 +6,7 @@
   "price_max": 50,
   "priority": 90,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/2e6c3510e2",
   "examples": [
     {
       "asset_id": "arms_gloves",
