@@ -5,7 +5,7 @@
   "price_max": 60,
   "priority": 110,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/3f470bf5fd",
   "examples": [
     {
       "asset_id": "mage_lord_svetlanya"

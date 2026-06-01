@@ -5,7 +5,7 @@
   "price_max": 40,
   "priority": 100,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/035af5cfa2",
   "examples": [
     {
       "asset_id": "wolf_knight"

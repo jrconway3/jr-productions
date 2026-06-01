@@ -4,7 +4,7 @@
   "applies_to": ["lpc_legs_only", "lpc_full_body"],
   "price_min": 30,
   "price_max": 30,
-  "priority": 30,
+  "priority": 20,
   "inquire": false,
   "kofi_url": "https://ko-fi.com/c/9abcb6a505",
   "examples": [

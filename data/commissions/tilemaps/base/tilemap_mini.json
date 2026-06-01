@@ -1,0 +1,10 @@
+{
+  "name": "Mini RPG Tilemap (32x32)",
+  "description": "Custom RPG-style tilemap up to 32x32 tiles in TMX format with PNG export. Primarily uses open-source LPC assets.",
+  "price_min": 25,
+  "price_max": 25,
+  "priority": 5,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": []
+}
