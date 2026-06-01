@@ -109,7 +109,7 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
   return (
     <>
       <Head>
-        <title>{category.label} - FE - JaidynReiman Productions</title>
+        <title>{`${category.label} - FE - JaidynReiman Productions`}</title>
       </Head>
 
       <main className="section-fe page-wide py-12">

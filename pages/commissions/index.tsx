@@ -81,7 +81,7 @@ function CommissionCard({
               href={kofiLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1 bg-site-muted text-site-surface rounded text-xs font-bold hover:opacity-80 transition-opacity"
+              className="px-3 py-1 bg-site-muted text-site-surface rounded text-xs font-bold hover:opacity-80 transition-opacity whitespace-nowrap"
             >
               Ko-Fi
             </a>
@@ -92,20 +92,6 @@ function CommissionCard({
   );
 }
 
-function ModifierCard({ entry }: { entry: CommissionEntry }) {
-  return (
-    <div className="border border-site-muted/30 rounded-md p-4 hover:border-lpc-accent/50 transition-colors">
-      <h4 className="font-bold text-site-text font-pixel mb-1">{entry.name}</h4>
-      <p className="text-site-muted text-sm mb-2">{entry.description}</p>
-      <p className="font-bold text-lpc-accent font-pixel">
-        {entry.price_min === entry.price_max
-          ? `$${entry.price_min}`
-          : `$${entry.price_min}–$${entry.price_max}`}
-      </p>
-      {entry.price_note && <p className="text-xs text-site-muted mt-1">{entry.price_note}</p>}
-    </div>
-  );
-}
 
 function CommissionCategorySection({
   category,
@@ -134,24 +120,19 @@ function CommissionCategorySection({
         section.entries.length > 0 ? (
           <div key={section.key} className="mb-8">
             <h3 className="text-site-text font-pixel text-sm mb-4 pl-1">{section.label}</h3>
-            {section.key === 'modifiers' ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {section.entries.map(entry => <ModifierCard key={entry.id} entry={entry} />)}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {section.entries.map(entry => (
+            <div className="flex flex-wrap gap-4 justify-center">
+              {section.entries.map(entry => (
+                <div key={entry.id} className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]">
                   <CommissionCard
-                    key={entry.id}
                     entry={entry}
                     color={color}
                     example={examplesByEntryId[entry.id]}
                     exampleAsset={examplesByEntryId[entry.id] ? exampleAssetsById[examplesByEntryId[entry.id]!.assetId] : undefined}
                     resolvedSpec={examplesByEntryId[entry.id] ? resolvedSpecsByAssetId[examplesByEntryId[entry.id]!.assetId] : undefined}
                   />
-                ))}
-              </div>
-            )}
+                </div>
+              ))}
+            </div>
           </div>
         ) : null
       ))}
@@ -189,7 +170,18 @@ export default function Commissions({ data, exampleAssetsById, resolvedSpecsByAs
 
         <section className="mb-12 border border-site-muted/30 rounded-md p-5">
           {data.meta.intro && (
-            <p className="text-site-muted font-body text-sm mb-4">{data.meta.intro}</p>
+            <p className="text-site-muted font-body text-sm mb-4">
+              Hello, I&apos;m JaidynReiman and I&apos;m currently taking Commissions! Feel free to browse the options
+              below or the assets across the rest of the website. Most assets are modifications of existing assets, but I
+              am willing to accept custom sprites with special accommodation. Reach out to me directly on{' '}
+              <a href="https://jrplays.net" target="_blank" rel="noopener noreferrer" className="text-lpc-accent hover:underline">
+                my blog website
+              </a>{' '}
+              or on{' '}
+              <a href="https://ko-fi.com/jaidynreiman" target="_blank" rel="noopener noreferrer" className="text-lpc-accent hover:underline">
+                Ko-Fi
+              </a>.
+            </p>
           )}
 
           <h2 className="text-site-text font-pixel text-sm mb-2">Payment Methods:</h2>
@@ -216,12 +208,24 @@ export default function Commissions({ data, exampleAssetsById, resolvedSpecsByAs
           <CommissionCategorySection
             key={category.key}
             category={category}
-            color={category.key as 'lpc' | 'fe'}
+            color={category.key === 'fe' ? 'fe' : 'lpc'}
             examplesByEntryId={examplesByEntryId}
             exampleAssetsById={exampleAssetsById}
             resolvedSpecsByAssetId={resolvedSpecsByAssetId}
           />
         ))}
+
+        <div className="border-t border-site-muted/20 pt-10 mt-4 flex flex-col items-center gap-3 text-center">
+          <p className="text-site-muted font-body text-sm">Ready to commission?</p>
+          <a
+            href="https://ko-fi.com/jaidynreiman"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2 bg-lpc-accent text-site-surface rounded font-bold font-pixel text-sm hover:opacity-80 transition-opacity"
+          >
+            Reach out on Ko-Fi →
+          </a>
+        </div>
       </main>
     </>
   );

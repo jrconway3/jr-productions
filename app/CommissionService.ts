@@ -45,7 +45,7 @@ function walkCategory(categoryDir: string): CommissionCategoryData {
 
 export function getCommissionData(): CommissionData {
   const meta = loadJSON(path.join(COMMISSION_DIR, 'meta.json'));
-  const categories = ['lpc', 'fe'].map(key => walkCategory(path.join(COMMISSION_DIR, key)));
+  const categories = ['lpc', 'fe', 'tilemaps'].map(key => walkCategory(path.join(COMMISSION_DIR, key)));
   return { meta, categories };
 }
 
