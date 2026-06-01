@@ -171,9 +171,8 @@ export default function Commissions({ data, exampleAssetsById, resolvedSpecsByAs
         <section className="mb-12 border border-site-muted/30 rounded-md p-5">
           {data.meta.intro && (
             <p className="text-site-muted font-body text-sm mb-4">
-              Hello, I&apos;m JaidynReiman and I&apos;m currently taking Commissions! Feel free to browse the options
-              below or the assets across the rest of the website. Most assets are modifications of existing assets, but I
-              am willing to accept custom sprites with special accommodation. Reach out to me directly on{' '}
+              {data.meta.intro}{' '}
+              Reach out to me directly on{' '}
               <a href="https://jrplays.net" target="_blank" rel="noopener noreferrer" className="text-lpc-accent hover:underline">
                 my blog website
               </a>{' '}
