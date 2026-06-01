@@ -6,7 +6,7 @@
   "price_max": 20,
   "priority": 30,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/5a7aad4c71",
   "examples": [
     {
       "asset_id": "hair_relm_short",

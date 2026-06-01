@@ -1,0 +1,10 @@
+{
+  "name": "Small RPG Tilemap (64x64)",
+  "description": "Custom RPG-style tilemap, 64x64 tiles, in TMX format with PNG export. Primarily uses open-source LPC assets.",
+  "price_min": 50,
+  "price_max": 50,
+  "priority": 10,
+  "inquire": false,
+  "kofi_url": null,
+  "examples": []
+}

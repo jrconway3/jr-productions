@@ -4,9 +4,9 @@
   "applies_to": ["lpc_torso_arms", "lpc_full_body"],
   "price_min": 25,
   "price_max": 25,
-  "priority": 20,
+  "priority": 30,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/59e7fafa12",
   "examples": [
     {
       "asset_id": "torso_clothes_shortsleeve_polo",

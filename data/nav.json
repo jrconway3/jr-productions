@@ -21,6 +21,16 @@
       }
     },
     {
+      "id": "commissions",
+      "label": "Commissions",
+      "href": "/commissions",
+      "accent": "commissions",
+      "links": [
+        { "href": "/commissions", "label": "Commissions" },
+        { "href": "https://ko-fi.com/jaidynreiman/commissions", "label": "Ko-fi", "external": true }
+      ]
+    },
+    {
       "id": "about",
       "label": "About",
       "href": "https://jrplays.net/about-me",

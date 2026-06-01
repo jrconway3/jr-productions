@@ -1,0 +1,15 @@
+{
+  "name": "Slash",
+  "description": "Slash animation. Applies to any base asset.",
+  "price_min": 25,
+  "price_max": 25,
+  "priority": 75,
+  "inquire": false,
+  "kofi_url": "https://ko-fi.com/c/51ca92a950",
+  "examples": [
+    {
+      "asset_id": "dress_kimono",
+      "animation": "slash"
+    }
+  ]
+}

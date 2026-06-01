@@ -97,7 +97,7 @@ export default function FeIndex({ category, treeAssets, resolvedSpecs = {}, anim
   return (
     <>
       <Head>
-        <title>{category.label} - JaidynReiman Productions</title>
+        <title>{`${category.label} - JaidynReiman Productions`}</title>
       </Head>
 
       <main className="section-fe page-wide py-12">

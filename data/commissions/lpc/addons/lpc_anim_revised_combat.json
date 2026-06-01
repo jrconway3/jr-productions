@@ -7,7 +7,7 @@
   "bundle": true,
   "bundle_items": ["backslash", "halfslash", "combat_idle"],
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/8c25ea8244",
   "examples": [
     {
       "asset_id": "shoulders_pauldrons",

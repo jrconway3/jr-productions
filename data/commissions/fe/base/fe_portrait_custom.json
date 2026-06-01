@@ -5,7 +5,7 @@
   "price_max": 60,
   "priority": 30,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/4754d66e0a",
   "examples": [
     {
       "asset_id": "svetlanya"

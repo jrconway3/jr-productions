@@ -5,7 +5,7 @@
   "price_max": 30,
   "priority": 70,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/519b1db009",
   "examples": [
     {
       "asset_id": "arms_armour",

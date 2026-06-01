@@ -5,7 +5,7 @@
   "price_max": 50,
   "priority": 50,
   "inquire": false,
-  "kofi_url": null,
+  "kofi_url": "https://ko-fi.com/c/84f55b4334",
   "examples": [
     {
       "asset_id": "legs_armour",
