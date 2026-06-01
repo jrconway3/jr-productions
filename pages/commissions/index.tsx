@@ -122,7 +122,7 @@ function CommissionCategorySection({
             <h3 className="text-site-text font-pixel text-sm mb-4 pl-1">{section.label}</h3>
             <div className="flex flex-wrap gap-4 justify-center">
               {section.entries.map(entry => (
-                <div key={entry.id} className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]">
+                <div key={entry.id} className="w-full md:w-[calc(50%_-_0.5rem)] lg:w-[calc(33.333%_-_0.667rem)]">
                   <CommissionCard
                     entry={entry}
                     color={color}
