@@ -7,6 +7,7 @@ import { formatPrice } from 'app/commissionUtils';
 import type { ResolvedCommissionData, CommissionEntry, CommissionCategoryData, ResolvedCommissionExample } from 'app/CommissionTypes';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
+import { SITE_URL } from 'app/siteConfig';
 
 interface CommissionsProps {
   data: ResolvedCommissionData;
@@ -155,6 +156,10 @@ export default function Commissions({ data, exampleAssetsById, resolvedSpecsByAs
       <Head>
         <title>Commissions - JaidynReiman Productions</title>
         <meta name="description" content="Commission LPC and Fire Emblem assets from Jaidyn Reiman" />
+        <meta property="og:title" content="Commissions - JaidynReiman Productions" />
+        <meta property="og:description" content="Commission LPC and Fire Emblem assets from Jaidyn Reiman" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/commissions`} />
       </Head>
 
       <main className="page-wide py-12">

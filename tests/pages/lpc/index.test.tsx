@@ -31,17 +31,17 @@ const mockCategory: Category = {
 
 describe('LPC index page', () => {
   it('renders the category heading', () => {
-    render(<LpcIndex category={mockCategory} />);
+    render(<LpcIndex category={mockCategory} pageUrl="https://jaidynreiman.net/lpc" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('heading', { name: 'LPC Assets' })).toBeInTheDocument();
   });
 
   it('renders subcategory links', () => {
-    render(<LpcIndex category={mockCategory} />);
+    render(<LpcIndex category={mockCategory} pageUrl="https://jaidynreiman.net/lpc" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('link', { name: 'Hair' })).toBeInTheDocument();
   });
 
   it('renders description when present', () => {
-    render(<LpcIndex category={mockCategory} />);
+    render(<LpcIndex category={mockCategory} pageUrl="https://jaidynreiman.net/lpc" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByText('Libre Pixel Art Collection assets')).toBeInTheDocument();
   });
 });

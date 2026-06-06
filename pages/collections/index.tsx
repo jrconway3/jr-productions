@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { getAllCollections } from 'app/CollectionService';
 import type { Collection } from 'app/models/Collection';
+import { SITE_URL } from 'app/siteConfig';
 
 interface CollectionsIndexProps {
   collections: Collection[];
@@ -13,6 +14,11 @@ export default function CollectionsIndex({ collections }: CollectionsIndexProps)
     <>
       <Head>
         <title>Collections - JaidynReiman Productions</title>
+        <meta name="description" content="Curated collections of sprite and game assets by JaidynReiman." />
+        <meta property="og:title" content="Collections - JaidynReiman Productions" />
+        <meta property="og:description" content="Curated collections of sprite and game assets by JaidynReiman." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/collections`} />
       </Head>
 
       <main className="page-wide py-12">

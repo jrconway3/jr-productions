@@ -11,6 +11,7 @@ import PageCredits from 'components/gallery/PageCredits';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
+import { SITE_URL } from 'app/siteConfig';
 
 interface LpcIndexProps {
   category: Category;
@@ -20,6 +21,8 @@ interface LpcIndexProps {
   bodyTypes?: Record<string, string>;
   groupNames?: Record<string, string[]>;
   pageCredits?: ResolvedPageCredit[];
+  pageUrl: string;
+  ogImage: string | null;
 }
 
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
@@ -61,7 +64,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {}, pageCredits = [] }: LpcIndexProps) {
+export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {}, pageCredits = [], pageUrl, ogImage }: LpcIndexProps) {
   const allAssets = useMemo(() => treeAssets ?? [], [treeAssets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'lpc'), [category.path]);
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, featuredAssetCount));
@@ -100,6 +103,23 @@ export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, ani
     <>
       <Head>
         <title>{`${category.label} - JaidynReiman Productions`}</title>
+        {category.description && <meta name="description" content={category.description} />}
+        <meta property="og:title" content={`${category.label} - JaidynReiman Productions`} />
+        {category.description && <meta property="og:description" content={category.description} />}
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={pageUrl} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${category.label} - JaidynReiman Productions`,
+            description: category.description ?? '',
+            url: pageUrl,
+            author: { '@type': 'Person', name: 'JaidynReiman' },
+          }).replace(/</g, '\\u003c') }}
+        />
       </Head>
 
       <main className="section-lpc page-wide py-12">
@@ -162,5 +182,9 @@ export const getStaticProps: GetStaticProps<LpcIndexProps> = async () => {
   const treeAssets = getAssetsByCategoryTree('lpc');
   const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(treeAssets);
   const pageCredits = getSectionPageCredits('lpc', treeAssets);
-  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits } };
+  const firstPreview = treeAssets.find((a) => a.preview)?.preview;
+  const ogImage = firstPreview
+    ? `${SITE_URL}${firstPreview.startsWith('/') ? '' : '/'}${firstPreview}`
+    : null;
+  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits, pageUrl: `${SITE_URL}/lpc`, ogImage } };
 };
