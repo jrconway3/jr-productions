@@ -78,7 +78,7 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
   const directions = animSpec.directions ?? DEFAULT_DIRECTIONS;
   const layout = animSpec.layout ?? 'row';
   const [hasRenderableLayers, setHasRenderableLayers] = useState(true);
-  const [inView, setInView] = useState(() => typeof IntersectionObserver === 'undefined');
+  const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const cutouts = animSpec.cutouts as Record<string, AnimationCutout> | undefined;
   const rowsByDirection = Object.fromEntries(
@@ -96,7 +96,7 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    if (typeof IntersectionObserver === 'undefined') return;
+    if (typeof IntersectionObserver === 'undefined') { queueMicrotask(() => setInView(true)); return; }
     const obs = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: '100px' },
@@ -230,7 +230,7 @@ interface FePortraitViewerProps {
 export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading }: FePortraitViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const loopRef = useRef<{ stop: () => void; updateState: (p: object) => void } | null>(null);
-  const [inView, setInView] = useState(() => typeof IntersectionObserver === 'undefined');
+  const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [playing, setPlaying] = useState(true);
@@ -250,7 +250,7 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    if (typeof IntersectionObserver === 'undefined') return;
+    if (typeof IntersectionObserver === 'undefined') { queueMicrotask(() => setInView(true)); return; }
     const obs = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: '100px' },
@@ -461,7 +461,7 @@ function getCutoutFrameDims(
 export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProps) {
   const canvasRefs = useRef<Record<string, HTMLCanvasElement | null>>({});
   const stopRefs = useRef<Record<string, () => void>>({});
-  const [inView, setInView] = useState(() => typeof IntersectionObserver === 'undefined');
+  const [inView, setInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const animations = useMemo(
@@ -483,7 +483,7 @@ export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProp
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    if (typeof IntersectionObserver === 'undefined') return;
+    if (typeof IntersectionObserver === 'undefined') { queueMicrotask(() => setInView(true)); return; }
     const obs = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: '100px' },
