@@ -117,7 +117,7 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
             url: SITE_URL,
             description: 'Pixel art sprites, tilesets, and game assets by JaidynReiman.',
             author: { '@type': 'Person', name: 'JaidynReiman' },
-          }) }}
+          }).replace(/</g, '\\u003c') }}
         />
       </Head>
 

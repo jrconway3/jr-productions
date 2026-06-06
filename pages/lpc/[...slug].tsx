@@ -204,7 +204,7 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
             description: category.description ?? '',
             url: pageUrl,
             author: { '@type': 'Person', name: 'JaidynReiman' },
-          }) }}
+          }).replace(/</g, '\\u003c') }}
         />
       </Head>
 
