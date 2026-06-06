@@ -13,8 +13,7 @@ import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import PageCredits from 'components/gallery/PageCredits';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
-
-const SITE_URL = 'https://jaidynreiman.net';
+import { SITE_URL } from 'app/siteConfig';
 
 interface HomeProps {
   categories: Category[];

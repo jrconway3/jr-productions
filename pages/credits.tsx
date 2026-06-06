@@ -2,6 +2,7 @@ import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { getAllAssets } from 'app/AssetService';
 import type { AssetCredit } from 'app/models/Asset';
+import { SITE_URL } from 'app/siteConfig';
 
 interface CreditEntry {
   authors: string[];
@@ -30,7 +31,7 @@ export default function Credits({ groups }: CreditsProps) {
         <meta property="og:title" content="Credits - JaidynReiman Productions" />
         <meta property="og:description" content="Credits and attribution for all sprite assets featured on JaidynReiman Productions." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://jaidynreiman.net/credits" />
+        <meta property="og:url" content={`${SITE_URL}/credits`} />
       </Head>
 
       <main className="page-wide py-12">

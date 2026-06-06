@@ -10,8 +10,7 @@ import MasonryGrid from 'components/gallery/MasonryGrid';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import type { Category } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
-
-const SITE_URL = 'https://jaidynreiman.net';
+import { SITE_URL } from 'app/siteConfig';
 
 interface FeIndexProps {
   category: Category;

@@ -15,15 +15,6 @@ export interface FePortraitState {
   playing: boolean;
 }
 
-function loadImage(url: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = url;
-  });
-}
-
 // Wraps an already-created Image in a Promise, avoiding a second fetch/decode.
 function awaitImage(img: HTMLImageElement): Promise<HTMLImageElement> {
   if (img.complete) {
@@ -170,6 +161,7 @@ export function createLpcMultiDirectionLoop(
     if (syncLayers.length === probedImgs.length) {
       drawLpcFrame(ctx, syncLayers, spec, dir, startFrame);
     } else {
+      // Fill with preview-surface background while images load; remains if any load fails.
       ctx.fillStyle = '#112d1f'; // .asset-preview-surface background (globals.css)
       ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
@@ -352,6 +344,7 @@ export function createFePortraitLoop(
     if (ctx) drawFePortraitFrame(ctx, portraitImg, cutouts, state);
   } else {
     const ctx = canvas.getContext('2d');
+    // Fill with preview-surface background while the image loads; remains if the image fails to load.
     if (ctx) { ctx.fillStyle = '#112d1f'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
   }
 
@@ -515,6 +508,7 @@ export function createFeMapSpriteLoop(
     }
   } else {
     const ctx = canvas.getContext('2d');
+    // Fill with preview-surface background while the image loads; remains if the image fails to load.
     if (ctx) { ctx.fillStyle = '#112d1f'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
   }
 

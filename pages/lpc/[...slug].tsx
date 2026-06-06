@@ -13,8 +13,7 @@ import AssetCard, { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
 import PageCredits from 'components/gallery/PageCredits';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, ResolvedLpcSpec, ResolvedFeSpec } from 'app/models/Asset';
-
-const SITE_URL = 'https://jaidynreiman.net';
+import { SITE_URL } from 'app/siteConfig';
 
 interface LpcSlugProps {
   category: Category;

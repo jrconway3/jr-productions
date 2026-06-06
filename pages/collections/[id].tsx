@@ -6,6 +6,7 @@ import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard from 'components/gallery/AssetCard';
 import type { Collection } from 'app/models/Collection';
 import type { Asset } from 'app/models/Asset';
+import { SITE_URL } from 'app/siteConfig';
 
 interface CollectionDetailProps {
   collection: Collection;
@@ -21,7 +22,7 @@ export default function CollectionDetail({ collection, assets }: CollectionDetai
         <meta property="og:title" content={`${collection.label} - Collections - JaidynReiman Productions`} />
         {collection.description && <meta property="og:description" content={collection.description} />}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://jaidynreiman.net/collections/${collection.id}`} />
+        <meta property="og:url" content={`${SITE_URL}/collections/${collection.id}`} />
       </Head>
 
       <main className="page-wide py-12">

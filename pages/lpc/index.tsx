@@ -11,8 +11,7 @@ import PageCredits from 'components/gallery/PageCredits';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
-
-const SITE_URL = 'https://jaidynreiman.net';
+import { SITE_URL } from 'app/siteConfig';
 
 interface LpcIndexProps {
   category: Category;
