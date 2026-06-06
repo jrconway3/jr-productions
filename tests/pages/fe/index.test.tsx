@@ -31,17 +31,17 @@ const mockCategory: Category = {
 
 describe('FE index page', () => {
   it('renders the category heading', () => {
-    render(<FeIndex category={mockCategory} />);
+    render(<FeIndex category={mockCategory} pageUrl="https://jaidynreiman.net/fe" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('heading', { name: 'Fire Emblem' })).toBeInTheDocument();
   });
 
   it('renders subcategory links', () => {
-    render(<FeIndex category={mockCategory} />);
+    render(<FeIndex category={mockCategory} pageUrl="https://jaidynreiman.net/fe" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('link', { name: 'Portraits' })).toBeInTheDocument();
   });
 
   it('renders description when present', () => {
-    render(<FeIndex category={mockCategory} />);
+    render(<FeIndex category={mockCategory} pageUrl="https://jaidynreiman.net/fe" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByText('Fire Emblem sprite assets')).toBeInTheDocument();
   });
 });

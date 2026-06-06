@@ -14,6 +14,8 @@ import PageCredits from 'components/gallery/PageCredits';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 
+const SITE_URL = 'https://jaidynreiman.net';
+
 interface HomeProps {
   categories: Category[];
   featuredAssets: Asset[];
@@ -22,6 +24,7 @@ interface HomeProps {
   groupNames: Record<string, string[]>;
   bodyTypes: Record<string, string>;
   pageCredits: ResolvedPageCredit[];
+  ogImage: string | null;
 }
 
 const FEATURED_ASSET_COUNT = 180;
@@ -61,7 +64,7 @@ function setCachedAssetIds(ids: string[]): void {
   }
 }
 
-export default function Home({ categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits }: HomeProps) {
+export default function Home({ categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits, ogImage }: HomeProps) {
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => featuredAssets);
 
   const featuredById = useMemo(() => {
@@ -100,10 +103,27 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
       <Head>
         <title>JaidynReiman Productions - Sprite &amp; Game Asset Portfolio</title>
         <meta name="description" content="Pixel art sprites, tilesets, and game assets by JaidynReiman." />
+        <meta property="og:title" content="JaidynReiman Productions - Sprite &amp; Game Asset Portfolio" />
+        <meta property="og:description" content="Pixel art sprites, tilesets, and game assets by JaidynReiman." />
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={SITE_URL} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'JaidynReiman Productions',
+            url: SITE_URL,
+            description: 'Pixel art sprites, tilesets, and game assets by JaidynReiman.',
+            author: { '@type': 'Person', name: 'JaidynReiman' },
+          }) }}
+        />
       </Head>
 
       {/* Main: asset gallery or section nav */}
       <main className="page-wide py-10">
+        <h1 className="sr-only">JaidynReiman Productions — Sprite &amp; Game Asset Portfolio</h1>
         {displayAssets.length > 0 ? (
           <>
             <h2 className="font-pixel text-sm text-site-muted mb-6 tracking-widest uppercase">Featured Picks</h2>
@@ -169,5 +189,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     ...getSectionPageCredits('lpc'),
     ...getSectionPageCredits('fe'),
   ];
-  return { props: { categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits } };
+  const firstPreview = featuredAssets.find((a) => a.preview)?.preview;
+  const ogImage = firstPreview
+    ? `${SITE_URL}${firstPreview.startsWith('/') ? '' : '/'}${firstPreview}`
+    : null;
+  return { props: { categories, featuredAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageCredits, ogImage } };
 };

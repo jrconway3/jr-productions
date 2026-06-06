@@ -155,6 +155,10 @@ export default function Commissions({ data, exampleAssetsById, resolvedSpecsByAs
       <Head>
         <title>Commissions - JaidynReiman Productions</title>
         <meta name="description" content="Commission LPC and Fire Emblem assets from Jaidyn Reiman" />
+        <meta property="og:title" content="Commissions - JaidynReiman Productions" />
+        <meta property="og:description" content="Commission LPC and Fire Emblem assets from Jaidyn Reiman" />
+<meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jaidynreiman.net/commissions" />
       </Head>
 
       <main className="page-wide py-12">

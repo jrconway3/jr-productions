@@ -40,23 +40,23 @@ const mockCategory: Category = {
 
 describe('LPC slug page', () => {
   it('renders the category heading', () => {
-    render(<LpcSlug category={mockCategory} assets={[]} slugs={['hair']} pageCredits={[]} />);
+    render(<LpcSlug category={mockCategory} assets={[]} slugs={['hair']} pageCredits={[]} pageUrl="https://jaidynreiman.net/lpc/hair" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('heading', { name: 'Hair' })).toBeInTheDocument();
   });
 
   it('renders breadcrumb back to LPC root', () => {
-    render(<LpcSlug category={mockCategory} assets={[]} slugs={['hair']} pageCredits={[]} />);
+    render(<LpcSlug category={mockCategory} assets={[]} slugs={['hair']} pageCredits={[]} pageUrl="https://jaidynreiman.net/lpc/hair" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('link', { name: 'LPC' })).toBeInTheDocument();
   });
 
   it('renders subcategory links', () => {
-    render(<LpcSlug category={mockCategory} assets={[]} slugs={['hair']} pageCredits={[]} />);
+    render(<LpcSlug category={mockCategory} assets={[]} slugs={['hair']} pageCredits={[]} pageUrl="https://jaidynreiman.net/lpc/hair" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByRole('link', { name: 'Long Hair' })).toBeInTheDocument();
   });
 
   it('renders asset cards when assets are present', () => {
     const asset: Asset = { id: 'h1', name: 'Braided Hair', type: 'lpc', format: 'spritesheet', preview: '/assets/lpc/test/braided.png' };
-    render(<LpcSlug category={mockCategory} assets={[asset]} slugs={['hair']} pageCredits={[]} />);
+    render(<LpcSlug category={mockCategory} assets={[asset]} slugs={['hair']} pageCredits={[]} pageUrl="https://jaidynreiman.net/lpc/hair" ogImage="https://jaidynreiman.net/og-default.png" />);
     expect(screen.getByText('Braided Hair')).toBeInTheDocument();
   });
 });

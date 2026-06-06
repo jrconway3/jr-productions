@@ -140,6 +140,27 @@ export function createLpcMultiDirectionLoop(
   const frames = spec.frames ?? 1;
   const directions = Object.keys(canvases);
 
+  // Sync pre-draw: if images are already in the browser cache (return visit),
+  // draw start_frame immediately. Otherwise fill with the preview surface background
+  // so the canvas isn't transparent while the async load runs.
+  for (const dir of directions) {
+    const ctx = canvases[dir].getContext('2d');
+    if (!ctx) continue;
+    const syncLayers: LayerImage[] = layerUrls
+      .map(({ url, zPos }) => {
+        const img = new Image();
+        img.src = url;
+        return img.complete && img.naturalWidth > 0 ? { image: img, zPos } : null;
+      })
+      .filter((r): r is LayerImage => r !== null);
+    if (syncLayers.length === layerUrls.length) {
+      drawLpcFrame(ctx, syncLayers, spec, dir, startFrame);
+    } else {
+      ctx.fillStyle = '#112d1f'; // .asset-preview-surface background (globals.css)
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+  }
+
   Promise.all(
     layerUrls.map(({ url, zPos }) =>
       loadImage(url)
@@ -308,6 +329,17 @@ export function createFePortraitLoop(
     playing: options.playing !== false,
   };
 
+  // Sync pre-draw from cache, or background fill while async load runs.
+  const syncPortraitImg = new Image();
+  syncPortraitImg.src = imageUrl;
+  if (syncPortraitImg.complete && syncPortraitImg.naturalWidth > 0) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) drawFePortraitFrame(ctx, syncPortraitImg, cutouts, state);
+  } else {
+    const ctx = canvas.getContext('2d');
+    if (ctx) { ctx.fillStyle = '#112d1f'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+  }
+
   loadImage(imageUrl).then((image) => {
     if (stopped) return;
     const ctx = canvas.getContext('2d');
@@ -446,6 +478,29 @@ export function createFeMapSpriteLoop(
       return { sx: cutout.x ?? 0, sy: (cutout.y ?? 0) + idx * perFrameH };
     }
     return { sx: (cutout.x ?? 0) + idx * perFrameW, sy: cutout.y ?? 0 };
+  }
+
+  // Sync pre-draw from cache, or background fill while async load runs.
+  const syncMapImg = new Image();
+  syncMapImg.src = imageUrl;
+  if (syncMapImg.complete && syncMapImg.naturalWidth > 0) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.imageSmoothingEnabled = false;
+      const { sx, sy } = getXY(frameSequence[0] ?? 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (flip) {
+        ctx.save();
+        ctx.scale(-1, 1);
+        ctx.drawImage(syncMapImg, sx, sy, perFrameW, perFrameH, -canvas.width, 0, canvas.width, canvas.height);
+        ctx.restore();
+      } else {
+        ctx.drawImage(syncMapImg, sx, sy, perFrameW, perFrameH, 0, 0, canvas.width, canvas.height);
+      }
+    }
+  } else {
+    const ctx = canvas.getContext('2d');
+    if (ctx) { ctx.fillStyle = '#112d1f'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
   }
 
   loadImage(imageUrl).then((image) => {

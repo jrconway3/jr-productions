@@ -12,6 +12,8 @@ import PageCredits from 'components/gallery/PageCredits';
 import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, ResolvedLpcSpec, ResolvedFeSpec } from 'app/models/Asset';
 
+const SITE_URL = 'https://jaidynreiman.net';
+
 interface FeSlugProps {
   category: Category;
   section?: Category;
@@ -21,6 +23,8 @@ interface FeSlugProps {
   breadcrumbs?: Array<{ label: string; href: string }>;
   resolvedSpecs?: Record<string, ResolvedLpcSpec | ResolvedFeSpec>;
   pageCredits: ResolvedPageCredit[];
+  pageUrl: string;
+  ogImage: string | null;
 }
 
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
@@ -66,7 +70,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function FeSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits }: FeSlugProps) {
+export default function FeSlug({ category, section, treeAssets, assets, slugs, breadcrumbs, resolvedSpecs, pageCredits, pageUrl, ogImage }: FeSlugProps) {
   const scopedAssets = useMemo(() => treeAssets ?? assets ?? [], [treeAssets, assets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'FE', href: '/fe' }, { label: category.label, href: `/fe/${slugsToPath(slugs)}` }];
@@ -110,6 +114,23 @@ export default function FeSlug({ category, section, treeAssets, assets, slugs, b
     <>
       <Head>
         <title>{`${category.label} - FE - JaidynReiman Productions`}</title>
+        {category.description && <meta name="description" content={category.description} />}
+        <meta property="og:title" content={`${category.label} - FE - JaidynReiman Productions`} />
+        {category.description && <meta property="og:description" content={category.description} />}
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={pageUrl} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${category.label} - FE - JaidynReiman Productions`,
+            description: category.description ?? '',
+            url: pageUrl,
+            author: { '@type': 'Person', name: 'JaidynReiman' },
+          }) }}
+        />
       </Head>
 
       <main className="section-fe page-wide py-12">
@@ -224,5 +245,10 @@ export const getStaticProps: GetStaticProps<FeSlugProps> = async ({ params }) =>
   const treeAssets = getAssetsByCategoryTree(['fe', ...slugs].join('/'));
   const resolvedSpecs = resolveAssetsSpecs(treeAssets);
   const pageCredits = getSectionPageCredits(['fe', ...slugs].join('/'), treeAssets);
-  return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits } };
+  const firstPreview = treeAssets.find((a) => a.preview)?.preview;
+  const ogImage = firstPreview
+    ? `${SITE_URL}${firstPreview.startsWith('/') ? '' : '/'}${firstPreview}`
+    : null;
+  const pageUrl = `${SITE_URL}/fe/${slugs.join('/')}`;
+  return { props: { category, section, treeAssets, slugs, breadcrumbs, resolvedSpecs, pageCredits, pageUrl, ogImage } };
 };

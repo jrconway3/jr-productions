@@ -78,6 +78,8 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
   const directions = animSpec.directions ?? DEFAULT_DIRECTIONS;
   const layout = animSpec.layout ?? 'row';
   const [hasRenderableLayers, setHasRenderableLayers] = useState(true);
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const cutouts = animSpec.cutouts as Record<string, AnimationCutout> | undefined;
   const rowsByDirection = Object.fromEntries(
     directions.map((dir) => {
@@ -92,6 +94,18 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
   const stopRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '100px' },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) { stopRef.current?.(); return; }
     stopRef.current?.();
 
     let cancelled = false;
@@ -173,12 +187,12 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
       cancelled = true;
       stop();
     };
-  }, [asset, animName, animSpec, directions, bodyType, backgroundLayers]);
+  }, [inView, asset, animName, animSpec, directions, bodyType, backgroundLayers]);
 
   const layoutClass = LAYOUT_CLASS[layout] ?? LAYOUT_CLASS.row;
 
   return (
-    <div className="relative w-full">
+    <div ref={containerRef} className="relative w-full">
       <div className={`${layoutClass} w-full gap-px`}>
         {directions.map((dir) => (
           <canvas
@@ -213,8 +227,10 @@ interface FePortraitViewerProps {
 }
 
 export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading }: FePortraitViewerProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const loopRef = useRef<{ stop: () => void; updateState: (p: object) => void } | null>(null);
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [playing, setPlaying] = useState(true);
   const [blinkEnabled, setBlinkEnabled] = useState(false);
@@ -231,6 +247,18 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
   const ph = portrait?.height ?? 80;
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '100px' },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) { loopRef.current?.stop(); return; }
     const canvas = canvasRef.current;
     if (!canvas || !previewUrl) return;
 
@@ -238,7 +266,7 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
     const loop = createFePortraitLoop(canvas, previewUrl, cutouts, { blinkEnabled: false });
     loopRef.current = loop;
     return () => loop.stop();
-  }, [previewUrl, cutouts]);
+  }, [inView, previewUrl, cutouts]);
 
   // Sync interactive state into the running loop without re-creating it.
   useEffect(() => {
@@ -267,9 +295,9 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
   const ch = chibi?.height ?? 32;
 
   return (
-    <div className="flex gap-2 items-start w-full">
+    <div ref={containerRef} className="flex gap-2 items-start w-full">
       <canvas
-        ref={canvasRef}
+        ref={(el) => { canvasRef.current = el; }}
         width={pw}
         height={ph}
         className="min-w-0"
@@ -431,6 +459,8 @@ function getCutoutFrameDims(
 export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProps) {
   const canvasRefs = useRef<Record<string, HTMLCanvasElement | null>>({});
   const stopRefs = useRef<Record<string, () => void>>({});
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const animations = useMemo(
     () => [...new Set(asset.animations ?? ['stand'])],
@@ -449,8 +479,21 @@ export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProp
   );
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '100px' },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
     for (const stop of Object.values(stopRefs.current)) stop();
     stopRefs.current = {};
+
+    if (!inView) return;
 
     for (const entry of renderEntries) {
       const canvas = canvasRefs.current[entry.id];
@@ -466,10 +509,10 @@ export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProp
       for (const stop of Object.values(stopRefs.current)) stop();
       stopRefs.current = {};
     };
-  }, [animationSources, cutouts, fw, fh, renderEntries]);
+  }, [inView, animationSources, cutouts, fw, fh, renderEntries]);
 
   return (
-    <div className="grid w-full grid-flow-col auto-cols-fr gap-px items-start">
+    <div ref={containerRef} className="grid w-full grid-flow-col auto-cols-fr gap-px items-start">
       {renderEntries.map((entry) => (
         (() => {
           const cutout = cutouts[entry.cutoutKey];

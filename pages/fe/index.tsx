@@ -11,6 +11,8 @@ import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
 import type { Category } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 
+const SITE_URL = 'https://jaidynreiman.net';
+
 interface FeIndexProps {
   category: Category;
   treeAssets?: Asset[];
@@ -18,6 +20,8 @@ interface FeIndexProps {
   animNames?: Record<string, string>;
   bodyTypes?: Record<string, string>;
   groupNames?: Record<string, string[]>;
+  pageUrl: string;
+  ogImage: string | null;
 }
 
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
@@ -59,7 +63,7 @@ function setCachedAssetIds(cacheKey: string, ids: string[]): void {
   }
 }
 
-export default function FeIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {} }: FeIndexProps) {
+export default function FeIndex({ category, treeAssets, resolvedSpecs = {}, animNames = {}, bodyTypes = {}, groupNames = {}, pageUrl, ogImage }: FeIndexProps) {
   const allAssets = useMemo(() => treeAssets ?? [], [treeAssets]);
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'fe'), [category.path]);
   const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => allAssets.slice(0, featuredAssetCount));
@@ -98,6 +102,23 @@ export default function FeIndex({ category, treeAssets, resolvedSpecs = {}, anim
     <>
       <Head>
         <title>{`${category.label} - JaidynReiman Productions`}</title>
+        {category.description && <meta name="description" content={category.description} />}
+        <meta property="og:title" content={`${category.label} - JaidynReiman Productions`} />
+        {category.description && <meta property="og:description" content={category.description} />}
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={pageUrl} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `${category.label} - JaidynReiman Productions`,
+            description: category.description ?? '',
+            url: pageUrl,
+            author: { '@type': 'Person', name: 'JaidynReiman' },
+          }) }}
+        />
       </Head>
 
       <main className="section-fe page-wide py-12">
@@ -158,5 +179,9 @@ export const getStaticProps: GetStaticProps<FeIndexProps> = async () => {
 
   const treeAssets = getAssetsByCategoryTree('fe');
   const { specs: resolvedSpecs, animNames, bodyTypes, groupNames } = resolveHomepageSpecs(treeAssets);
-  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames } };
+  const firstPreview = treeAssets.find((a) => a.preview)?.preview;
+  const ogImage = firstPreview
+    ? `${SITE_URL}${firstPreview.startsWith('/') ? '' : '/'}${firstPreview}`
+    : null;
+  return { props: { category, treeAssets, resolvedSpecs, animNames, bodyTypes, groupNames, pageUrl: `${SITE_URL}/fe`, ogImage } };
 };
