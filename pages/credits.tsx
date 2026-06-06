@@ -29,7 +29,7 @@ export default function Credits({ groups }: CreditsProps) {
         <meta name="description" content="Credits and attribution for all sprite assets featured on JaidynReiman Productions." />
         <meta property="og:title" content="Credits - JaidynReiman Productions" />
         <meta property="og:description" content="Credits and attribution for all sprite assets featured on JaidynReiman Productions." />
-<meta property="og:type" content="website" />
+        <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jaidynreiman.net/credits" />
       </Head>
 

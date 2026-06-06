@@ -554,6 +554,8 @@ export function createFeMapSpriteLoop(
     }
 
     rafId = requestAnimationFrame(tick);
+  }).catch(() => {
+    // Image failed to load; canvas retains background fill.
   });
 
   return {

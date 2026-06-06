@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-module.exports = {
+const config = {
   siteUrl: 'https://jaidynreiman.net',
   generateRobotsTxt: true,
   outDir: './out',
@@ -7,3 +7,5 @@ module.exports = {
     policies: [{ userAgent: '*', allow: '/' }],
   },
 };
+
+export default config;

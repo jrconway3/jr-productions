@@ -16,7 +16,7 @@ export default function CollectionsIndex({ collections }: CollectionsIndexProps)
         <meta name="description" content="Curated collections of sprite and game assets by JaidynReiman." />
         <meta property="og:title" content="Collections - JaidynReiman Productions" />
         <meta property="og:description" content="Curated collections of sprite and game assets by JaidynReiman." />
-<meta property="og:type" content="website" />
+        <meta property="og:type" content="website" />
         <meta property="og:url" content="https://jaidynreiman.net/collections" />
       </Head>
 

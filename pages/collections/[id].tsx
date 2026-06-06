@@ -20,7 +20,7 @@ export default function CollectionDetail({ collection, assets }: CollectionDetai
         {collection.description && <meta name="description" content={collection.description} />}
         <meta property="og:title" content={`${collection.label} - Collections - JaidynReiman Productions`} />
         {collection.description && <meta property="og:description" content={collection.description} />}
-<meta property="og:type" content="website" />
+        <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://jaidynreiman.net/collections/${collection.id}`} />
       </Head>
 
