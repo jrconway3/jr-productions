@@ -103,7 +103,7 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
       <Head>
         <title>JaidynReiman Productions - Sprite &amp; Game Asset Portfolio</title>
         <meta name="description" content="Pixel art sprites, tilesets, and game assets by JaidynReiman." />
-        <meta property="og:title" content="JaidynReiman Productions - Sprite &amp; Game Asset Portfolio" />
+        <meta property="og:title" content="JaidynReiman Productions - Sprite & Game Asset Portfolio" />
         <meta property="og:description" content="Pixel art sprites, tilesets, and game assets by JaidynReiman." />
         {ogImage && <meta property="og:image" content={ogImage} />}
         <meta property="og:type" content="website" />
@@ -123,7 +123,7 @@ export default function Home({ categories, featuredAssets, resolvedSpecs, animNa
 
       {/* Main: asset gallery or section nav */}
       <main className="page-wide py-10">
-        <h1 className="sr-only">JaidynReiman Productions — Sprite &amp; Game Asset Portfolio</h1>
+        <h1 className="sr-only">JaidynReiman Productions — Sprite & Game Asset Portfolio</h1>
         {displayAssets.length > 0 ? (
           <>
             <h2 className="font-pixel text-sm text-site-muted mb-6 tracking-widest uppercase">Featured Picks</h2>

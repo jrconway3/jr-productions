@@ -96,6 +96,7 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') { setInView(true); return; }
     const obs = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: '100px' },
@@ -249,6 +250,7 @@ export function FePortraitViewer({ asset, resolvedSpec, onDownload, downloading 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') { setInView(true); return; }
     const obs = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: '100px' },
@@ -481,6 +483,7 @@ export function FeMapSpriteViewer({ asset, resolvedSpec }: FeMapSpriteViewerProp
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') { setInView(true); return; }
     const obs = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: '100px' },

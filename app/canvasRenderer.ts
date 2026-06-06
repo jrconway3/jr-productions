@@ -24,6 +24,19 @@ function loadImage(url: string): Promise<HTMLImageElement> {
   });
 }
 
+// Wraps an already-created Image in a Promise, avoiding a second fetch/decode.
+function awaitImage(img: HTMLImageElement): Promise<HTMLImageElement> {
+  if (img.complete) {
+    return img.naturalWidth > 0
+      ? Promise.resolve(img)
+      : Promise.reject(new Error(`Image failed to load: ${img.src}`));
+  }
+  return new Promise((resolve, reject) => {
+    img.addEventListener('load', () => resolve(img), { once: true });
+    img.addEventListener('error', () => reject(new Error(`Image failed to load: ${img.src}`)), { once: true });
+  });
+}
+
 // LPC: cutout.width = total strip width; frameWidth = single frame width (from spec).
 // Returns the top-left pixel of the frame within the source image.
 function getLpcFrameXY(
@@ -140,20 +153,21 @@ export function createLpcMultiDirectionLoop(
   const frames = spec.frames ?? 1;
   const directions = Object.keys(canvases);
 
-  // Sync pre-draw: if images are already in the browser cache (return visit),
-  // draw start_frame immediately. Otherwise fill with the preview surface background
-  // so the canvas isn't transparent while the async load runs.
+  // Create Image objects once — reused for both sync pre-draw and async animation loop.
+  const probedImgs = layerUrls.map(({ url, zPos }) => {
+    const img = new Image();
+    img.src = url;
+    return { img, zPos };
+  });
+
+  // Sync pre-draw: draw start_frame if all images are already cached; otherwise fill background.
   for (const dir of directions) {
     const ctx = canvases[dir].getContext('2d');
     if (!ctx) continue;
-    const syncLayers: LayerImage[] = layerUrls
-      .map(({ url, zPos }) => {
-        const img = new Image();
-        img.src = url;
-        return img.complete && img.naturalWidth > 0 ? { image: img, zPos } : null;
-      })
-      .filter((r): r is LayerImage => r !== null);
-    if (syncLayers.length === layerUrls.length) {
+    const syncLayers: LayerImage[] = probedImgs
+      .filter(({ img }) => img.complete && img.naturalWidth > 0)
+      .map(({ img, zPos }) => ({ image: img, zPos }));
+    if (syncLayers.length === probedImgs.length) {
       drawLpcFrame(ctx, syncLayers, spec, dir, startFrame);
     } else {
       ctx.fillStyle = '#112d1f'; // .asset-preview-surface background (globals.css)
@@ -161,9 +175,10 @@ export function createLpcMultiDirectionLoop(
     }
   }
 
+  // Async: reuse the same Image instances to avoid a duplicate fetch/decode.
   Promise.all(
-    layerUrls.map(({ url, zPos }) =>
-      loadImage(url)
+    probedImgs.map(({ img, zPos }) =>
+      awaitImage(img)
         .then((image) => ({ image, zPos }))
         .catch(() => null),
     ),
@@ -329,18 +344,18 @@ export function createFePortraitLoop(
     playing: options.playing !== false,
   };
 
-  // Sync pre-draw from cache, or background fill while async load runs.
-  const syncPortraitImg = new Image();
-  syncPortraitImg.src = imageUrl;
-  if (syncPortraitImg.complete && syncPortraitImg.naturalWidth > 0) {
+  // Create Image once — reused for both sync pre-draw and async animation loop.
+  const portraitImg = new Image();
+  portraitImg.src = imageUrl;
+  if (portraitImg.complete && portraitImg.naturalWidth > 0) {
     const ctx = canvas.getContext('2d');
-    if (ctx) drawFePortraitFrame(ctx, syncPortraitImg, cutouts, state);
+    if (ctx) drawFePortraitFrame(ctx, portraitImg, cutouts, state);
   } else {
     const ctx = canvas.getContext('2d');
     if (ctx) { ctx.fillStyle = '#112d1f'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
   }
 
-  loadImage(imageUrl).then((image) => {
+  awaitImage(portraitImg).then((image) => {
     if (stopped) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -480,10 +495,10 @@ export function createFeMapSpriteLoop(
     return { sx: (cutout.x ?? 0) + idx * perFrameW, sy: cutout.y ?? 0 };
   }
 
-  // Sync pre-draw from cache, or background fill while async load runs.
-  const syncMapImg = new Image();
-  syncMapImg.src = imageUrl;
-  if (syncMapImg.complete && syncMapImg.naturalWidth > 0) {
+  // Create Image once — reused for both sync pre-draw and async animation loop.
+  const mapImg = new Image();
+  mapImg.src = imageUrl;
+  if (mapImg.complete && mapImg.naturalWidth > 0) {
     const ctx = canvas.getContext('2d');
     if (ctx) {
       ctx.imageSmoothingEnabled = false;
@@ -492,10 +507,10 @@ export function createFeMapSpriteLoop(
       if (flip) {
         ctx.save();
         ctx.scale(-1, 1);
-        ctx.drawImage(syncMapImg, sx, sy, perFrameW, perFrameH, -canvas.width, 0, canvas.width, canvas.height);
+        ctx.drawImage(mapImg, sx, sy, perFrameW, perFrameH, -canvas.width, 0, canvas.width, canvas.height);
         ctx.restore();
       } else {
-        ctx.drawImage(syncMapImg, sx, sy, perFrameW, perFrameH, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(mapImg, sx, sy, perFrameW, perFrameH, 0, 0, canvas.width, canvas.height);
       }
     }
   } else {
@@ -503,7 +518,8 @@ export function createFeMapSpriteLoop(
     if (ctx) { ctx.fillStyle = '#112d1f'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
   }
 
-  loadImage(imageUrl).then((image) => {
+  // Async: reuse the same Image instance to avoid a duplicate fetch/decode.
+  awaitImage(mapImg).then((image) => {
     if (stopped) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
