@@ -47,10 +47,11 @@
       "notes": "isolated stripe from cape_trimmed, adapted to v3 bases by bluecarrot16"
     }
   ],
-  "prerequisites": [
-    "solid_cape",
-    "tattered_cape"
-  ],
+  "prerequisites": {
+    "asset": [
+      "solid_cape"
+    ]
+  },
   "recolors": {
     "material": "cloth",
     "palettes": [

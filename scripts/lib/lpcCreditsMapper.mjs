@@ -18,9 +18,17 @@ export function mapLpcCredits(sourceCredits) {
       return mapped;
     });
 
+  const seen = new Set();
+  const deduped = mappedCredits.filter((entry) => {
+    const key = JSON.stringify({ authors: [...entry.authors].sort(), urls: [...(entry.urls ?? [])].sort(), notes: entry.notes ?? '' });
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
   const license = [...licenses].sort((a, b) => a.localeCompare(b)).join(', ');
   return {
     license,
-    credits: mappedCredits,
+    credits: deduped,
   };
 }

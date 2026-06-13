@@ -390,7 +390,18 @@ function runBuild(mode) {
   }
 
   writeCategoryMetaFromConfig(categories);
-  writeLeafCategoryMeta(leafDirs);
+
+  // Expand leafDirs to include all ancestor directories between DATA_ROOT and each leaf,
+  // so intermediate dirs (e.g. torso/waist, obi/knot) also get meta.json.
+  const allManagedDirs = new Set(leafDirs);
+  for (const leafDir of leafDirs) {
+    let dir = path.dirname(leafDir);
+    while (dir.startsWith(DATA_ROOT) && dir !== DATA_ROOT) {
+      allManagedDirs.add(dir);
+      dir = path.dirname(dir);
+    }
+  }
+  writeLeafCategoryMeta(allManagedDirs);
 
   const deleted = deleteStaleOutputs(expectedRelativePaths);
 
