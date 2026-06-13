@@ -57,6 +57,11 @@
       ]
     }
   ],
+  "prerequisites": {
+    "asset": [
+      "belt_obi"
+    ]
+  },
   "recolors": {
     "material": "cloth",
     "palettes": [

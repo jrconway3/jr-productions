@@ -1,5 +1,64 @@
 import type { Asset } from './models/Asset';
 
+/**
+ * Given a randomly-selected set of assets, ensures every asset with prerequisites
+ * is accompanied by a satisfying prerequisite asset in the result.
+ *
+ * - `asset` prerequisites: adds the first matching prerequisite found in `pool`.
+ * - `category` prerequisites: adds a random asset with the required category from `pool`.
+ * - If a prerequisite cannot be found in `pool` (e.g. narrow subcategory scope), the
+ *   dependent asset is kept as-is so dedicated subcategory pages still render.
+ * - Runs iteratively until the result is stable (handles chained prerequisites).
+ */
+export function resolvePrerequisites(selected: Asset[], pool: Asset[]): Asset[] {
+  const poolById = new Map(pool.map((a) => [a.id, a]));
+  const poolByCategory = new Map<string, Asset[]>();
+  for (const a of pool) {
+    if (a.category) {
+      if (!poolByCategory.has(a.category)) poolByCategory.set(a.category, []);
+      poolByCategory.get(a.category)!.push(a);
+    }
+  }
+
+  const result = new Map<string, Asset>(selected.map((a) => [a.id, a]));
+  let changed = true;
+
+  while (changed) {
+    changed = false;
+    for (const [, asset] of [...result.entries()]) {
+      const prereqs = asset.prerequisites;
+      if (!prereqs) continue;
+
+      if (prereqs.asset?.length) {
+        const satisfied = prereqs.asset.some((reqId) => result.has(reqId));
+        if (!satisfied) {
+          const toAdd = prereqs.asset.find((reqId) => poolById.has(reqId));
+          if (toAdd) {
+            result.set(toAdd, poolById.get(toAdd)!);
+            changed = true;
+          }
+        }
+      }
+
+      if (prereqs.category?.length) {
+        const satisfied = prereqs.category.some((cat) =>
+          [...result.values()].some((a) => a.category === cat),
+        );
+        if (!satisfied) {
+          const candidates = prereqs.category.flatMap((cat) => poolByCategory.get(cat) ?? []);
+          if (candidates.length > 0) {
+            const pick = candidates[Math.floor(Math.random() * candidates.length)];
+            result.set(pick.id, pick);
+            changed = true;
+          }
+        }
+      }
+    }
+  }
+
+  return [...result.values()];
+}
+
 export function hasPrerequisites(asset: Asset): boolean {
   const prerequisites = asset.prerequisites;
   if (!prerequisites) return false;

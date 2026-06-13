@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getCategoryBySlug } from 'app/CategoryService';
 import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
 import { resolveHomepageSpecs } from 'app/AnimationService';
-import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
+import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted, resolvePrerequisites } from 'app/assetSampling';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import PageCredits from 'components/gallery/PageCredits';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
@@ -95,8 +95,9 @@ export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, ani
     }
 
     const picked = pickRandomAssetsPreferUnrestricted(allAssets, featuredAssetCount);
-    updateDisplayAssets(picked);
-    setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
+    const resolved = resolvePrerequisites(picked, allAssets);
+    updateDisplayAssets(resolved);
+    setCachedAssetIds(cacheKey, resolved.map((asset) => asset.id));
   }, [category.path, allAssets, treeAssetsById, featuredAssetCount]);
 
   return (

@@ -6,7 +6,7 @@ import { getCategoryBySlug } from 'app/CategoryService';
 import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
 import { resolveAssetsSpecs } from 'app/AnimationService';
 import { toPublicAssetUrl } from 'app/assetUrl';
-import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted } from 'app/assetSampling';
+import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted, resolvePrerequisites } from 'app/assetSampling';
 import { collectLpcBodyTypes } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard, { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
@@ -180,8 +180,9 @@ export default function LpcSlug({ category, section, treeAssets, assets, slugs, 
     }
 
     const picked = pickRandomAssetsPreferUnrestricted(scopedAssets, featuredAssetCount);
-    updateDisplayAssets(picked);
-    setCachedAssetIds(cacheKey, picked.map((asset) => asset.id));
+    const resolved = resolvePrerequisites(picked, scopedAssets);
+    updateDisplayAssets(resolved);
+    setCachedAssetIds(cacheKey, resolved.map((asset) => asset.id));
   }, [category.path, scopedAssets, treeAssetsById, featuredAssetCount]);
 
   return (

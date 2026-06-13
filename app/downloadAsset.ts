@@ -65,6 +65,21 @@ export async function downloadLpcAsset(
   triggerDownload(content, `${asset.id}.zip`);
 }
 
+export async function downloadStaticFiles(urls: string[], filename: string): Promise<void> {
+  const zip = new JSZip();
+  await Promise.all(
+    urls.map((url) => {
+      const publicUrl = url.startsWith('/') ? url : `/${url}`;
+      const entryName = publicUrl.split('/').pop() ?? 'file';
+      return fetchBlob(publicUrl).then((blob) => {
+        if (blob) zip.file(entryName, blob);
+      });
+    }),
+  );
+  const content = await zip.generateAsync({ type: 'blob' });
+  triggerDownload(content, filename);
+}
+
 export async function downloadFeAsset(asset: Asset): Promise<void> {
   const url = asset.preview
     ? (asset.preview.startsWith('/') ? asset.preview : `/${asset.preview}`)

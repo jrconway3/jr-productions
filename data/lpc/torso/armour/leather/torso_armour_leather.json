@@ -17,7 +17,8 @@
     "jump",
     "sit",
     "emote",
-    "climb"
+    "climb",
+    "run"
   ],
   "layers": [
     {
@@ -57,7 +58,7 @@
         "https://opengameart.org/content/lpc-clothing-updates",
         "https://opengameart.org/content/lpc-expanded-armor"
       ],
-      "notes": "adapted to v3 bases by bluecarrot16, reduced colors and climb/emote/jump by JaidynReiman"
+      "notes": "adapted to v3 bases by bluecarrot16, reduced colors and climb/sit/emote/jump/run by JaidynReiman"
     },
     {
       "authors": [
@@ -73,7 +74,7 @@
         "https://opengameart.org/content/lpc-clothing-updates",
         "https://opengameart.org/content/lpc-expanded-armor"
       ],
-      "notes": "recolor of torso/armour/leather/female/brown.png, adapted to v3 bases by bluecarrot16, reduced colors and climb/emote/jump by JaidynReiman"
+      "notes": "recolor of torso/armour/leather/female/brown.png, adapted to v3 bases by bluecarrot16, reduced colors and climb/sit/emote/jump/run by JaidynReiman"
     },
     {
       "authors": [
@@ -89,7 +90,7 @@
         "https://opengameart.org/content/lpc-clothing-updates",
         "https://opengameart.org/content/lpc-expanded-armor"
       ],
-      "notes": "adapted to v3 bases by bluecarrot16, teen version by JaidynReiman adapted from Male and Female versions"
+      "notes": "adapted to v3 bases by bluecarrot16, teen version by JaidynReiman adapted from Male and Female versions, climb/sit/emote/jump/run by JaidynReiman"
     }
   ],
   "recolors": {

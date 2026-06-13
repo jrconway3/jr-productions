@@ -16,24 +16,11 @@
   ],
   "layers": [
     {
-      "id": "bg",
-      "zPos": 31,
-      "assets": [
-        {
-          "path": "dress/kimono/sleeves/female/bg",
-          "body_types": [
-            "female",
-            "teen"
-          ]
-        }
-      ]
-    },
-    {
       "id": "fg",
       "zPos": 145,
       "assets": [
         {
-          "path": "dress/kimono/sleeves/female/fg",
+          "path": "dress/kimono/sleeves/female",
           "body_types": [
             "female",
             "teen"

@@ -126,7 +126,7 @@ export interface Asset {
   credits?: AssetCredit[];
   collection?: string;
   preview?: string;
-  download?: string;
+  download?: string | string[];
   body_types?: string[];
   animations?: string[];
   variants?: string[];

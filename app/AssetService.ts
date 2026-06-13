@@ -26,7 +26,7 @@ function resolveLpcPath(value?: string): string {
   const normalized = normalizeAssetPath(value);
   if (!normalized || HTTP_URL_PATTERN.test(normalized)) return normalized;
   if (normalized.startsWith(`${LPC_PUBLIC_BASE}/`)) return normalized;
-  if (normalized.startsWith('characters/')) return `${LPC_PUBLIC_BASE}/${normalized}`;
+  if (normalized.startsWith('characters/') || normalized.startsWith('tilesets/') || normalized.startsWith('tilemaps/')) return `${LPC_PUBLIC_BASE}/${normalized}`;
   return `${LPC_PUBLIC_BASE}/characters/${normalized}`;
 }
 
@@ -77,7 +77,7 @@ function normalizeAsset(asset: Asset): Asset {
     return {
       ...asset,
       preview: resolveFePath(asset.preview),
-      download: resolveFePath(asset.download),
+      download: typeof asset.download === 'string' ? resolveFePath(asset.download) : asset.download,
     };
   }
 
@@ -85,15 +85,18 @@ function normalizeAsset(asset: Asset): Asset {
     return {
       ...asset,
       preview: normalizeAssetPath(asset.preview),
-      download: normalizeAssetPath(asset.download),
+      download: typeof asset.download === 'string' ? normalizeAssetPath(asset.download) : asset.download,
     };
   }
 
   const normalizedPreview = resolveLpcPath(asset.preview) || deriveLpcPreview(asset);
+  const normalizedDownload = Array.isArray(asset.download)
+    ? asset.download.map(resolveLpcPath)
+    : normalizeAssetPath(asset.download);
   return {
     ...asset,
     preview: normalizedPreview,
-    download: normalizeAssetPath(asset.download),
+    download: normalizedDownload,
   };
 }
 
@@ -129,9 +132,26 @@ function inheritContextLayers(filePath: string): BackgroundLayer[] | undefined {
   return undefined;
 }
 
+function resolvePublicRelativePath(value: string, publicDir: string): string {
+  if (!value || HTTP_URL_PATTERN.test(value) || value.startsWith('/') || value.startsWith('assets/')) return value;
+  return path.posix.join(publicDir, value);
+}
+
 function loadAsset(filePath: string): Asset {
   const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   const asset: Asset = { ...data, id: path.basename(filePath, '.json') };
+
+  const relToPublic = path.relative(PUBLIC_ROOT, filePath);
+  if (!relToPublic.startsWith('..')) {
+    const publicDir = path.relative(PUBLIC_ROOT, path.dirname(filePath)).replace(/\\/g, '/');
+    if (typeof asset.preview === 'string') asset.preview = resolvePublicRelativePath(asset.preview, publicDir);
+    if (Array.isArray(asset.download)) {
+      asset.download = asset.download.map((d) => resolvePublicRelativePath(d, publicDir));
+    } else if (typeof asset.download === 'string') {
+      asset.download = resolvePublicRelativePath(asset.download, publicDir);
+    }
+  }
+
   if (!asset.context_layers) {
     const inherited = inheritContextLayers(filePath);
     if (inherited) asset.context_layers = inherited;

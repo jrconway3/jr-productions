@@ -20,7 +20,7 @@
       "zPos": 30,
       "assets": [
         {
-          "path": "dress/kimono/split/universal/female",
+          "path": "dress/kimono/split/female",
           "body_types": [
             "female",
             "teen"

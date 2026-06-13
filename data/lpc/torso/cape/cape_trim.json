@@ -1,10 +1,10 @@
 {
-  "name": "Obi Knot Left",
+  "name": "Cape Trim",
   "type": "lpc",
   "category": "torso",
   "format": "spritesheet",
   "animation_spec": "lpc",
-  "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",
+  "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
   "animations": [
     "spellcast",
     "thrust",
@@ -14,31 +14,18 @@
     "hurt",
     "watering",
     "idle",
-    "jump",
-    "run",
-    "sit",
-    "emote",
-    "climb",
-    "combat",
-    "1h_slash",
-    "1h_backslash",
-    "1h_halfslash"
+    "climb"
   ],
   "layers": [
     {
       "id": "base",
-      "zPos": 66,
+      "zPos": 90,
       "assets": [
         {
-          "path": "torso/waist/obi/knot/left/male",
+          "path": "torso/cape/trim",
           "body_types": [
             "male",
-            "muscular"
-          ]
-        },
-        {
-          "path": "torso/waist/obi/knot/left/thin",
-          "body_types": [
+            "muscular",
             "female",
             "teen",
             "pregnant"
@@ -50,23 +37,25 @@
   "credits": [
     {
       "authors": [
+        "bluecarrot16",
         "JaidynReiman"
       ],
       "urls": [
-        "https://opengameart.org/content/lpc-kimono-relm"
-      ]
+        "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "isolated stripe from cape_trimmed, adapted to v3 bases by bluecarrot16"
     }
   ],
-  "prerequisites": {
-    "asset": [
-      "belt_obi"
-    ]
-  },
+  "prerequisites": [
+    "solid_cape",
+    "tattered_cape"
+  ],
   "recolors": {
     "material": "cloth",
     "palettes": [
       "ulpc",
-      "lpcr",
+      "metal.ulpc",
       "all.lpcr"
     ]
   },
