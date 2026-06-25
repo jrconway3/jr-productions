@@ -6,10 +6,11 @@ import { getCategoryBySlug } from 'app/CategoryService';
 import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService';
 import { resolveHomepageSpecs } from 'app/AnimationService';
 import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted, resolvePrerequisites } from 'app/assetSampling';
+import { expandLpcLayers } from 'app/lpcLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import PageCredits from 'components/gallery/PageCredits';
 import UnifiedAssetCard from 'components/gallery/UnifiedAssetCard';
-import type { Category, ResolvedPageCredit } from 'app/models/Category';
+import type { BackgroundLayer, Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 import { SITE_URL } from 'app/siteConfig';
 
@@ -28,7 +29,7 @@ interface LpcIndexProps {
 const FEATURED_CACHE_TTL_MS = 1000 * 60 * 60 * 3;
 
 function getCategoryCacheKey(path: string): string {
-  return `category-featured-v1:${path}`;
+  return `category-featured-v4:${path}`;
 }
 
 function getCachedAssetIds(cacheKey: string): string[] | null {
@@ -72,6 +73,54 @@ export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, ani
   const treeAssetsById = useMemo(() => {
     return new Map(allAssets.map((asset) => [asset.id, asset]));
   }, [allAssets]);
+
+  const prereqLayersByAssetId = useMemo(() => {
+    const byId = new Map<string, Asset>();
+    const bySubcategory = new Map<string, Asset[]>();
+    const byCategory = new Map<string, Asset[]>();
+    for (const a of displayAssets) {
+      byId.set(a.id, a);
+      if (a.subcategory) {
+        if (!bySubcategory.has(a.subcategory)) bySubcategory.set(a.subcategory, []);
+        bySubcategory.get(a.subcategory)!.push(a);
+      }
+      if (a.category) {
+        if (!byCategory.has(a.category)) byCategory.set(a.category, []);
+        byCategory.get(a.category)!.push(a);
+      }
+    }
+    const result = new Map<string, BackgroundLayer[]>();
+    for (const a of displayAssets) {
+      const prereqs = a.prerequisites;
+      if (!prereqs) continue;
+      let prereqAsset: Asset | undefined;
+      if (prereqs.asset?.length) {
+        for (const id of prereqs.asset) {
+          const candidate = byId.get(id);
+          if (candidate && candidate.id !== a.id) { prereqAsset = candidate; break; }
+        }
+      }
+      if (!prereqAsset && prereqs.subcategory?.length) {
+        for (const sub of prereqs.subcategory) {
+          const cs = bySubcategory.get(sub) ?? [];
+          prereqAsset = cs.find(c => c.id !== a.id && !c.prerequisites?.subcategory?.includes(sub))
+            ?? cs.find(c => c.id !== a.id);
+          if (prereqAsset) break;
+        }
+      }
+      if (!prereqAsset && prereqs.category?.length) {
+        for (const cat of prereqs.category) {
+          const cs = byCategory.get(cat) ?? [];
+          prereqAsset = cs.find(c => c.id !== a.id && !c.prerequisites?.category?.includes(cat))
+            ?? cs.find(c => c.id !== a.id);
+          if (prereqAsset) break;
+        }
+      }
+      if (!prereqAsset) continue;
+      result.set(a.id, expandLpcLayers(prereqAsset.layers));
+    }
+    return result;
+  }, [displayAssets]);
 
   useEffect(() => {
     const cacheKey = getCategoryCacheKey(category.path);
@@ -133,16 +182,23 @@ export default function LpcIndex({ category, treeAssets, resolvedSpecs = {}, ani
 
             {displayAssets.length > 0 ? (
               <MasonryGrid>
-                {displayAssets.map((asset) => (
-                  <UnifiedAssetCard
-                    key={asset.id}
-                    asset={asset}
-                    resolvedSpec={resolvedSpecs[asset.id]}
-                    animName={animNames[asset.id] ?? asset.animations?.[0]}
-                    bodyType={bodyTypes[asset.id]}
-                    groupAnimNames={groupNames[asset.id]}
-                  />
-                ))}
+                {displayAssets.map((asset) => {
+                  const prereqLayers = prereqLayersByAssetId.get(asset.id);
+                  const bgLayers = prereqLayers?.length
+                    ? [...prereqLayers, ...(asset.context_layers ?? [])]
+                    : asset.context_layers;
+                  return (
+                    <UnifiedAssetCard
+                      key={asset.id}
+                      asset={asset}
+                      resolvedSpec={resolvedSpecs[asset.id]}
+                      animName={animNames[asset.id] ?? asset.animations?.[0]}
+                      bodyType={bodyTypes[asset.id]}
+                      groupAnimNames={groupNames[asset.id]}
+                      backgroundLayers={bgLayers}
+                    />
+                  );
+                })}
               </MasonryGrid>
             ) : (
               <p className="text-site-muted font-body">No assets yet.</p>

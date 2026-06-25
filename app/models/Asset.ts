@@ -131,7 +131,8 @@ export interface Asset {
   animations?: string[];
   variants?: string[];
   palettes?: PaletteVariant[];
-  prerequisites?: { asset?: string[]; category?: string[] };
+  subcategory?: string;
+  prerequisites?: { asset?: string[]; category?: string[]; subcategory?: string[] };
   new?: boolean;
   match_body_color?: boolean;
   recolors?: { material: string; palettes: string[] };

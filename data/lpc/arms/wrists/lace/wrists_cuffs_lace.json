@@ -2,6 +2,7 @@
   "name": "Lace Cuffs",
   "type": "lpc",
   "category": "arms",
+  "subcategory": "wrists",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "OGA-BY 3.0",

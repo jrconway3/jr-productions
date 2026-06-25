@@ -2,6 +2,7 @@
   "name": "Happy Alt",
   "type": "lpc",
   "category": "head",
+  "subcategory": "expression",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0",

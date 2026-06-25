@@ -38,6 +38,10 @@
         "label": "Torso"
       },
       {
+        "href": "/lpc/tilesets",
+        "label": "Tilesets"
+      },
+      {
         "href": "/lpc/eyes",
         "label": "Eyes"
       },

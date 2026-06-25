@@ -2,6 +2,7 @@ import AssetCard, { FeCard, LpcCard, LpcGroupCard } from 'components/gallery/Ass
 import { collectLpcBodyTypes } from 'app/lpcLayers';
 import { toPublicAssetUrl } from 'app/assetUrl';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
+import type { BackgroundLayer } from 'app/models/Category';
 
 function isAnimationSpec(value: AnimationSpec | ResolvedFeSpec | ResolvedLpcSpec | undefined): value is AnimationSpec {
   return Boolean(value && typeof value === 'object' && 'id' in value);
@@ -18,9 +19,10 @@ interface UnifiedAssetCardProps {
   weapon?: string;
   bodyType?: string;
   groupAnimNames?: string[];
+  backgroundLayers?: BackgroundLayer[];
 }
 
-export default function UnifiedAssetCard({ asset, resolvedSpec, animName, weapon, bodyType, groupAnimNames }: UnifiedAssetCardProps) {
+export default function UnifiedAssetCard({ asset, resolvedSpec, animName, weapon, bodyType, groupAnimNames, backgroundLayers }: UnifiedAssetCardProps) {
   const hasPreview = Boolean(toPublicAssetUrl(asset.preview));
 
   if (asset.type === 'lpc' && asset.animations?.length) {
@@ -38,7 +40,7 @@ export default function UnifiedAssetCard({ asset, resolvedSpec, animName, weapon
             animNames={validAnimNames}
             specs={validAnimNames.map((name) => lpcSpec[name])}
             bodyType={selectedBodyType}
-            backgroundLayers={asset.context_layers}
+            backgroundLayers={backgroundLayers ?? asset.context_layers}
             allAnimSpecs={lpcSpec}
           />
         );
@@ -51,7 +53,7 @@ export default function UnifiedAssetCard({ asset, resolvedSpec, animName, weapon
             asset={asset}
             animName={fallbackAnimName}
             bodyType={selectedBodyType}
-            backgroundLayers={asset.context_layers}
+            backgroundLayers={backgroundLayers ?? asset.context_layers}
             animSpec={lpcSpec[fallbackAnimName]}
             allAnimSpecs={lpcSpec}
           />
@@ -74,7 +76,7 @@ export default function UnifiedAssetCard({ asset, resolvedSpec, animName, weapon
         asset={asset}
         animName={selectedAnim}
         bodyType={selectedBodyType}
-        backgroundLayers={asset.context_layers}
+        backgroundLayers={backgroundLayers ?? asset.context_layers}
         animSpec={animSpec}
         allAnimSpecs={lpcSpec}
       />

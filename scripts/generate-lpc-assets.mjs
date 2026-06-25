@@ -49,6 +49,7 @@ const CATEGORY_CONFIG = {
 
 const LEAF_META_OVERRIDES = {
   'head/heads': { excluded: true },
+  'body/bodies': { excluded: true },
 };
 
 function parseModeFromArgs() {
@@ -160,6 +161,7 @@ function buildCompiledAsset(sourcePath) {
     name: source.name,
     type: 'lpc',
     category: topLevelCategory,
+    subcategory: source.category !== topLevelCategory ? source.category : undefined,
     format: 'spritesheet',
     animation_spec: 'lpc',
     license: credits.license,

@@ -2,6 +2,7 @@
   "name": "Shortsleeve Cardigan",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "shortsleeve",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "OGA-BY 3.0",

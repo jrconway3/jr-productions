@@ -2,6 +2,7 @@
   "name": "Left Eye",
   "type": "lpc",
   "category": "body",
+  "subcategory": "wound_eye_left",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0",

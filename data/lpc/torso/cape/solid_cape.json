@@ -2,6 +2,7 @@
   "name": "Solid Cape",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "cape",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",

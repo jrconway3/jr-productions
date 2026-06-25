@@ -17,8 +17,7 @@
     "idle",
     "jump",
     "sit",
-    "emote",
-    "run"
+    "emote"
   ],
   "layers": [
     {

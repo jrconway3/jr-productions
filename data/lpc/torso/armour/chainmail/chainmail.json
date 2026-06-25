@@ -2,6 +2,7 @@
   "name": "Chainmail",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "Armour",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
@@ -25,16 +26,15 @@
       "zPos": 50,
       "assets": [
         {
-          "path": "torso/armour/chainmail/torso/chainmail/male",
+          "path": "torso/armour/chainmail/male",
           "body_types": [
             "male"
           ]
         },
         {
-          "path": "torso/armour/chainmail/torso/chainmail/female",
+          "path": "torso/armour/chainmail/female",
           "body_types": [
-            "female",
-            "teen"
+            "female"
           ]
         }
       ]

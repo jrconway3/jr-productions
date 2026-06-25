@@ -13,10 +13,15 @@ import type { Asset } from './models/Asset';
 export function resolvePrerequisites(selected: Asset[], pool: Asset[]): Asset[] {
   const poolById = new Map(pool.map((a) => [a.id, a]));
   const poolByCategory = new Map<string, Asset[]>();
+  const poolBySubcategory = new Map<string, Asset[]>();
   for (const a of pool) {
     if (a.category) {
       if (!poolByCategory.has(a.category)) poolByCategory.set(a.category, []);
       poolByCategory.get(a.category)!.push(a);
+    }
+    if (a.subcategory) {
+      if (!poolBySubcategory.has(a.subcategory)) poolBySubcategory.set(a.subcategory, []);
+      poolBySubcategory.get(a.subcategory)!.push(a);
     }
   }
 
@@ -41,11 +46,35 @@ export function resolvePrerequisites(selected: Asset[], pool: Asset[]): Asset[] 
       }
 
       if (prereqs.category?.length) {
+        // Satisfied only by a *base* asset — one that does not itself require the same category.
+        // This prevents hair extensions from satisfying each other's "hair" prerequisite.
         const satisfied = prereqs.category.some((cat) =>
-          [...result.values()].some((a) => a.category === cat),
+          [...result.values()].some(
+            (a) => a.id !== asset.id && a.category === cat && !a.prerequisites?.category?.includes(cat),
+          ),
         );
         if (!satisfied) {
-          const candidates = prereqs.category.flatMap((cat) => poolByCategory.get(cat) ?? []);
+          const candidates = prereqs.category.flatMap(
+            (cat) => (poolByCategory.get(cat) ?? []).filter((a) => !a.prerequisites?.category?.includes(cat)),
+          );
+          if (candidates.length > 0) {
+            const pick = candidates[Math.floor(Math.random() * candidates.length)];
+            result.set(pick.id, pick);
+            changed = true;
+          }
+        }
+      }
+
+      if (prereqs.subcategory?.length) {
+        const satisfied = prereqs.subcategory.some((sub) =>
+          [...result.values()].some(
+            (a) => a.id !== asset.id && a.subcategory === sub && !a.prerequisites?.subcategory?.includes(sub),
+          ),
+        );
+        if (!satisfied) {
+          const candidates = prereqs.subcategory.flatMap(
+            (sub) => (poolBySubcategory.get(sub) ?? []).filter((a) => !a.prerequisites?.subcategory?.includes(sub)),
+          );
           if (candidates.length > 0) {
             const pick = candidates[Math.floor(Math.random() * candidates.length)];
             result.set(pick.id, pick);
@@ -62,7 +91,9 @@ export function resolvePrerequisites(selected: Asset[], pool: Asset[]): Asset[] 
 export function hasPrerequisites(asset: Asset): boolean {
   const prerequisites = asset.prerequisites;
   if (!prerequisites) return false;
-  return (prerequisites.asset?.length ?? 0) > 0 || (prerequisites.category?.length ?? 0) > 0;
+  return (prerequisites.asset?.length ?? 0) > 0
+    || (prerequisites.category?.length ?? 0) > 0
+    || (prerequisites.subcategory?.length ?? 0) > 0;
 }
 
 function getAssetWeight(asset: Asset, restrictedWeight: number): number {

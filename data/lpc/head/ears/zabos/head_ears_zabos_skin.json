@@ -2,6 +2,7 @@
   "name": "Side Cat Ears Skintone",
   "type": "lpc",
   "category": "head",
+  "subcategory": "ears_inner",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",

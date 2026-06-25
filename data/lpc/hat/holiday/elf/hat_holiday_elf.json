@@ -2,6 +2,7 @@
   "name": "Elf Trim",
   "type": "lpc",
   "category": "hat",
+  "subcategory": "hat_trim",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "GPL 3.0, OGA-BY 3.0",

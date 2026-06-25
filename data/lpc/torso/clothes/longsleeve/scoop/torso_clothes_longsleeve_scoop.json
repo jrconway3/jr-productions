@@ -2,6 +2,7 @@
   "name": "Scoop",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "clothes",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "GPL 3.0, OGA-BY 3.0",
