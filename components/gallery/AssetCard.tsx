@@ -327,7 +327,7 @@ export default function AssetCard({ asset }: AssetCardProps) {
           </a>
         )}
         {downloadFiles && (
-          <button onClick={handleDownload} disabled={downloading} title="Download ZIP"
+          <button type="button" onClick={handleDownload} disabled={downloading} title="Download ZIP"
             aria-label="Download ZIP" aria-busy={downloading} aria-disabled={downloading}
             className="flex-shrink-0 text-site-muted hover:text-white transition-colors disabled:opacity-40">
             {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}

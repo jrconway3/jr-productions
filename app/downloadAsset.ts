@@ -68,8 +68,11 @@ export async function downloadLpcAsset(
 export async function downloadStaticFiles(urls: string[], filename: string): Promise<void> {
   const zip = new JSZip();
   let added = 0;
+  const normalizedUrls = urls
+    .map((u) => u.trim())
+    .filter((u) => u.length > 0 && !/^https?:\/\//i.test(u));
   await Promise.all(
-    urls.map((url) => {
+    normalizedUrls.map((url) => {
       const publicUrl = url.startsWith('/') ? url : `/${url}`;
       const entryPath = publicUrl.slice(1); // strip leading slash — preserves full path, avoids basename collisions
       return fetchBlob(publicUrl).then((blob) => {
