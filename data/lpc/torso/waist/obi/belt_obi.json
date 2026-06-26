@@ -58,11 +58,6 @@
       ]
     }
   ],
-  "prerequisites": {
-    "asset": [
-      "belt_waistband"
-    ]
-  },
   "recolors": {
     "material": "cloth",
     "palettes": [

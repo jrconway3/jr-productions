@@ -413,7 +413,7 @@ function runBuild(mode) {
   if (mode === MODE_ADD_NEW) console.log(`- Existing assets skipped: ${skipped}`);
   console.log(`- Stale output assets deleted: ${deleted}`);
   console.log(`- Categories meta written: ${categories.size}`);
-  console.log(`- Leaf categories meta written: ${leafDirs.size}`);
+  console.log(`- Leaf categories meta written: ${allManagedDirs.size}`);
 }
 
 function main() {

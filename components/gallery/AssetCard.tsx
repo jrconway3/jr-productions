@@ -299,7 +299,7 @@ export default function AssetCard({ asset }: AssetCardProps) {
   const [downloading, setDownloading] = useState(false);
   const previewUrl = toPublicAssetUrl(asset.preview);
   const downloadFiles = Array.isArray(asset.download) && asset.download.length > 0 ? asset.download : null;
-  const downloadUrl = downloadFiles ? '' : toPublicAssetUrl(asset.download as string | undefined);
+  const downloadUrl = downloadFiles ? '' : toPublicAssetUrl(typeof asset.download === 'string' ? asset.download : undefined);
 
   const handleDownload = async () => {
     if (!downloadFiles || downloading) return;
