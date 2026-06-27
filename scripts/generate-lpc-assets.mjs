@@ -4,10 +4,12 @@ import { mapLpcCredits } from './lib/lpcCreditsMapper.mjs';
 import { resolveCompiledLayers } from './lib/lpcLayerResolver.mjs';
 import {
   joinPosix,
+  normalizeSlashes,
   titleCaseFromSlug,
   toAssetDirectoryRelativePath,
   toOutputJsonRelativePath,
   topLevelCategoryFromRelativeDir,
+  toPosixRelative,
 } from './lib/lpcPathUtils.mjs';
 
 const MODE_ADD_NEW = 'add-new';
@@ -17,7 +19,10 @@ const MODE_CLEAR_NEW = 'clear-new';
 const PROJECT_ROOT = process.cwd();
 const DATA_ROOT = path.join(PROJECT_ROOT, 'data', 'lpc');
 const SOURCE_ROOT = process.env.LPC_SOURCE_ROOT
-  ?? path.join(PROJECT_ROOT, '..', '..', 'assets', 'lpc', 'lpc-jaidynreiman-assets', 'characters');
+  ?? path.join(PROJECT_ROOT, 'public', 'assets', 'lpc', 'characters');
+const TILESET_SOURCE_ROOT = process.env.LPC_TILESET_SOURCE_ROOT
+  ?? path.join(PROJECT_ROOT, 'public', 'assets', 'lpc', 'tilesets');
+const PUBLIC_ROOT = path.join(PROJECT_ROOT, 'public');
 
 const ROOT_META = {
   label: 'Liberated Pixel Cup Assets',
@@ -44,6 +49,7 @@ const CATEGORY_CONFIG = {
 
 const LEAF_META_OVERRIDES = {
   'head/heads': { excluded: true },
+  'body/bodies': { excluded: true },
 };
 
 function parseModeFromArgs() {
@@ -155,6 +161,7 @@ function buildCompiledAsset(sourcePath) {
     name: source.name,
     type: 'lpc',
     category: topLevelCategory,
+    subcategory: source.category !== topLevelCategory ? source.category : undefined,
     format: 'spritesheet',
     animation_spec: 'lpc',
     license: credits.license,
@@ -173,6 +180,55 @@ function buildCompiledAsset(sourcePath) {
     outputPath,
     relativeOutputPath,
     topLevelCategory,
+    compiled,
+  };
+}
+
+const HTTP_URL_PATTERN = /^https?:\/\//i;
+
+function resolveTilesetPath(value, publicDir) {
+  if (!value || HTTP_URL_PATTERN.test(value) || value.startsWith('/') || value.startsWith('assets/')) return value;
+  return `${publicDir}/${value}`;
+}
+
+function buildCompiledTilesetAsset(sourcePath) {
+  const source = loadJson(sourcePath);
+  const relativeFromRoot = toPosixRelative(TILESET_SOURCE_ROOT, sourcePath);
+  const relativeOutputPath = `tilesets/${relativeFromRoot}`;
+  const outputPath = path.join(DATA_ROOT, 'tilesets', relativeFromRoot);
+  const publicDir = normalizeSlashes(
+    path.relative(PUBLIC_ROOT, path.dirname(sourcePath)),
+  );
+
+  const credits = mapLpcCredits(source.credits);
+
+  const resolvedPreview = typeof source.preview === 'string'
+    ? resolveTilesetPath(source.preview, publicDir)
+    : '';
+
+  const resolvedDownload = Array.isArray(source.download)
+    ? source.download.map((d) => resolveTilesetPath(d, publicDir))
+    : typeof source.download === 'string'
+      ? resolveTilesetPath(source.download, publicDir)
+      : undefined;
+
+  const compiled = pruneUndefined({
+    name: source.name,
+    type: 'lpc',
+    category: 'tilesets',
+    format: 'tileset',
+    license: credits.license,
+    description: source.description,
+    preview: resolvedPreview,
+    download: resolvedDownload,
+    credits: credits.credits,
+  });
+
+  return {
+    sourcePath,
+    outputPath,
+    relativeOutputPath,
+    topLevelCategory: 'tilesets',
     compiled,
   };
 }
@@ -294,6 +350,14 @@ function runBuild(mode) {
   ensureRootMeta();
 
   const sourceJsonFiles = listJsonFilesRecursively(SOURCE_ROOT);
+  const tilesetJsonFiles = fs.existsSync(TILESET_SOURCE_ROOT)
+    ? listJsonFilesRecursively(TILESET_SOURCE_ROOT)
+    : [];
+  const allSourceEntries = [
+    ...sourceJsonFiles.map((p) => ({ path: p, builder: buildCompiledAsset })),
+    ...tilesetJsonFiles.map((p) => ({ path: p, builder: buildCompiledTilesetAsset })),
+  ];
+
   const expectedRelativePaths = new Set();
   const categories = new Set();
   const leafDirs = new Set();
@@ -301,14 +365,12 @@ function runBuild(mode) {
   let written = 0;
   let skipped = 0;
 
-  for (const sourcePath of sourceJsonFiles) {
-    const compiled = buildCompiledAsset(sourcePath);
+  for (const { path: sourcePath, builder } of allSourceEntries) {
+    const compiled = builder(sourcePath);
     const rel = compiled.relativeOutputPath;
 
     expectedRelativePaths.add(rel);
     categories.add(compiled.topLevelCategory);
-    
-    // Track leaf directory (parent of asset file)
     leafDirs.add(path.dirname(compiled.outputPath));
 
     const outputExists = fs.existsSync(compiled.outputPath);
@@ -330,17 +392,28 @@ function runBuild(mode) {
   }
 
   writeCategoryMetaFromConfig(categories);
-  writeLeafCategoryMeta(leafDirs);
+
+  // Expand leafDirs to include all ancestor directories between DATA_ROOT and each leaf,
+  // so intermediate dirs (e.g. torso/waist, obi/knot) also get meta.json.
+  const allManagedDirs = new Set(leafDirs);
+  for (const leafDir of leafDirs) {
+    let dir = path.dirname(leafDir);
+    while (dir.startsWith(DATA_ROOT) && dir !== DATA_ROOT) {
+      allManagedDirs.add(dir);
+      dir = path.dirname(dir);
+    }
+  }
+  writeLeafCategoryMeta(allManagedDirs);
 
   const deleted = deleteStaleOutputs(expectedRelativePaths);
 
   console.log(`LPC generation complete (${mode}).`);
-  console.log(`- Source assets scanned: ${sourceJsonFiles.length}`);
+  console.log(`- Source assets scanned: ${allSourceEntries.length} (${sourceJsonFiles.length} character, ${tilesetJsonFiles.length} tileset)`);
   console.log(`- Assets written: ${written}`);
   if (mode === MODE_ADD_NEW) console.log(`- Existing assets skipped: ${skipped}`);
   console.log(`- Stale output assets deleted: ${deleted}`);
   console.log(`- Categories meta written: ${categories.size}`);
-  console.log(`- Leaf categories meta written: ${leafDirs.size}`);
+  console.log(`- Leaf categories meta written: ${allManagedDirs.size}`);
 }
 
 function main() {

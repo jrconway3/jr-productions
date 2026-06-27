@@ -2,6 +2,7 @@
   "name": "Obi",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "sash",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",
@@ -57,11 +58,6 @@
       ]
     }
   ],
-  "prerequisites": {
-    "asset": [
-      "belt_waistband"
-    ]
-  },
   "recolors": {
     "material": "cloth",
     "palettes": [

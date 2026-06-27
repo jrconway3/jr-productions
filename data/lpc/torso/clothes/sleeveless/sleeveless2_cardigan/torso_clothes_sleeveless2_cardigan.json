@@ -2,6 +2,7 @@
   "name": "Sleeveless 2 Cardigan",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "sleeveless",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "OGA-BY 3.0",

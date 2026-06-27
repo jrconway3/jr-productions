@@ -1,7 +1,8 @@
 {
-  "name": "Shortsleeves 2 Overlay",
+  "name": "Shortsleeves 2",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "sleeves",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "OGA-BY 3.0",
@@ -68,8 +69,8 @@
     }
   ],
   "prerequisites": {
-    "asset": [
-      "torso_clothes_shortsleeve"
+    "subcategory": [
+      "sleeveless"
     ]
   },
   "recolors": {

@@ -135,36 +135,13 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
     const allBgLayers = [...(backgroundLayers ?? []), ...(animSpec.background_layers ?? [])];
     const filteredBgLayers = allBgLayers.filter(byBodyType);
 
-    const expandedAssetLayers = expandLpcLayers(asset.layers);
-    const filteredExpandedLayers = expandedAssetLayers.filter(byBodyType);
-    
-    // Extra defensive: for each ID, pick ONLY the first matching layer
-    // (this handles case where multiple assets in one layer ID both match bodyType)
-    const deduplicatedAssetLayers: typeof filteredExpandedLayers = [];
-    const seenIds = new Set<string>();
-    for (const layer of filteredExpandedLayers) {
-      if (!layer.id || !seenIds.has(layer.id)) {
-        if (layer.id) seenIds.add(layer.id);
-        deduplicatedAssetLayers.push(layer);
-      }
-    }
-    
-    const assetLayerIds = new Set(deduplicatedAssetLayers.map((l) => l.id).filter(Boolean));
-
-    // Asset layers with matching ID replace their background counterpart
+    const assetLayers = expandLpcLayers(asset.layers).filter(byBodyType);
+    const assetLayerIds = new Set(assetLayers.map((l) => l.id).filter(Boolean));
     const activeBgLayers = filteredBgLayers.filter((l) => !l.id || !assetLayerIds.has(l.id));
 
-    // Extra defensive: deduplicate background layers by ID as well
-    const bgLayerIds = new Set<string>();
-    const deduplicatedBgLayers = activeBgLayers.filter((layer) => {
-      if (layer.id && bgLayerIds.has(layer.id)) return false;
-      if (layer.id) bgLayerIds.add(layer.id);
-      return true;
-    });
-
     const allLayers = [
-      ...deduplicatedBgLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
-      ...deduplicatedAssetLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
+      ...activeBgLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
+      ...assetLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
     ];
 
     const layerUrls = allLayers.sort((a, b) => a.zPos - b.zPos);

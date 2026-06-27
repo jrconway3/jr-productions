@@ -2,6 +2,7 @@
   "name": "Bracers",
   "type": "lpc",
   "category": "arms",
+  "subcategory": "bracers",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
@@ -15,7 +16,10 @@
     "watering",
     "climb",
     "idle",
-    "emote"
+    "jump",
+    "sit",
+    "emote",
+    "run"
   ],
   "layers": [
     {

@@ -2,6 +2,7 @@
   "name": "Cat Ears Skintone",
   "type": "lpc",
   "category": "head",
+  "subcategory": "furry_ears_skin",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY 3.0+, GPL 3.0, OGA-BY 3.0+",

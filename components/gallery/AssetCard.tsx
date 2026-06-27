@@ -4,7 +4,7 @@ import { useState } from 'react';
 import type { Asset, AnimationSpec, ResolvedFeSpec, ResolvedLpcSpec } from 'app/models/Asset';
 import type { BackgroundLayer } from 'app/models/Category';
 import { toPublicAssetUrl } from 'app/assetUrl';
-import { downloadLpcAsset, downloadFeAsset } from 'app/downloadAsset';
+import { downloadLpcAsset, downloadFeAsset, downloadStaticFiles } from 'app/downloadAsset';
 
 const { LpcAnimViewer, FePortraitViewer, FeMapSpriteViewer, FeBattleViewer } = {
   LpcAnimViewer: dynamic(
@@ -296,8 +296,17 @@ interface AssetCardProps {
 }
 
 export default function AssetCard({ asset }: AssetCardProps) {
+  const [downloading, setDownloading] = useState(false);
   const previewUrl = toPublicAssetUrl(asset.preview);
-  const downloadUrl = toPublicAssetUrl(asset.download);
+  const downloadFiles = Array.isArray(asset.download) && asset.download.length > 0 ? asset.download : null;
+  const downloadUrl = downloadFiles ? '' : toPublicAssetUrl(typeof asset.download === 'string' ? asset.download : undefined);
+
+  const handleDownload = async () => {
+    if (!downloadFiles || downloading) return;
+    setDownloading(true);
+    try { await downloadStaticFiles(downloadFiles.map(toPublicAssetUrl), `${asset.id}.zip`); }
+    finally { setDownloading(false); }
+  };
 
   return (
     <div className="sprite-card overflow-hidden">
@@ -316,6 +325,13 @@ export default function AssetCard({ asset }: AssetCardProps) {
             className="flex-shrink-0 text-site-muted hover:text-white transition-colors">
             <DownloadIcon />
           </a>
+        )}
+        {downloadFiles && (
+          <button type="button" onClick={handleDownload} disabled={downloading} title="Download ZIP"
+            aria-label="Download ZIP" aria-busy={downloading} aria-disabled={downloading}
+            className="flex-shrink-0 text-site-muted hover:text-white transition-colors disabled:opacity-40">
+            {downloading ? <span className="text-[10px]">⏳</span> : <DownloadIcon />}
+          </button>
         )}
       </div>
     </div>

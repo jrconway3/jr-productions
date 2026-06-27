@@ -2,6 +2,7 @@
   "name": "Ankle Socks",
   "type": "lpc",
   "category": "feet",
+  "subcategory": "socks",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "GPL 3.0, OGA-BY 3.0",

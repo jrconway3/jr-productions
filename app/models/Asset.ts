@@ -126,12 +126,13 @@ export interface Asset {
   credits?: AssetCredit[];
   collection?: string;
   preview?: string;
-  download?: string;
+  download?: string | string[];
   body_types?: string[];
   animations?: string[];
   variants?: string[];
   palettes?: PaletteVariant[];
-  prerequisites?: { asset?: string[]; category?: string[] };
+  subcategory?: string;
+  prerequisites?: { asset?: string[]; category?: string[]; subcategory?: string[] };
   new?: boolean;
   match_body_color?: boolean;
   recolors?: { material: string; palettes: string[] };

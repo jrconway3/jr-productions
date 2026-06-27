@@ -1,0 +1,27 @@
+{
+  "name": "[LPC Revised] Woodshop",
+  "type": "lpc",
+  "category": "tilesets",
+  "format": "tileset",
+  "license": "OGA-BY 3.0",
+  "preview": "assets/lpc/tilesets/interior/woodshop/lpc-revised-woodshop.png",
+  "download": [
+    "assets/lpc/tilesets/interior/woodshop/lpc-revised-woodshop.png",
+    "assets/lpc/tilesets/interior/woodshop/lpc-revised-woodshop.tsx"
+  ],
+  "credits": [
+    {
+      "authors": [
+        "Bluecarrot16",
+        "ElizaWy",
+        "JaidynReiman"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-woodshop",
+        "https://github.com/ElizaWy/LPC/tree/main/Objects/Furniture",
+        "https://opengameart.org/content/lpc-revised-workshop-tilesets"
+      ],
+      "notes": "LPC Woodshop by bluecarrot16, recolors by ElizaWy, tileset by JaidynReiman."
+    }
+  ]
+}

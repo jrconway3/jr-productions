@@ -2,6 +2,7 @@
   "name": "Bauldron",
   "type": "lpc",
   "category": "shoulders",
+  "subcategory": "bauldron",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 2.0, GPL 3.0, OGA-BY 3.0",

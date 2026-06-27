@@ -2,6 +2,7 @@
   "name": "Shades",
   "type": "lpc",
   "category": "facial",
+  "subcategory": "facial_eyes",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0",

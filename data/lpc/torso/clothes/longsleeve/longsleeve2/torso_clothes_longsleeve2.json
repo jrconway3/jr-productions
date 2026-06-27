@@ -2,6 +2,7 @@
   "name": "Longsleeve 2",
   "type": "lpc",
   "category": "torso",
+  "subcategory": "clothes",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "OGA-BY 3.0",
