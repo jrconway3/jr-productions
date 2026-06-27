@@ -136,9 +136,11 @@ export function LpcAnimViewer({ asset, animName, animSpec, bodyType, backgroundL
     const filteredBgLayers = allBgLayers.filter(byBodyType);
 
     const assetLayers = expandLpcLayers(asset.layers).filter(byBodyType);
+    const assetLayerIds = new Set(assetLayers.map((l) => l.id).filter(Boolean));
+    const activeBgLayers = filteredBgLayers.filter((l) => !l.id || !assetLayerIds.has(l.id));
 
     const allLayers = [
-      ...filteredBgLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
+      ...activeBgLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
       ...assetLayers.map(({ path: p, zPos }) => ({ url: `${LPC_BASE}/${p}/${fileName}.png`, zPos })),
     ];
 
