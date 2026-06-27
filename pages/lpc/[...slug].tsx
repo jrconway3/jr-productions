@@ -7,11 +7,12 @@ import { getAssetsByCategoryTree, getSectionPageCredits } from 'app/AssetService
 import { resolveAssetsSpecs, resolveHomepageSpecs } from 'app/AnimationService';
 import { toPublicAssetUrl } from 'app/assetUrl';
 import { getCategorySampleCount, pickRandomAssetsPreferUnrestricted, resolvePrerequisites } from 'app/assetSampling';
-import { collectLpcBodyTypes, expandLpcLayers } from 'app/lpcLayers';
+import { collectLpcBodyTypes } from 'app/lpcLayers';
+import { buildPrereqLayersByAssetId } from 'app/prereqLayers';
 import MasonryGrid from 'components/gallery/MasonryGrid';
 import AssetCard, { LpcCard, LpcGroupCard } from 'components/gallery/AssetCard';
 import PageCredits from 'components/gallery/PageCredits';
-import type { BackgroundLayer, Category, ResolvedPageCredit } from 'app/models/Category';
+import type { Category, ResolvedPageCredit } from 'app/models/Category';
 import type { Asset, ResolvedLpcSpec, ResolvedFeSpec } from 'app/models/Asset';
 import { SITE_URL } from 'app/siteConfig';
 
@@ -79,7 +80,7 @@ export default function LpcSlug({ category, section, treeAssets, prereqAssets, a
   const featuredAssetCount = useMemo(() => getCategorySampleCount(category.path, 'lpc'), [category.path]);
   const navBreadcrumbs = breadcrumbs ?? [{ label: 'LPC', href: '/lpc' }, { label: category.label, href: `/lpc/${slugsToPath(slugs)}` }];
   const sectionCategory = section ?? { ...category, children: [] };
-  const [displayAssets, setDisplayAssets] = useState<Asset[]>([]);
+  const [displayAssets, setDisplayAssets] = useState<Asset[]>(() => sortNewFirst(scopedAssets.slice(0, featuredAssetCount)));
 
   const treeAssetsById = useMemo(() => {
     const map = new Map(scopedAssets.map((asset) => [asset.id, asset]));
@@ -95,53 +96,7 @@ export default function LpcSlug({ category, section, treeAssets, prereqAssets, a
   const cards = useMemo(() => {
     const result: React.ReactNode[] = [];
 
-    // Build prereq-asset background layers for compositing.
-    const prereqLayersByAssetId = new Map<string, BackgroundLayer[]>();
-    {
-      const byId = new Map<string, Asset>();
-      const bySubcategory = new Map<string, Asset[]>();
-      const byCategory = new Map<string, Asset[]>();
-      for (const a of displayAssets) {
-        byId.set(a.id, a);
-        if (a.subcategory) {
-          if (!bySubcategory.has(a.subcategory)) bySubcategory.set(a.subcategory, []);
-          bySubcategory.get(a.subcategory)!.push(a);
-        }
-        if (a.category) {
-          if (!byCategory.has(a.category)) byCategory.set(a.category, []);
-          byCategory.get(a.category)!.push(a);
-        }
-      }
-      for (const a of displayAssets) {
-        const prereqs = a.prerequisites;
-        if (!prereqs) continue;
-        let prereqAsset: Asset | undefined;
-        if (prereqs.asset?.length) {
-          for (const id of prereqs.asset) {
-            const candidate = byId.get(id);
-            if (candidate && candidate.id !== a.id) { prereqAsset = candidate; break; }
-          }
-        }
-        if (!prereqAsset && prereqs.subcategory?.length) {
-          for (const sub of prereqs.subcategory) {
-            const cs = bySubcategory.get(sub) ?? [];
-            prereqAsset = cs.find(c => c.id !== a.id && !c.prerequisites?.subcategory?.includes(sub))
-              ?? cs.find(c => c.id !== a.id);
-            if (prereqAsset) break;
-          }
-        }
-        if (!prereqAsset && prereqs.category?.length) {
-          for (const cat of prereqs.category) {
-            const cs = byCategory.get(cat) ?? [];
-            prereqAsset = cs.find(c => c.id !== a.id && !c.prerequisites?.category?.includes(cat))
-              ?? cs.find(c => c.id !== a.id);
-            if (prereqAsset) break;
-          }
-        }
-        if (!prereqAsset) continue;
-        prereqLayersByAssetId.set(a.id, expandLpcLayers(prereqAsset.layers));
-      }
-    }
+    const prereqLayersByAssetId = buildPrereqLayersByAssetId(displayAssets);
 
     for (const asset of displayAssets) {
       if (result.length >= MAX_CARDS) break;

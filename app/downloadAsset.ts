@@ -70,7 +70,7 @@ export async function downloadStaticFiles(urls: string[], filename: string): Pro
   let added = 0;
   const normalizedUrls = urls
     .map((u) => u.trim())
-    .filter((u) => u.length > 0 && !/^https?:\/\//i.test(u));
+    .filter((u) => u.length > 0 && !/^(https?:)?\/\//i.test(u));
   await Promise.all(
     normalizedUrls.map((url) => {
       const publicUrl = url.startsWith('/') ? url : `/${url}`;
