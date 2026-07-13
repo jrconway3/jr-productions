@@ -1,8 +1,7 @@
 {
-  "name": "Chainmail",
+  "name": "Plate Shoes",
   "type": "lpc",
-  "category": "torso",
-  "subcategory": "armour",
+  "category": "feet",
   "format": "spritesheet",
   "animation_spec": "lpc",
   "license": "CC-BY-SA 3.0, GPL 3.0, OGA-BY 3.0",
@@ -14,28 +13,31 @@
     "shoot",
     "hurt",
     "watering",
-    "climb",
     "idle",
     "jump",
     "sit",
     "emote",
+    "climb",
     "run"
   ],
   "layers": [
     {
       "id": "base",
-      "zPos": 50,
+      "zPos": 20,
       "assets": [
         {
-          "path": "torso/armour/chainmail/male",
+          "path": "feet/armour/plate/male",
           "body_types": [
-            "male"
+            "male",
+            "muscular"
           ]
         },
         {
-          "path": "torso/armour/chainmail/female",
+          "path": "feet/armour/plate/thin",
           "body_types": [
-            "female"
+            "female",
+            "teen",
+            "pregnant"
           ]
         }
       ]
@@ -44,14 +46,16 @@
   "credits": [
     {
       "authors": [
-        "Johannes Sjölund (wulax)",
-        "Napsio (Vitruvian Studio)",
-        "JaidynReiman"
+        "bluecarrot16",
+        "JaidynReiman",
+        "Michael Whitlock (bigbeargames)",
+        "Matthew Krohn (makrohn)",
+        "Johannes Sjölund (wulax)"
       ],
       "urls": [
         "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"
       ],
-      "notes": "minor edits by bluecarrot16, reduced colors by Napsio, adjusted Male colors and Idle/Sit/Emote/Climb by JaidynReiman"
+      "notes": "reduced to 7 colors an adapted to v3 bases by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman"
     }
   ],
   "recolors": {

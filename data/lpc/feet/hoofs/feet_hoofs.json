@@ -1,0 +1,81 @@
+{
+  "name": "Hooves",
+  "type": "lpc",
+  "category": "feet",
+  "subcategory": "hoofs",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "idle",
+    "jump",
+    "sit",
+    "emote",
+    "climb"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 15,
+      "assets": [
+        {
+          "path": "feet/hoofs/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "feet/hoofs/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "JaidynReiman",
+        "Evert"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-faun-and-minotaur"
+      ],
+      "notes": "original by Evert, color cleanup/minor fixes/climb/jump/sit/emote by JaidynReiman"
+    },
+    {
+      "authors": [
+        "JaidynReiman",
+        "bluecarrot16",
+        "Evert"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-faun-and-minotaur",
+        "http://opengameart.org/content/lpc-clothing-updates"
+      ],
+      "notes": "edited for v3 female bases by bluecarrot16, color cleanup/minor fixes/climb/jump/sit/emote by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "body",
+    "base": "fur_tan",
+    "palettes": [
+      "ulpc",
+      "lpcr",
+      "hair.ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

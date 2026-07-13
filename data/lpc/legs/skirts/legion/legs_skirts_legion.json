@@ -1,0 +1,68 @@
+{
+  "name": "Legion Skirt",
+  "type": "lpc",
+  "category": "legs",
+  "format": "spritesheet",
+  "animation_spec": "lpc",
+  "license": "CC-BY-SA 3.0, GPL 2.0, GPL 3.0, OGA-BY 3.0",
+  "animations": [
+    "spellcast",
+    "thrust",
+    "walk",
+    "slash",
+    "shoot",
+    "hurt",
+    "watering",
+    "climb",
+    "idle",
+    "sit",
+    "emote",
+    "run"
+  ],
+  "layers": [
+    {
+      "id": "base",
+      "zPos": 20,
+      "assets": [
+        {
+          "path": "legs/skirts/legion/male",
+          "body_types": [
+            "male",
+            "muscular"
+          ]
+        },
+        {
+          "path": "legs/skirts/legion/thin",
+          "body_types": [
+            "female",
+            "teen",
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "authors": [
+        "bluecarrot16",
+        "Nila122"
+      ],
+      "urls": [
+        "https://opengameart.org/content/lpc-roman-armor",
+        "http://opengameart.org/content/lpc-clothing-updates",
+        "https://opengameart.org/content/lpc-expanded-armour"
+      ],
+      "notes": "original by Nila122 to legion, adapted to v3 bases by bluecarrot16, climb/jump/sit/run by JaidynReiman"
+    }
+  ],
+  "recolors": {
+    "material": "cloth",
+    "palettes": [
+      "ulpc",
+      "metal.ulpc",
+      "all.lpcr"
+    ]
+  },
+  "preview": ""
+}

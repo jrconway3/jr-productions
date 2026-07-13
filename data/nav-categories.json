@@ -42,20 +42,8 @@
         "label": "Tilesets"
       },
       {
-        "href": "/lpc/eyes",
-        "label": "Eyes"
-      },
-      {
-        "href": "/lpc/facial",
-        "label": "Facial"
-      },
-      {
         "href": "/lpc/hat",
         "label": "Hat"
-      },
-      {
-        "href": "/lpc/neck",
-        "label": "Neck"
       }
     ],
     "fe": [
